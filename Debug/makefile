@@ -46,8 +46,8 @@ bluebil.bin \
 all: bluebil.elf secondary-outputs
 
 # Tool invocations
-bluebil.elf: $(OBJS) $(USER_OBJS) C:\Users\Egypt_Laptop\STM32CubeIDE\workspace_1.4.0\bluebil\STM32F103C8TX_FLASH.ld
-	arm-none-eabi-gcc -o "bluebil.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Egypt_Laptop\STM32CubeIDE\workspace_1.4.0\bluebil\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bluebil.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+bluebil.elf: $(OBJS) $(USER_OBJS) C:\Users\Egypt_Laptop\Desktop\bluebil\STM32F103C8TX_FLASH.ld
+	arm-none-eabi-gcc -o "bluebil.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Egypt_Laptop\Desktop\bluebil\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bluebil.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

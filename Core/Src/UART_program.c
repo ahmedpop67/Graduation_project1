@@ -13,8 +13,11 @@
 #include "UART_configuration.h"
 #include "UART_interface.h"
 
+u8 G_u8DataFromUART = 0;
 /*global array to store recived data from UART*/
 u8 global_u8String[MAX_SIZE_DATA_BUFFER];
+
+u8 local_u8_RX_Busyflag=0;
 
 /*pointer to function for UART1 for call back*/
 void (*MUSART1_CallBack)(void);
@@ -142,6 +145,15 @@ u8 MUART_u8ReceiveByteSynchNonBlocking (  USART_t *A_xUART_Type )
 	return L_u8Data;
 }
 
+void MUART_u8ReceiveByteASynch (  USART_t *A_xUART_Type )
+{
+	if(local_u8_RX_Busyflag == 0)
+	{
+		local_u8_RX_Busyflag=1;
+		SET_BIT(A_xUART_Type->CR1 , MUSART_CR1_RXNEIE_BIT);
+	}
+}
+
 u8 * MUART_ptrReceiveStringSynchNonBlocking (  USART_t *A_xUART_Type )
 {
 	u8 L_u8Iterator = 0 ;
@@ -176,6 +188,7 @@ u8 MUART_u8ReadDataRegister(USART_t *USARTx)
 
 void MUART1_voidSetCallBack( void (*ptr) (void) )
 {
+
 	MUSART1_CallBack =ptr;
 }
 
@@ -193,6 +206,8 @@ void MUART6_voidSetCallBack( void (*ptr) (void) )
 void USART1_IRQHandler(void)
 {
     UART1->SR = 0;
+    //G_u8DataFromUART = MUART_u8ReadDataRegister(UART1);
+    local_u8_RX_Busyflag=0;
 	if(MUSART1_CallBack!=NULL)
 	{
 		MUSART1_CallBack();
@@ -203,6 +218,8 @@ void USART1_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
 	UART2->SR = 0;
+	//G_u8DataFromUART = MUART_u8ReadDataRegister(UART2);
+	local_u8_RX_Busyflag=0;
 	if(MUSART2_CallBack!=NULL)
 	{
 		MUSART2_CallBack();

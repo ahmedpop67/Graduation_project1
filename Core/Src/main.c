@@ -112,13 +112,13 @@ typedef struct
 My_Data       G_xMy_Data       = {0,0,0};
 Near_Distance G_xNear_Distance = {0,0,0,0};
 
-u8 G_u8DataFromUART  = 0 ;
+u8 APP_G_u8DataFromUART;
 
 u16 G_u8DataAfterProccing = 0 ;
 u8 ProcessingFun (void)
 {
 	/*Mapping data from UART*/
-	switch (G_u8DataFromUART)
+	switch (APP_G_u8DataFromUART)
 	{
 	case 'F':
 	case 'f':
@@ -243,7 +243,7 @@ void init_conf()
 	HUltrasonic_voidInit(ULTR_4);
 	MUART1_voidSetCallBack(&APP_GET_UART_Command);
 	MUART_voidEnable(UART1);
-	MUART_u8ReceiveByteSynchNonBlocking(UART1);
+	MUART_u8ReceiveByteASynch(UART1);
 }
 
 
@@ -674,7 +674,7 @@ void APP_V2V_Connection()
 
 void APP_GET_UART_Command()
 {
-
+	APP_G_u8DataFromUART = MUART_u8ReadDataRegister(UART1);
 }
 
 
