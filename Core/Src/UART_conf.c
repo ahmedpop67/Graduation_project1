@@ -20,8 +20,7 @@ USART_InitType MUART_Init =
 		.Parity_Enable       = DISABLE          ,
 		.Parity_Selection    = EVEN_PARITY      ,
 		.TransferDirection   = TX_RX            ,
-		.HardwareFlowControl = DISABLE          ,
-		.Oversampling        = OVER_SAMPLING_16
+		.HardwareFlowControl = DISABLE
 } ;
 
 /* Configuration of MUART_clock */
