@@ -597,7 +597,7 @@ void APP_GET_UART_Command()
 void ProcessingFun (void)
 {
 	/*Mapping data from UART*/
-	switch (G_u8DataFromUART)
+	switch (APP_G_u8DataFromUART)
 	{
 	case 'F':
 	case 'f':
