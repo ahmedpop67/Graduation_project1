@@ -60,13 +60,8 @@ all: main-build
 main-build: bluebil.elf secondary-outputs
 
 # Tool invocations
-<<<<<<< HEAD
-bluebil.elf: $(OBJS) $(USER_OBJS) C:\Users\Egypt_Laptop\Desktop\bluebil\STM32F103C8TX_FLASH.ld
-	arm-none-eabi-gcc -o "bluebil.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\Egypt_Laptop\Desktop\bluebil\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bluebil.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-=======
 bluebil.elf bluebil.map: $(OBJS) $(USER_OBJS) D:\_college\GP\Graduation_project1\STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	arm-none-eabi-gcc -o "bluebil.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\_college\GP\Graduation_project1\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="bluebil.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
->>>>>>> a3f83467b01eb27b85baadafb2473b7ffbc4c518
 	@echo 'Finished building target: $@'
 	@echo ' '
 

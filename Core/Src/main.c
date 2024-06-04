@@ -66,7 +66,7 @@ Near_Distance G_xNear_Distance = {0,0,0,0};
 
 u8 APP_G_u8DataFromUART;
 
-u16 G_u16DataAfterProccing = 0 ;
+My_Data G_u16DataAfterProccing = {0,0,0};
 
 
 
@@ -103,69 +103,66 @@ int main()
 	{
 		ProcessingFun();
 
-		/*Encoding recived data and take Direction (second 3bits)*/
-		L_u8Direction = G_u16DataAfterProccing & 0x0f ;
-		/*Encoding recived data and take Speed (first 4bits)*/
-		L_u16Speed = (G_u16DataAfterProccing >> 4) & 0x07 ;
-		/*Encoding recived data and take Flag (last bit)*/
-		L_u8Flag = G_u16DataAfterProccing >> 7 ;
+		/*Encoding received data and take Direction (second 3bits)*/
+		L_u8Direction = G_u16DataAfterProccing.Direction;
+		/*Encoding received data and take Speed (first 4bits)*/
+		L_u16Speed = G_u16DataAfterProccing.Speed;
+		/*Encoding received data and take Flag (last bit)*/
+		L_u8Flag = G_u16DataAfterProccing.Flag;
 
-		if (L_u8Direction == Stop)
+		if (L_u8Direction == Stop){
+			MOTOR_Stop(MOTOR_1) ;
+			MOTOR_Stop(MOTOR_2) ;
+		}else
+		{
+			/*
+			 * first speed  = 1 +  =
+			 * second speed = 2 +  =
+			 * third speed  = 3 +  =
+			 */
+			L_u16Speed = (0Xff<<G_xMy_Data.Speed) + 0xf0;
 
-				{
-					MOTOR_Stop(MOTOR_1) ;
-					MOTOR_Stop(MOTOR_2) ;
-				}
-		else
-				{
-					/*
-					 * first speed  = 1 +  =
-					 * second speed = 2 +  =
-					 * third speed  = 3 +  =
-					 */
-					L_u16Speed = (0Xff<<G_xMy_Data.Speed) + 0xf0;
-
-					if (L_u8Direction == Go)  //Forward direction
-					{
-						MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
-						MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
-					}
-					else if (L_u8Direction == Back)  //Backward direction
-					{
-						MOTOR_CounterClockWise(MOTOR_1 , L_u16Speed) ;
-						MOTOR_CounterClockWise(MOTOR_2 , L_u16Speed) ;
-					}
-					else if (L_u8Direction == Right)  //Right direction
-					{
-						MOTOR_Stop(MOTOR_1) ;
-						MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
-					}
-					else if (L_u8Direction == Left)  //Left direction
-					{
-						MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
-						MOTOR_Stop(MOTOR_2) ;
-					}
-					else if (L_u8Direction == Forward_Right)  //forward right
-					{
-						MOTOR_ClockWise(MOTOR_1 , 0xa) ;
-						MOTOR_ClockWise(MOTOR_2 , 0xc) ;
-					}
-					else if (L_u8Direction == Forward_Left)  //forward left
-					{
-						MOTOR_ClockWise(MOTOR_1 , 0xa) ;
-						MOTOR_ClockWise(MOTOR_2 , 0xc) ;
-					}
-					else if (L_u8Direction == Backward_Right)  //backward right
-					{
-						MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
-						MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
-					}
-					else if (L_u8Direction == Backward_Left)  //backward left
-					{
-						MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
-						MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
-					}
-				}
+			if (L_u8Direction == Go)  //Forward direction
+			{
+				MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
+				MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
+			}
+			else if (L_u8Direction == Back)  //Backward direction
+			{
+				MOTOR_CounterClockWise(MOTOR_1 , L_u16Speed) ;
+				MOTOR_CounterClockWise(MOTOR_2 , L_u16Speed) ;
+			}
+			else if (L_u8Direction == Right)  //Right direction
+			{
+				MOTOR_Stop(MOTOR_1) ;
+				MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
+			}
+			else if (L_u8Direction == Left)  //Left direction
+			{
+				MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
+				MOTOR_Stop(MOTOR_2) ;
+			}
+			else if (L_u8Direction == Forward_Right)  //forward right
+			{
+				MOTOR_ClockWise(MOTOR_1 , 0xa) ;
+				MOTOR_ClockWise(MOTOR_2 , 0xc) ;
+			}
+			else if (L_u8Direction == Forward_Left)  //forward left
+			{
+				MOTOR_ClockWise(MOTOR_1 , 0xa) ;
+				MOTOR_ClockWise(MOTOR_2 , 0xc) ;
+			}
+			else if (L_u8Direction == Backward_Right)  //backward right
+			{
+				MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
+				MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
+			}
+			else if (L_u8Direction == Backward_Left)  //backward left
+			{
+				MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
+				MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
+			}
+		}
 	}
     return 0;
 }
@@ -192,214 +189,180 @@ void APP_voidCalcLeft_Distance()
 void APP_VoidStop()
 {
 	//direction = stop
-	SET_BIT(G_u16DataAfterProccing , 0) ;
-	SET_BIT(G_u16DataAfterProccing , 1) ;
-	SET_BIT(G_u16DataAfterProccing , 2) ;
-	CLR_BIT(G_u16DataAfterProccing , 3) ;
+	G_u16DataAfterProccing.Direction = Stop;
 	/*flag = 3*/
-	SET_BIT(G_u16DataAfterProccing , 6) ;
-	SET_BIT(G_u16DataAfterProccing , 7) ;
+	G_u16DataAfterProccing.Flag = 3;
 	/*stop car + alarm*/
-	G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-
-
+//	G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
 }
 
 void APP_voidGoTasks ()
 {
 	if (G_xNear_Distance.Distance_Forword  <= SO_SHORT_DISTANCE) // stop car
 		{
-		   //direction = stop
-		    SET_BIT(G_u16DataAfterProccing , 0) ;
-		    SET_BIT(G_u16DataAfterProccing , 1) ;
-		    SET_BIT(G_u16DataAfterProccing , 2) ;
-		    CLR_BIT(G_u16DataAfterProccing , 3) ;
-		   /*flag = 3*/
-			SET_BIT(G_u16DataAfterProccing , 6) ;
-			SET_BIT(G_u16DataAfterProccing , 7) ;
+			//direction = stop
+			G_u16DataAfterProccing.Direction = Stop;
+			/*flag = 3*/
+			G_u16DataAfterProccing.Flag = 3;
 			/*stop car + alarm*/
-			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+//			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
 		}
 	else if (G_xNear_Distance.Distance_Forword <= UN_SAFE_DISTANCE) //Un Safed Distance
 		{
-				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
-				{
-					/*flag = 1*/
-					SET_BIT(G_u16DataAfterProccing , 6) ;
-					CLR_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
-				}
-				else
-				{
-					/*flag = 2*/
-					CLR_BIT(G_u16DataAfterProccing , 6) ;
-					SET_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_u8_LimetedSpeed << 4)) ;
-				}
+			if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+			{
+				/*flag = 1*/
+				G_u16DataAfterProccing.Flag = 1;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
+			}
+			else
+			{
+				/*flag = 2*/
+				G_u16DataAfterProccing.Flag = 2;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
+			}
 		}
-	else //sefed case
+	else //safe case
 		{
 			/*flag = 0*/
-			CLR_BIT(G_u16DataAfterProccing , 6) ;
-			CLR_BIT(G_u16DataAfterProccing , 7) ;
+			G_u16DataAfterProccing.Flag = 0;
 			/*send direction and speed without any change*/
-			G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == Automatic_ON)
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+			if (speed_control_Automatic == Automatic_ON)
+				G_u16DataAfterProccing.Speed = max_speed;
 			else
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
 		}
 }
 void APP_voidBackTasks ()
 {
 	if (G_xNear_Distance.Distance_Back  <= SO_SHORT_DISTANCE) // stop car
-		{
-		   //direction = stop
-		    SET_BIT(G_u16DataAfterProccing , 0) ;
-		    SET_BIT(G_u16DataAfterProccing , 1) ;
-		    SET_BIT(G_u16DataAfterProccing , 2) ;
-		    CLR_BIT(G_u16DataAfterProccing , 3) ;
-		   /*flag = 3*/
-			SET_BIT(G_u16DataAfterProccing , 6) ;
-			SET_BIT(G_u16DataAfterProccing , 7) ;
-			/*stop car + alarm*/
-			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-		}
+	{
+		//direction = stop
+		G_u16DataAfterProccing.Direction = Stop;
+		/*flag = 3*/
+		G_u16DataAfterProccing.Flag = 3;
+		/*stop car + alarm*/
+//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+	}
 	else if (G_xNear_Distance.Distance_Back <= UN_SAFE_DISTANCE) //Un Safed Distance
+	{
+		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 		{
-				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
-				{
-					/*flag = 1*/
-					SET_BIT(G_u16DataAfterProccing , 6) ;
-					CLR_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
-				}
-				else
-				{
-					/*flag = 2*/
-					CLR_BIT(G_u16DataAfterProccing , 6) ;
-					SET_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_u8_LimetedSpeed << 4)) ;
-				}
-		}
-	else //sefed case
-		{
-			/*flag = 0*/
-			CLR_BIT(G_u16DataAfterProccing , 6) ;
-			CLR_BIT(G_u16DataAfterProccing , 7) ;
+			/*flag = 1*/
+			G_u16DataAfterProccing.Flag = 1; ;
 			/*send direction and speed without any change*/
-			G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == Automatic_ON)
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
-			else
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
+		else
+		{
+			/*flag = 2*/
+			G_u16DataAfterProccing.Flag = 2;
+			/*send direction and speed without any change*/
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
+		}
+	}
+	else //sefed case
+	{
+		/*flag = 0*/
+		G_u16DataAfterProccing.Flag = 0;
+		/*send direction and speed without any change*/
+		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+		if (speed_control_Automatic == Automatic_ON)
+			G_u16DataAfterProccing.Speed = max_speed;
+		else
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+	}
 }
 void APP_voidBackward_RightTasks ()
 {
 	if (G_xNear_Distance.Distance_Left  <= SO_SHORT_DISTANCE) // stop car
-		{
-		   //direction = stop
-		    SET_BIT(G_u16DataAfterProccing , 0) ;
-		    SET_BIT(G_u16DataAfterProccing , 1) ;
-		    SET_BIT(G_u16DataAfterProccing , 2) ;
-		    CLR_BIT(G_u16DataAfterProccing , 3) ;
-		   /*flag = 3*/
-			SET_BIT(G_u16DataAfterProccing , 6) ;
-			SET_BIT(G_u16DataAfterProccing , 7) ;
-			/*stop car + alarm*/
-			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-		}
+	{
+		//direction = stop
+		G_u16DataAfterProccing.Direction = Stop;
+		/*flag = 3*/
+		G_u16DataAfterProccing.Flag = 3;
+		/*stop car + alarm*/
+//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+	}
 	else if (G_xNear_Distance.Distance_Left <= UN_SAFE_DISTANCE) //Un Safed Distance
+	{
+		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 		{
-				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
-				{
-					/*flag = 1*/
-					SET_BIT(G_u16DataAfterProccing , 6) ;
-					CLR_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
-				}
-				else
-				{
-					/*flag = 2*/
-					CLR_BIT(G_u16DataAfterProccing , 6) ;
-					SET_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_u8_LimetedSpeed << 4)) ;
-				}
-		}
-	else //sefed case
-		{
-			/*flag = 0*/
-			CLR_BIT(G_u16DataAfterProccing , 6) ;
-			CLR_BIT(G_u16DataAfterProccing , 7) ;
+			/*flag = 1*/
+			G_u16DataAfterProccing.Flag = 1; ;
 			/*send direction and speed without any change*/
-			G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == Automatic_ON)
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
-			else
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
+		else
+		{
+			/*flag = 2*/
+			G_u16DataAfterProccing.Flag = 2;
+			/*send direction and speed without any change*/
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
+		}
+	}
+	else //sefed case
+	{
+		/*flag = 0*/
+		G_u16DataAfterProccing.Flag = 0;
+		/*send direction and speed without any change*/
+		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+		if (speed_control_Automatic == Automatic_ON)
+			G_u16DataAfterProccing.Speed = max_speed;
+		else
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+	}
 }
 void APP_voidBackward_LEFTTasks ()
 {
 	if (G_xNear_Distance.Distance_Right  <= SO_SHORT_DISTANCE) // stop car
-		{
-		   //direction = stop
-		    SET_BIT(G_u16DataAfterProccing , 0) ;
-		    SET_BIT(G_u16DataAfterProccing , 1) ;
-		    SET_BIT(G_u16DataAfterProccing , 2) ;
-		    CLR_BIT(G_u16DataAfterProccing , 3) ;
-		   /*flag = 3*/
-			SET_BIT(G_u16DataAfterProccing , 6) ;
-			SET_BIT(G_u16DataAfterProccing , 7) ;
-			/*stop car + alarm*/
-			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-		}
+	{
+		//direction = stop
+		G_u16DataAfterProccing.Direction = Stop;
+		/*flag = 3*/
+		G_u16DataAfterProccing.Flag = 3;
+		/*stop car + alarm*/
+//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+	}
 	else if (G_xNear_Distance.Distance_Right <= UN_SAFE_DISTANCE) //Un Safed Distance
+	{
+		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 		{
-				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
-				{
-					/*flag = 1*/
-					SET_BIT(G_u16DataAfterProccing , 6) ;
-					CLR_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
-				}
-				else
-				{
-					/*flag = 2*/
-					CLR_BIT(G_u16DataAfterProccing , 6) ;
-					SET_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_u8_LimetedSpeed << 4)) ;
-				}
-		}
-	else //sefed case
-		{
-			/*flag = 0*/
-			CLR_BIT(G_u16DataAfterProccing , 6) ;
-			CLR_BIT(G_u16DataAfterProccing , 7) ;
+			/*flag = 1*/
+			G_u16DataAfterProccing.Flag = 1;
 			/*send direction and speed without any change*/
-			G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == Automatic_ON)
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
-			else
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
+		else
+		{
+			/*flag = 2*/
+			G_u16DataAfterProccing.Flag = 2;
+			/*send direction and speed without any change*/
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
+		}
+	}
+	else //sefed case
+	{
+		/*flag = 0*/
+		G_u16DataAfterProccing.Flag = 0;
+		/*send direction and speed without any change*/
+		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+		if (speed_control_Automatic == Automatic_ON)
+			G_u16DataAfterProccing.Speed = max_speed;
+		else
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+	}
 }
 void APP_voidRight_LeftTasks ()
 {
@@ -408,100 +371,86 @@ void APP_voidRight_LeftTasks ()
 void APP_voidForward_RightTasks ()
 {
 	if (G_xNear_Distance.Distance_Right  <= SO_SHORT_DISTANCE) // stop car
-		{
-		   //direction = stop
-		    SET_BIT(G_u16DataAfterProccing , 0) ;
-		    SET_BIT(G_u16DataAfterProccing , 1) ;
-		    SET_BIT(G_u16DataAfterProccing , 2) ;
-		    CLR_BIT(G_u16DataAfterProccing , 3) ;
-		   /*flag = 3*/
-			SET_BIT(G_u16DataAfterProccing , 6) ;
-			SET_BIT(G_u16DataAfterProccing , 7) ;
-			/*stop car + alarm*/
-			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-		}
+	{
+		//direction = stop
+		G_u16DataAfterProccing.Direction = Stop;
+		/*flag = 3*/
+		G_u16DataAfterProccing.Flag = 3;
+		/*stop car + alarm*/
+//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+	}
 	else if (G_xNear_Distance.Distance_Right <= UN_SAFE_DISTANCE) //Un Safed Distance
+	{
+		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 		{
-				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
-				{
-					/*flag = 1*/
-					SET_BIT(G_u16DataAfterProccing , 6) ;
-					CLR_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
-				}
-				else
-				{
-					/*flag = 2*/
-					CLR_BIT(G_u16DataAfterProccing , 6) ;
-					SET_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_u8_LimetedSpeed << 4)) ;
-				}
-		}
-	else //sefed case
-		{
-			/*flag = 0*/
-			CLR_BIT(G_u16DataAfterProccing , 6) ;
-			CLR_BIT(G_u16DataAfterProccing , 7) ;
+			/*flag = 1*/
+			G_u16DataAfterProccing.Flag = 1;
 			/*send direction and speed without any change*/
-			G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == Automatic_ON)
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
-			else
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
+		else
+		{
+			/*flag = 2*/
+			G_u16DataAfterProccing.Flag = 2;
+			/*send direction and speed without any change*/
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
+		}
+	}
+	else //sefed case
+	{
+		/*flag = 0*/
+		G_u16DataAfterProccing.Flag = 0;
+		/*send direction and speed without any change*/
+		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+		if (speed_control_Automatic == Automatic_ON)
+			G_u16DataAfterProccing.Speed = max_speed;
+		else
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+	}
 }
 void APP_voidForward_LeftTasks ()
 {
 	if (G_xNear_Distance.Distance_Left  <= SO_SHORT_DISTANCE) // stop car
-		{
-		   //direction = stop
-		    SET_BIT(G_u16DataAfterProccing , 0) ;
-		    SET_BIT(G_u16DataAfterProccing , 1) ;
-		    SET_BIT(G_u16DataAfterProccing , 2) ;
-		    CLR_BIT(G_u16DataAfterProccing , 3) ;
-		   /*flag = 3*/
-			SET_BIT(G_u16DataAfterProccing , 6) ;
-			SET_BIT(G_u16DataAfterProccing , 7) ;
-			/*stop car + alarm*/
-			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-		}
+	{
+		//direction = stop
+		G_u16DataAfterProccing.Direction = Stop;
+		/*flag = 3*/
+		G_u16DataAfterProccing.Flag = 3;
+		/*stop car + alarm*/
+//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+	}
 	else if (G_xNear_Distance.Distance_Left <= UN_SAFE_DISTANCE) //Un Safed Distance
+	{
+		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 		{
-				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
-				{
-					/*flag = 1*/
-					SET_BIT(G_u16DataAfterProccing , 6) ;
-					CLR_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
-				}
-				else
-				{
-					/*flag = 2*/
-					CLR_BIT(G_u16DataAfterProccing , 6) ;
-					SET_BIT(G_u16DataAfterProccing , 7) ;
-					/*send direction and speed without any change*/
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-					G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_u8_LimetedSpeed << 4)) ;
-				}
-		}
-	else //sefed case
-		{
-			/*flag = 0*/
-			CLR_BIT(G_u16DataAfterProccing , 6) ;
-			CLR_BIT(G_u16DataAfterProccing , 7) ;
+			/*flag = 1*/
+			G_u16DataAfterProccing.Flag = 1;
 			/*send direction and speed without any change*/
-			G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == Automatic_ON)
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
-			else
-				G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
+		else
+		{
+			/*flag = 2*/
+			G_u16DataAfterProccing.Flag = 2;
+			/*send direction and speed without any change*/
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed;
+		}
+	}
+	else //sefed case
+	{
+		/*flag = 0*/
+		G_u16DataAfterProccing.Flag = 0;
+		/*send direction and speed without any change*/
+		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+		if (speed_control_Automatic == Automatic_ON)
+			G_u16DataAfterProccing.Speed = max_speed;
+		else
+			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+	}
 }
 
 void APP_voidLane_Change()
@@ -528,67 +477,85 @@ void ProcessingFun (void)
 	/*Mapping data from UART*/
 	switch (APP_G_u8DataFromUART)
 	{
-	case 'F':
-	case 'f':
-		G_xMy_Data.Direction = Go ;
+	case 0x10: //forced stop
+		G_xMy_Data.Direction = Stop ;
+		//TODO make it forced
 		break;
-	case 'S':
-	case 's':
+	case 0x20: //normal stop
 		G_xMy_Data.Direction = Stop ;
 		break;
-	case 'I':
-	case 'i':
-		G_xMy_Data.Direction = Forward_Right ;
+	case 0x40: //turn left extremely
+		G_xMy_Data.Direction = Left;
 		break;
-	case 'R':
-	case 'r':
-		G_xMy_Data.Direction = Right ;
+	case 0x48: //turn left normal (forward left)
+		G_xMy_Data.Direction = Forward_Left;
 		break;
-	case 'J':
-	case 'j':
-		G_xMy_Data.Direction = Backward_Right ;
+	case 0x4c: //turn left slightly
+		G_xMy_Data.Direction = Forward_Left;
+		//TODO make it slight
 		break;
-	case 'B':
-	case 'b':
-		G_xMy_Data.Direction = Back ;
+	case 0x50: //turn Right extremely
+		G_xMy_Data.Direction = Right;
 		break;
-	case 'U':
-	case 'u':
-		G_xMy_Data.Direction = Backward_Left ;
+	case 0x58: //turn Right normal (forward Right)
+		G_xMy_Data.Direction = Forward_Right;
 		break;
-	case 'L':
-	case 'l':
-		G_xMy_Data.Direction = Left ;
+	case 0x5c: //turn Right slightly
+		G_xMy_Data.Direction = Forward_Right;
+		//TODO make it slight
 		break;
-	case 'G':
-	case 'g':
-		G_xMy_Data.Direction = Forward_Left ;
+	case 0x60: //Decrease speed greatly
+		//TODO
+		if(G_xMy_Data.Speed > 4){
+			G_xMy_Data.Speed -= 4;
+		}else{
+			G_xMy_Data.Speed = Speed1;
+		}
 		break;
-	case '1':
-		G_xMy_Data.Speed = Speed1 ;
+	case 0x68: //Decrease speed
+		//TODO
+		if(G_xMy_Data.Speed > 2){
+			G_xMy_Data.Speed -= 2;
+		}else{
+			G_xMy_Data.Speed = Speed1;
+		}
 		break;
-	case '2':
-		G_xMy_Data.Speed = Speed2 ;
+	case 0x6c: //Decrease speed lightly
+		//TODO
+		if(G_xMy_Data.Speed > 1){
+			G_xMy_Data.Speed -= 1;
+		}else{
+			G_xMy_Data.Direction = Stop;
+		}
 		break;
-	case '3':
-		G_xMy_Data.Speed = Speed3 ;
+	case 0x70: //Increase speed greatly
+		//TODO
+		if(G_xMy_Data.Speed+4 < 8){
+			G_xMy_Data.Speed += 4;
+		}else{
+			G_xMy_Data.Speed = Speed7;
+		}
 		break;
-	case '4':
-		G_xMy_Data.Speed = Speed4 ;
+	case 0x78: //Increase speed
+		//TODO
+		if(G_xMy_Data.Speed+2 < 8){
+			G_xMy_Data.Speed += 2;
+		}else{
+			G_xMy_Data.Speed = Speed7;
+		}
 		break;
-	case '5':
-		G_xMy_Data.Speed = Speed5 ;
-		break;
-	case '6':
-		G_xMy_Data.Speed = Speed6 ;
-		break;
-	case '7':
-		G_xMy_Data.Speed = Speed7 ;
+	case 0x7c: //Increase speed lightly
+		//TODO
+		if(G_xMy_Data.Speed != Speed7){
+			G_xMy_Data.Speed += 1;
+		}else{
+			G_xMy_Data.Speed = Speed7;
+		}
 		break;
 	}
 
-	G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-	G_u16DataAfterProccing = ((G_u16DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
+	G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+	G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 	switch(G_xMy_Data.Direction){
 	case Go:
 		APP_voidGoTasks();

@@ -12,7 +12,7 @@
  * Automatic_ON
  * Automatic_OFF
  */
-#define speed_control_outomatic         Automatic_ON
+#define speed_control_Automatic         Automatic_ON
 #define V2V_OPTION                      V2V_ENABLE
 
 #define SO_SHORT_DISTANCE  10.0
