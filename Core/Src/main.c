@@ -13,10 +13,10 @@
 #include "APP.h"
 
 /*
- * outomatic_ON
- * outomatic_OFF
+ * Automatic_ON
+ * Automatic_OFF
  */
-#define speed_control_outomatic         outomatic_ON
+#define speed_control_outomatic         Automatic_ON
 #define V2V_OPTION                      V2V_ENABLE
 u8 G_u8_LimetedSpeed = 4;
 
@@ -404,7 +404,7 @@ void APP_voidGoTasks ()
 			CLR_BIT(G_u8DataAfterProccing , 7) ;
 			/*send direction and speed without any change*/
 			G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == outomatic_ON)
+			if (speed_control_outomatic == Automatic_ON)
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
 			else
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
@@ -453,7 +453,7 @@ void APP_voidBackTasks ()
 			CLR_BIT(G_u8DataAfterProccing , 7) ;
 			/*send direction and speed without any change*/
 			G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == outomatic_ON)
+			if (speed_control_outomatic == Automatic_ON)
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
 			else
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
@@ -502,7 +502,7 @@ void APP_voidBackward_RightTasks ()
 			CLR_BIT(G_u8DataAfterProccing , 7) ;
 			/*send direction and speed without any change*/
 			G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == outomatic_ON)
+			if (speed_control_outomatic == Automatic_ON)
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
 			else
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
@@ -551,7 +551,7 @@ void APP_voidBackward_LEFTTasks ()
 			CLR_BIT(G_u8DataAfterProccing , 7) ;
 			/*send direction and speed without any change*/
 			G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == outomatic_ON)
+			if (speed_control_outomatic == Automatic_ON)
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
 			else
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
@@ -604,7 +604,7 @@ void APP_voidForward_RightTasks ()
 			CLR_BIT(G_u8DataAfterProccing , 7) ;
 			/*send direction and speed without any change*/
 			G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == outomatic_ON)
+			if (speed_control_outomatic == Automatic_ON)
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
 			else
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
@@ -653,7 +653,7 @@ void APP_voidForward_LeftTasks ()
 			CLR_BIT(G_u8DataAfterProccing , 7) ;
 			/*send direction and speed without any change*/
 			G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFFF0)) | G_xMy_Data.Direction) ;
-			if (speed_control_outomatic == outomatic_ON)
+			if (speed_control_outomatic == Automatic_ON)
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (max_speed << 4)) ;
 			else
 				G_u8DataAfterProccing = ((G_u8DataAfterProccing & (0xFF8F)) | (G_xMy_Data.Speed << 4)) ;
