@@ -64,9 +64,76 @@ typedef struct
 My_Data       G_xMy_Data       = {0,0,0};
 Near_Distance G_xNear_Distance = {0,0,0,0};
 
-u8 G_u8DataFromUART  = 0 ;
+u8 APP_G_u8DataFromUART;
 
+<<<<<<< HEAD
+u16 G_u8DataAfterProccing = 0 ;
+u8 ProcessingFun (void)
+{
+	/*Mapping data from UART*/
+	switch (APP_G_u8DataFromUART)
+	{
+	case 'F':
+	case 'f':
+		G_xMy_Data.Direction = Go ;
+		break;
+	case 'S':
+	case 's':
+		G_xMy_Data.Direction = Stop ;
+		break;
+	case 'I':
+	case 'i':
+		G_xMy_Data.Direction = Forward_Right ;
+		break;
+	case 'R':
+	case 'r':
+		G_xMy_Data.Direction = Right ;
+		break;
+	case 'J':
+	case 'j':
+		G_xMy_Data.Direction = Backward_Right ;
+		break;
+	case 'B':
+	case 'b':
+		G_xMy_Data.Direction = Back ;
+		break;
+	case 'U':
+	case 'u':
+		G_xMy_Data.Direction = Backward_Left ;
+		break;
+	case 'L':
+	case 'l':
+		G_xMy_Data.Direction = Left ;
+		break;
+	case 'G':
+	case 'g':
+		G_xMy_Data.Direction = Forward_Left ;
+		break;
+	case '1':
+		G_xMy_Data.Speed = Speed1 ;
+		break;
+	case '2':
+		G_xMy_Data.Speed = Speed2 ;
+		break;
+	case '3':
+		G_xMy_Data.Speed = Speed3 ;
+		break;
+	case '4':
+		G_xMy_Data.Speed = Speed4 ;
+		break;
+	case '5':
+		G_xMy_Data.Speed = Speed5 ;
+		break;
+	case '6':
+		G_xMy_Data.Speed = Speed6 ;
+		break;
+	case '7':
+		G_xMy_Data.Speed = Speed7 ;
+		break;
+	}
+=======
 u16 G_u16DataAfterProccing = 0 ;
+>>>>>>> a3f83467b01eb27b85baadafb2473b7ffbc4c518
 
 
 
@@ -87,7 +154,7 @@ void init_conf()
 	HUltrasonic_voidInit(ULTR_4);
 	MUART1_voidSetCallBack(&APP_GET_UART_Command);
 	MUART_voidEnable(UART1);
-	MUART_u8ReceiveByteSynchNonBlocking(UART1);
+	MUART_u8ReceiveByteASynch(UART1);
 }
 
 
@@ -518,15 +585,18 @@ void APP_V2V_Connection()
 
 void APP_GET_UART_Command()
 {
-
+	APP_G_u8DataFromUART = MUART_u8ReadDataRegister(UART1);
 }
 
+<<<<<<< HEAD
+
+=======
 ////ahmed hassan and ayman saad
 
 void ProcessingFun (void)
 {
 	/*Mapping data from UART*/
-	switch (G_u8DataFromUART)
+	switch (APP_G_u8DataFromUART)
 	{
 	case 'F':
 	case 'f':
@@ -622,5 +692,6 @@ void ProcessingFun (void)
 	return;
 
 }
+>>>>>>> a3f83467b01eb27b85baadafb2473b7ffbc4c518
 
 

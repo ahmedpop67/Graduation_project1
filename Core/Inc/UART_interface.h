@@ -163,4 +163,8 @@ void MUART1_voidSetCallBack( void (*ptr) (void) ) ;
 void MUART2_voidSetCallBack( void (*ptr) (void) ) ;
 
 
+void MUART_u8ReceiveByteASynch (  USART_t *A_xUART_Type );
+
+
+
 #endif /* UART_INTERFACE_H_ */
