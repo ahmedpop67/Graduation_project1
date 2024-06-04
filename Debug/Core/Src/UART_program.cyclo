@@ -1,0 +1,15 @@
+../Core/Src/UART_program.c:29:6:MUART_voidInit	7
+../Core/Src/UART_program.c:91:6:MUART_voidEnable	1
+../Core/Src/UART_program.c:96:6:MUART_voidDisable	1
+../Core/Src/UART_program.c:101:6:MUART_voidTransmitByte	3
+../Core/Src/UART_program.c:116:6:MUART_voidTransmitString	2
+../Core/Src/UART_program.c:126:4:MUART_u8ReceiveByteSynchNonBlocking	4
+../Core/Src/UART_program.c:145:6:MUART_ptrReceiveStringSynchNonBlocking	2
+../Core/Src/UART_program.c:158:6:MUART_RxIntSetStatus	3
+../Core/Src/UART_program.c:167:6:MUART_voidClearFlags	1
+../Core/Src/UART_program.c:172:4:MUART_u8ReadDataRegister	1
+../Core/Src/UART_program.c:177:6:MUART1_voidSetCallBack	1
+../Core/Src/UART_program.c:182:6:MUART2_voidSetCallBack	1
+../Core/Src/UART_program.c:187:6:MUART6_voidSetCallBack	1
+../Core/Src/UART_program.c:193:6:USART1_IRQHandler	2
+../Core/Src/UART_program.c:203:6:USART2_IRQHandler	2
