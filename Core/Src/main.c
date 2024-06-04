@@ -1,4 +1,3 @@
-
 #include "STD_TYPES.h"
 #include "BIT_MATH.h"
 
@@ -46,8 +45,8 @@ typedef struct
 typedef struct
 {
 	u8 Sign_detected:1;
-	u8 Sign_distance  ;
 	u8 sign_type    :4;
+	u8 Sign_distance  ;
 }SIGN;
 
 typedef struct
