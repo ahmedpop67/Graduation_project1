@@ -1,0 +1,4 @@
+../Core/Src/PWM_DCmotor_prog.c:13:6:MOTOR_init	4
+../Core/Src/PWM_DCmotor_prog.c:36:6:MOTOR_CounterClockWise	5
+../Core/Src/PWM_DCmotor_prog.c:59:6:MOTOR_ClockWise	5
+../Core/Src/PWM_DCmotor_prog.c:81:6:MOTOR_Stop	5

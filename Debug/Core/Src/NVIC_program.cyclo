@@ -1,0 +1,5 @@
+../Core/Src/NVIC_program.c:14:6:NVIC_voidEnableInterrupt	4
+../Core/Src/NVIC_program.c:31:6:NVIC_voidDisableInterrupt	4
+../Core/Src/NVIC_program.c:48:6:NVIC_voidSetPeningFlag	4
+../Core/Src/NVIC_program.c:65:6:NVIC_voidClearPeningFlag	4
+../Core/Src/NVIC_program.c:82:4:NVIC_voidGetActiveFlag	4

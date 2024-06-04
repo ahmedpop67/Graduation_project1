@@ -1,0 +1,10 @@
+../Core/Src/SPI_program.c:38:6:SPI_voidInit	1
+../Core/Src/SPI_program.c:122:6:SPI_voidSendReceieveCharSynch	3
+../Core/Src/SPI_program.c:141:6:SPI_enu_SendDataAsynch	1
+../Core/Src/SPI_program.c:158:6:SPI_enu_SendStreamAsynch	2
+../Core/Src/SPI_program.c:184:6:SPI_enu_SendRecieveStreamSynch	2
+../Core/Src/SPI_program.c:206:6:SPI_enu_GetDataAsynch	2
+../Core/Src/SPI_program.c:230:6:SPI_voidsetCallBck	2
+../Core/Src/SPI_program.c:246:27:insert_queue	3
+../Core/Src/SPI_program.c:274:27:truncate_queue	3
+../Core/Src/SPI_program.c:300:6:SPI1_IRQHandler	3
