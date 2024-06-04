@@ -7,6 +7,7 @@
 #include "STK_interface.h"
 #include "EXTI_interface.h"
 #include "SPI_interface.h"
+#include "UART_interface.h"
 #include "Ultrasonic_init.h"
 #include "PWM_DCmotor_init.h"
 #include "APP.h"
@@ -60,6 +61,7 @@ void APP_voidForward_RightTasks () ;
 void APP_voidForward_LeftTasks () ;
 void APP_voidLane_Change();
 void APP_V2V_Connection();
+void APP_GET_UART_Command();
 
 /*declaration 4motors*/
 //extern DCmotor_Type MOTOR_1 ;
@@ -182,27 +184,27 @@ u8 ProcessingFun (void)
 
 	if (G_xMy_Data.Direction == Go)
 		{
-			MSTK_voidSetBusyWait(1000) ;
+			//MSTK_voidSetBusyWait(1000) ;
 			APP_voidGoTasks() ;
 		}
 	else if (G_xMy_Data.Direction == Stop)
 		{
-			MSTK_voidSetBusyWait(1000) ;
+			//MSTK_voidSetBusyWait(1000) ;
 			APP_VoidStop();
 		}
 	else if (G_xMy_Data.Direction == Back)
 		{
-			MSTK_voidSetBusyWait(1000) ;
+			//MSTK_voidSetBusyWait(1000) ;
 			APP_voidBackTasks () ;
 		}
 	else if (G_xMy_Data.Direction == Backward_Right)
 		{
-			MSTK_voidSetBusyWait(1000) ;
+			//MSTK_voidSetBusyWait(1000) ;
 			APP_voidBackward_RightTasks () ;
 		}
 	else if (G_xMy_Data.Direction == Backward_Left)
 		{
-			MSTK_voidSetBusyWait(1000) ;
+			//MSTK_voidSetBusyWait(1000) ;
 			APP_voidBackward_LEFTTasks () ;
 		}
 	else if (G_xMy_Data.Direction == Right || G_xMy_Data.Direction == Left )
@@ -211,7 +213,7 @@ u8 ProcessingFun (void)
 		}
 	else if (G_xMy_Data.Direction == Forward_Right)
 		{
-			MSTK_voidSetBusyWait(1000) ;
+			//MSTK_voidSetBusyWait(1000) ;
 			APP_voidForward_RightTasks() ;
 		}
 	else if (G_xMy_Data.Direction == Forward_Left)
@@ -239,14 +241,17 @@ void init_conf()
 	HUltrasonic_voidInit(ULTR_2);
 	HUltrasonic_voidInit(ULTR_3);
 	HUltrasonic_voidInit(ULTR_4);
+	MUART1_voidSetCallBack(&APP_GET_UART_Command);
+	MUART_voidEnable(UART1);
+	MUART_u8ReceiveByteSynchNonBlocking(UART1);
 }
 
 
 int main()
 {
-	u8  L_u8Speed ;
-	u8  L_u8Direction ;
-	u8  L_u8Flag ;
+	u16  L_u16Speed = 0;
+	u8  L_u8Direction = 0 ;
+	u8  L_u8Flag = 0;
 
 	init_conf();
 
@@ -257,7 +262,7 @@ int main()
 		/*Encoding recived data and take Direction (second 3bits)*/
 		L_u8Direction = G_u8DataAfterProccing & 0x0f ;
 		/*Encoding recived data and take Speed (first 4bits)*/
-		L_u8Speed = (G_u8DataAfterProccing >> 4) & 0x07 ;
+		L_u16Speed = (G_u8DataAfterProccing >> 4) & 0x07 ;
 		/*Encoding recived data and take Flag (last bit)*/
 		L_u8Flag = G_u8DataAfterProccing >> 7 ;
 
@@ -274,26 +279,26 @@ int main()
 					 * second speed = 2 +  =
 					 * third speed  = 3 +  =
 					 */
-					L_u8Speed = (G_xMy_Data.Speed) + 0xAAA1;
+					L_u16Speed = (0Xff<<G_xMy_Data.Speed) + 0xf0;
 
 					if (L_u8Direction == Go)  //Forward direction
 					{
-						MOTOR_ClockWise(MOTOR_1 , L_u8Speed) ;
-						MOTOR_ClockWise(MOTOR_2 , L_u8Speed) ;
+						MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
+						MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
 					}
 					else if (L_u8Direction == Back)  //Backward direction
 					{
-						MOTOR_CounterClockWise(MOTOR_1 , L_u8Speed) ;
-						MOTOR_CounterClockWise(MOTOR_2 , L_u8Speed) ;
+						MOTOR_CounterClockWise(MOTOR_1 , L_u16Speed) ;
+						MOTOR_CounterClockWise(MOTOR_2 , L_u16Speed) ;
 					}
 					else if (L_u8Direction == Right)  //Right direction
 					{
 						MOTOR_Stop(MOTOR_1) ;
-						MOTOR_ClockWise(MOTOR_2 , L_u8Speed) ;
+						MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
 					}
 					else if (L_u8Direction == Left)  //Left direction
 					{
-						MOTOR_ClockWise(MOTOR_1 , L_u8Speed) ;
+						MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
 						MOTOR_Stop(MOTOR_2) ;
 					}
 					else if (L_u8Direction == Forward_Right)  //forward right
@@ -328,15 +333,15 @@ void APP_voidCalcForword_Distance()
 }
 void APP_voidCalcBackword_Distance()
 {
-	G_xNear_Distance.Distance_Forword = HUltrasonic_f32CalcDistance(ULTR_2);
+	G_xNear_Distance.Distance_Back = HUltrasonic_f32CalcDistance(ULTR_2);
 }
 void APP_voidCalcRight_Distance()
 {
-	G_xNear_Distance.Distance_Forword = HUltrasonic_f32CalcDistance(ULTR_3);
+	G_xNear_Distance.Distance_Right = HUltrasonic_f32CalcDistance(ULTR_3);
 }
 void APP_voidCalcLeft_Distance()
 {
-	G_xNear_Distance.Distance_Forword = HUltrasonic_f32CalcDistance(ULTR_1);
+	G_xNear_Distance.Distance_Left = HUltrasonic_f32CalcDistance(ULTR_1);
 }
 
 
@@ -371,7 +376,7 @@ void APP_voidGoTasks ()
 			/*stop car + alarm*/
 			G_u8DataAfterProccing = G_u8DataAfterProccing & 0xFF8F ;
 		}
-	else if (G_xNear_Distance.Distance_Forword <= G_u8_LimetedSpeed) //Un Safed Distance
+	else if (G_xNear_Distance.Distance_Forword <= UN_SAFE_DISTANCE) //Un Safed Distance
 		{
 				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 				{
@@ -420,7 +425,7 @@ void APP_voidBackTasks ()
 			/*stop car + alarm*/
 			G_u8DataAfterProccing = G_u8DataAfterProccing & 0xFF8F ;
 		}
-	else if (G_xNear_Distance.Distance_Back <= G_u8_LimetedSpeed) //Un Safed Distance
+	else if (G_xNear_Distance.Distance_Back <= UN_SAFE_DISTANCE) //Un Safed Distance
 		{
 				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 				{
@@ -469,7 +474,7 @@ void APP_voidBackward_RightTasks ()
 			/*stop car + alarm*/
 			G_u8DataAfterProccing = G_u8DataAfterProccing & 0xFF8F ;
 		}
-	else if (G_xNear_Distance.Distance_Left <= G_u8_LimetedSpeed) //Un Safed Distance
+	else if (G_xNear_Distance.Distance_Left <= UN_SAFE_DISTANCE) //Un Safed Distance
 		{
 				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 				{
@@ -518,7 +523,7 @@ void APP_voidBackward_LEFTTasks ()
 			/*stop car + alarm*/
 			G_u8DataAfterProccing = G_u8DataAfterProccing & 0xFF8F ;
 		}
-	else if (G_xNear_Distance.Distance_Right <= G_u8_LimetedSpeed) //Un Safed Distance
+	else if (G_xNear_Distance.Distance_Right <= UN_SAFE_DISTANCE) //Un Safed Distance
 		{
 				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 				{
@@ -571,7 +576,7 @@ void APP_voidForward_RightTasks ()
 			/*stop car + alarm*/
 			G_u8DataAfterProccing = G_u8DataAfterProccing & 0xFF8F ;
 		}
-	else if (G_xNear_Distance.Distance_Right <= G_u8_LimetedSpeed) //Un Safed Distance
+	else if (G_xNear_Distance.Distance_Right <= UN_SAFE_DISTANCE) //Un Safed Distance
 		{
 				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 				{
@@ -620,7 +625,7 @@ void APP_voidForward_LeftTasks ()
 			/*stop car + alarm*/
 			G_u8DataAfterProccing = G_u8DataAfterProccing & 0xFF8F ;
 		}
-	else if (G_xNear_Distance.Distance_Left <= G_u8_LimetedSpeed) //Un Safed Distance
+	else if (G_xNear_Distance.Distance_Left <= UN_SAFE_DISTANCE) //Un Safed Distance
 		{
 				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 				{
@@ -666,3 +671,14 @@ void APP_V2V_Connection()
 
 
 }
+
+void APP_GET_UART_Command()
+{
+
+}
+
+
+
+
+
+
