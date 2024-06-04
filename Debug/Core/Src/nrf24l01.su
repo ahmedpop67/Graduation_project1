@@ -1,0 +1,14 @@
+nrf24l01.c:52:6:NRF24L01_init	8	static
+nrf24l01.c:90:6:NRF24L01_reset	8	static
+nrf24l01.c:120:13:NRF24L01_sendCommand	16	static
+nrf24l01.c:138:13:NRF24L01_readRegister	16	static
+nrf24l01.c:159:6:NRF24L01_writeRegister	16	static
+nrf24l01.c:181:13:NRF24L01_writeRegisterMulti	16	static
+nrf24l01.c:202:26:NRF24L01_switchToTransmitterMode	24	static
+nrf24l01.c:244:26:NRF24L01_switchToReceiverMode	24	static
+nrf24l01.c:334:26:NRF24L01_checkTransmitterBuffer	24	static
+nrf24l01.c:374:26:NRF24L01_checkReceiverBuffer	24	static
+nrf24l01.c:418:26:NRF24L01_sendData	24	static
+nrf24l01.c:453:26:NRF24L01_readData	24	static
+nrf24l01.c:486:6:NRF24L01_flushTransmitterBuffer	8	static
+nrf24l01.c:497:6:NRF24L01_flushReceiverBuffer	8	static
