@@ -5,31 +5,31 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   0000010c  08000000  08000000  00010000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         00003098  0800010c  0800010c  0001010c  2**2
+  1 .text         00002d1c  0800010c  0800010c  0001010c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000000  080031a4  080031a4  000200cc  2**0
+  2 .rodata       00000000  08002e28  08002e28  000200cc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .ARM.extab    00000000  080031a4  080031a4  000200cc  2**0
+  3 .ARM.extab    00000000  08002e28  08002e28  000200cc  2**0
                   CONTENTS
-  4 .ARM          00000000  080031a4  080031a4  000200cc  2**0
+  4 .ARM          00000000  08002e28  08002e28  000200cc  2**0
                   CONTENTS
-  5 .preinit_array 00000000  080031a4  080031a4  000200cc  2**0
+  5 .preinit_array 00000000  08002e28  08002e28  000200cc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  080031a4  080031a4  000131a4  2**2
+  6 .init_array   00000004  08002e28  08002e28  00012e28  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  080031a8  080031a8  000131a8  2**2
+  7 .fini_array   00000004  08002e2c  08002e2c  00012e2c  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         000000cc  20000000  080031ac  00020000  2**2
+  8 .data         000000cc  20000000  08002e30  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000110  200000cc  08003278  000200cc  2**2
+  9 .bss          00000110  200000cc  08002efc  000200cc  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  200001dc  08003278  000201dc  2**0
+ 10 ._user_heap_stack 00000604  200001dc  08002efc  000201dc  2**0
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  000200cc  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00002155  00000000  00000000  000200f5  2**0
+ 12 .debug_info   00002154  00000000  00000000  000200f5  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00000d20  00000000  00000000  0002224a  2**0
+ 13 .debug_abbrev 00000d20  00000000  00000000  00022249  2**0
                   CONTENTS, READONLY, DEBUGGING
  14 .debug_aranges 00000408  00000000  00000000  00022f70  2**3
                   CONTENTS, READONLY, DEBUGGING
@@ -37,17 +37,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  16 .debug_macro  0000217e  00000000  00000000  00023564  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   00002b1d  00000000  00000000  000256e2  2**0
+ 17 .debug_line   00002ada  00000000  00000000  000256e2  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    00083ba7  00000000  00000000  000281ff  2**0
+ 18 .debug_str    00083ba7  00000000  00000000  000281bc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      000000be  00000000  00000000  000abda6  2**0
+ 19 .comment      000000be  00000000  00000000  000abd63  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000e64  00000000  00000000  000abe64  2**2
+ 20 .debug_frame  00000e64  00000000  00000000  000abe24  2**2
                   CONTENTS, READONLY, DEBUGGING
- 21 .debug_ranges 00000120  00000000  00000000  000accc8  2**0
+ 21 .debug_ranges 00000120  00000000  00000000  000acc88  2**0
                   CONTENTS, READONLY, DEBUGGING
- 22 .debug_line_str 00000051  00000000  00000000  000acde8  2**0
+ 22 .debug_line_str 00000051  00000000  00000000  000acda8  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -66,7 +66,7 @@ Disassembly of section .text:
  8000122:	bd10      	pop	{r4, pc}
  8000124:	200000cc 	.word	0x200000cc
  8000128:	00000000 	.word	0x00000000
- 800012c:	0800318c 	.word	0x0800318c
+ 800012c:	08002e10 	.word	0x08002e10
 
 08000130 <frame_dummy>:
  8000130:	b508      	push	{r3, lr}
@@ -78,7 +78,7 @@ Disassembly of section .text:
  800013e:	bd08      	pop	{r3, pc}
  8000140:	00000000 	.word	0x00000000
  8000144:	200000d0 	.word	0x200000d0
- 8000148:	0800318c 	.word	0x0800318c
+ 8000148:	08002e10 	.word	0x08002e10
 
 0800014c <__aeabi_drsub>:
  800014c:	f081 4100 	eor.w	r1, r1, #2147483648	; 0x80000000
@@ -3250,7 +3250,7 @@ Disassembly of section .text:
  80020be:	bf00      	nop
  80020c0:	bd80      	pop	{r7, pc}
  80020c2:	bf00      	nop
- 80020c4:	08002db1 	.word	0x08002db1
+ 80020c4:	080028b5 	.word	0x080028b5
  80020c8:	40013800 	.word	0x40013800
 
 080020cc <main>:
@@ -3264,22 +3264,21 @@ Disassembly of section .text:
  80020da:	2300      	movs	r3, #0
  80020dc:	713b      	strb	r3, [r7, #4]
  80020de:	f7ff ffb9 	bl	8002054 <init_conf>
- 80020e2:	f000 fe75 	bl	8002dd0 <ProcessingFun>
+ 80020e2:	f000 fbf7 	bl	80028d4 <ProcessingFun>
  80020e6:	4b46      	ldr	r3, [pc, #280]	; (8002200 <main+0x134>)
- 80020e8:	881b      	ldrh	r3, [r3, #0]
- 80020ea:	b2db      	uxtb	r3, r3
- 80020ec:	f003 030f 	and.w	r3, r3, #15
+ 80020e8:	781b      	ldrb	r3, [r3, #0]
+ 80020ea:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 80020ee:	b2db      	uxtb	r3, r3
  80020f0:	717b      	strb	r3, [r7, #5]
  80020f2:	4b43      	ldr	r3, [pc, #268]	; (8002200 <main+0x134>)
- 80020f4:	881b      	ldrh	r3, [r3, #0]
- 80020f6:	091b      	lsrs	r3, r3, #4
- 80020f8:	b29b      	uxth	r3, r3
- 80020fa:	f003 0307 	and.w	r3, r3, #7
- 80020fe:	80fb      	strh	r3, [r7, #6]
- 8002100:	4b3f      	ldr	r3, [pc, #252]	; (8002200 <main+0x134>)
- 8002102:	881b      	ldrh	r3, [r3, #0]
- 8002104:	09db      	lsrs	r3, r3, #7
- 8002106:	b29b      	uxth	r3, r3
+ 80020f4:	781b      	ldrb	r3, [r3, #0]
+ 80020f6:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80020fa:	b2db      	uxtb	r3, r3
+ 80020fc:	80fb      	strh	r3, [r7, #6]
+ 80020fe:	4b40      	ldr	r3, [pc, #256]	; (8002200 <main+0x134>)
+ 8002100:	785b      	ldrb	r3, [r3, #1]
+ 8002102:	f3c3 0301 	ubfx	r3, r3, #0, #2
+ 8002106:	b2db      	uxtb	r3, r3
  8002108:	713b      	strb	r3, [r7, #4]
  800210a:	797b      	ldrb	r3, [r7, #5]
  800210c:	2b08      	cmp	r3, #8
@@ -3390,252 +3389,237 @@ Disassembly of section .text:
 08002208 <APP_VoidStop>:
  8002208:	b480      	push	{r7}
  800220a:	af00      	add	r7, sp, #0
- 800220c:	4b1a      	ldr	r3, [pc, #104]	; (8002278 <APP_VoidStop+0x70>)
- 800220e:	881b      	ldrh	r3, [r3, #0]
- 8002210:	f043 0301 	orr.w	r3, r3, #1
- 8002214:	b29a      	uxth	r2, r3
- 8002216:	4b18      	ldr	r3, [pc, #96]	; (8002278 <APP_VoidStop+0x70>)
- 8002218:	801a      	strh	r2, [r3, #0]
- 800221a:	4b17      	ldr	r3, [pc, #92]	; (8002278 <APP_VoidStop+0x70>)
- 800221c:	881b      	ldrh	r3, [r3, #0]
- 800221e:	f043 0302 	orr.w	r3, r3, #2
- 8002222:	b29a      	uxth	r2, r3
- 8002224:	4b14      	ldr	r3, [pc, #80]	; (8002278 <APP_VoidStop+0x70>)
- 8002226:	801a      	strh	r2, [r3, #0]
- 8002228:	4b13      	ldr	r3, [pc, #76]	; (8002278 <APP_VoidStop+0x70>)
- 800222a:	881b      	ldrh	r3, [r3, #0]
- 800222c:	f043 0304 	orr.w	r3, r3, #4
- 8002230:	b29a      	uxth	r2, r3
- 8002232:	4b11      	ldr	r3, [pc, #68]	; (8002278 <APP_VoidStop+0x70>)
- 8002234:	801a      	strh	r2, [r3, #0]
- 8002236:	4b10      	ldr	r3, [pc, #64]	; (8002278 <APP_VoidStop+0x70>)
- 8002238:	881b      	ldrh	r3, [r3, #0]
- 800223a:	f023 0308 	bic.w	r3, r3, #8
- 800223e:	b29a      	uxth	r2, r3
- 8002240:	4b0d      	ldr	r3, [pc, #52]	; (8002278 <APP_VoidStop+0x70>)
- 8002242:	801a      	strh	r2, [r3, #0]
- 8002244:	4b0c      	ldr	r3, [pc, #48]	; (8002278 <APP_VoidStop+0x70>)
- 8002246:	881b      	ldrh	r3, [r3, #0]
- 8002248:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 800224c:	b29a      	uxth	r2, r3
- 800224e:	4b0a      	ldr	r3, [pc, #40]	; (8002278 <APP_VoidStop+0x70>)
- 8002250:	801a      	strh	r2, [r3, #0]
- 8002252:	4b09      	ldr	r3, [pc, #36]	; (8002278 <APP_VoidStop+0x70>)
- 8002254:	881b      	ldrh	r3, [r3, #0]
- 8002256:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 800225a:	b29a      	uxth	r2, r3
- 800225c:	4b06      	ldr	r3, [pc, #24]	; (8002278 <APP_VoidStop+0x70>)
- 800225e:	801a      	strh	r2, [r3, #0]
- 8002260:	4b05      	ldr	r3, [pc, #20]	; (8002278 <APP_VoidStop+0x70>)
- 8002262:	881b      	ldrh	r3, [r3, #0]
- 8002264:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002268:	b29a      	uxth	r2, r3
- 800226a:	4b03      	ldr	r3, [pc, #12]	; (8002278 <APP_VoidStop+0x70>)
- 800226c:	801a      	strh	r2, [r3, #0]
- 800226e:	bf00      	nop
- 8002270:	46bd      	mov	sp, r7
- 8002272:	bc80      	pop	{r7}
- 8002274:	4770      	bx	lr
- 8002276:	bf00      	nop
- 8002278:	20000100 	.word	0x20000100
+ 800220c:	4a07      	ldr	r2, [pc, #28]	; (800222c <APP_VoidStop+0x24>)
+ 800220e:	7813      	ldrb	r3, [r2, #0]
+ 8002210:	2108      	movs	r1, #8
+ 8002212:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002216:	7013      	strb	r3, [r2, #0]
+ 8002218:	4a04      	ldr	r2, [pc, #16]	; (800222c <APP_VoidStop+0x24>)
+ 800221a:	7853      	ldrb	r3, [r2, #1]
+ 800221c:	f043 0303 	orr.w	r3, r3, #3
+ 8002220:	7053      	strb	r3, [r2, #1]
+ 8002222:	bf00      	nop
+ 8002224:	46bd      	mov	sp, r7
+ 8002226:	bc80      	pop	{r7}
+ 8002228:	4770      	bx	lr
+ 800222a:	bf00      	nop
+ 800222c:	20000100 	.word	0x20000100
 
-0800227c <APP_voidGoTasks>:
- 800227c:	b580      	push	{r7, lr}
- 800227e:	af00      	add	r7, sp, #0
- 8002280:	4b6f      	ldr	r3, [pc, #444]	; (8002440 <APP_voidGoTasks+0x1c4>)
+08002230 <APP_voidGoTasks>:
+ 8002230:	b580      	push	{r7, lr}
+ 8002232:	af00      	add	r7, sp, #0
+ 8002234:	4b3d      	ldr	r3, [pc, #244]	; (800232c <APP_voidGoTasks+0xfc>)
+ 8002236:	781b      	ldrb	r3, [r3, #0]
+ 8002238:	4618      	mov	r0, r3
+ 800223a:	f7fe f8d9 	bl	80003f0 <__aeabi_i2d>
+ 800223e:	f04f 0200 	mov.w	r2, #0
+ 8002242:	4b3b      	ldr	r3, [pc, #236]	; (8002330 <APP_voidGoTasks+0x100>)
+ 8002244:	f7fe f9a8 	bl	8000598 <__aeabi_dcmple>
+ 8002248:	4603      	mov	r3, r0
+ 800224a:	2b00      	cmp	r3, #0
+ 800224c:	d00b      	beq.n	8002266 <APP_voidGoTasks+0x36>
+ 800224e:	4a39      	ldr	r2, [pc, #228]	; (8002334 <APP_voidGoTasks+0x104>)
+ 8002250:	7813      	ldrb	r3, [r2, #0]
+ 8002252:	2108      	movs	r1, #8
+ 8002254:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002258:	7013      	strb	r3, [r2, #0]
+ 800225a:	4a36      	ldr	r2, [pc, #216]	; (8002334 <APP_voidGoTasks+0x104>)
+ 800225c:	7853      	ldrb	r3, [r2, #1]
+ 800225e:	f043 0303 	orr.w	r3, r3, #3
+ 8002262:	7053      	strb	r3, [r2, #1]
+ 8002264:	e060      	b.n	8002328 <APP_voidGoTasks+0xf8>
+ 8002266:	4b31      	ldr	r3, [pc, #196]	; (800232c <APP_voidGoTasks+0xfc>)
+ 8002268:	781b      	ldrb	r3, [r3, #0]
+ 800226a:	4618      	mov	r0, r3
+ 800226c:	f7fe f8c0 	bl	80003f0 <__aeabi_i2d>
+ 8002270:	f04f 0200 	mov.w	r2, #0
+ 8002274:	4b30      	ldr	r3, [pc, #192]	; (8002338 <APP_voidGoTasks+0x108>)
+ 8002276:	f7fe f98f 	bl	8000598 <__aeabi_dcmple>
+ 800227a:	4603      	mov	r3, r0
+ 800227c:	2b00      	cmp	r3, #0
+ 800227e:	d03f      	beq.n	8002300 <APP_voidGoTasks+0xd0>
+ 8002280:	4b2e      	ldr	r3, [pc, #184]	; (800233c <APP_voidGoTasks+0x10c>)
  8002282:	781b      	ldrb	r3, [r3, #0]
- 8002284:	4618      	mov	r0, r3
- 8002286:	f7fe f8b3 	bl	80003f0 <__aeabi_i2d>
- 800228a:	f04f 0200 	mov.w	r2, #0
- 800228e:	4b6d      	ldr	r3, [pc, #436]	; (8002444 <APP_voidGoTasks+0x1c8>)
- 8002290:	f7fe f982 	bl	8000598 <__aeabi_dcmple>
- 8002294:	4603      	mov	r3, r0
- 8002296:	2b00      	cmp	r3, #0
- 8002298:	d031      	beq.n	80022fe <APP_voidGoTasks+0x82>
- 800229a:	4b6b      	ldr	r3, [pc, #428]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800229c:	881b      	ldrh	r3, [r3, #0]
- 800229e:	f043 0301 	orr.w	r3, r3, #1
- 80022a2:	b29a      	uxth	r2, r3
- 80022a4:	4b68      	ldr	r3, [pc, #416]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022a6:	801a      	strh	r2, [r3, #0]
- 80022a8:	4b67      	ldr	r3, [pc, #412]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022aa:	881b      	ldrh	r3, [r3, #0]
- 80022ac:	f043 0302 	orr.w	r3, r3, #2
- 80022b0:	b29a      	uxth	r2, r3
- 80022b2:	4b65      	ldr	r3, [pc, #404]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022b4:	801a      	strh	r2, [r3, #0]
- 80022b6:	4b64      	ldr	r3, [pc, #400]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022b8:	881b      	ldrh	r3, [r3, #0]
- 80022ba:	f043 0304 	orr.w	r3, r3, #4
- 80022be:	b29a      	uxth	r2, r3
- 80022c0:	4b61      	ldr	r3, [pc, #388]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022c2:	801a      	strh	r2, [r3, #0]
- 80022c4:	4b60      	ldr	r3, [pc, #384]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022c6:	881b      	ldrh	r3, [r3, #0]
- 80022c8:	f023 0308 	bic.w	r3, r3, #8
- 80022cc:	b29a      	uxth	r2, r3
- 80022ce:	4b5e      	ldr	r3, [pc, #376]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022d0:	801a      	strh	r2, [r3, #0]
- 80022d2:	4b5d      	ldr	r3, [pc, #372]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022d4:	881b      	ldrh	r3, [r3, #0]
- 80022d6:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 80022da:	b29a      	uxth	r2, r3
- 80022dc:	4b5a      	ldr	r3, [pc, #360]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022de:	801a      	strh	r2, [r3, #0]
- 80022e0:	4b59      	ldr	r3, [pc, #356]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022e2:	881b      	ldrh	r3, [r3, #0]
- 80022e4:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 80022e8:	b29a      	uxth	r2, r3
- 80022ea:	4b57      	ldr	r3, [pc, #348]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022ec:	801a      	strh	r2, [r3, #0]
- 80022ee:	4b56      	ldr	r3, [pc, #344]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022f0:	881b      	ldrh	r3, [r3, #0]
- 80022f2:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 80022f6:	b29a      	uxth	r2, r3
- 80022f8:	4b53      	ldr	r3, [pc, #332]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80022fa:	801a      	strh	r2, [r3, #0]
- 80022fc:	e09d      	b.n	800243a <APP_voidGoTasks+0x1be>
- 80022fe:	4b50      	ldr	r3, [pc, #320]	; (8002440 <APP_voidGoTasks+0x1c4>)
- 8002300:	781b      	ldrb	r3, [r3, #0]
- 8002302:	4618      	mov	r0, r3
- 8002304:	f7fe f874 	bl	80003f0 <__aeabi_i2d>
- 8002308:	f04f 0200 	mov.w	r2, #0
- 800230c:	4b4f      	ldr	r3, [pc, #316]	; (800244c <APP_voidGoTasks+0x1d0>)
- 800230e:	f7fe f943 	bl	8000598 <__aeabi_dcmple>
- 8002312:	4603      	mov	r3, r0
- 8002314:	2b00      	cmp	r3, #0
- 8002316:	d06a      	beq.n	80023ee <APP_voidGoTasks+0x172>
- 8002318:	4b4d      	ldr	r3, [pc, #308]	; (8002450 <APP_voidGoTasks+0x1d4>)
- 800231a:	781b      	ldrb	r3, [r3, #0]
- 800231c:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002320:	b2db      	uxtb	r3, r3
- 8002322:	461a      	mov	r2, r3
- 8002324:	4b4b      	ldr	r3, [pc, #300]	; (8002454 <APP_voidGoTasks+0x1d8>)
- 8002326:	781b      	ldrb	r3, [r3, #0]
- 8002328:	429a      	cmp	r2, r3
- 800232a:	dc31      	bgt.n	8002390 <APP_voidGoTasks+0x114>
- 800232c:	4b46      	ldr	r3, [pc, #280]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800232e:	881b      	ldrh	r3, [r3, #0]
- 8002330:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 8002334:	b29a      	uxth	r2, r3
- 8002336:	4b44      	ldr	r3, [pc, #272]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 8002338:	801a      	strh	r2, [r3, #0]
- 800233a:	4b43      	ldr	r3, [pc, #268]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800233c:	881b      	ldrh	r3, [r3, #0]
- 800233e:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 8002342:	b29a      	uxth	r2, r3
- 8002344:	4b40      	ldr	r3, [pc, #256]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 8002346:	801a      	strh	r2, [r3, #0]
- 8002348:	4b3f      	ldr	r3, [pc, #252]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800234a:	881b      	ldrh	r3, [r3, #0]
- 800234c:	b21b      	sxth	r3, r3
- 800234e:	f023 030f 	bic.w	r3, r3, #15
- 8002352:	b21a      	sxth	r2, r3
- 8002354:	4b3e      	ldr	r3, [pc, #248]	; (8002450 <APP_voidGoTasks+0x1d4>)
- 8002356:	781b      	ldrb	r3, [r3, #0]
- 8002358:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 800235c:	b2db      	uxtb	r3, r3
- 800235e:	b21b      	sxth	r3, r3
- 8002360:	4313      	orrs	r3, r2
- 8002362:	b21b      	sxth	r3, r3
- 8002364:	b29a      	uxth	r2, r3
- 8002366:	4b38      	ldr	r3, [pc, #224]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 8002368:	801a      	strh	r2, [r3, #0]
- 800236a:	4b37      	ldr	r3, [pc, #220]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800236c:	881b      	ldrh	r3, [r3, #0]
- 800236e:	b21b      	sxth	r3, r3
- 8002370:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002374:	b21a      	sxth	r2, r3
- 8002376:	4b36      	ldr	r3, [pc, #216]	; (8002450 <APP_voidGoTasks+0x1d4>)
- 8002378:	781b      	ldrb	r3, [r3, #0]
- 800237a:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 800237e:	b2db      	uxtb	r3, r3
- 8002380:	011b      	lsls	r3, r3, #4
- 8002382:	b21b      	sxth	r3, r3
- 8002384:	4313      	orrs	r3, r2
- 8002386:	b21b      	sxth	r3, r3
- 8002388:	b29a      	uxth	r2, r3
- 800238a:	4b2f      	ldr	r3, [pc, #188]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800238c:	801a      	strh	r2, [r3, #0]
- 800238e:	e054      	b.n	800243a <APP_voidGoTasks+0x1be>
- 8002390:	4b2d      	ldr	r3, [pc, #180]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 8002392:	881b      	ldrh	r3, [r3, #0]
- 8002394:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 8002398:	b29a      	uxth	r2, r3
- 800239a:	4b2b      	ldr	r3, [pc, #172]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800239c:	801a      	strh	r2, [r3, #0]
- 800239e:	4b2a      	ldr	r3, [pc, #168]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023a0:	881b      	ldrh	r3, [r3, #0]
- 80023a2:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 80023a6:	b29a      	uxth	r2, r3
- 80023a8:	4b27      	ldr	r3, [pc, #156]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023aa:	801a      	strh	r2, [r3, #0]
- 80023ac:	4b26      	ldr	r3, [pc, #152]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023ae:	881b      	ldrh	r3, [r3, #0]
- 80023b0:	b21b      	sxth	r3, r3
- 80023b2:	f023 030f 	bic.w	r3, r3, #15
- 80023b6:	b21a      	sxth	r2, r3
- 80023b8:	4b25      	ldr	r3, [pc, #148]	; (8002450 <APP_voidGoTasks+0x1d4>)
- 80023ba:	781b      	ldrb	r3, [r3, #0]
- 80023bc:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 80023c0:	b2db      	uxtb	r3, r3
- 80023c2:	b21b      	sxth	r3, r3
- 80023c4:	4313      	orrs	r3, r2
- 80023c6:	b21b      	sxth	r3, r3
- 80023c8:	b29a      	uxth	r2, r3
- 80023ca:	4b1f      	ldr	r3, [pc, #124]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023cc:	801a      	strh	r2, [r3, #0]
- 80023ce:	4b1e      	ldr	r3, [pc, #120]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023d0:	881b      	ldrh	r3, [r3, #0]
- 80023d2:	b21b      	sxth	r3, r3
- 80023d4:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 80023d8:	b21a      	sxth	r2, r3
- 80023da:	4b1e      	ldr	r3, [pc, #120]	; (8002454 <APP_voidGoTasks+0x1d8>)
- 80023dc:	781b      	ldrb	r3, [r3, #0]
- 80023de:	011b      	lsls	r3, r3, #4
- 80023e0:	b21b      	sxth	r3, r3
- 80023e2:	4313      	orrs	r3, r2
- 80023e4:	b21b      	sxth	r3, r3
- 80023e6:	b29a      	uxth	r2, r3
- 80023e8:	4b17      	ldr	r3, [pc, #92]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023ea:	801a      	strh	r2, [r3, #0]
- 80023ec:	e025      	b.n	800243a <APP_voidGoTasks+0x1be>
- 80023ee:	4b16      	ldr	r3, [pc, #88]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023f0:	881b      	ldrh	r3, [r3, #0]
- 80023f2:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 80023f6:	b29a      	uxth	r2, r3
- 80023f8:	4b13      	ldr	r3, [pc, #76]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023fa:	801a      	strh	r2, [r3, #0]
- 80023fc:	4b12      	ldr	r3, [pc, #72]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 80023fe:	881b      	ldrh	r3, [r3, #0]
- 8002400:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 8002404:	b29a      	uxth	r2, r3
- 8002406:	4b10      	ldr	r3, [pc, #64]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 8002408:	801a      	strh	r2, [r3, #0]
- 800240a:	4b0f      	ldr	r3, [pc, #60]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800240c:	881b      	ldrh	r3, [r3, #0]
- 800240e:	b21b      	sxth	r3, r3
- 8002410:	f023 030f 	bic.w	r3, r3, #15
- 8002414:	b21a      	sxth	r2, r3
- 8002416:	4b0e      	ldr	r3, [pc, #56]	; (8002450 <APP_voidGoTasks+0x1d4>)
- 8002418:	781b      	ldrb	r3, [r3, #0]
- 800241a:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 800241e:	b2db      	uxtb	r3, r3
- 8002420:	b21b      	sxth	r3, r3
- 8002422:	4313      	orrs	r3, r2
- 8002424:	b21b      	sxth	r3, r3
- 8002426:	b29a      	uxth	r2, r3
- 8002428:	4b07      	ldr	r3, [pc, #28]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800242a:	801a      	strh	r2, [r3, #0]
- 800242c:	4b06      	ldr	r3, [pc, #24]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 800242e:	881b      	ldrh	r3, [r3, #0]
- 8002430:	f043 0370 	orr.w	r3, r3, #112	; 0x70
- 8002434:	b29a      	uxth	r2, r3
- 8002436:	4b04      	ldr	r3, [pc, #16]	; (8002448 <APP_voidGoTasks+0x1cc>)
- 8002438:	801a      	strh	r2, [r3, #0]
- 800243a:	bf00      	nop
- 800243c:	bd80      	pop	{r7, pc}
- 800243e:	bf00      	nop
+ 8002284:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002288:	b2db      	uxtb	r3, r3
+ 800228a:	461a      	mov	r2, r3
+ 800228c:	4b2c      	ldr	r3, [pc, #176]	; (8002340 <APP_voidGoTasks+0x110>)
+ 800228e:	781b      	ldrb	r3, [r3, #0]
+ 8002290:	429a      	cmp	r2, r3
+ 8002292:	dc1a      	bgt.n	80022ca <APP_voidGoTasks+0x9a>
+ 8002294:	4a27      	ldr	r2, [pc, #156]	; (8002334 <APP_voidGoTasks+0x104>)
+ 8002296:	7853      	ldrb	r3, [r2, #1]
+ 8002298:	2101      	movs	r1, #1
+ 800229a:	f361 0301 	bfi	r3, r1, #0, #2
+ 800229e:	7053      	strb	r3, [r2, #1]
+ 80022a0:	4b26      	ldr	r3, [pc, #152]	; (800233c <APP_voidGoTasks+0x10c>)
+ 80022a2:	781b      	ldrb	r3, [r3, #0]
+ 80022a4:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 80022a8:	b2d9      	uxtb	r1, r3
+ 80022aa:	4a22      	ldr	r2, [pc, #136]	; (8002334 <APP_voidGoTasks+0x104>)
+ 80022ac:	7813      	ldrb	r3, [r2, #0]
+ 80022ae:	f361 0303 	bfi	r3, r1, #0, #4
+ 80022b2:	7013      	strb	r3, [r2, #0]
+ 80022b4:	4b21      	ldr	r3, [pc, #132]	; (800233c <APP_voidGoTasks+0x10c>)
+ 80022b6:	781b      	ldrb	r3, [r3, #0]
+ 80022b8:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80022bc:	b2d9      	uxtb	r1, r3
+ 80022be:	4a1d      	ldr	r2, [pc, #116]	; (8002334 <APP_voidGoTasks+0x104>)
+ 80022c0:	7813      	ldrb	r3, [r2, #0]
+ 80022c2:	f361 1306 	bfi	r3, r1, #4, #3
+ 80022c6:	7013      	strb	r3, [r2, #0]
+ 80022c8:	e02e      	b.n	8002328 <APP_voidGoTasks+0xf8>
+ 80022ca:	4a1a      	ldr	r2, [pc, #104]	; (8002334 <APP_voidGoTasks+0x104>)
+ 80022cc:	7853      	ldrb	r3, [r2, #1]
+ 80022ce:	2102      	movs	r1, #2
+ 80022d0:	f361 0301 	bfi	r3, r1, #0, #2
+ 80022d4:	7053      	strb	r3, [r2, #1]
+ 80022d6:	4b19      	ldr	r3, [pc, #100]	; (800233c <APP_voidGoTasks+0x10c>)
+ 80022d8:	781b      	ldrb	r3, [r3, #0]
+ 80022da:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 80022de:	b2d9      	uxtb	r1, r3
+ 80022e0:	4a14      	ldr	r2, [pc, #80]	; (8002334 <APP_voidGoTasks+0x104>)
+ 80022e2:	7813      	ldrb	r3, [r2, #0]
+ 80022e4:	f361 0303 	bfi	r3, r1, #0, #4
+ 80022e8:	7013      	strb	r3, [r2, #0]
+ 80022ea:	4b14      	ldr	r3, [pc, #80]	; (800233c <APP_voidGoTasks+0x10c>)
+ 80022ec:	781b      	ldrb	r3, [r3, #0]
+ 80022ee:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80022f2:	b2d9      	uxtb	r1, r3
+ 80022f4:	4a0f      	ldr	r2, [pc, #60]	; (8002334 <APP_voidGoTasks+0x104>)
+ 80022f6:	7813      	ldrb	r3, [r2, #0]
+ 80022f8:	f361 1306 	bfi	r3, r1, #4, #3
+ 80022fc:	7013      	strb	r3, [r2, #0]
+ 80022fe:	e013      	b.n	8002328 <APP_voidGoTasks+0xf8>
+ 8002300:	4a0c      	ldr	r2, [pc, #48]	; (8002334 <APP_voidGoTasks+0x104>)
+ 8002302:	7853      	ldrb	r3, [r2, #1]
+ 8002304:	f36f 0301 	bfc	r3, #0, #2
+ 8002308:	7053      	strb	r3, [r2, #1]
+ 800230a:	4b0c      	ldr	r3, [pc, #48]	; (800233c <APP_voidGoTasks+0x10c>)
+ 800230c:	781b      	ldrb	r3, [r3, #0]
+ 800230e:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002312:	b2d9      	uxtb	r1, r3
+ 8002314:	4a07      	ldr	r2, [pc, #28]	; (8002334 <APP_voidGoTasks+0x104>)
+ 8002316:	7813      	ldrb	r3, [r2, #0]
+ 8002318:	f361 0303 	bfi	r3, r1, #0, #4
+ 800231c:	7013      	strb	r3, [r2, #0]
+ 800231e:	4a05      	ldr	r2, [pc, #20]	; (8002334 <APP_voidGoTasks+0x104>)
+ 8002320:	7813      	ldrb	r3, [r2, #0]
+ 8002322:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 8002326:	7013      	strb	r3, [r2, #0]
+ 8002328:	bf00      	nop
+ 800232a:	bd80      	pop	{r7, pc}
+ 800232c:	200000fc 	.word	0x200000fc
+ 8002330:	40240000 	.word	0x40240000
+ 8002334:	20000100 	.word	0x20000100
+ 8002338:	40340000 	.word	0x40340000
+ 800233c:	200000f8 	.word	0x200000f8
+ 8002340:	200000ca 	.word	0x200000ca
+
+08002344 <APP_voidBackTasks>:
+ 8002344:	b580      	push	{r7, lr}
+ 8002346:	af00      	add	r7, sp, #0
+ 8002348:	4b3d      	ldr	r3, [pc, #244]	; (8002440 <APP_voidBackTasks+0xfc>)
+ 800234a:	785b      	ldrb	r3, [r3, #1]
+ 800234c:	4618      	mov	r0, r3
+ 800234e:	f7fe f84f 	bl	80003f0 <__aeabi_i2d>
+ 8002352:	f04f 0200 	mov.w	r2, #0
+ 8002356:	4b3b      	ldr	r3, [pc, #236]	; (8002444 <APP_voidBackTasks+0x100>)
+ 8002358:	f7fe f91e 	bl	8000598 <__aeabi_dcmple>
+ 800235c:	4603      	mov	r3, r0
+ 800235e:	2b00      	cmp	r3, #0
+ 8002360:	d00b      	beq.n	800237a <APP_voidBackTasks+0x36>
+ 8002362:	4a39      	ldr	r2, [pc, #228]	; (8002448 <APP_voidBackTasks+0x104>)
+ 8002364:	7813      	ldrb	r3, [r2, #0]
+ 8002366:	2108      	movs	r1, #8
+ 8002368:	f361 0303 	bfi	r3, r1, #0, #4
+ 800236c:	7013      	strb	r3, [r2, #0]
+ 800236e:	4a36      	ldr	r2, [pc, #216]	; (8002448 <APP_voidBackTasks+0x104>)
+ 8002370:	7853      	ldrb	r3, [r2, #1]
+ 8002372:	f043 0303 	orr.w	r3, r3, #3
+ 8002376:	7053      	strb	r3, [r2, #1]
+ 8002378:	e060      	b.n	800243c <APP_voidBackTasks+0xf8>
+ 800237a:	4b31      	ldr	r3, [pc, #196]	; (8002440 <APP_voidBackTasks+0xfc>)
+ 800237c:	785b      	ldrb	r3, [r3, #1]
+ 800237e:	4618      	mov	r0, r3
+ 8002380:	f7fe f836 	bl	80003f0 <__aeabi_i2d>
+ 8002384:	f04f 0200 	mov.w	r2, #0
+ 8002388:	4b30      	ldr	r3, [pc, #192]	; (800244c <APP_voidBackTasks+0x108>)
+ 800238a:	f7fe f905 	bl	8000598 <__aeabi_dcmple>
+ 800238e:	4603      	mov	r3, r0
+ 8002390:	2b00      	cmp	r3, #0
+ 8002392:	d03f      	beq.n	8002414 <APP_voidBackTasks+0xd0>
+ 8002394:	4b2e      	ldr	r3, [pc, #184]	; (8002450 <APP_voidBackTasks+0x10c>)
+ 8002396:	781b      	ldrb	r3, [r3, #0]
+ 8002398:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 800239c:	b2db      	uxtb	r3, r3
+ 800239e:	461a      	mov	r2, r3
+ 80023a0:	4b2c      	ldr	r3, [pc, #176]	; (8002454 <APP_voidBackTasks+0x110>)
+ 80023a2:	781b      	ldrb	r3, [r3, #0]
+ 80023a4:	429a      	cmp	r2, r3
+ 80023a6:	dc1a      	bgt.n	80023de <APP_voidBackTasks+0x9a>
+ 80023a8:	4a27      	ldr	r2, [pc, #156]	; (8002448 <APP_voidBackTasks+0x104>)
+ 80023aa:	7853      	ldrb	r3, [r2, #1]
+ 80023ac:	2101      	movs	r1, #1
+ 80023ae:	f361 0301 	bfi	r3, r1, #0, #2
+ 80023b2:	7053      	strb	r3, [r2, #1]
+ 80023b4:	4b26      	ldr	r3, [pc, #152]	; (8002450 <APP_voidBackTasks+0x10c>)
+ 80023b6:	781b      	ldrb	r3, [r3, #0]
+ 80023b8:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 80023bc:	b2d9      	uxtb	r1, r3
+ 80023be:	4a22      	ldr	r2, [pc, #136]	; (8002448 <APP_voidBackTasks+0x104>)
+ 80023c0:	7813      	ldrb	r3, [r2, #0]
+ 80023c2:	f361 0303 	bfi	r3, r1, #0, #4
+ 80023c6:	7013      	strb	r3, [r2, #0]
+ 80023c8:	4b21      	ldr	r3, [pc, #132]	; (8002450 <APP_voidBackTasks+0x10c>)
+ 80023ca:	781b      	ldrb	r3, [r3, #0]
+ 80023cc:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80023d0:	b2d9      	uxtb	r1, r3
+ 80023d2:	4a1d      	ldr	r2, [pc, #116]	; (8002448 <APP_voidBackTasks+0x104>)
+ 80023d4:	7813      	ldrb	r3, [r2, #0]
+ 80023d6:	f361 1306 	bfi	r3, r1, #4, #3
+ 80023da:	7013      	strb	r3, [r2, #0]
+ 80023dc:	e02e      	b.n	800243c <APP_voidBackTasks+0xf8>
+ 80023de:	4a1a      	ldr	r2, [pc, #104]	; (8002448 <APP_voidBackTasks+0x104>)
+ 80023e0:	7853      	ldrb	r3, [r2, #1]
+ 80023e2:	2102      	movs	r1, #2
+ 80023e4:	f361 0301 	bfi	r3, r1, #0, #2
+ 80023e8:	7053      	strb	r3, [r2, #1]
+ 80023ea:	4b19      	ldr	r3, [pc, #100]	; (8002450 <APP_voidBackTasks+0x10c>)
+ 80023ec:	781b      	ldrb	r3, [r3, #0]
+ 80023ee:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 80023f2:	b2d9      	uxtb	r1, r3
+ 80023f4:	4a14      	ldr	r2, [pc, #80]	; (8002448 <APP_voidBackTasks+0x104>)
+ 80023f6:	7813      	ldrb	r3, [r2, #0]
+ 80023f8:	f361 0303 	bfi	r3, r1, #0, #4
+ 80023fc:	7013      	strb	r3, [r2, #0]
+ 80023fe:	4b15      	ldr	r3, [pc, #84]	; (8002454 <APP_voidBackTasks+0x110>)
+ 8002400:	781b      	ldrb	r3, [r3, #0]
+ 8002402:	f003 0307 	and.w	r3, r3, #7
+ 8002406:	b2d9      	uxtb	r1, r3
+ 8002408:	4a0f      	ldr	r2, [pc, #60]	; (8002448 <APP_voidBackTasks+0x104>)
+ 800240a:	7813      	ldrb	r3, [r2, #0]
+ 800240c:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002410:	7013      	strb	r3, [r2, #0]
+ 8002412:	e013      	b.n	800243c <APP_voidBackTasks+0xf8>
+ 8002414:	4a0c      	ldr	r2, [pc, #48]	; (8002448 <APP_voidBackTasks+0x104>)
+ 8002416:	7853      	ldrb	r3, [r2, #1]
+ 8002418:	f36f 0301 	bfc	r3, #0, #2
+ 800241c:	7053      	strb	r3, [r2, #1]
+ 800241e:	4b0c      	ldr	r3, [pc, #48]	; (8002450 <APP_voidBackTasks+0x10c>)
+ 8002420:	781b      	ldrb	r3, [r3, #0]
+ 8002422:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002426:	b2d9      	uxtb	r1, r3
+ 8002428:	4a07      	ldr	r2, [pc, #28]	; (8002448 <APP_voidBackTasks+0x104>)
+ 800242a:	7813      	ldrb	r3, [r2, #0]
+ 800242c:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002430:	7013      	strb	r3, [r2, #0]
+ 8002432:	4a05      	ldr	r2, [pc, #20]	; (8002448 <APP_voidBackTasks+0x104>)
+ 8002434:	7813      	ldrb	r3, [r2, #0]
+ 8002436:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 800243a:	7013      	strb	r3, [r2, #0]
+ 800243c:	bf00      	nop
+ 800243e:	bd80      	pop	{r7, pc}
  8002440:	200000fc 	.word	0x200000fc
  8002444:	40240000 	.word	0x40240000
  8002448:	20000100 	.word	0x20000100
@@ -3643,1445 +3627,998 @@ Disassembly of section .text:
  8002450:	200000f8 	.word	0x200000f8
  8002454:	200000ca 	.word	0x200000ca
 
-08002458 <APP_voidBackTasks>:
+08002458 <APP_voidBackward_RightTasks>:
  8002458:	b580      	push	{r7, lr}
  800245a:	af00      	add	r7, sp, #0
- 800245c:	4b6f      	ldr	r3, [pc, #444]	; (800261c <APP_voidBackTasks+0x1c4>)
- 800245e:	785b      	ldrb	r3, [r3, #1]
+ 800245c:	4b3d      	ldr	r3, [pc, #244]	; (8002554 <APP_voidBackward_RightTasks+0xfc>)
+ 800245e:	789b      	ldrb	r3, [r3, #2]
  8002460:	4618      	mov	r0, r3
  8002462:	f7fd ffc5 	bl	80003f0 <__aeabi_i2d>
  8002466:	f04f 0200 	mov.w	r2, #0
- 800246a:	4b6d      	ldr	r3, [pc, #436]	; (8002620 <APP_voidBackTasks+0x1c8>)
+ 800246a:	4b3b      	ldr	r3, [pc, #236]	; (8002558 <APP_voidBackward_RightTasks+0x100>)
  800246c:	f7fe f894 	bl	8000598 <__aeabi_dcmple>
  8002470:	4603      	mov	r3, r0
  8002472:	2b00      	cmp	r3, #0
- 8002474:	d031      	beq.n	80024da <APP_voidBackTasks+0x82>
- 8002476:	4b6b      	ldr	r3, [pc, #428]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002478:	881b      	ldrh	r3, [r3, #0]
- 800247a:	f043 0301 	orr.w	r3, r3, #1
- 800247e:	b29a      	uxth	r2, r3
- 8002480:	4b68      	ldr	r3, [pc, #416]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002482:	801a      	strh	r2, [r3, #0]
- 8002484:	4b67      	ldr	r3, [pc, #412]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002486:	881b      	ldrh	r3, [r3, #0]
- 8002488:	f043 0302 	orr.w	r3, r3, #2
- 800248c:	b29a      	uxth	r2, r3
- 800248e:	4b65      	ldr	r3, [pc, #404]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002490:	801a      	strh	r2, [r3, #0]
- 8002492:	4b64      	ldr	r3, [pc, #400]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002494:	881b      	ldrh	r3, [r3, #0]
- 8002496:	f043 0304 	orr.w	r3, r3, #4
- 800249a:	b29a      	uxth	r2, r3
- 800249c:	4b61      	ldr	r3, [pc, #388]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 800249e:	801a      	strh	r2, [r3, #0]
- 80024a0:	4b60      	ldr	r3, [pc, #384]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80024a2:	881b      	ldrh	r3, [r3, #0]
- 80024a4:	f023 0308 	bic.w	r3, r3, #8
- 80024a8:	b29a      	uxth	r2, r3
- 80024aa:	4b5e      	ldr	r3, [pc, #376]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80024ac:	801a      	strh	r2, [r3, #0]
- 80024ae:	4b5d      	ldr	r3, [pc, #372]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80024b0:	881b      	ldrh	r3, [r3, #0]
- 80024b2:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 80024b6:	b29a      	uxth	r2, r3
- 80024b8:	4b5a      	ldr	r3, [pc, #360]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80024ba:	801a      	strh	r2, [r3, #0]
- 80024bc:	4b59      	ldr	r3, [pc, #356]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80024be:	881b      	ldrh	r3, [r3, #0]
- 80024c0:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 80024c4:	b29a      	uxth	r2, r3
- 80024c6:	4b57      	ldr	r3, [pc, #348]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80024c8:	801a      	strh	r2, [r3, #0]
- 80024ca:	4b56      	ldr	r3, [pc, #344]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80024cc:	881b      	ldrh	r3, [r3, #0]
- 80024ce:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 80024d2:	b29a      	uxth	r2, r3
- 80024d4:	4b53      	ldr	r3, [pc, #332]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80024d6:	801a      	strh	r2, [r3, #0]
- 80024d8:	e09d      	b.n	8002616 <APP_voidBackTasks+0x1be>
- 80024da:	4b50      	ldr	r3, [pc, #320]	; (800261c <APP_voidBackTasks+0x1c4>)
- 80024dc:	785b      	ldrb	r3, [r3, #1]
- 80024de:	4618      	mov	r0, r3
- 80024e0:	f7fd ff86 	bl	80003f0 <__aeabi_i2d>
- 80024e4:	f04f 0200 	mov.w	r2, #0
- 80024e8:	4b4f      	ldr	r3, [pc, #316]	; (8002628 <APP_voidBackTasks+0x1d0>)
- 80024ea:	f7fe f855 	bl	8000598 <__aeabi_dcmple>
- 80024ee:	4603      	mov	r3, r0
- 80024f0:	2b00      	cmp	r3, #0
- 80024f2:	d06a      	beq.n	80025ca <APP_voidBackTasks+0x172>
- 80024f4:	4b4d      	ldr	r3, [pc, #308]	; (800262c <APP_voidBackTasks+0x1d4>)
- 80024f6:	781b      	ldrb	r3, [r3, #0]
- 80024f8:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80024fc:	b2db      	uxtb	r3, r3
- 80024fe:	461a      	mov	r2, r3
- 8002500:	4b4b      	ldr	r3, [pc, #300]	; (8002630 <APP_voidBackTasks+0x1d8>)
- 8002502:	781b      	ldrb	r3, [r3, #0]
- 8002504:	429a      	cmp	r2, r3
- 8002506:	dc31      	bgt.n	800256c <APP_voidBackTasks+0x114>
- 8002508:	4b46      	ldr	r3, [pc, #280]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 800250a:	881b      	ldrh	r3, [r3, #0]
- 800250c:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 8002510:	b29a      	uxth	r2, r3
- 8002512:	4b44      	ldr	r3, [pc, #272]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002514:	801a      	strh	r2, [r3, #0]
- 8002516:	4b43      	ldr	r3, [pc, #268]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002518:	881b      	ldrh	r3, [r3, #0]
- 800251a:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 800251e:	b29a      	uxth	r2, r3
- 8002520:	4b40      	ldr	r3, [pc, #256]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002522:	801a      	strh	r2, [r3, #0]
- 8002524:	4b3f      	ldr	r3, [pc, #252]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002526:	881b      	ldrh	r3, [r3, #0]
- 8002528:	b21b      	sxth	r3, r3
- 800252a:	f023 030f 	bic.w	r3, r3, #15
- 800252e:	b21a      	sxth	r2, r3
- 8002530:	4b3e      	ldr	r3, [pc, #248]	; (800262c <APP_voidBackTasks+0x1d4>)
- 8002532:	781b      	ldrb	r3, [r3, #0]
- 8002534:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002538:	b2db      	uxtb	r3, r3
- 800253a:	b21b      	sxth	r3, r3
- 800253c:	4313      	orrs	r3, r2
- 800253e:	b21b      	sxth	r3, r3
- 8002540:	b29a      	uxth	r2, r3
- 8002542:	4b38      	ldr	r3, [pc, #224]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002544:	801a      	strh	r2, [r3, #0]
- 8002546:	4b37      	ldr	r3, [pc, #220]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002548:	881b      	ldrh	r3, [r3, #0]
- 800254a:	b21b      	sxth	r3, r3
- 800254c:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002550:	b21a      	sxth	r2, r3
- 8002552:	4b36      	ldr	r3, [pc, #216]	; (800262c <APP_voidBackTasks+0x1d4>)
- 8002554:	781b      	ldrb	r3, [r3, #0]
- 8002556:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 800255a:	b2db      	uxtb	r3, r3
- 800255c:	011b      	lsls	r3, r3, #4
- 800255e:	b21b      	sxth	r3, r3
- 8002560:	4313      	orrs	r3, r2
- 8002562:	b21b      	sxth	r3, r3
- 8002564:	b29a      	uxth	r2, r3
- 8002566:	4b2f      	ldr	r3, [pc, #188]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002568:	801a      	strh	r2, [r3, #0]
- 800256a:	e054      	b.n	8002616 <APP_voidBackTasks+0x1be>
- 800256c:	4b2d      	ldr	r3, [pc, #180]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 800256e:	881b      	ldrh	r3, [r3, #0]
- 8002570:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 8002574:	b29a      	uxth	r2, r3
- 8002576:	4b2b      	ldr	r3, [pc, #172]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002578:	801a      	strh	r2, [r3, #0]
- 800257a:	4b2a      	ldr	r3, [pc, #168]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 800257c:	881b      	ldrh	r3, [r3, #0]
- 800257e:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 8002582:	b29a      	uxth	r2, r3
- 8002584:	4b27      	ldr	r3, [pc, #156]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002586:	801a      	strh	r2, [r3, #0]
- 8002588:	4b26      	ldr	r3, [pc, #152]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 800258a:	881b      	ldrh	r3, [r3, #0]
- 800258c:	b21b      	sxth	r3, r3
- 800258e:	f023 030f 	bic.w	r3, r3, #15
- 8002592:	b21a      	sxth	r2, r3
- 8002594:	4b25      	ldr	r3, [pc, #148]	; (800262c <APP_voidBackTasks+0x1d4>)
- 8002596:	781b      	ldrb	r3, [r3, #0]
- 8002598:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 800259c:	b2db      	uxtb	r3, r3
- 800259e:	b21b      	sxth	r3, r3
- 80025a0:	4313      	orrs	r3, r2
- 80025a2:	b21b      	sxth	r3, r3
- 80025a4:	b29a      	uxth	r2, r3
- 80025a6:	4b1f      	ldr	r3, [pc, #124]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80025a8:	801a      	strh	r2, [r3, #0]
- 80025aa:	4b1e      	ldr	r3, [pc, #120]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80025ac:	881b      	ldrh	r3, [r3, #0]
- 80025ae:	b21b      	sxth	r3, r3
- 80025b0:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 80025b4:	b21a      	sxth	r2, r3
- 80025b6:	4b1e      	ldr	r3, [pc, #120]	; (8002630 <APP_voidBackTasks+0x1d8>)
- 80025b8:	781b      	ldrb	r3, [r3, #0]
- 80025ba:	011b      	lsls	r3, r3, #4
- 80025bc:	b21b      	sxth	r3, r3
- 80025be:	4313      	orrs	r3, r2
- 80025c0:	b21b      	sxth	r3, r3
- 80025c2:	b29a      	uxth	r2, r3
- 80025c4:	4b17      	ldr	r3, [pc, #92]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80025c6:	801a      	strh	r2, [r3, #0]
- 80025c8:	e025      	b.n	8002616 <APP_voidBackTasks+0x1be>
- 80025ca:	4b16      	ldr	r3, [pc, #88]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80025cc:	881b      	ldrh	r3, [r3, #0]
- 80025ce:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 80025d2:	b29a      	uxth	r2, r3
- 80025d4:	4b13      	ldr	r3, [pc, #76]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80025d6:	801a      	strh	r2, [r3, #0]
- 80025d8:	4b12      	ldr	r3, [pc, #72]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80025da:	881b      	ldrh	r3, [r3, #0]
- 80025dc:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 80025e0:	b29a      	uxth	r2, r3
- 80025e2:	4b10      	ldr	r3, [pc, #64]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80025e4:	801a      	strh	r2, [r3, #0]
- 80025e6:	4b0f      	ldr	r3, [pc, #60]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 80025e8:	881b      	ldrh	r3, [r3, #0]
- 80025ea:	b21b      	sxth	r3, r3
- 80025ec:	f023 030f 	bic.w	r3, r3, #15
- 80025f0:	b21a      	sxth	r2, r3
- 80025f2:	4b0e      	ldr	r3, [pc, #56]	; (800262c <APP_voidBackTasks+0x1d4>)
- 80025f4:	781b      	ldrb	r3, [r3, #0]
- 80025f6:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 80025fa:	b2db      	uxtb	r3, r3
- 80025fc:	b21b      	sxth	r3, r3
- 80025fe:	4313      	orrs	r3, r2
- 8002600:	b21b      	sxth	r3, r3
- 8002602:	b29a      	uxth	r2, r3
- 8002604:	4b07      	ldr	r3, [pc, #28]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002606:	801a      	strh	r2, [r3, #0]
- 8002608:	4b06      	ldr	r3, [pc, #24]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 800260a:	881b      	ldrh	r3, [r3, #0]
- 800260c:	f043 0370 	orr.w	r3, r3, #112	; 0x70
- 8002610:	b29a      	uxth	r2, r3
- 8002612:	4b04      	ldr	r3, [pc, #16]	; (8002624 <APP_voidBackTasks+0x1cc>)
- 8002614:	801a      	strh	r2, [r3, #0]
- 8002616:	bf00      	nop
- 8002618:	bd80      	pop	{r7, pc}
- 800261a:	bf00      	nop
- 800261c:	200000fc 	.word	0x200000fc
- 8002620:	40240000 	.word	0x40240000
- 8002624:	20000100 	.word	0x20000100
- 8002628:	40340000 	.word	0x40340000
- 800262c:	200000f8 	.word	0x200000f8
- 8002630:	200000ca 	.word	0x200000ca
+ 8002474:	d00b      	beq.n	800248e <APP_voidBackward_RightTasks+0x36>
+ 8002476:	4a39      	ldr	r2, [pc, #228]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 8002478:	7813      	ldrb	r3, [r2, #0]
+ 800247a:	2108      	movs	r1, #8
+ 800247c:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002480:	7013      	strb	r3, [r2, #0]
+ 8002482:	4a36      	ldr	r2, [pc, #216]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 8002484:	7853      	ldrb	r3, [r2, #1]
+ 8002486:	f043 0303 	orr.w	r3, r3, #3
+ 800248a:	7053      	strb	r3, [r2, #1]
+ 800248c:	e060      	b.n	8002550 <APP_voidBackward_RightTasks+0xf8>
+ 800248e:	4b31      	ldr	r3, [pc, #196]	; (8002554 <APP_voidBackward_RightTasks+0xfc>)
+ 8002490:	789b      	ldrb	r3, [r3, #2]
+ 8002492:	4618      	mov	r0, r3
+ 8002494:	f7fd ffac 	bl	80003f0 <__aeabi_i2d>
+ 8002498:	f04f 0200 	mov.w	r2, #0
+ 800249c:	4b30      	ldr	r3, [pc, #192]	; (8002560 <APP_voidBackward_RightTasks+0x108>)
+ 800249e:	f7fe f87b 	bl	8000598 <__aeabi_dcmple>
+ 80024a2:	4603      	mov	r3, r0
+ 80024a4:	2b00      	cmp	r3, #0
+ 80024a6:	d03f      	beq.n	8002528 <APP_voidBackward_RightTasks+0xd0>
+ 80024a8:	4b2e      	ldr	r3, [pc, #184]	; (8002564 <APP_voidBackward_RightTasks+0x10c>)
+ 80024aa:	781b      	ldrb	r3, [r3, #0]
+ 80024ac:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80024b0:	b2db      	uxtb	r3, r3
+ 80024b2:	461a      	mov	r2, r3
+ 80024b4:	4b2c      	ldr	r3, [pc, #176]	; (8002568 <APP_voidBackward_RightTasks+0x110>)
+ 80024b6:	781b      	ldrb	r3, [r3, #0]
+ 80024b8:	429a      	cmp	r2, r3
+ 80024ba:	dc1a      	bgt.n	80024f2 <APP_voidBackward_RightTasks+0x9a>
+ 80024bc:	4a27      	ldr	r2, [pc, #156]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 80024be:	7853      	ldrb	r3, [r2, #1]
+ 80024c0:	2101      	movs	r1, #1
+ 80024c2:	f361 0301 	bfi	r3, r1, #0, #2
+ 80024c6:	7053      	strb	r3, [r2, #1]
+ 80024c8:	4b26      	ldr	r3, [pc, #152]	; (8002564 <APP_voidBackward_RightTasks+0x10c>)
+ 80024ca:	781b      	ldrb	r3, [r3, #0]
+ 80024cc:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 80024d0:	b2d9      	uxtb	r1, r3
+ 80024d2:	4a22      	ldr	r2, [pc, #136]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 80024d4:	7813      	ldrb	r3, [r2, #0]
+ 80024d6:	f361 0303 	bfi	r3, r1, #0, #4
+ 80024da:	7013      	strb	r3, [r2, #0]
+ 80024dc:	4b21      	ldr	r3, [pc, #132]	; (8002564 <APP_voidBackward_RightTasks+0x10c>)
+ 80024de:	781b      	ldrb	r3, [r3, #0]
+ 80024e0:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80024e4:	b2d9      	uxtb	r1, r3
+ 80024e6:	4a1d      	ldr	r2, [pc, #116]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 80024e8:	7813      	ldrb	r3, [r2, #0]
+ 80024ea:	f361 1306 	bfi	r3, r1, #4, #3
+ 80024ee:	7013      	strb	r3, [r2, #0]
+ 80024f0:	e02e      	b.n	8002550 <APP_voidBackward_RightTasks+0xf8>
+ 80024f2:	4a1a      	ldr	r2, [pc, #104]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 80024f4:	7853      	ldrb	r3, [r2, #1]
+ 80024f6:	2102      	movs	r1, #2
+ 80024f8:	f361 0301 	bfi	r3, r1, #0, #2
+ 80024fc:	7053      	strb	r3, [r2, #1]
+ 80024fe:	4b19      	ldr	r3, [pc, #100]	; (8002564 <APP_voidBackward_RightTasks+0x10c>)
+ 8002500:	781b      	ldrb	r3, [r3, #0]
+ 8002502:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002506:	b2d9      	uxtb	r1, r3
+ 8002508:	4a14      	ldr	r2, [pc, #80]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 800250a:	7813      	ldrb	r3, [r2, #0]
+ 800250c:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002510:	7013      	strb	r3, [r2, #0]
+ 8002512:	4b15      	ldr	r3, [pc, #84]	; (8002568 <APP_voidBackward_RightTasks+0x110>)
+ 8002514:	781b      	ldrb	r3, [r3, #0]
+ 8002516:	f003 0307 	and.w	r3, r3, #7
+ 800251a:	b2d9      	uxtb	r1, r3
+ 800251c:	4a0f      	ldr	r2, [pc, #60]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 800251e:	7813      	ldrb	r3, [r2, #0]
+ 8002520:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002524:	7013      	strb	r3, [r2, #0]
+ 8002526:	e013      	b.n	8002550 <APP_voidBackward_RightTasks+0xf8>
+ 8002528:	4a0c      	ldr	r2, [pc, #48]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 800252a:	7853      	ldrb	r3, [r2, #1]
+ 800252c:	f36f 0301 	bfc	r3, #0, #2
+ 8002530:	7053      	strb	r3, [r2, #1]
+ 8002532:	4b0c      	ldr	r3, [pc, #48]	; (8002564 <APP_voidBackward_RightTasks+0x10c>)
+ 8002534:	781b      	ldrb	r3, [r3, #0]
+ 8002536:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 800253a:	b2d9      	uxtb	r1, r3
+ 800253c:	4a07      	ldr	r2, [pc, #28]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 800253e:	7813      	ldrb	r3, [r2, #0]
+ 8002540:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002544:	7013      	strb	r3, [r2, #0]
+ 8002546:	4a05      	ldr	r2, [pc, #20]	; (800255c <APP_voidBackward_RightTasks+0x104>)
+ 8002548:	7813      	ldrb	r3, [r2, #0]
+ 800254a:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 800254e:	7013      	strb	r3, [r2, #0]
+ 8002550:	bf00      	nop
+ 8002552:	bd80      	pop	{r7, pc}
+ 8002554:	200000fc 	.word	0x200000fc
+ 8002558:	40240000 	.word	0x40240000
+ 800255c:	20000100 	.word	0x20000100
+ 8002560:	40340000 	.word	0x40340000
+ 8002564:	200000f8 	.word	0x200000f8
+ 8002568:	200000ca 	.word	0x200000ca
 
-08002634 <APP_voidBackward_RightTasks>:
- 8002634:	b580      	push	{r7, lr}
- 8002636:	af00      	add	r7, sp, #0
- 8002638:	4b6f      	ldr	r3, [pc, #444]	; (80027f8 <APP_voidBackward_RightTasks+0x1c4>)
- 800263a:	789b      	ldrb	r3, [r3, #2]
- 800263c:	4618      	mov	r0, r3
- 800263e:	f7fd fed7 	bl	80003f0 <__aeabi_i2d>
- 8002642:	f04f 0200 	mov.w	r2, #0
- 8002646:	4b6d      	ldr	r3, [pc, #436]	; (80027fc <APP_voidBackward_RightTasks+0x1c8>)
- 8002648:	f7fd ffa6 	bl	8000598 <__aeabi_dcmple>
- 800264c:	4603      	mov	r3, r0
- 800264e:	2b00      	cmp	r3, #0
- 8002650:	d031      	beq.n	80026b6 <APP_voidBackward_RightTasks+0x82>
- 8002652:	4b6b      	ldr	r3, [pc, #428]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002654:	881b      	ldrh	r3, [r3, #0]
- 8002656:	f043 0301 	orr.w	r3, r3, #1
- 800265a:	b29a      	uxth	r2, r3
- 800265c:	4b68      	ldr	r3, [pc, #416]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 800265e:	801a      	strh	r2, [r3, #0]
- 8002660:	4b67      	ldr	r3, [pc, #412]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002662:	881b      	ldrh	r3, [r3, #0]
- 8002664:	f043 0302 	orr.w	r3, r3, #2
- 8002668:	b29a      	uxth	r2, r3
- 800266a:	4b65      	ldr	r3, [pc, #404]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 800266c:	801a      	strh	r2, [r3, #0]
- 800266e:	4b64      	ldr	r3, [pc, #400]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002670:	881b      	ldrh	r3, [r3, #0]
- 8002672:	f043 0304 	orr.w	r3, r3, #4
- 8002676:	b29a      	uxth	r2, r3
- 8002678:	4b61      	ldr	r3, [pc, #388]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 800267a:	801a      	strh	r2, [r3, #0]
- 800267c:	4b60      	ldr	r3, [pc, #384]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 800267e:	881b      	ldrh	r3, [r3, #0]
- 8002680:	f023 0308 	bic.w	r3, r3, #8
- 8002684:	b29a      	uxth	r2, r3
- 8002686:	4b5e      	ldr	r3, [pc, #376]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002688:	801a      	strh	r2, [r3, #0]
- 800268a:	4b5d      	ldr	r3, [pc, #372]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 800268c:	881b      	ldrh	r3, [r3, #0]
- 800268e:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 8002692:	b29a      	uxth	r2, r3
- 8002694:	4b5a      	ldr	r3, [pc, #360]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002696:	801a      	strh	r2, [r3, #0]
- 8002698:	4b59      	ldr	r3, [pc, #356]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 800269a:	881b      	ldrh	r3, [r3, #0]
- 800269c:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 80026a0:	b29a      	uxth	r2, r3
- 80026a2:	4b57      	ldr	r3, [pc, #348]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80026a4:	801a      	strh	r2, [r3, #0]
- 80026a6:	4b56      	ldr	r3, [pc, #344]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80026a8:	881b      	ldrh	r3, [r3, #0]
- 80026aa:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 80026ae:	b29a      	uxth	r2, r3
- 80026b0:	4b53      	ldr	r3, [pc, #332]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80026b2:	801a      	strh	r2, [r3, #0]
- 80026b4:	e09d      	b.n	80027f2 <APP_voidBackward_RightTasks+0x1be>
- 80026b6:	4b50      	ldr	r3, [pc, #320]	; (80027f8 <APP_voidBackward_RightTasks+0x1c4>)
- 80026b8:	789b      	ldrb	r3, [r3, #2]
- 80026ba:	4618      	mov	r0, r3
- 80026bc:	f7fd fe98 	bl	80003f0 <__aeabi_i2d>
- 80026c0:	f04f 0200 	mov.w	r2, #0
- 80026c4:	4b4f      	ldr	r3, [pc, #316]	; (8002804 <APP_voidBackward_RightTasks+0x1d0>)
- 80026c6:	f7fd ff67 	bl	8000598 <__aeabi_dcmple>
- 80026ca:	4603      	mov	r3, r0
- 80026cc:	2b00      	cmp	r3, #0
- 80026ce:	d06a      	beq.n	80027a6 <APP_voidBackward_RightTasks+0x172>
- 80026d0:	4b4d      	ldr	r3, [pc, #308]	; (8002808 <APP_voidBackward_RightTasks+0x1d4>)
- 80026d2:	781b      	ldrb	r3, [r3, #0]
- 80026d4:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80026d8:	b2db      	uxtb	r3, r3
- 80026da:	461a      	mov	r2, r3
- 80026dc:	4b4b      	ldr	r3, [pc, #300]	; (800280c <APP_voidBackward_RightTasks+0x1d8>)
+0800256c <APP_voidBackward_LEFTTasks>:
+ 800256c:	b580      	push	{r7, lr}
+ 800256e:	af00      	add	r7, sp, #0
+ 8002570:	4b3d      	ldr	r3, [pc, #244]	; (8002668 <APP_voidBackward_LEFTTasks+0xfc>)
+ 8002572:	78db      	ldrb	r3, [r3, #3]
+ 8002574:	4618      	mov	r0, r3
+ 8002576:	f7fd ff3b 	bl	80003f0 <__aeabi_i2d>
+ 800257a:	f04f 0200 	mov.w	r2, #0
+ 800257e:	4b3b      	ldr	r3, [pc, #236]	; (800266c <APP_voidBackward_LEFTTasks+0x100>)
+ 8002580:	f7fe f80a 	bl	8000598 <__aeabi_dcmple>
+ 8002584:	4603      	mov	r3, r0
+ 8002586:	2b00      	cmp	r3, #0
+ 8002588:	d00b      	beq.n	80025a2 <APP_voidBackward_LEFTTasks+0x36>
+ 800258a:	4a39      	ldr	r2, [pc, #228]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 800258c:	7813      	ldrb	r3, [r2, #0]
+ 800258e:	2108      	movs	r1, #8
+ 8002590:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002594:	7013      	strb	r3, [r2, #0]
+ 8002596:	4a36      	ldr	r2, [pc, #216]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 8002598:	7853      	ldrb	r3, [r2, #1]
+ 800259a:	f043 0303 	orr.w	r3, r3, #3
+ 800259e:	7053      	strb	r3, [r2, #1]
+ 80025a0:	e060      	b.n	8002664 <APP_voidBackward_LEFTTasks+0xf8>
+ 80025a2:	4b31      	ldr	r3, [pc, #196]	; (8002668 <APP_voidBackward_LEFTTasks+0xfc>)
+ 80025a4:	78db      	ldrb	r3, [r3, #3]
+ 80025a6:	4618      	mov	r0, r3
+ 80025a8:	f7fd ff22 	bl	80003f0 <__aeabi_i2d>
+ 80025ac:	f04f 0200 	mov.w	r2, #0
+ 80025b0:	4b30      	ldr	r3, [pc, #192]	; (8002674 <APP_voidBackward_LEFTTasks+0x108>)
+ 80025b2:	f7fd fff1 	bl	8000598 <__aeabi_dcmple>
+ 80025b6:	4603      	mov	r3, r0
+ 80025b8:	2b00      	cmp	r3, #0
+ 80025ba:	d03f      	beq.n	800263c <APP_voidBackward_LEFTTasks+0xd0>
+ 80025bc:	4b2e      	ldr	r3, [pc, #184]	; (8002678 <APP_voidBackward_LEFTTasks+0x10c>)
+ 80025be:	781b      	ldrb	r3, [r3, #0]
+ 80025c0:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80025c4:	b2db      	uxtb	r3, r3
+ 80025c6:	461a      	mov	r2, r3
+ 80025c8:	4b2c      	ldr	r3, [pc, #176]	; (800267c <APP_voidBackward_LEFTTasks+0x110>)
+ 80025ca:	781b      	ldrb	r3, [r3, #0]
+ 80025cc:	429a      	cmp	r2, r3
+ 80025ce:	dc1a      	bgt.n	8002606 <APP_voidBackward_LEFTTasks+0x9a>
+ 80025d0:	4a27      	ldr	r2, [pc, #156]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 80025d2:	7853      	ldrb	r3, [r2, #1]
+ 80025d4:	2101      	movs	r1, #1
+ 80025d6:	f361 0301 	bfi	r3, r1, #0, #2
+ 80025da:	7053      	strb	r3, [r2, #1]
+ 80025dc:	4b26      	ldr	r3, [pc, #152]	; (8002678 <APP_voidBackward_LEFTTasks+0x10c>)
+ 80025de:	781b      	ldrb	r3, [r3, #0]
+ 80025e0:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 80025e4:	b2d9      	uxtb	r1, r3
+ 80025e6:	4a22      	ldr	r2, [pc, #136]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 80025e8:	7813      	ldrb	r3, [r2, #0]
+ 80025ea:	f361 0303 	bfi	r3, r1, #0, #4
+ 80025ee:	7013      	strb	r3, [r2, #0]
+ 80025f0:	4b21      	ldr	r3, [pc, #132]	; (8002678 <APP_voidBackward_LEFTTasks+0x10c>)
+ 80025f2:	781b      	ldrb	r3, [r3, #0]
+ 80025f4:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80025f8:	b2d9      	uxtb	r1, r3
+ 80025fa:	4a1d      	ldr	r2, [pc, #116]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 80025fc:	7813      	ldrb	r3, [r2, #0]
+ 80025fe:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002602:	7013      	strb	r3, [r2, #0]
+ 8002604:	e02e      	b.n	8002664 <APP_voidBackward_LEFTTasks+0xf8>
+ 8002606:	4a1a      	ldr	r2, [pc, #104]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 8002608:	7853      	ldrb	r3, [r2, #1]
+ 800260a:	2102      	movs	r1, #2
+ 800260c:	f361 0301 	bfi	r3, r1, #0, #2
+ 8002610:	7053      	strb	r3, [r2, #1]
+ 8002612:	4b19      	ldr	r3, [pc, #100]	; (8002678 <APP_voidBackward_LEFTTasks+0x10c>)
+ 8002614:	781b      	ldrb	r3, [r3, #0]
+ 8002616:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 800261a:	b2d9      	uxtb	r1, r3
+ 800261c:	4a14      	ldr	r2, [pc, #80]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 800261e:	7813      	ldrb	r3, [r2, #0]
+ 8002620:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002624:	7013      	strb	r3, [r2, #0]
+ 8002626:	4b15      	ldr	r3, [pc, #84]	; (800267c <APP_voidBackward_LEFTTasks+0x110>)
+ 8002628:	781b      	ldrb	r3, [r3, #0]
+ 800262a:	f003 0307 	and.w	r3, r3, #7
+ 800262e:	b2d9      	uxtb	r1, r3
+ 8002630:	4a0f      	ldr	r2, [pc, #60]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 8002632:	7813      	ldrb	r3, [r2, #0]
+ 8002634:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002638:	7013      	strb	r3, [r2, #0]
+ 800263a:	e013      	b.n	8002664 <APP_voidBackward_LEFTTasks+0xf8>
+ 800263c:	4a0c      	ldr	r2, [pc, #48]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 800263e:	7853      	ldrb	r3, [r2, #1]
+ 8002640:	f36f 0301 	bfc	r3, #0, #2
+ 8002644:	7053      	strb	r3, [r2, #1]
+ 8002646:	4b0c      	ldr	r3, [pc, #48]	; (8002678 <APP_voidBackward_LEFTTasks+0x10c>)
+ 8002648:	781b      	ldrb	r3, [r3, #0]
+ 800264a:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 800264e:	b2d9      	uxtb	r1, r3
+ 8002650:	4a07      	ldr	r2, [pc, #28]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 8002652:	7813      	ldrb	r3, [r2, #0]
+ 8002654:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002658:	7013      	strb	r3, [r2, #0]
+ 800265a:	4a05      	ldr	r2, [pc, #20]	; (8002670 <APP_voidBackward_LEFTTasks+0x104>)
+ 800265c:	7813      	ldrb	r3, [r2, #0]
+ 800265e:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 8002662:	7013      	strb	r3, [r2, #0]
+ 8002664:	bf00      	nop
+ 8002666:	bd80      	pop	{r7, pc}
+ 8002668:	200000fc 	.word	0x200000fc
+ 800266c:	40240000 	.word	0x40240000
+ 8002670:	20000100 	.word	0x20000100
+ 8002674:	40340000 	.word	0x40340000
+ 8002678:	200000f8 	.word	0x200000f8
+ 800267c:	200000ca 	.word	0x200000ca
+
+08002680 <APP_voidRight_LeftTasks>:
+ 8002680:	b480      	push	{r7}
+ 8002682:	af00      	add	r7, sp, #0
+ 8002684:	bf00      	nop
+ 8002686:	46bd      	mov	sp, r7
+ 8002688:	bc80      	pop	{r7}
+ 800268a:	4770      	bx	lr
+
+0800268c <APP_voidForward_RightTasks>:
+ 800268c:	b580      	push	{r7, lr}
+ 800268e:	af00      	add	r7, sp, #0
+ 8002690:	4b3d      	ldr	r3, [pc, #244]	; (8002788 <APP_voidForward_RightTasks+0xfc>)
+ 8002692:	78db      	ldrb	r3, [r3, #3]
+ 8002694:	4618      	mov	r0, r3
+ 8002696:	f7fd feab 	bl	80003f0 <__aeabi_i2d>
+ 800269a:	f04f 0200 	mov.w	r2, #0
+ 800269e:	4b3b      	ldr	r3, [pc, #236]	; (800278c <APP_voidForward_RightTasks+0x100>)
+ 80026a0:	f7fd ff7a 	bl	8000598 <__aeabi_dcmple>
+ 80026a4:	4603      	mov	r3, r0
+ 80026a6:	2b00      	cmp	r3, #0
+ 80026a8:	d00b      	beq.n	80026c2 <APP_voidForward_RightTasks+0x36>
+ 80026aa:	4a39      	ldr	r2, [pc, #228]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 80026ac:	7813      	ldrb	r3, [r2, #0]
+ 80026ae:	2108      	movs	r1, #8
+ 80026b0:	f361 0303 	bfi	r3, r1, #0, #4
+ 80026b4:	7013      	strb	r3, [r2, #0]
+ 80026b6:	4a36      	ldr	r2, [pc, #216]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 80026b8:	7853      	ldrb	r3, [r2, #1]
+ 80026ba:	f043 0303 	orr.w	r3, r3, #3
+ 80026be:	7053      	strb	r3, [r2, #1]
+ 80026c0:	e060      	b.n	8002784 <APP_voidForward_RightTasks+0xf8>
+ 80026c2:	4b31      	ldr	r3, [pc, #196]	; (8002788 <APP_voidForward_RightTasks+0xfc>)
+ 80026c4:	78db      	ldrb	r3, [r3, #3]
+ 80026c6:	4618      	mov	r0, r3
+ 80026c8:	f7fd fe92 	bl	80003f0 <__aeabi_i2d>
+ 80026cc:	f04f 0200 	mov.w	r2, #0
+ 80026d0:	4b30      	ldr	r3, [pc, #192]	; (8002794 <APP_voidForward_RightTasks+0x108>)
+ 80026d2:	f7fd ff61 	bl	8000598 <__aeabi_dcmple>
+ 80026d6:	4603      	mov	r3, r0
+ 80026d8:	2b00      	cmp	r3, #0
+ 80026da:	d03f      	beq.n	800275c <APP_voidForward_RightTasks+0xd0>
+ 80026dc:	4b2e      	ldr	r3, [pc, #184]	; (8002798 <APP_voidForward_RightTasks+0x10c>)
  80026de:	781b      	ldrb	r3, [r3, #0]
- 80026e0:	429a      	cmp	r2, r3
- 80026e2:	dc31      	bgt.n	8002748 <APP_voidBackward_RightTasks+0x114>
- 80026e4:	4b46      	ldr	r3, [pc, #280]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80026e6:	881b      	ldrh	r3, [r3, #0]
- 80026e8:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 80026ec:	b29a      	uxth	r2, r3
- 80026ee:	4b44      	ldr	r3, [pc, #272]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80026f0:	801a      	strh	r2, [r3, #0]
- 80026f2:	4b43      	ldr	r3, [pc, #268]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80026f4:	881b      	ldrh	r3, [r3, #0]
- 80026f6:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 80026fa:	b29a      	uxth	r2, r3
- 80026fc:	4b40      	ldr	r3, [pc, #256]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80026fe:	801a      	strh	r2, [r3, #0]
- 8002700:	4b3f      	ldr	r3, [pc, #252]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002702:	881b      	ldrh	r3, [r3, #0]
- 8002704:	b21b      	sxth	r3, r3
- 8002706:	f023 030f 	bic.w	r3, r3, #15
- 800270a:	b21a      	sxth	r2, r3
- 800270c:	4b3e      	ldr	r3, [pc, #248]	; (8002808 <APP_voidBackward_RightTasks+0x1d4>)
- 800270e:	781b      	ldrb	r3, [r3, #0]
- 8002710:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002714:	b2db      	uxtb	r3, r3
- 8002716:	b21b      	sxth	r3, r3
- 8002718:	4313      	orrs	r3, r2
- 800271a:	b21b      	sxth	r3, r3
- 800271c:	b29a      	uxth	r2, r3
- 800271e:	4b38      	ldr	r3, [pc, #224]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002720:	801a      	strh	r2, [r3, #0]
- 8002722:	4b37      	ldr	r3, [pc, #220]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002724:	881b      	ldrh	r3, [r3, #0]
- 8002726:	b21b      	sxth	r3, r3
- 8002728:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 800272c:	b21a      	sxth	r2, r3
- 800272e:	4b36      	ldr	r3, [pc, #216]	; (8002808 <APP_voidBackward_RightTasks+0x1d4>)
- 8002730:	781b      	ldrb	r3, [r3, #0]
- 8002732:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002736:	b2db      	uxtb	r3, r3
- 8002738:	011b      	lsls	r3, r3, #4
- 800273a:	b21b      	sxth	r3, r3
- 800273c:	4313      	orrs	r3, r2
- 800273e:	b21b      	sxth	r3, r3
- 8002740:	b29a      	uxth	r2, r3
- 8002742:	4b2f      	ldr	r3, [pc, #188]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002744:	801a      	strh	r2, [r3, #0]
- 8002746:	e054      	b.n	80027f2 <APP_voidBackward_RightTasks+0x1be>
- 8002748:	4b2d      	ldr	r3, [pc, #180]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 800274a:	881b      	ldrh	r3, [r3, #0]
- 800274c:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 8002750:	b29a      	uxth	r2, r3
- 8002752:	4b2b      	ldr	r3, [pc, #172]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002754:	801a      	strh	r2, [r3, #0]
- 8002756:	4b2a      	ldr	r3, [pc, #168]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002758:	881b      	ldrh	r3, [r3, #0]
- 800275a:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 800275e:	b29a      	uxth	r2, r3
- 8002760:	4b27      	ldr	r3, [pc, #156]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002762:	801a      	strh	r2, [r3, #0]
- 8002764:	4b26      	ldr	r3, [pc, #152]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002766:	881b      	ldrh	r3, [r3, #0]
- 8002768:	b21b      	sxth	r3, r3
- 800276a:	f023 030f 	bic.w	r3, r3, #15
- 800276e:	b21a      	sxth	r2, r3
- 8002770:	4b25      	ldr	r3, [pc, #148]	; (8002808 <APP_voidBackward_RightTasks+0x1d4>)
- 8002772:	781b      	ldrb	r3, [r3, #0]
- 8002774:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002778:	b2db      	uxtb	r3, r3
- 800277a:	b21b      	sxth	r3, r3
- 800277c:	4313      	orrs	r3, r2
- 800277e:	b21b      	sxth	r3, r3
- 8002780:	b29a      	uxth	r2, r3
- 8002782:	4b1f      	ldr	r3, [pc, #124]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002784:	801a      	strh	r2, [r3, #0]
- 8002786:	4b1e      	ldr	r3, [pc, #120]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 8002788:	881b      	ldrh	r3, [r3, #0]
- 800278a:	b21b      	sxth	r3, r3
- 800278c:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002790:	b21a      	sxth	r2, r3
- 8002792:	4b1e      	ldr	r3, [pc, #120]	; (800280c <APP_voidBackward_RightTasks+0x1d8>)
- 8002794:	781b      	ldrb	r3, [r3, #0]
- 8002796:	011b      	lsls	r3, r3, #4
- 8002798:	b21b      	sxth	r3, r3
- 800279a:	4313      	orrs	r3, r2
- 800279c:	b21b      	sxth	r3, r3
- 800279e:	b29a      	uxth	r2, r3
- 80027a0:	4b17      	ldr	r3, [pc, #92]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027a2:	801a      	strh	r2, [r3, #0]
- 80027a4:	e025      	b.n	80027f2 <APP_voidBackward_RightTasks+0x1be>
- 80027a6:	4b16      	ldr	r3, [pc, #88]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027a8:	881b      	ldrh	r3, [r3, #0]
- 80027aa:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 80027ae:	b29a      	uxth	r2, r3
- 80027b0:	4b13      	ldr	r3, [pc, #76]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027b2:	801a      	strh	r2, [r3, #0]
- 80027b4:	4b12      	ldr	r3, [pc, #72]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027b6:	881b      	ldrh	r3, [r3, #0]
- 80027b8:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 80027bc:	b29a      	uxth	r2, r3
- 80027be:	4b10      	ldr	r3, [pc, #64]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027c0:	801a      	strh	r2, [r3, #0]
- 80027c2:	4b0f      	ldr	r3, [pc, #60]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027c4:	881b      	ldrh	r3, [r3, #0]
- 80027c6:	b21b      	sxth	r3, r3
- 80027c8:	f023 030f 	bic.w	r3, r3, #15
- 80027cc:	b21a      	sxth	r2, r3
- 80027ce:	4b0e      	ldr	r3, [pc, #56]	; (8002808 <APP_voidBackward_RightTasks+0x1d4>)
- 80027d0:	781b      	ldrb	r3, [r3, #0]
- 80027d2:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 80027d6:	b2db      	uxtb	r3, r3
- 80027d8:	b21b      	sxth	r3, r3
- 80027da:	4313      	orrs	r3, r2
- 80027dc:	b21b      	sxth	r3, r3
- 80027de:	b29a      	uxth	r2, r3
- 80027e0:	4b07      	ldr	r3, [pc, #28]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027e2:	801a      	strh	r2, [r3, #0]
- 80027e4:	4b06      	ldr	r3, [pc, #24]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027e6:	881b      	ldrh	r3, [r3, #0]
- 80027e8:	f043 0370 	orr.w	r3, r3, #112	; 0x70
- 80027ec:	b29a      	uxth	r2, r3
- 80027ee:	4b04      	ldr	r3, [pc, #16]	; (8002800 <APP_voidBackward_RightTasks+0x1cc>)
- 80027f0:	801a      	strh	r2, [r3, #0]
- 80027f2:	bf00      	nop
- 80027f4:	bd80      	pop	{r7, pc}
- 80027f6:	bf00      	nop
- 80027f8:	200000fc 	.word	0x200000fc
- 80027fc:	40240000 	.word	0x40240000
- 8002800:	20000100 	.word	0x20000100
- 8002804:	40340000 	.word	0x40340000
- 8002808:	200000f8 	.word	0x200000f8
- 800280c:	200000ca 	.word	0x200000ca
+ 80026e0:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80026e4:	b2db      	uxtb	r3, r3
+ 80026e6:	461a      	mov	r2, r3
+ 80026e8:	4b2c      	ldr	r3, [pc, #176]	; (800279c <APP_voidForward_RightTasks+0x110>)
+ 80026ea:	781b      	ldrb	r3, [r3, #0]
+ 80026ec:	429a      	cmp	r2, r3
+ 80026ee:	dc1a      	bgt.n	8002726 <APP_voidForward_RightTasks+0x9a>
+ 80026f0:	4a27      	ldr	r2, [pc, #156]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 80026f2:	7853      	ldrb	r3, [r2, #1]
+ 80026f4:	2101      	movs	r1, #1
+ 80026f6:	f361 0301 	bfi	r3, r1, #0, #2
+ 80026fa:	7053      	strb	r3, [r2, #1]
+ 80026fc:	4b26      	ldr	r3, [pc, #152]	; (8002798 <APP_voidForward_RightTasks+0x10c>)
+ 80026fe:	781b      	ldrb	r3, [r3, #0]
+ 8002700:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002704:	b2d9      	uxtb	r1, r3
+ 8002706:	4a22      	ldr	r2, [pc, #136]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 8002708:	7813      	ldrb	r3, [r2, #0]
+ 800270a:	f361 0303 	bfi	r3, r1, #0, #4
+ 800270e:	7013      	strb	r3, [r2, #0]
+ 8002710:	4b21      	ldr	r3, [pc, #132]	; (8002798 <APP_voidForward_RightTasks+0x10c>)
+ 8002712:	781b      	ldrb	r3, [r3, #0]
+ 8002714:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002718:	b2d9      	uxtb	r1, r3
+ 800271a:	4a1d      	ldr	r2, [pc, #116]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 800271c:	7813      	ldrb	r3, [r2, #0]
+ 800271e:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002722:	7013      	strb	r3, [r2, #0]
+ 8002724:	e02e      	b.n	8002784 <APP_voidForward_RightTasks+0xf8>
+ 8002726:	4a1a      	ldr	r2, [pc, #104]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 8002728:	7853      	ldrb	r3, [r2, #1]
+ 800272a:	2102      	movs	r1, #2
+ 800272c:	f361 0301 	bfi	r3, r1, #0, #2
+ 8002730:	7053      	strb	r3, [r2, #1]
+ 8002732:	4b19      	ldr	r3, [pc, #100]	; (8002798 <APP_voidForward_RightTasks+0x10c>)
+ 8002734:	781b      	ldrb	r3, [r3, #0]
+ 8002736:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 800273a:	b2d9      	uxtb	r1, r3
+ 800273c:	4a14      	ldr	r2, [pc, #80]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 800273e:	7813      	ldrb	r3, [r2, #0]
+ 8002740:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002744:	7013      	strb	r3, [r2, #0]
+ 8002746:	4b15      	ldr	r3, [pc, #84]	; (800279c <APP_voidForward_RightTasks+0x110>)
+ 8002748:	781b      	ldrb	r3, [r3, #0]
+ 800274a:	f003 0307 	and.w	r3, r3, #7
+ 800274e:	b2d9      	uxtb	r1, r3
+ 8002750:	4a0f      	ldr	r2, [pc, #60]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 8002752:	7813      	ldrb	r3, [r2, #0]
+ 8002754:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002758:	7013      	strb	r3, [r2, #0]
+ 800275a:	e013      	b.n	8002784 <APP_voidForward_RightTasks+0xf8>
+ 800275c:	4a0c      	ldr	r2, [pc, #48]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 800275e:	7853      	ldrb	r3, [r2, #1]
+ 8002760:	f36f 0301 	bfc	r3, #0, #2
+ 8002764:	7053      	strb	r3, [r2, #1]
+ 8002766:	4b0c      	ldr	r3, [pc, #48]	; (8002798 <APP_voidForward_RightTasks+0x10c>)
+ 8002768:	781b      	ldrb	r3, [r3, #0]
+ 800276a:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 800276e:	b2d9      	uxtb	r1, r3
+ 8002770:	4a07      	ldr	r2, [pc, #28]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 8002772:	7813      	ldrb	r3, [r2, #0]
+ 8002774:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002778:	7013      	strb	r3, [r2, #0]
+ 800277a:	4a05      	ldr	r2, [pc, #20]	; (8002790 <APP_voidForward_RightTasks+0x104>)
+ 800277c:	7813      	ldrb	r3, [r2, #0]
+ 800277e:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 8002782:	7013      	strb	r3, [r2, #0]
+ 8002784:	bf00      	nop
+ 8002786:	bd80      	pop	{r7, pc}
+ 8002788:	200000fc 	.word	0x200000fc
+ 800278c:	40240000 	.word	0x40240000
+ 8002790:	20000100 	.word	0x20000100
+ 8002794:	40340000 	.word	0x40340000
+ 8002798:	200000f8 	.word	0x200000f8
+ 800279c:	200000ca 	.word	0x200000ca
 
-08002810 <APP_voidBackward_LEFTTasks>:
- 8002810:	b580      	push	{r7, lr}
- 8002812:	af00      	add	r7, sp, #0
- 8002814:	4b6f      	ldr	r3, [pc, #444]	; (80029d4 <APP_voidBackward_LEFTTasks+0x1c4>)
- 8002816:	78db      	ldrb	r3, [r3, #3]
- 8002818:	4618      	mov	r0, r3
- 800281a:	f7fd fde9 	bl	80003f0 <__aeabi_i2d>
- 800281e:	f04f 0200 	mov.w	r2, #0
- 8002822:	4b6d      	ldr	r3, [pc, #436]	; (80029d8 <APP_voidBackward_LEFTTasks+0x1c8>)
- 8002824:	f7fd feb8 	bl	8000598 <__aeabi_dcmple>
- 8002828:	4603      	mov	r3, r0
- 800282a:	2b00      	cmp	r3, #0
- 800282c:	d031      	beq.n	8002892 <APP_voidBackward_LEFTTasks+0x82>
- 800282e:	4b6b      	ldr	r3, [pc, #428]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002830:	881b      	ldrh	r3, [r3, #0]
- 8002832:	f043 0301 	orr.w	r3, r3, #1
- 8002836:	b29a      	uxth	r2, r3
- 8002838:	4b68      	ldr	r3, [pc, #416]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800283a:	801a      	strh	r2, [r3, #0]
- 800283c:	4b67      	ldr	r3, [pc, #412]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800283e:	881b      	ldrh	r3, [r3, #0]
- 8002840:	f043 0302 	orr.w	r3, r3, #2
- 8002844:	b29a      	uxth	r2, r3
- 8002846:	4b65      	ldr	r3, [pc, #404]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002848:	801a      	strh	r2, [r3, #0]
- 800284a:	4b64      	ldr	r3, [pc, #400]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800284c:	881b      	ldrh	r3, [r3, #0]
- 800284e:	f043 0304 	orr.w	r3, r3, #4
- 8002852:	b29a      	uxth	r2, r3
- 8002854:	4b61      	ldr	r3, [pc, #388]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002856:	801a      	strh	r2, [r3, #0]
- 8002858:	4b60      	ldr	r3, [pc, #384]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800285a:	881b      	ldrh	r3, [r3, #0]
- 800285c:	f023 0308 	bic.w	r3, r3, #8
- 8002860:	b29a      	uxth	r2, r3
- 8002862:	4b5e      	ldr	r3, [pc, #376]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002864:	801a      	strh	r2, [r3, #0]
- 8002866:	4b5d      	ldr	r3, [pc, #372]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002868:	881b      	ldrh	r3, [r3, #0]
- 800286a:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 800286e:	b29a      	uxth	r2, r3
- 8002870:	4b5a      	ldr	r3, [pc, #360]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002872:	801a      	strh	r2, [r3, #0]
- 8002874:	4b59      	ldr	r3, [pc, #356]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002876:	881b      	ldrh	r3, [r3, #0]
- 8002878:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 800287c:	b29a      	uxth	r2, r3
- 800287e:	4b57      	ldr	r3, [pc, #348]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002880:	801a      	strh	r2, [r3, #0]
- 8002882:	4b56      	ldr	r3, [pc, #344]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002884:	881b      	ldrh	r3, [r3, #0]
- 8002886:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 800288a:	b29a      	uxth	r2, r3
- 800288c:	4b53      	ldr	r3, [pc, #332]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800288e:	801a      	strh	r2, [r3, #0]
- 8002890:	e09d      	b.n	80029ce <APP_voidBackward_LEFTTasks+0x1be>
- 8002892:	4b50      	ldr	r3, [pc, #320]	; (80029d4 <APP_voidBackward_LEFTTasks+0x1c4>)
- 8002894:	78db      	ldrb	r3, [r3, #3]
- 8002896:	4618      	mov	r0, r3
- 8002898:	f7fd fdaa 	bl	80003f0 <__aeabi_i2d>
- 800289c:	f04f 0200 	mov.w	r2, #0
- 80028a0:	4b4f      	ldr	r3, [pc, #316]	; (80029e0 <APP_voidBackward_LEFTTasks+0x1d0>)
- 80028a2:	f7fd fe79 	bl	8000598 <__aeabi_dcmple>
- 80028a6:	4603      	mov	r3, r0
- 80028a8:	2b00      	cmp	r3, #0
- 80028aa:	d06a      	beq.n	8002982 <APP_voidBackward_LEFTTasks+0x172>
- 80028ac:	4b4d      	ldr	r3, [pc, #308]	; (80029e4 <APP_voidBackward_LEFTTasks+0x1d4>)
- 80028ae:	781b      	ldrb	r3, [r3, #0]
- 80028b0:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80028b4:	b2db      	uxtb	r3, r3
- 80028b6:	461a      	mov	r2, r3
- 80028b8:	4b4b      	ldr	r3, [pc, #300]	; (80029e8 <APP_voidBackward_LEFTTasks+0x1d8>)
- 80028ba:	781b      	ldrb	r3, [r3, #0]
- 80028bc:	429a      	cmp	r2, r3
- 80028be:	dc31      	bgt.n	8002924 <APP_voidBackward_LEFTTasks+0x114>
- 80028c0:	4b46      	ldr	r3, [pc, #280]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80028c2:	881b      	ldrh	r3, [r3, #0]
- 80028c4:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 80028c8:	b29a      	uxth	r2, r3
- 80028ca:	4b44      	ldr	r3, [pc, #272]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80028cc:	801a      	strh	r2, [r3, #0]
- 80028ce:	4b43      	ldr	r3, [pc, #268]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80028d0:	881b      	ldrh	r3, [r3, #0]
- 80028d2:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 80028d6:	b29a      	uxth	r2, r3
- 80028d8:	4b40      	ldr	r3, [pc, #256]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80028da:	801a      	strh	r2, [r3, #0]
- 80028dc:	4b3f      	ldr	r3, [pc, #252]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80028de:	881b      	ldrh	r3, [r3, #0]
- 80028e0:	b21b      	sxth	r3, r3
- 80028e2:	f023 030f 	bic.w	r3, r3, #15
- 80028e6:	b21a      	sxth	r2, r3
- 80028e8:	4b3e      	ldr	r3, [pc, #248]	; (80029e4 <APP_voidBackward_LEFTTasks+0x1d4>)
- 80028ea:	781b      	ldrb	r3, [r3, #0]
- 80028ec:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 80028f0:	b2db      	uxtb	r3, r3
- 80028f2:	b21b      	sxth	r3, r3
- 80028f4:	4313      	orrs	r3, r2
- 80028f6:	b21b      	sxth	r3, r3
- 80028f8:	b29a      	uxth	r2, r3
- 80028fa:	4b38      	ldr	r3, [pc, #224]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80028fc:	801a      	strh	r2, [r3, #0]
- 80028fe:	4b37      	ldr	r3, [pc, #220]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002900:	881b      	ldrh	r3, [r3, #0]
- 8002902:	b21b      	sxth	r3, r3
- 8002904:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002908:	b21a      	sxth	r2, r3
- 800290a:	4b36      	ldr	r3, [pc, #216]	; (80029e4 <APP_voidBackward_LEFTTasks+0x1d4>)
- 800290c:	781b      	ldrb	r3, [r3, #0]
- 800290e:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002912:	b2db      	uxtb	r3, r3
- 8002914:	011b      	lsls	r3, r3, #4
- 8002916:	b21b      	sxth	r3, r3
- 8002918:	4313      	orrs	r3, r2
- 800291a:	b21b      	sxth	r3, r3
- 800291c:	b29a      	uxth	r2, r3
- 800291e:	4b2f      	ldr	r3, [pc, #188]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002920:	801a      	strh	r2, [r3, #0]
- 8002922:	e054      	b.n	80029ce <APP_voidBackward_LEFTTasks+0x1be>
- 8002924:	4b2d      	ldr	r3, [pc, #180]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002926:	881b      	ldrh	r3, [r3, #0]
- 8002928:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 800292c:	b29a      	uxth	r2, r3
- 800292e:	4b2b      	ldr	r3, [pc, #172]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002930:	801a      	strh	r2, [r3, #0]
- 8002932:	4b2a      	ldr	r3, [pc, #168]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002934:	881b      	ldrh	r3, [r3, #0]
- 8002936:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 800293a:	b29a      	uxth	r2, r3
- 800293c:	4b27      	ldr	r3, [pc, #156]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800293e:	801a      	strh	r2, [r3, #0]
- 8002940:	4b26      	ldr	r3, [pc, #152]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002942:	881b      	ldrh	r3, [r3, #0]
- 8002944:	b21b      	sxth	r3, r3
- 8002946:	f023 030f 	bic.w	r3, r3, #15
- 800294a:	b21a      	sxth	r2, r3
- 800294c:	4b25      	ldr	r3, [pc, #148]	; (80029e4 <APP_voidBackward_LEFTTasks+0x1d4>)
- 800294e:	781b      	ldrb	r3, [r3, #0]
- 8002950:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002954:	b2db      	uxtb	r3, r3
- 8002956:	b21b      	sxth	r3, r3
- 8002958:	4313      	orrs	r3, r2
- 800295a:	b21b      	sxth	r3, r3
- 800295c:	b29a      	uxth	r2, r3
- 800295e:	4b1f      	ldr	r3, [pc, #124]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002960:	801a      	strh	r2, [r3, #0]
- 8002962:	4b1e      	ldr	r3, [pc, #120]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002964:	881b      	ldrh	r3, [r3, #0]
- 8002966:	b21b      	sxth	r3, r3
- 8002968:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 800296c:	b21a      	sxth	r2, r3
- 800296e:	4b1e      	ldr	r3, [pc, #120]	; (80029e8 <APP_voidBackward_LEFTTasks+0x1d8>)
- 8002970:	781b      	ldrb	r3, [r3, #0]
- 8002972:	011b      	lsls	r3, r3, #4
- 8002974:	b21b      	sxth	r3, r3
- 8002976:	4313      	orrs	r3, r2
- 8002978:	b21b      	sxth	r3, r3
- 800297a:	b29a      	uxth	r2, r3
- 800297c:	4b17      	ldr	r3, [pc, #92]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800297e:	801a      	strh	r2, [r3, #0]
- 8002980:	e025      	b.n	80029ce <APP_voidBackward_LEFTTasks+0x1be>
- 8002982:	4b16      	ldr	r3, [pc, #88]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002984:	881b      	ldrh	r3, [r3, #0]
- 8002986:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 800298a:	b29a      	uxth	r2, r3
- 800298c:	4b13      	ldr	r3, [pc, #76]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800298e:	801a      	strh	r2, [r3, #0]
- 8002990:	4b12      	ldr	r3, [pc, #72]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 8002992:	881b      	ldrh	r3, [r3, #0]
- 8002994:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 8002998:	b29a      	uxth	r2, r3
- 800299a:	4b10      	ldr	r3, [pc, #64]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 800299c:	801a      	strh	r2, [r3, #0]
- 800299e:	4b0f      	ldr	r3, [pc, #60]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80029a0:	881b      	ldrh	r3, [r3, #0]
- 80029a2:	b21b      	sxth	r3, r3
- 80029a4:	f023 030f 	bic.w	r3, r3, #15
- 80029a8:	b21a      	sxth	r2, r3
- 80029aa:	4b0e      	ldr	r3, [pc, #56]	; (80029e4 <APP_voidBackward_LEFTTasks+0x1d4>)
- 80029ac:	781b      	ldrb	r3, [r3, #0]
- 80029ae:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 80029b2:	b2db      	uxtb	r3, r3
- 80029b4:	b21b      	sxth	r3, r3
- 80029b6:	4313      	orrs	r3, r2
- 80029b8:	b21b      	sxth	r3, r3
- 80029ba:	b29a      	uxth	r2, r3
- 80029bc:	4b07      	ldr	r3, [pc, #28]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80029be:	801a      	strh	r2, [r3, #0]
- 80029c0:	4b06      	ldr	r3, [pc, #24]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80029c2:	881b      	ldrh	r3, [r3, #0]
- 80029c4:	f043 0370 	orr.w	r3, r3, #112	; 0x70
- 80029c8:	b29a      	uxth	r2, r3
- 80029ca:	4b04      	ldr	r3, [pc, #16]	; (80029dc <APP_voidBackward_LEFTTasks+0x1cc>)
- 80029cc:	801a      	strh	r2, [r3, #0]
- 80029ce:	bf00      	nop
- 80029d0:	bd80      	pop	{r7, pc}
- 80029d2:	bf00      	nop
- 80029d4:	200000fc 	.word	0x200000fc
- 80029d8:	40240000 	.word	0x40240000
- 80029dc:	20000100 	.word	0x20000100
- 80029e0:	40340000 	.word	0x40340000
- 80029e4:	200000f8 	.word	0x200000f8
- 80029e8:	200000ca 	.word	0x200000ca
+080027a0 <APP_voidForward_LeftTasks>:
+ 80027a0:	b580      	push	{r7, lr}
+ 80027a2:	af00      	add	r7, sp, #0
+ 80027a4:	4b3d      	ldr	r3, [pc, #244]	; (800289c <APP_voidForward_LeftTasks+0xfc>)
+ 80027a6:	789b      	ldrb	r3, [r3, #2]
+ 80027a8:	4618      	mov	r0, r3
+ 80027aa:	f7fd fe21 	bl	80003f0 <__aeabi_i2d>
+ 80027ae:	f04f 0200 	mov.w	r2, #0
+ 80027b2:	4b3b      	ldr	r3, [pc, #236]	; (80028a0 <APP_voidForward_LeftTasks+0x100>)
+ 80027b4:	f7fd fef0 	bl	8000598 <__aeabi_dcmple>
+ 80027b8:	4603      	mov	r3, r0
+ 80027ba:	2b00      	cmp	r3, #0
+ 80027bc:	d00b      	beq.n	80027d6 <APP_voidForward_LeftTasks+0x36>
+ 80027be:	4a39      	ldr	r2, [pc, #228]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 80027c0:	7813      	ldrb	r3, [r2, #0]
+ 80027c2:	2108      	movs	r1, #8
+ 80027c4:	f361 0303 	bfi	r3, r1, #0, #4
+ 80027c8:	7013      	strb	r3, [r2, #0]
+ 80027ca:	4a36      	ldr	r2, [pc, #216]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 80027cc:	7853      	ldrb	r3, [r2, #1]
+ 80027ce:	f043 0303 	orr.w	r3, r3, #3
+ 80027d2:	7053      	strb	r3, [r2, #1]
+ 80027d4:	e060      	b.n	8002898 <APP_voidForward_LeftTasks+0xf8>
+ 80027d6:	4b31      	ldr	r3, [pc, #196]	; (800289c <APP_voidForward_LeftTasks+0xfc>)
+ 80027d8:	789b      	ldrb	r3, [r3, #2]
+ 80027da:	4618      	mov	r0, r3
+ 80027dc:	f7fd fe08 	bl	80003f0 <__aeabi_i2d>
+ 80027e0:	f04f 0200 	mov.w	r2, #0
+ 80027e4:	4b30      	ldr	r3, [pc, #192]	; (80028a8 <APP_voidForward_LeftTasks+0x108>)
+ 80027e6:	f7fd fed7 	bl	8000598 <__aeabi_dcmple>
+ 80027ea:	4603      	mov	r3, r0
+ 80027ec:	2b00      	cmp	r3, #0
+ 80027ee:	d03f      	beq.n	8002870 <APP_voidForward_LeftTasks+0xd0>
+ 80027f0:	4b2e      	ldr	r3, [pc, #184]	; (80028ac <APP_voidForward_LeftTasks+0x10c>)
+ 80027f2:	781b      	ldrb	r3, [r3, #0]
+ 80027f4:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80027f8:	b2db      	uxtb	r3, r3
+ 80027fa:	461a      	mov	r2, r3
+ 80027fc:	4b2c      	ldr	r3, [pc, #176]	; (80028b0 <APP_voidForward_LeftTasks+0x110>)
+ 80027fe:	781b      	ldrb	r3, [r3, #0]
+ 8002800:	429a      	cmp	r2, r3
+ 8002802:	dc1a      	bgt.n	800283a <APP_voidForward_LeftTasks+0x9a>
+ 8002804:	4a27      	ldr	r2, [pc, #156]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 8002806:	7853      	ldrb	r3, [r2, #1]
+ 8002808:	2101      	movs	r1, #1
+ 800280a:	f361 0301 	bfi	r3, r1, #0, #2
+ 800280e:	7053      	strb	r3, [r2, #1]
+ 8002810:	4b26      	ldr	r3, [pc, #152]	; (80028ac <APP_voidForward_LeftTasks+0x10c>)
+ 8002812:	781b      	ldrb	r3, [r3, #0]
+ 8002814:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002818:	b2d9      	uxtb	r1, r3
+ 800281a:	4a22      	ldr	r2, [pc, #136]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 800281c:	7813      	ldrb	r3, [r2, #0]
+ 800281e:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002822:	7013      	strb	r3, [r2, #0]
+ 8002824:	4b21      	ldr	r3, [pc, #132]	; (80028ac <APP_voidForward_LeftTasks+0x10c>)
+ 8002826:	781b      	ldrb	r3, [r3, #0]
+ 8002828:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 800282c:	b2d9      	uxtb	r1, r3
+ 800282e:	4a1d      	ldr	r2, [pc, #116]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 8002830:	7813      	ldrb	r3, [r2, #0]
+ 8002832:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002836:	7013      	strb	r3, [r2, #0]
+ 8002838:	e02e      	b.n	8002898 <APP_voidForward_LeftTasks+0xf8>
+ 800283a:	4a1a      	ldr	r2, [pc, #104]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 800283c:	7853      	ldrb	r3, [r2, #1]
+ 800283e:	2102      	movs	r1, #2
+ 8002840:	f361 0301 	bfi	r3, r1, #0, #2
+ 8002844:	7053      	strb	r3, [r2, #1]
+ 8002846:	4b19      	ldr	r3, [pc, #100]	; (80028ac <APP_voidForward_LeftTasks+0x10c>)
+ 8002848:	781b      	ldrb	r3, [r3, #0]
+ 800284a:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 800284e:	b2d9      	uxtb	r1, r3
+ 8002850:	4a14      	ldr	r2, [pc, #80]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 8002852:	7813      	ldrb	r3, [r2, #0]
+ 8002854:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002858:	7013      	strb	r3, [r2, #0]
+ 800285a:	4b15      	ldr	r3, [pc, #84]	; (80028b0 <APP_voidForward_LeftTasks+0x110>)
+ 800285c:	781b      	ldrb	r3, [r3, #0]
+ 800285e:	f003 0307 	and.w	r3, r3, #7
+ 8002862:	b2d9      	uxtb	r1, r3
+ 8002864:	4a0f      	ldr	r2, [pc, #60]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 8002866:	7813      	ldrb	r3, [r2, #0]
+ 8002868:	f361 1306 	bfi	r3, r1, #4, #3
+ 800286c:	7013      	strb	r3, [r2, #0]
+ 800286e:	e013      	b.n	8002898 <APP_voidForward_LeftTasks+0xf8>
+ 8002870:	4a0c      	ldr	r2, [pc, #48]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 8002872:	7853      	ldrb	r3, [r2, #1]
+ 8002874:	f36f 0301 	bfc	r3, #0, #2
+ 8002878:	7053      	strb	r3, [r2, #1]
+ 800287a:	4b0c      	ldr	r3, [pc, #48]	; (80028ac <APP_voidForward_LeftTasks+0x10c>)
+ 800287c:	781b      	ldrb	r3, [r3, #0]
+ 800287e:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002882:	b2d9      	uxtb	r1, r3
+ 8002884:	4a07      	ldr	r2, [pc, #28]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 8002886:	7813      	ldrb	r3, [r2, #0]
+ 8002888:	f361 0303 	bfi	r3, r1, #0, #4
+ 800288c:	7013      	strb	r3, [r2, #0]
+ 800288e:	4a05      	ldr	r2, [pc, #20]	; (80028a4 <APP_voidForward_LeftTasks+0x104>)
+ 8002890:	7813      	ldrb	r3, [r2, #0]
+ 8002892:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 8002896:	7013      	strb	r3, [r2, #0]
+ 8002898:	bf00      	nop
+ 800289a:	bd80      	pop	{r7, pc}
+ 800289c:	200000fc 	.word	0x200000fc
+ 80028a0:	40240000 	.word	0x40240000
+ 80028a4:	20000100 	.word	0x20000100
+ 80028a8:	40340000 	.word	0x40340000
+ 80028ac:	200000f8 	.word	0x200000f8
+ 80028b0:	200000ca 	.word	0x200000ca
 
-080029ec <APP_voidRight_LeftTasks>:
- 80029ec:	b480      	push	{r7}
- 80029ee:	af00      	add	r7, sp, #0
- 80029f0:	bf00      	nop
- 80029f2:	46bd      	mov	sp, r7
- 80029f4:	bc80      	pop	{r7}
- 80029f6:	4770      	bx	lr
+080028b4 <APP_GET_UART_Command>:
+ 80028b4:	b580      	push	{r7, lr}
+ 80028b6:	af00      	add	r7, sp, #0
+ 80028b8:	4804      	ldr	r0, [pc, #16]	; (80028cc <APP_GET_UART_Command+0x18>)
+ 80028ba:	f7ff fb27 	bl	8001f0c <MUART_u8ReadDataRegister>
+ 80028be:	4603      	mov	r3, r0
+ 80028c0:	461a      	mov	r2, r3
+ 80028c2:	4b03      	ldr	r3, [pc, #12]	; (80028d0 <APP_GET_UART_Command+0x1c>)
+ 80028c4:	701a      	strb	r2, [r3, #0]
+ 80028c6:	bf00      	nop
+ 80028c8:	bd80      	pop	{r7, pc}
+ 80028ca:	bf00      	nop
+ 80028cc:	40013800 	.word	0x40013800
+ 80028d0:	200001d8 	.word	0x200001d8
 
-080029f8 <APP_voidForward_RightTasks>:
- 80029f8:	b580      	push	{r7, lr}
- 80029fa:	af00      	add	r7, sp, #0
- 80029fc:	4b6f      	ldr	r3, [pc, #444]	; (8002bbc <APP_voidForward_RightTasks+0x1c4>)
- 80029fe:	78db      	ldrb	r3, [r3, #3]
- 8002a00:	4618      	mov	r0, r3
- 8002a02:	f7fd fcf5 	bl	80003f0 <__aeabi_i2d>
- 8002a06:	f04f 0200 	mov.w	r2, #0
- 8002a0a:	4b6d      	ldr	r3, [pc, #436]	; (8002bc0 <APP_voidForward_RightTasks+0x1c8>)
- 8002a0c:	f7fd fdc4 	bl	8000598 <__aeabi_dcmple>
- 8002a10:	4603      	mov	r3, r0
- 8002a12:	2b00      	cmp	r3, #0
- 8002a14:	d031      	beq.n	8002a7a <APP_voidForward_RightTasks+0x82>
- 8002a16:	4b6b      	ldr	r3, [pc, #428]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a18:	881b      	ldrh	r3, [r3, #0]
- 8002a1a:	f043 0301 	orr.w	r3, r3, #1
- 8002a1e:	b29a      	uxth	r2, r3
- 8002a20:	4b68      	ldr	r3, [pc, #416]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a22:	801a      	strh	r2, [r3, #0]
- 8002a24:	4b67      	ldr	r3, [pc, #412]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a26:	881b      	ldrh	r3, [r3, #0]
- 8002a28:	f043 0302 	orr.w	r3, r3, #2
- 8002a2c:	b29a      	uxth	r2, r3
- 8002a2e:	4b65      	ldr	r3, [pc, #404]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a30:	801a      	strh	r2, [r3, #0]
- 8002a32:	4b64      	ldr	r3, [pc, #400]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a34:	881b      	ldrh	r3, [r3, #0]
- 8002a36:	f043 0304 	orr.w	r3, r3, #4
- 8002a3a:	b29a      	uxth	r2, r3
- 8002a3c:	4b61      	ldr	r3, [pc, #388]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a3e:	801a      	strh	r2, [r3, #0]
- 8002a40:	4b60      	ldr	r3, [pc, #384]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a42:	881b      	ldrh	r3, [r3, #0]
- 8002a44:	f023 0308 	bic.w	r3, r3, #8
- 8002a48:	b29a      	uxth	r2, r3
- 8002a4a:	4b5e      	ldr	r3, [pc, #376]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a4c:	801a      	strh	r2, [r3, #0]
- 8002a4e:	4b5d      	ldr	r3, [pc, #372]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a50:	881b      	ldrh	r3, [r3, #0]
- 8002a52:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 8002a56:	b29a      	uxth	r2, r3
- 8002a58:	4b5a      	ldr	r3, [pc, #360]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a5a:	801a      	strh	r2, [r3, #0]
- 8002a5c:	4b59      	ldr	r3, [pc, #356]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a5e:	881b      	ldrh	r3, [r3, #0]
- 8002a60:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 8002a64:	b29a      	uxth	r2, r3
- 8002a66:	4b57      	ldr	r3, [pc, #348]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a68:	801a      	strh	r2, [r3, #0]
- 8002a6a:	4b56      	ldr	r3, [pc, #344]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a6c:	881b      	ldrh	r3, [r3, #0]
- 8002a6e:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002a72:	b29a      	uxth	r2, r3
- 8002a74:	4b53      	ldr	r3, [pc, #332]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002a76:	801a      	strh	r2, [r3, #0]
- 8002a78:	e09d      	b.n	8002bb6 <APP_voidForward_RightTasks+0x1be>
- 8002a7a:	4b50      	ldr	r3, [pc, #320]	; (8002bbc <APP_voidForward_RightTasks+0x1c4>)
- 8002a7c:	78db      	ldrb	r3, [r3, #3]
- 8002a7e:	4618      	mov	r0, r3
- 8002a80:	f7fd fcb6 	bl	80003f0 <__aeabi_i2d>
- 8002a84:	f04f 0200 	mov.w	r2, #0
- 8002a88:	4b4f      	ldr	r3, [pc, #316]	; (8002bc8 <APP_voidForward_RightTasks+0x1d0>)
- 8002a8a:	f7fd fd85 	bl	8000598 <__aeabi_dcmple>
- 8002a8e:	4603      	mov	r3, r0
- 8002a90:	2b00      	cmp	r3, #0
- 8002a92:	d06a      	beq.n	8002b6a <APP_voidForward_RightTasks+0x172>
- 8002a94:	4b4d      	ldr	r3, [pc, #308]	; (8002bcc <APP_voidForward_RightTasks+0x1d4>)
- 8002a96:	781b      	ldrb	r3, [r3, #0]
- 8002a98:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002a9c:	b2db      	uxtb	r3, r3
- 8002a9e:	461a      	mov	r2, r3
- 8002aa0:	4b4b      	ldr	r3, [pc, #300]	; (8002bd0 <APP_voidForward_RightTasks+0x1d8>)
- 8002aa2:	781b      	ldrb	r3, [r3, #0]
- 8002aa4:	429a      	cmp	r2, r3
- 8002aa6:	dc31      	bgt.n	8002b0c <APP_voidForward_RightTasks+0x114>
- 8002aa8:	4b46      	ldr	r3, [pc, #280]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002aaa:	881b      	ldrh	r3, [r3, #0]
- 8002aac:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 8002ab0:	b29a      	uxth	r2, r3
- 8002ab2:	4b44      	ldr	r3, [pc, #272]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002ab4:	801a      	strh	r2, [r3, #0]
- 8002ab6:	4b43      	ldr	r3, [pc, #268]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002ab8:	881b      	ldrh	r3, [r3, #0]
- 8002aba:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 8002abe:	b29a      	uxth	r2, r3
- 8002ac0:	4b40      	ldr	r3, [pc, #256]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002ac2:	801a      	strh	r2, [r3, #0]
- 8002ac4:	4b3f      	ldr	r3, [pc, #252]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002ac6:	881b      	ldrh	r3, [r3, #0]
- 8002ac8:	b21b      	sxth	r3, r3
- 8002aca:	f023 030f 	bic.w	r3, r3, #15
- 8002ace:	b21a      	sxth	r2, r3
- 8002ad0:	4b3e      	ldr	r3, [pc, #248]	; (8002bcc <APP_voidForward_RightTasks+0x1d4>)
- 8002ad2:	781b      	ldrb	r3, [r3, #0]
- 8002ad4:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002ad8:	b2db      	uxtb	r3, r3
- 8002ada:	b21b      	sxth	r3, r3
- 8002adc:	4313      	orrs	r3, r2
- 8002ade:	b21b      	sxth	r3, r3
- 8002ae0:	b29a      	uxth	r2, r3
- 8002ae2:	4b38      	ldr	r3, [pc, #224]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002ae4:	801a      	strh	r2, [r3, #0]
- 8002ae6:	4b37      	ldr	r3, [pc, #220]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002ae8:	881b      	ldrh	r3, [r3, #0]
- 8002aea:	b21b      	sxth	r3, r3
- 8002aec:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002af0:	b21a      	sxth	r2, r3
- 8002af2:	4b36      	ldr	r3, [pc, #216]	; (8002bcc <APP_voidForward_RightTasks+0x1d4>)
- 8002af4:	781b      	ldrb	r3, [r3, #0]
- 8002af6:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002afa:	b2db      	uxtb	r3, r3
- 8002afc:	011b      	lsls	r3, r3, #4
- 8002afe:	b21b      	sxth	r3, r3
- 8002b00:	4313      	orrs	r3, r2
- 8002b02:	b21b      	sxth	r3, r3
- 8002b04:	b29a      	uxth	r2, r3
- 8002b06:	4b2f      	ldr	r3, [pc, #188]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b08:	801a      	strh	r2, [r3, #0]
- 8002b0a:	e054      	b.n	8002bb6 <APP_voidForward_RightTasks+0x1be>
- 8002b0c:	4b2d      	ldr	r3, [pc, #180]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b0e:	881b      	ldrh	r3, [r3, #0]
- 8002b10:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 8002b14:	b29a      	uxth	r2, r3
- 8002b16:	4b2b      	ldr	r3, [pc, #172]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b18:	801a      	strh	r2, [r3, #0]
- 8002b1a:	4b2a      	ldr	r3, [pc, #168]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b1c:	881b      	ldrh	r3, [r3, #0]
- 8002b1e:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 8002b22:	b29a      	uxth	r2, r3
- 8002b24:	4b27      	ldr	r3, [pc, #156]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b26:	801a      	strh	r2, [r3, #0]
- 8002b28:	4b26      	ldr	r3, [pc, #152]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b2a:	881b      	ldrh	r3, [r3, #0]
- 8002b2c:	b21b      	sxth	r3, r3
- 8002b2e:	f023 030f 	bic.w	r3, r3, #15
- 8002b32:	b21a      	sxth	r2, r3
- 8002b34:	4b25      	ldr	r3, [pc, #148]	; (8002bcc <APP_voidForward_RightTasks+0x1d4>)
- 8002b36:	781b      	ldrb	r3, [r3, #0]
- 8002b38:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002b3c:	b2db      	uxtb	r3, r3
- 8002b3e:	b21b      	sxth	r3, r3
- 8002b40:	4313      	orrs	r3, r2
- 8002b42:	b21b      	sxth	r3, r3
- 8002b44:	b29a      	uxth	r2, r3
- 8002b46:	4b1f      	ldr	r3, [pc, #124]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b48:	801a      	strh	r2, [r3, #0]
- 8002b4a:	4b1e      	ldr	r3, [pc, #120]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b4c:	881b      	ldrh	r3, [r3, #0]
- 8002b4e:	b21b      	sxth	r3, r3
- 8002b50:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002b54:	b21a      	sxth	r2, r3
- 8002b56:	4b1e      	ldr	r3, [pc, #120]	; (8002bd0 <APP_voidForward_RightTasks+0x1d8>)
- 8002b58:	781b      	ldrb	r3, [r3, #0]
- 8002b5a:	011b      	lsls	r3, r3, #4
- 8002b5c:	b21b      	sxth	r3, r3
- 8002b5e:	4313      	orrs	r3, r2
- 8002b60:	b21b      	sxth	r3, r3
- 8002b62:	b29a      	uxth	r2, r3
- 8002b64:	4b17      	ldr	r3, [pc, #92]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b66:	801a      	strh	r2, [r3, #0]
- 8002b68:	e025      	b.n	8002bb6 <APP_voidForward_RightTasks+0x1be>
- 8002b6a:	4b16      	ldr	r3, [pc, #88]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b6c:	881b      	ldrh	r3, [r3, #0]
- 8002b6e:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 8002b72:	b29a      	uxth	r2, r3
- 8002b74:	4b13      	ldr	r3, [pc, #76]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b76:	801a      	strh	r2, [r3, #0]
- 8002b78:	4b12      	ldr	r3, [pc, #72]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b7a:	881b      	ldrh	r3, [r3, #0]
- 8002b7c:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 8002b80:	b29a      	uxth	r2, r3
- 8002b82:	4b10      	ldr	r3, [pc, #64]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b84:	801a      	strh	r2, [r3, #0]
- 8002b86:	4b0f      	ldr	r3, [pc, #60]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002b88:	881b      	ldrh	r3, [r3, #0]
- 8002b8a:	b21b      	sxth	r3, r3
- 8002b8c:	f023 030f 	bic.w	r3, r3, #15
- 8002b90:	b21a      	sxth	r2, r3
- 8002b92:	4b0e      	ldr	r3, [pc, #56]	; (8002bcc <APP_voidForward_RightTasks+0x1d4>)
- 8002b94:	781b      	ldrb	r3, [r3, #0]
- 8002b96:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002b9a:	b2db      	uxtb	r3, r3
- 8002b9c:	b21b      	sxth	r3, r3
- 8002b9e:	4313      	orrs	r3, r2
- 8002ba0:	b21b      	sxth	r3, r3
- 8002ba2:	b29a      	uxth	r2, r3
- 8002ba4:	4b07      	ldr	r3, [pc, #28]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002ba6:	801a      	strh	r2, [r3, #0]
- 8002ba8:	4b06      	ldr	r3, [pc, #24]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002baa:	881b      	ldrh	r3, [r3, #0]
- 8002bac:	f043 0370 	orr.w	r3, r3, #112	; 0x70
- 8002bb0:	b29a      	uxth	r2, r3
- 8002bb2:	4b04      	ldr	r3, [pc, #16]	; (8002bc4 <APP_voidForward_RightTasks+0x1cc>)
- 8002bb4:	801a      	strh	r2, [r3, #0]
- 8002bb6:	bf00      	nop
- 8002bb8:	bd80      	pop	{r7, pc}
- 8002bba:	bf00      	nop
- 8002bbc:	200000fc 	.word	0x200000fc
- 8002bc0:	40240000 	.word	0x40240000
- 8002bc4:	20000100 	.word	0x20000100
- 8002bc8:	40340000 	.word	0x40340000
- 8002bcc:	200000f8 	.word	0x200000f8
- 8002bd0:	200000ca 	.word	0x200000ca
+080028d4 <ProcessingFun>:
+ 80028d4:	b580      	push	{r7, lr}
+ 80028d6:	af00      	add	r7, sp, #0
+ 80028d8:	4bd5      	ldr	r3, [pc, #852]	; (8002c30 <ProcessingFun+0x35c>)
+ 80028da:	781b      	ldrb	r3, [r3, #0]
+ 80028dc:	3b10      	subs	r3, #16
+ 80028de:	2b6c      	cmp	r3, #108	; 0x6c
+ 80028e0:	f200 81cd 	bhi.w	8002c7e <ProcessingFun+0x3aa>
+ 80028e4:	a201      	add	r2, pc, #4	; (adr r2, 80028ec <ProcessingFun+0x18>)
+ 80028e6:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 80028ea:	bf00      	nop
+ 80028ec:	08002aa1 	.word	0x08002aa1
+ 80028f0:	08002c7f 	.word	0x08002c7f
+ 80028f4:	08002c7f 	.word	0x08002c7f
+ 80028f8:	08002c7f 	.word	0x08002c7f
+ 80028fc:	08002c7f 	.word	0x08002c7f
+ 8002900:	08002c7f 	.word	0x08002c7f
+ 8002904:	08002c7f 	.word	0x08002c7f
+ 8002908:	08002c7f 	.word	0x08002c7f
+ 800290c:	08002c7f 	.word	0x08002c7f
+ 8002910:	08002c7f 	.word	0x08002c7f
+ 8002914:	08002c7f 	.word	0x08002c7f
+ 8002918:	08002c7f 	.word	0x08002c7f
+ 800291c:	08002c7f 	.word	0x08002c7f
+ 8002920:	08002c7f 	.word	0x08002c7f
+ 8002924:	08002c7f 	.word	0x08002c7f
+ 8002928:	08002c7f 	.word	0x08002c7f
+ 800292c:	08002aaf 	.word	0x08002aaf
+ 8002930:	08002c7f 	.word	0x08002c7f
+ 8002934:	08002c7f 	.word	0x08002c7f
+ 8002938:	08002c7f 	.word	0x08002c7f
+ 800293c:	08002c7f 	.word	0x08002c7f
+ 8002940:	08002c7f 	.word	0x08002c7f
+ 8002944:	08002c7f 	.word	0x08002c7f
+ 8002948:	08002c7f 	.word	0x08002c7f
+ 800294c:	08002c7f 	.word	0x08002c7f
+ 8002950:	08002c7f 	.word	0x08002c7f
+ 8002954:	08002c7f 	.word	0x08002c7f
+ 8002958:	08002c7f 	.word	0x08002c7f
+ 800295c:	08002c7f 	.word	0x08002c7f
+ 8002960:	08002c7f 	.word	0x08002c7f
+ 8002964:	08002c7f 	.word	0x08002c7f
+ 8002968:	08002c7f 	.word	0x08002c7f
+ 800296c:	08002c7f 	.word	0x08002c7f
+ 8002970:	08002c7f 	.word	0x08002c7f
+ 8002974:	08002c7f 	.word	0x08002c7f
+ 8002978:	08002c7f 	.word	0x08002c7f
+ 800297c:	08002c7f 	.word	0x08002c7f
+ 8002980:	08002c7f 	.word	0x08002c7f
+ 8002984:	08002c7f 	.word	0x08002c7f
+ 8002988:	08002c7f 	.word	0x08002c7f
+ 800298c:	08002c7f 	.word	0x08002c7f
+ 8002990:	08002c7f 	.word	0x08002c7f
+ 8002994:	08002c7f 	.word	0x08002c7f
+ 8002998:	08002c7f 	.word	0x08002c7f
+ 800299c:	08002c7f 	.word	0x08002c7f
+ 80029a0:	08002c7f 	.word	0x08002c7f
+ 80029a4:	08002c7f 	.word	0x08002c7f
+ 80029a8:	08002c7f 	.word	0x08002c7f
+ 80029ac:	08002abd 	.word	0x08002abd
+ 80029b0:	08002c7f 	.word	0x08002c7f
+ 80029b4:	08002c7f 	.word	0x08002c7f
+ 80029b8:	08002c7f 	.word	0x08002c7f
+ 80029bc:	08002c7f 	.word	0x08002c7f
+ 80029c0:	08002c7f 	.word	0x08002c7f
+ 80029c4:	08002c7f 	.word	0x08002c7f
+ 80029c8:	08002c7f 	.word	0x08002c7f
+ 80029cc:	08002acb 	.word	0x08002acb
+ 80029d0:	08002c7f 	.word	0x08002c7f
+ 80029d4:	08002c7f 	.word	0x08002c7f
+ 80029d8:	08002c7f 	.word	0x08002c7f
+ 80029dc:	08002ad9 	.word	0x08002ad9
+ 80029e0:	08002c7f 	.word	0x08002c7f
+ 80029e4:	08002c7f 	.word	0x08002c7f
+ 80029e8:	08002c7f 	.word	0x08002c7f
+ 80029ec:	08002ae7 	.word	0x08002ae7
+ 80029f0:	08002c7f 	.word	0x08002c7f
+ 80029f4:	08002c7f 	.word	0x08002c7f
+ 80029f8:	08002c7f 	.word	0x08002c7f
+ 80029fc:	08002c7f 	.word	0x08002c7f
+ 8002a00:	08002c7f 	.word	0x08002c7f
+ 8002a04:	08002c7f 	.word	0x08002c7f
+ 8002a08:	08002c7f 	.word	0x08002c7f
+ 8002a0c:	08002af5 	.word	0x08002af5
+ 8002a10:	08002c7f 	.word	0x08002c7f
+ 8002a14:	08002c7f 	.word	0x08002c7f
+ 8002a18:	08002c7f 	.word	0x08002c7f
+ 8002a1c:	08002b03 	.word	0x08002b03
+ 8002a20:	08002c7f 	.word	0x08002c7f
+ 8002a24:	08002c7f 	.word	0x08002c7f
+ 8002a28:	08002c7f 	.word	0x08002c7f
+ 8002a2c:	08002b11 	.word	0x08002b11
+ 8002a30:	08002c7f 	.word	0x08002c7f
+ 8002a34:	08002c7f 	.word	0x08002c7f
+ 8002a38:	08002c7f 	.word	0x08002c7f
+ 8002a3c:	08002c7f 	.word	0x08002c7f
+ 8002a40:	08002c7f 	.word	0x08002c7f
+ 8002a44:	08002c7f 	.word	0x08002c7f
+ 8002a48:	08002c7f 	.word	0x08002c7f
+ 8002a4c:	08002b4d 	.word	0x08002b4d
+ 8002a50:	08002c7f 	.word	0x08002c7f
+ 8002a54:	08002c7f 	.word	0x08002c7f
+ 8002a58:	08002c7f 	.word	0x08002c7f
+ 8002a5c:	08002b89 	.word	0x08002b89
+ 8002a60:	08002c7f 	.word	0x08002c7f
+ 8002a64:	08002c7f 	.word	0x08002c7f
+ 8002a68:	08002c7f 	.word	0x08002c7f
+ 8002a6c:	08002bc5 	.word	0x08002bc5
+ 8002a70:	08002c7f 	.word	0x08002c7f
+ 8002a74:	08002c7f 	.word	0x08002c7f
+ 8002a78:	08002c7f 	.word	0x08002c7f
+ 8002a7c:	08002c7f 	.word	0x08002c7f
+ 8002a80:	08002c7f 	.word	0x08002c7f
+ 8002a84:	08002c7f 	.word	0x08002c7f
+ 8002a88:	08002c7f 	.word	0x08002c7f
+ 8002a8c:	08002c01 	.word	0x08002c01
+ 8002a90:	08002c7f 	.word	0x08002c7f
+ 8002a94:	08002c7f 	.word	0x08002c7f
+ 8002a98:	08002c7f 	.word	0x08002c7f
+ 8002a9c:	08002c45 	.word	0x08002c45
+ 8002aa0:	4a64      	ldr	r2, [pc, #400]	; (8002c34 <ProcessingFun+0x360>)
+ 8002aa2:	7813      	ldrb	r3, [r2, #0]
+ 8002aa4:	2108      	movs	r1, #8
+ 8002aa6:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002aaa:	7013      	strb	r3, [r2, #0]
+ 8002aac:	e0e7      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002aae:	4a61      	ldr	r2, [pc, #388]	; (8002c34 <ProcessingFun+0x360>)
+ 8002ab0:	7813      	ldrb	r3, [r2, #0]
+ 8002ab2:	2108      	movs	r1, #8
+ 8002ab4:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002ab8:	7013      	strb	r3, [r2, #0]
+ 8002aba:	e0e0      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002abc:	4a5d      	ldr	r2, [pc, #372]	; (8002c34 <ProcessingFun+0x360>)
+ 8002abe:	7813      	ldrb	r3, [r2, #0]
+ 8002ac0:	2103      	movs	r1, #3
+ 8002ac2:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002ac6:	7013      	strb	r3, [r2, #0]
+ 8002ac8:	e0d9      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002aca:	4a5a      	ldr	r2, [pc, #360]	; (8002c34 <ProcessingFun+0x360>)
+ 8002acc:	7813      	ldrb	r3, [r2, #0]
+ 8002ace:	2105      	movs	r1, #5
+ 8002ad0:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002ad4:	7013      	strb	r3, [r2, #0]
+ 8002ad6:	e0d2      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002ad8:	4a56      	ldr	r2, [pc, #344]	; (8002c34 <ProcessingFun+0x360>)
+ 8002ada:	7813      	ldrb	r3, [r2, #0]
+ 8002adc:	2105      	movs	r1, #5
+ 8002ade:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002ae2:	7013      	strb	r3, [r2, #0]
+ 8002ae4:	e0cb      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002ae6:	4a53      	ldr	r2, [pc, #332]	; (8002c34 <ProcessingFun+0x360>)
+ 8002ae8:	7813      	ldrb	r3, [r2, #0]
+ 8002aea:	2102      	movs	r1, #2
+ 8002aec:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002af0:	7013      	strb	r3, [r2, #0]
+ 8002af2:	e0c4      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002af4:	4a4f      	ldr	r2, [pc, #316]	; (8002c34 <ProcessingFun+0x360>)
+ 8002af6:	7813      	ldrb	r3, [r2, #0]
+ 8002af8:	2104      	movs	r1, #4
+ 8002afa:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002afe:	7013      	strb	r3, [r2, #0]
+ 8002b00:	e0bd      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002b02:	4a4c      	ldr	r2, [pc, #304]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b04:	7813      	ldrb	r3, [r2, #0]
+ 8002b06:	2104      	movs	r1, #4
+ 8002b08:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002b0c:	7013      	strb	r3, [r2, #0]
+ 8002b0e:	e0b6      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002b10:	4b48      	ldr	r3, [pc, #288]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b12:	781b      	ldrb	r3, [r3, #0]
+ 8002b14:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002b18:	b2db      	uxtb	r3, r3
+ 8002b1a:	2b04      	cmp	r3, #4
+ 8002b1c:	d90f      	bls.n	8002b3e <ProcessingFun+0x26a>
+ 8002b1e:	4b45      	ldr	r3, [pc, #276]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b20:	781b      	ldrb	r3, [r3, #0]
+ 8002b22:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002b26:	b2db      	uxtb	r3, r3
+ 8002b28:	3b04      	subs	r3, #4
+ 8002b2a:	b2db      	uxtb	r3, r3
+ 8002b2c:	f003 0307 	and.w	r3, r3, #7
+ 8002b30:	b2d9      	uxtb	r1, r3
+ 8002b32:	4a40      	ldr	r2, [pc, #256]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b34:	7813      	ldrb	r3, [r2, #0]
+ 8002b36:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002b3a:	7013      	strb	r3, [r2, #0]
+ 8002b3c:	e09f      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002b3e:	4a3d      	ldr	r2, [pc, #244]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b40:	7813      	ldrb	r3, [r2, #0]
+ 8002b42:	2101      	movs	r1, #1
+ 8002b44:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002b48:	7013      	strb	r3, [r2, #0]
+ 8002b4a:	e098      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002b4c:	4b39      	ldr	r3, [pc, #228]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b4e:	781b      	ldrb	r3, [r3, #0]
+ 8002b50:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002b54:	b2db      	uxtb	r3, r3
+ 8002b56:	2b02      	cmp	r3, #2
+ 8002b58:	d90f      	bls.n	8002b7a <ProcessingFun+0x2a6>
+ 8002b5a:	4b36      	ldr	r3, [pc, #216]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b5c:	781b      	ldrb	r3, [r3, #0]
+ 8002b5e:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002b62:	b2db      	uxtb	r3, r3
+ 8002b64:	3b02      	subs	r3, #2
+ 8002b66:	b2db      	uxtb	r3, r3
+ 8002b68:	f003 0307 	and.w	r3, r3, #7
+ 8002b6c:	b2d9      	uxtb	r1, r3
+ 8002b6e:	4a31      	ldr	r2, [pc, #196]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b70:	7813      	ldrb	r3, [r2, #0]
+ 8002b72:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002b76:	7013      	strb	r3, [r2, #0]
+ 8002b78:	e081      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002b7a:	4a2e      	ldr	r2, [pc, #184]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b7c:	7813      	ldrb	r3, [r2, #0]
+ 8002b7e:	2101      	movs	r1, #1
+ 8002b80:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002b84:	7013      	strb	r3, [r2, #0]
+ 8002b86:	e07a      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002b88:	4b2a      	ldr	r3, [pc, #168]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b8a:	781b      	ldrb	r3, [r3, #0]
+ 8002b8c:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002b90:	b2db      	uxtb	r3, r3
+ 8002b92:	2b01      	cmp	r3, #1
+ 8002b94:	d90f      	bls.n	8002bb6 <ProcessingFun+0x2e2>
+ 8002b96:	4b27      	ldr	r3, [pc, #156]	; (8002c34 <ProcessingFun+0x360>)
+ 8002b98:	781b      	ldrb	r3, [r3, #0]
+ 8002b9a:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002b9e:	b2db      	uxtb	r3, r3
+ 8002ba0:	3b01      	subs	r3, #1
+ 8002ba2:	b2db      	uxtb	r3, r3
+ 8002ba4:	f003 0307 	and.w	r3, r3, #7
+ 8002ba8:	b2d9      	uxtb	r1, r3
+ 8002baa:	4a22      	ldr	r2, [pc, #136]	; (8002c34 <ProcessingFun+0x360>)
+ 8002bac:	7813      	ldrb	r3, [r2, #0]
+ 8002bae:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002bb2:	7013      	strb	r3, [r2, #0]
+ 8002bb4:	e063      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002bb6:	4a1f      	ldr	r2, [pc, #124]	; (8002c34 <ProcessingFun+0x360>)
+ 8002bb8:	7813      	ldrb	r3, [r2, #0]
+ 8002bba:	2108      	movs	r1, #8
+ 8002bbc:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002bc0:	7013      	strb	r3, [r2, #0]
+ 8002bc2:	e05c      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002bc4:	4b1b      	ldr	r3, [pc, #108]	; (8002c34 <ProcessingFun+0x360>)
+ 8002bc6:	781b      	ldrb	r3, [r3, #0]
+ 8002bc8:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002bcc:	b2db      	uxtb	r3, r3
+ 8002bce:	3304      	adds	r3, #4
+ 8002bd0:	2b07      	cmp	r3, #7
+ 8002bd2:	dc0f      	bgt.n	8002bf4 <ProcessingFun+0x320>
+ 8002bd4:	4b17      	ldr	r3, [pc, #92]	; (8002c34 <ProcessingFun+0x360>)
+ 8002bd6:	781b      	ldrb	r3, [r3, #0]
+ 8002bd8:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002bdc:	b2db      	uxtb	r3, r3
+ 8002bde:	3304      	adds	r3, #4
+ 8002be0:	b2db      	uxtb	r3, r3
+ 8002be2:	f003 0307 	and.w	r3, r3, #7
+ 8002be6:	b2d9      	uxtb	r1, r3
+ 8002be8:	4a12      	ldr	r2, [pc, #72]	; (8002c34 <ProcessingFun+0x360>)
+ 8002bea:	7813      	ldrb	r3, [r2, #0]
+ 8002bec:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002bf0:	7013      	strb	r3, [r2, #0]
+ 8002bf2:	e044      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002bf4:	4a0f      	ldr	r2, [pc, #60]	; (8002c34 <ProcessingFun+0x360>)
+ 8002bf6:	7813      	ldrb	r3, [r2, #0]
+ 8002bf8:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 8002bfc:	7013      	strb	r3, [r2, #0]
+ 8002bfe:	e03e      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002c00:	4b0c      	ldr	r3, [pc, #48]	; (8002c34 <ProcessingFun+0x360>)
+ 8002c02:	781b      	ldrb	r3, [r3, #0]
+ 8002c04:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002c08:	b2db      	uxtb	r3, r3
+ 8002c0a:	3302      	adds	r3, #2
+ 8002c0c:	2b07      	cmp	r3, #7
+ 8002c0e:	dc13      	bgt.n	8002c38 <ProcessingFun+0x364>
+ 8002c10:	4b08      	ldr	r3, [pc, #32]	; (8002c34 <ProcessingFun+0x360>)
+ 8002c12:	781b      	ldrb	r3, [r3, #0]
+ 8002c14:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002c18:	b2db      	uxtb	r3, r3
+ 8002c1a:	3302      	adds	r3, #2
+ 8002c1c:	b2db      	uxtb	r3, r3
+ 8002c1e:	f003 0307 	and.w	r3, r3, #7
+ 8002c22:	b2d9      	uxtb	r1, r3
+ 8002c24:	4a03      	ldr	r2, [pc, #12]	; (8002c34 <ProcessingFun+0x360>)
+ 8002c26:	7813      	ldrb	r3, [r2, #0]
+ 8002c28:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002c2c:	7013      	strb	r3, [r2, #0]
+ 8002c2e:	e026      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002c30:	200001d8 	.word	0x200001d8
+ 8002c34:	200000f8 	.word	0x200000f8
+ 8002c38:	4a37      	ldr	r2, [pc, #220]	; (8002d18 <ProcessingFun+0x444>)
+ 8002c3a:	7813      	ldrb	r3, [r2, #0]
+ 8002c3c:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 8002c40:	7013      	strb	r3, [r2, #0]
+ 8002c42:	e01c      	b.n	8002c7e <ProcessingFun+0x3aa>
+ 8002c44:	4b34      	ldr	r3, [pc, #208]	; (8002d18 <ProcessingFun+0x444>)
+ 8002c46:	781b      	ldrb	r3, [r3, #0]
+ 8002c48:	f003 0370 	and.w	r3, r3, #112	; 0x70
+ 8002c4c:	b2db      	uxtb	r3, r3
+ 8002c4e:	2b70      	cmp	r3, #112	; 0x70
+ 8002c50:	d00f      	beq.n	8002c72 <ProcessingFun+0x39e>
+ 8002c52:	4b31      	ldr	r3, [pc, #196]	; (8002d18 <ProcessingFun+0x444>)
+ 8002c54:	781b      	ldrb	r3, [r3, #0]
+ 8002c56:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002c5a:	b2db      	uxtb	r3, r3
+ 8002c5c:	3301      	adds	r3, #1
+ 8002c5e:	b2db      	uxtb	r3, r3
+ 8002c60:	f003 0307 	and.w	r3, r3, #7
+ 8002c64:	b2d9      	uxtb	r1, r3
+ 8002c66:	4a2c      	ldr	r2, [pc, #176]	; (8002d18 <ProcessingFun+0x444>)
+ 8002c68:	7813      	ldrb	r3, [r2, #0]
+ 8002c6a:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002c6e:	7013      	strb	r3, [r2, #0]
+ 8002c70:	e004      	b.n	8002c7c <ProcessingFun+0x3a8>
+ 8002c72:	4a29      	ldr	r2, [pc, #164]	; (8002d18 <ProcessingFun+0x444>)
+ 8002c74:	7813      	ldrb	r3, [r2, #0]
+ 8002c76:	f043 0370 	orr.w	r3, r3, #112	; 0x70
+ 8002c7a:	7013      	strb	r3, [r2, #0]
+ 8002c7c:	bf00      	nop
+ 8002c7e:	4b26      	ldr	r3, [pc, #152]	; (8002d18 <ProcessingFun+0x444>)
+ 8002c80:	781b      	ldrb	r3, [r3, #0]
+ 8002c82:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002c86:	b2d9      	uxtb	r1, r3
+ 8002c88:	4a24      	ldr	r2, [pc, #144]	; (8002d1c <ProcessingFun+0x448>)
+ 8002c8a:	7813      	ldrb	r3, [r2, #0]
+ 8002c8c:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002c90:	7013      	strb	r3, [r2, #0]
+ 8002c92:	4b21      	ldr	r3, [pc, #132]	; (8002d18 <ProcessingFun+0x444>)
+ 8002c94:	781b      	ldrb	r3, [r3, #0]
+ 8002c96:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002c9a:	b2d9      	uxtb	r1, r3
+ 8002c9c:	4a1f      	ldr	r2, [pc, #124]	; (8002d1c <ProcessingFun+0x448>)
+ 8002c9e:	7813      	ldrb	r3, [r2, #0]
+ 8002ca0:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002ca4:	7013      	strb	r3, [r2, #0]
+ 8002ca6:	4b1c      	ldr	r3, [pc, #112]	; (8002d18 <ProcessingFun+0x444>)
+ 8002ca8:	781b      	ldrb	r3, [r3, #0]
+ 8002caa:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002cae:	b2db      	uxtb	r3, r3
+ 8002cb0:	2b08      	cmp	r3, #8
+ 8002cb2:	d82d      	bhi.n	8002d10 <ProcessingFun+0x43c>
+ 8002cb4:	a201      	add	r2, pc, #4	; (adr r2, 8002cbc <ProcessingFun+0x3e8>)
+ 8002cb6:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8002cba:	bf00      	nop
+ 8002cbc:	08002ce1 	.word	0x08002ce1
+ 8002cc0:	08002ced 	.word	0x08002ced
+ 8002cc4:	08002d0b 	.word	0x08002d0b
+ 8002cc8:	08002d0b 	.word	0x08002d0b
+ 8002ccc:	08002cff 	.word	0x08002cff
+ 8002cd0:	08002d05 	.word	0x08002d05
+ 8002cd4:	08002cf3 	.word	0x08002cf3
+ 8002cd8:	08002cf9 	.word	0x08002cf9
+ 8002cdc:	08002ce7 	.word	0x08002ce7
+ 8002ce0:	f7ff faa6 	bl	8002230 <APP_voidGoTasks>
+ 8002ce4:	e015      	b.n	8002d12 <ProcessingFun+0x43e>
+ 8002ce6:	f7ff fa8f 	bl	8002208 <APP_VoidStop>
+ 8002cea:	e012      	b.n	8002d12 <ProcessingFun+0x43e>
+ 8002cec:	f7ff fb2a 	bl	8002344 <APP_voidBackTasks>
+ 8002cf0:	e00f      	b.n	8002d12 <ProcessingFun+0x43e>
+ 8002cf2:	f7ff fbb1 	bl	8002458 <APP_voidBackward_RightTasks>
+ 8002cf6:	e00c      	b.n	8002d12 <ProcessingFun+0x43e>
+ 8002cf8:	f7ff fc38 	bl	800256c <APP_voidBackward_LEFTTasks>
+ 8002cfc:	e009      	b.n	8002d12 <ProcessingFun+0x43e>
+ 8002cfe:	f7ff fcc5 	bl	800268c <APP_voidForward_RightTasks>
+ 8002d02:	e006      	b.n	8002d12 <ProcessingFun+0x43e>
+ 8002d04:	f7ff fd4c 	bl	80027a0 <APP_voidForward_LeftTasks>
+ 8002d08:	e003      	b.n	8002d12 <ProcessingFun+0x43e>
+ 8002d0a:	f7ff fcb9 	bl	8002680 <APP_voidRight_LeftTasks>
+ 8002d0e:	e000      	b.n	8002d12 <ProcessingFun+0x43e>
+ 8002d10:	bf00      	nop
+ 8002d12:	bf00      	nop
+ 8002d14:	bd80      	pop	{r7, pc}
+ 8002d16:	bf00      	nop
+ 8002d18:	200000f8 	.word	0x200000f8
+ 8002d1c:	20000100 	.word	0x20000100
 
-08002bd4 <APP_voidForward_LeftTasks>:
- 8002bd4:	b580      	push	{r7, lr}
- 8002bd6:	af00      	add	r7, sp, #0
- 8002bd8:	4b6f      	ldr	r3, [pc, #444]	; (8002d98 <APP_voidForward_LeftTasks+0x1c4>)
- 8002bda:	789b      	ldrb	r3, [r3, #2]
- 8002bdc:	4618      	mov	r0, r3
- 8002bde:	f7fd fc07 	bl	80003f0 <__aeabi_i2d>
- 8002be2:	f04f 0200 	mov.w	r2, #0
- 8002be6:	4b6d      	ldr	r3, [pc, #436]	; (8002d9c <APP_voidForward_LeftTasks+0x1c8>)
- 8002be8:	f7fd fcd6 	bl	8000598 <__aeabi_dcmple>
- 8002bec:	4603      	mov	r3, r0
- 8002bee:	2b00      	cmp	r3, #0
- 8002bf0:	d031      	beq.n	8002c56 <APP_voidForward_LeftTasks+0x82>
- 8002bf2:	4b6b      	ldr	r3, [pc, #428]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002bf4:	881b      	ldrh	r3, [r3, #0]
- 8002bf6:	f043 0301 	orr.w	r3, r3, #1
- 8002bfa:	b29a      	uxth	r2, r3
- 8002bfc:	4b68      	ldr	r3, [pc, #416]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002bfe:	801a      	strh	r2, [r3, #0]
- 8002c00:	4b67      	ldr	r3, [pc, #412]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c02:	881b      	ldrh	r3, [r3, #0]
- 8002c04:	f043 0302 	orr.w	r3, r3, #2
- 8002c08:	b29a      	uxth	r2, r3
- 8002c0a:	4b65      	ldr	r3, [pc, #404]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c0c:	801a      	strh	r2, [r3, #0]
- 8002c0e:	4b64      	ldr	r3, [pc, #400]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c10:	881b      	ldrh	r3, [r3, #0]
- 8002c12:	f043 0304 	orr.w	r3, r3, #4
- 8002c16:	b29a      	uxth	r2, r3
- 8002c18:	4b61      	ldr	r3, [pc, #388]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c1a:	801a      	strh	r2, [r3, #0]
- 8002c1c:	4b60      	ldr	r3, [pc, #384]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c1e:	881b      	ldrh	r3, [r3, #0]
- 8002c20:	f023 0308 	bic.w	r3, r3, #8
- 8002c24:	b29a      	uxth	r2, r3
- 8002c26:	4b5e      	ldr	r3, [pc, #376]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c28:	801a      	strh	r2, [r3, #0]
- 8002c2a:	4b5d      	ldr	r3, [pc, #372]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c2c:	881b      	ldrh	r3, [r3, #0]
- 8002c2e:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 8002c32:	b29a      	uxth	r2, r3
- 8002c34:	4b5a      	ldr	r3, [pc, #360]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c36:	801a      	strh	r2, [r3, #0]
- 8002c38:	4b59      	ldr	r3, [pc, #356]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c3a:	881b      	ldrh	r3, [r3, #0]
- 8002c3c:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 8002c40:	b29a      	uxth	r2, r3
- 8002c42:	4b57      	ldr	r3, [pc, #348]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c44:	801a      	strh	r2, [r3, #0]
- 8002c46:	4b56      	ldr	r3, [pc, #344]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c48:	881b      	ldrh	r3, [r3, #0]
- 8002c4a:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002c4e:	b29a      	uxth	r2, r3
- 8002c50:	4b53      	ldr	r3, [pc, #332]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c52:	801a      	strh	r2, [r3, #0]
- 8002c54:	e09d      	b.n	8002d92 <APP_voidForward_LeftTasks+0x1be>
- 8002c56:	4b50      	ldr	r3, [pc, #320]	; (8002d98 <APP_voidForward_LeftTasks+0x1c4>)
- 8002c58:	789b      	ldrb	r3, [r3, #2]
- 8002c5a:	4618      	mov	r0, r3
- 8002c5c:	f7fd fbc8 	bl	80003f0 <__aeabi_i2d>
- 8002c60:	f04f 0200 	mov.w	r2, #0
- 8002c64:	4b4f      	ldr	r3, [pc, #316]	; (8002da4 <APP_voidForward_LeftTasks+0x1d0>)
- 8002c66:	f7fd fc97 	bl	8000598 <__aeabi_dcmple>
- 8002c6a:	4603      	mov	r3, r0
- 8002c6c:	2b00      	cmp	r3, #0
- 8002c6e:	d06a      	beq.n	8002d46 <APP_voidForward_LeftTasks+0x172>
- 8002c70:	4b4d      	ldr	r3, [pc, #308]	; (8002da8 <APP_voidForward_LeftTasks+0x1d4>)
- 8002c72:	781b      	ldrb	r3, [r3, #0]
- 8002c74:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002c78:	b2db      	uxtb	r3, r3
- 8002c7a:	461a      	mov	r2, r3
- 8002c7c:	4b4b      	ldr	r3, [pc, #300]	; (8002dac <APP_voidForward_LeftTasks+0x1d8>)
- 8002c7e:	781b      	ldrb	r3, [r3, #0]
- 8002c80:	429a      	cmp	r2, r3
- 8002c82:	dc31      	bgt.n	8002ce8 <APP_voidForward_LeftTasks+0x114>
- 8002c84:	4b46      	ldr	r3, [pc, #280]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c86:	881b      	ldrh	r3, [r3, #0]
- 8002c88:	f043 0340 	orr.w	r3, r3, #64	; 0x40
- 8002c8c:	b29a      	uxth	r2, r3
- 8002c8e:	4b44      	ldr	r3, [pc, #272]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c90:	801a      	strh	r2, [r3, #0]
- 8002c92:	4b43      	ldr	r3, [pc, #268]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c94:	881b      	ldrh	r3, [r3, #0]
- 8002c96:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 8002c9a:	b29a      	uxth	r2, r3
- 8002c9c:	4b40      	ldr	r3, [pc, #256]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002c9e:	801a      	strh	r2, [r3, #0]
- 8002ca0:	4b3f      	ldr	r3, [pc, #252]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002ca2:	881b      	ldrh	r3, [r3, #0]
- 8002ca4:	b21b      	sxth	r3, r3
- 8002ca6:	f023 030f 	bic.w	r3, r3, #15
- 8002caa:	b21a      	sxth	r2, r3
- 8002cac:	4b3e      	ldr	r3, [pc, #248]	; (8002da8 <APP_voidForward_LeftTasks+0x1d4>)
- 8002cae:	781b      	ldrb	r3, [r3, #0]
- 8002cb0:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002cb4:	b2db      	uxtb	r3, r3
- 8002cb6:	b21b      	sxth	r3, r3
- 8002cb8:	4313      	orrs	r3, r2
- 8002cba:	b21b      	sxth	r3, r3
- 8002cbc:	b29a      	uxth	r2, r3
- 8002cbe:	4b38      	ldr	r3, [pc, #224]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002cc0:	801a      	strh	r2, [r3, #0]
- 8002cc2:	4b37      	ldr	r3, [pc, #220]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002cc4:	881b      	ldrh	r3, [r3, #0]
- 8002cc6:	b21b      	sxth	r3, r3
- 8002cc8:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002ccc:	b21a      	sxth	r2, r3
- 8002cce:	4b36      	ldr	r3, [pc, #216]	; (8002da8 <APP_voidForward_LeftTasks+0x1d4>)
- 8002cd0:	781b      	ldrb	r3, [r3, #0]
- 8002cd2:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002cd6:	b2db      	uxtb	r3, r3
- 8002cd8:	011b      	lsls	r3, r3, #4
- 8002cda:	b21b      	sxth	r3, r3
- 8002cdc:	4313      	orrs	r3, r2
- 8002cde:	b21b      	sxth	r3, r3
- 8002ce0:	b29a      	uxth	r2, r3
- 8002ce2:	4b2f      	ldr	r3, [pc, #188]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002ce4:	801a      	strh	r2, [r3, #0]
- 8002ce6:	e054      	b.n	8002d92 <APP_voidForward_LeftTasks+0x1be>
- 8002ce8:	4b2d      	ldr	r3, [pc, #180]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002cea:	881b      	ldrh	r3, [r3, #0]
- 8002cec:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 8002cf0:	b29a      	uxth	r2, r3
- 8002cf2:	4b2b      	ldr	r3, [pc, #172]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002cf4:	801a      	strh	r2, [r3, #0]
- 8002cf6:	4b2a      	ldr	r3, [pc, #168]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002cf8:	881b      	ldrh	r3, [r3, #0]
- 8002cfa:	f043 0380 	orr.w	r3, r3, #128	; 0x80
- 8002cfe:	b29a      	uxth	r2, r3
- 8002d00:	4b27      	ldr	r3, [pc, #156]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d02:	801a      	strh	r2, [r3, #0]
- 8002d04:	4b26      	ldr	r3, [pc, #152]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d06:	881b      	ldrh	r3, [r3, #0]
- 8002d08:	b21b      	sxth	r3, r3
- 8002d0a:	f023 030f 	bic.w	r3, r3, #15
- 8002d0e:	b21a      	sxth	r2, r3
- 8002d10:	4b25      	ldr	r3, [pc, #148]	; (8002da8 <APP_voidForward_LeftTasks+0x1d4>)
- 8002d12:	781b      	ldrb	r3, [r3, #0]
- 8002d14:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002d18:	b2db      	uxtb	r3, r3
- 8002d1a:	b21b      	sxth	r3, r3
- 8002d1c:	4313      	orrs	r3, r2
- 8002d1e:	b21b      	sxth	r3, r3
- 8002d20:	b29a      	uxth	r2, r3
- 8002d22:	4b1f      	ldr	r3, [pc, #124]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d24:	801a      	strh	r2, [r3, #0]
- 8002d26:	4b1e      	ldr	r3, [pc, #120]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d28:	881b      	ldrh	r3, [r3, #0]
- 8002d2a:	b21b      	sxth	r3, r3
- 8002d2c:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8002d30:	b21a      	sxth	r2, r3
- 8002d32:	4b1e      	ldr	r3, [pc, #120]	; (8002dac <APP_voidForward_LeftTasks+0x1d8>)
- 8002d34:	781b      	ldrb	r3, [r3, #0]
- 8002d36:	011b      	lsls	r3, r3, #4
- 8002d38:	b21b      	sxth	r3, r3
- 8002d3a:	4313      	orrs	r3, r2
- 8002d3c:	b21b      	sxth	r3, r3
- 8002d3e:	b29a      	uxth	r2, r3
- 8002d40:	4b17      	ldr	r3, [pc, #92]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d42:	801a      	strh	r2, [r3, #0]
- 8002d44:	e025      	b.n	8002d92 <APP_voidForward_LeftTasks+0x1be>
- 8002d46:	4b16      	ldr	r3, [pc, #88]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d48:	881b      	ldrh	r3, [r3, #0]
- 8002d4a:	f023 0340 	bic.w	r3, r3, #64	; 0x40
- 8002d4e:	b29a      	uxth	r2, r3
- 8002d50:	4b13      	ldr	r3, [pc, #76]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d52:	801a      	strh	r2, [r3, #0]
- 8002d54:	4b12      	ldr	r3, [pc, #72]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d56:	881b      	ldrh	r3, [r3, #0]
- 8002d58:	f023 0380 	bic.w	r3, r3, #128	; 0x80
- 8002d5c:	b29a      	uxth	r2, r3
- 8002d5e:	4b10      	ldr	r3, [pc, #64]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d60:	801a      	strh	r2, [r3, #0]
- 8002d62:	4b0f      	ldr	r3, [pc, #60]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d64:	881b      	ldrh	r3, [r3, #0]
- 8002d66:	b21b      	sxth	r3, r3
- 8002d68:	f023 030f 	bic.w	r3, r3, #15
- 8002d6c:	b21a      	sxth	r2, r3
- 8002d6e:	4b0e      	ldr	r3, [pc, #56]	; (8002da8 <APP_voidForward_LeftTasks+0x1d4>)
- 8002d70:	781b      	ldrb	r3, [r3, #0]
- 8002d72:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002d76:	b2db      	uxtb	r3, r3
- 8002d78:	b21b      	sxth	r3, r3
- 8002d7a:	4313      	orrs	r3, r2
- 8002d7c:	b21b      	sxth	r3, r3
- 8002d7e:	b29a      	uxth	r2, r3
- 8002d80:	4b07      	ldr	r3, [pc, #28]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d82:	801a      	strh	r2, [r3, #0]
- 8002d84:	4b06      	ldr	r3, [pc, #24]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d86:	881b      	ldrh	r3, [r3, #0]
- 8002d88:	f043 0370 	orr.w	r3, r3, #112	; 0x70
- 8002d8c:	b29a      	uxth	r2, r3
- 8002d8e:	4b04      	ldr	r3, [pc, #16]	; (8002da0 <APP_voidForward_LeftTasks+0x1cc>)
- 8002d90:	801a      	strh	r2, [r3, #0]
- 8002d92:	bf00      	nop
- 8002d94:	bd80      	pop	{r7, pc}
- 8002d96:	bf00      	nop
- 8002d98:	200000fc 	.word	0x200000fc
- 8002d9c:	40240000 	.word	0x40240000
- 8002da0:	20000100 	.word	0x20000100
- 8002da4:	40340000 	.word	0x40340000
- 8002da8:	200000f8 	.word	0x200000f8
- 8002dac:	200000ca 	.word	0x200000ca
+08002d20 <NMI_Handler>:
+ 8002d20:	b480      	push	{r7}
+ 8002d22:	af00      	add	r7, sp, #0
+ 8002d24:	bf00      	nop
+ 8002d26:	46bd      	mov	sp, r7
+ 8002d28:	bc80      	pop	{r7}
+ 8002d2a:	4770      	bx	lr
 
-08002db0 <APP_GET_UART_Command>:
- 8002db0:	b580      	push	{r7, lr}
- 8002db2:	af00      	add	r7, sp, #0
- 8002db4:	4804      	ldr	r0, [pc, #16]	; (8002dc8 <APP_GET_UART_Command+0x18>)
- 8002db6:	f7ff f8a9 	bl	8001f0c <MUART_u8ReadDataRegister>
- 8002dba:	4603      	mov	r3, r0
- 8002dbc:	461a      	mov	r2, r3
- 8002dbe:	4b03      	ldr	r3, [pc, #12]	; (8002dcc <APP_GET_UART_Command+0x1c>)
- 8002dc0:	701a      	strb	r2, [r3, #0]
- 8002dc2:	bf00      	nop
- 8002dc4:	bd80      	pop	{r7, pc}
- 8002dc6:	bf00      	nop
- 8002dc8:	40013800 	.word	0x40013800
- 8002dcc:	200001d8 	.word	0x200001d8
+08002d2c <HardFault_Handler>:
+ 8002d2c:	b480      	push	{r7}
+ 8002d2e:	af00      	add	r7, sp, #0
+ 8002d30:	bf00      	nop
+ 8002d32:	e7fd      	b.n	8002d30 <HardFault_Handler+0x4>
 
-08002dd0 <ProcessingFun>:
- 8002dd0:	b580      	push	{r7, lr}
- 8002dd2:	af00      	add	r7, sp, #0
- 8002dd4:	4bae      	ldr	r3, [pc, #696]	; (8003090 <ProcessingFun+0x2c0>)
- 8002dd6:	781b      	ldrb	r3, [r3, #0]
- 8002dd8:	3b31      	subs	r3, #49	; 0x31
- 8002dda:	2b44      	cmp	r3, #68	; 0x44
- 8002ddc:	f200 80fc 	bhi.w	8002fd8 <ProcessingFun+0x208>
- 8002de0:	a201      	add	r2, pc, #4	; (adr r2, 8002de8 <ProcessingFun+0x18>)
- 8002de2:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8002de6:	bf00      	nop
- 8002de8:	08002f79 	.word	0x08002f79
- 8002dec:	08002f87 	.word	0x08002f87
- 8002df0:	08002f95 	.word	0x08002f95
- 8002df4:	08002fa3 	.word	0x08002fa3
- 8002df8:	08002fb1 	.word	0x08002fb1
- 8002dfc:	08002fbf 	.word	0x08002fbf
- 8002e00:	08002fcd 	.word	0x08002fcd
- 8002e04:	08002fd9 	.word	0x08002fd9
- 8002e08:	08002fd9 	.word	0x08002fd9
- 8002e0c:	08002fd9 	.word	0x08002fd9
- 8002e10:	08002fd9 	.word	0x08002fd9
- 8002e14:	08002fd9 	.word	0x08002fd9
- 8002e18:	08002fd9 	.word	0x08002fd9
- 8002e1c:	08002fd9 	.word	0x08002fd9
- 8002e20:	08002fd9 	.word	0x08002fd9
- 8002e24:	08002fd9 	.word	0x08002fd9
- 8002e28:	08002fd9 	.word	0x08002fd9
- 8002e2c:	08002f41 	.word	0x08002f41
- 8002e30:	08002fd9 	.word	0x08002fd9
- 8002e34:	08002fd9 	.word	0x08002fd9
- 8002e38:	08002fd9 	.word	0x08002fd9
- 8002e3c:	08002efd 	.word	0x08002efd
- 8002e40:	08002f6b 	.word	0x08002f6b
- 8002e44:	08002fd9 	.word	0x08002fd9
- 8002e48:	08002f17 	.word	0x08002f17
- 8002e4c:	08002f33 	.word	0x08002f33
- 8002e50:	08002fd9 	.word	0x08002fd9
- 8002e54:	08002f5d 	.word	0x08002f5d
- 8002e58:	08002fd9 	.word	0x08002fd9
- 8002e5c:	08002fd9 	.word	0x08002fd9
- 8002e60:	08002fd9 	.word	0x08002fd9
- 8002e64:	08002fd9 	.word	0x08002fd9
- 8002e68:	08002fd9 	.word	0x08002fd9
- 8002e6c:	08002f25 	.word	0x08002f25
- 8002e70:	08002f09 	.word	0x08002f09
- 8002e74:	08002fd9 	.word	0x08002fd9
- 8002e78:	08002f4f 	.word	0x08002f4f
- 8002e7c:	08002fd9 	.word	0x08002fd9
- 8002e80:	08002fd9 	.word	0x08002fd9
- 8002e84:	08002fd9 	.word	0x08002fd9
- 8002e88:	08002fd9 	.word	0x08002fd9
- 8002e8c:	08002fd9 	.word	0x08002fd9
- 8002e90:	08002fd9 	.word	0x08002fd9
- 8002e94:	08002fd9 	.word	0x08002fd9
- 8002e98:	08002fd9 	.word	0x08002fd9
- 8002e9c:	08002fd9 	.word	0x08002fd9
- 8002ea0:	08002fd9 	.word	0x08002fd9
- 8002ea4:	08002fd9 	.word	0x08002fd9
- 8002ea8:	08002fd9 	.word	0x08002fd9
- 8002eac:	08002f41 	.word	0x08002f41
- 8002eb0:	08002fd9 	.word	0x08002fd9
- 8002eb4:	08002fd9 	.word	0x08002fd9
- 8002eb8:	08002fd9 	.word	0x08002fd9
- 8002ebc:	08002efd 	.word	0x08002efd
- 8002ec0:	08002f6b 	.word	0x08002f6b
- 8002ec4:	08002fd9 	.word	0x08002fd9
- 8002ec8:	08002f17 	.word	0x08002f17
- 8002ecc:	08002f33 	.word	0x08002f33
- 8002ed0:	08002fd9 	.word	0x08002fd9
- 8002ed4:	08002f5d 	.word	0x08002f5d
- 8002ed8:	08002fd9 	.word	0x08002fd9
- 8002edc:	08002fd9 	.word	0x08002fd9
- 8002ee0:	08002fd9 	.word	0x08002fd9
- 8002ee4:	08002fd9 	.word	0x08002fd9
- 8002ee8:	08002fd9 	.word	0x08002fd9
- 8002eec:	08002f25 	.word	0x08002f25
- 8002ef0:	08002f09 	.word	0x08002f09
- 8002ef4:	08002fd9 	.word	0x08002fd9
- 8002ef8:	08002f4f 	.word	0x08002f4f
- 8002efc:	4a65      	ldr	r2, [pc, #404]	; (8003094 <ProcessingFun+0x2c4>)
- 8002efe:	7813      	ldrb	r3, [r2, #0]
- 8002f00:	f36f 0303 	bfc	r3, #0, #4
- 8002f04:	7013      	strb	r3, [r2, #0]
- 8002f06:	e067      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f08:	4a62      	ldr	r2, [pc, #392]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f0a:	7813      	ldrb	r3, [r2, #0]
- 8002f0c:	2108      	movs	r1, #8
- 8002f0e:	f361 0303 	bfi	r3, r1, #0, #4
- 8002f12:	7013      	strb	r3, [r2, #0]
- 8002f14:	e060      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f16:	4a5f      	ldr	r2, [pc, #380]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f18:	7813      	ldrb	r3, [r2, #0]
- 8002f1a:	2104      	movs	r1, #4
- 8002f1c:	f361 0303 	bfi	r3, r1, #0, #4
- 8002f20:	7013      	strb	r3, [r2, #0]
- 8002f22:	e059      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f24:	4a5b      	ldr	r2, [pc, #364]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f26:	7813      	ldrb	r3, [r2, #0]
- 8002f28:	2102      	movs	r1, #2
- 8002f2a:	f361 0303 	bfi	r3, r1, #0, #4
- 8002f2e:	7013      	strb	r3, [r2, #0]
- 8002f30:	e052      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f32:	4a58      	ldr	r2, [pc, #352]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f34:	7813      	ldrb	r3, [r2, #0]
- 8002f36:	2106      	movs	r1, #6
- 8002f38:	f361 0303 	bfi	r3, r1, #0, #4
- 8002f3c:	7013      	strb	r3, [r2, #0]
- 8002f3e:	e04b      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f40:	4a54      	ldr	r2, [pc, #336]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f42:	7813      	ldrb	r3, [r2, #0]
- 8002f44:	2101      	movs	r1, #1
- 8002f46:	f361 0303 	bfi	r3, r1, #0, #4
- 8002f4a:	7013      	strb	r3, [r2, #0]
- 8002f4c:	e044      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f4e:	4a51      	ldr	r2, [pc, #324]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f50:	7813      	ldrb	r3, [r2, #0]
- 8002f52:	2107      	movs	r1, #7
- 8002f54:	f361 0303 	bfi	r3, r1, #0, #4
- 8002f58:	7013      	strb	r3, [r2, #0]
- 8002f5a:	e03d      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f5c:	4a4d      	ldr	r2, [pc, #308]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f5e:	7813      	ldrb	r3, [r2, #0]
- 8002f60:	2103      	movs	r1, #3
- 8002f62:	f361 0303 	bfi	r3, r1, #0, #4
- 8002f66:	7013      	strb	r3, [r2, #0]
- 8002f68:	e036      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f6a:	4a4a      	ldr	r2, [pc, #296]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f6c:	7813      	ldrb	r3, [r2, #0]
- 8002f6e:	2105      	movs	r1, #5
- 8002f70:	f361 0303 	bfi	r3, r1, #0, #4
- 8002f74:	7013      	strb	r3, [r2, #0]
- 8002f76:	e02f      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f78:	4a46      	ldr	r2, [pc, #280]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f7a:	7813      	ldrb	r3, [r2, #0]
- 8002f7c:	2101      	movs	r1, #1
- 8002f7e:	f361 1306 	bfi	r3, r1, #4, #3
- 8002f82:	7013      	strb	r3, [r2, #0]
- 8002f84:	e028      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f86:	4a43      	ldr	r2, [pc, #268]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f88:	7813      	ldrb	r3, [r2, #0]
- 8002f8a:	2102      	movs	r1, #2
- 8002f8c:	f361 1306 	bfi	r3, r1, #4, #3
- 8002f90:	7013      	strb	r3, [r2, #0]
- 8002f92:	e021      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002f94:	4a3f      	ldr	r2, [pc, #252]	; (8003094 <ProcessingFun+0x2c4>)
- 8002f96:	7813      	ldrb	r3, [r2, #0]
- 8002f98:	2103      	movs	r1, #3
- 8002f9a:	f361 1306 	bfi	r3, r1, #4, #3
- 8002f9e:	7013      	strb	r3, [r2, #0]
- 8002fa0:	e01a      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002fa2:	4a3c      	ldr	r2, [pc, #240]	; (8003094 <ProcessingFun+0x2c4>)
- 8002fa4:	7813      	ldrb	r3, [r2, #0]
- 8002fa6:	2104      	movs	r1, #4
- 8002fa8:	f361 1306 	bfi	r3, r1, #4, #3
- 8002fac:	7013      	strb	r3, [r2, #0]
- 8002fae:	e013      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002fb0:	4a38      	ldr	r2, [pc, #224]	; (8003094 <ProcessingFun+0x2c4>)
- 8002fb2:	7813      	ldrb	r3, [r2, #0]
- 8002fb4:	2105      	movs	r1, #5
- 8002fb6:	f361 1306 	bfi	r3, r1, #4, #3
- 8002fba:	7013      	strb	r3, [r2, #0]
- 8002fbc:	e00c      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002fbe:	4a35      	ldr	r2, [pc, #212]	; (8003094 <ProcessingFun+0x2c4>)
- 8002fc0:	7813      	ldrb	r3, [r2, #0]
- 8002fc2:	2106      	movs	r1, #6
- 8002fc4:	f361 1306 	bfi	r3, r1, #4, #3
- 8002fc8:	7013      	strb	r3, [r2, #0]
- 8002fca:	e005      	b.n	8002fd8 <ProcessingFun+0x208>
- 8002fcc:	4a31      	ldr	r2, [pc, #196]	; (8003094 <ProcessingFun+0x2c4>)
- 8002fce:	7813      	ldrb	r3, [r2, #0]
- 8002fd0:	f043 0370 	orr.w	r3, r3, #112	; 0x70
- 8002fd4:	7013      	strb	r3, [r2, #0]
- 8002fd6:	bf00      	nop
- 8002fd8:	4b2f      	ldr	r3, [pc, #188]	; (8003098 <ProcessingFun+0x2c8>)
- 8002fda:	881b      	ldrh	r3, [r3, #0]
- 8002fdc:	b21b      	sxth	r3, r3
- 8002fde:	f023 030f 	bic.w	r3, r3, #15
- 8002fe2:	b21a      	sxth	r2, r3
- 8002fe4:	4b2b      	ldr	r3, [pc, #172]	; (8003094 <ProcessingFun+0x2c4>)
- 8002fe6:	781b      	ldrb	r3, [r3, #0]
- 8002fe8:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002fec:	b2db      	uxtb	r3, r3
- 8002fee:	b21b      	sxth	r3, r3
- 8002ff0:	4313      	orrs	r3, r2
- 8002ff2:	b21b      	sxth	r3, r3
- 8002ff4:	b29a      	uxth	r2, r3
- 8002ff6:	4b28      	ldr	r3, [pc, #160]	; (8003098 <ProcessingFun+0x2c8>)
- 8002ff8:	801a      	strh	r2, [r3, #0]
- 8002ffa:	4b27      	ldr	r3, [pc, #156]	; (8003098 <ProcessingFun+0x2c8>)
- 8002ffc:	881b      	ldrh	r3, [r3, #0]
- 8002ffe:	b21b      	sxth	r3, r3
- 8003000:	f023 0370 	bic.w	r3, r3, #112	; 0x70
- 8003004:	b21a      	sxth	r2, r3
- 8003006:	4b23      	ldr	r3, [pc, #140]	; (8003094 <ProcessingFun+0x2c4>)
- 8003008:	781b      	ldrb	r3, [r3, #0]
- 800300a:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 800300e:	b2db      	uxtb	r3, r3
- 8003010:	011b      	lsls	r3, r3, #4
- 8003012:	b21b      	sxth	r3, r3
- 8003014:	4313      	orrs	r3, r2
- 8003016:	b21b      	sxth	r3, r3
- 8003018:	b29a      	uxth	r2, r3
- 800301a:	4b1f      	ldr	r3, [pc, #124]	; (8003098 <ProcessingFun+0x2c8>)
- 800301c:	801a      	strh	r2, [r3, #0]
- 800301e:	4b1d      	ldr	r3, [pc, #116]	; (8003094 <ProcessingFun+0x2c4>)
- 8003020:	781b      	ldrb	r3, [r3, #0]
- 8003022:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8003026:	b2db      	uxtb	r3, r3
- 8003028:	2b08      	cmp	r3, #8
- 800302a:	d82d      	bhi.n	8003088 <ProcessingFun+0x2b8>
- 800302c:	a201      	add	r2, pc, #4	; (adr r2, 8003034 <ProcessingFun+0x264>)
- 800302e:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8003032:	bf00      	nop
- 8003034:	08003059 	.word	0x08003059
- 8003038:	08003065 	.word	0x08003065
- 800303c:	08003083 	.word	0x08003083
- 8003040:	08003083 	.word	0x08003083
- 8003044:	08003077 	.word	0x08003077
- 8003048:	0800307d 	.word	0x0800307d
- 800304c:	0800306b 	.word	0x0800306b
- 8003050:	08003071 	.word	0x08003071
- 8003054:	0800305f 	.word	0x0800305f
- 8003058:	f7ff f910 	bl	800227c <APP_voidGoTasks>
- 800305c:	e015      	b.n	800308a <ProcessingFun+0x2ba>
- 800305e:	f7ff f8d3 	bl	8002208 <APP_VoidStop>
- 8003062:	e012      	b.n	800308a <ProcessingFun+0x2ba>
- 8003064:	f7ff f9f8 	bl	8002458 <APP_voidBackTasks>
- 8003068:	e00f      	b.n	800308a <ProcessingFun+0x2ba>
- 800306a:	f7ff fae3 	bl	8002634 <APP_voidBackward_RightTasks>
- 800306e:	e00c      	b.n	800308a <ProcessingFun+0x2ba>
- 8003070:	f7ff fbce 	bl	8002810 <APP_voidBackward_LEFTTasks>
- 8003074:	e009      	b.n	800308a <ProcessingFun+0x2ba>
- 8003076:	f7ff fcbf 	bl	80029f8 <APP_voidForward_RightTasks>
- 800307a:	e006      	b.n	800308a <ProcessingFun+0x2ba>
- 800307c:	f7ff fdaa 	bl	8002bd4 <APP_voidForward_LeftTasks>
- 8003080:	e003      	b.n	800308a <ProcessingFun+0x2ba>
- 8003082:	f7ff fcb3 	bl	80029ec <APP_voidRight_LeftTasks>
- 8003086:	e000      	b.n	800308a <ProcessingFun+0x2ba>
- 8003088:	bf00      	nop
- 800308a:	bf00      	nop
- 800308c:	bd80      	pop	{r7, pc}
- 800308e:	bf00      	nop
- 8003090:	200001d8 	.word	0x200001d8
- 8003094:	200000f8 	.word	0x200000f8
- 8003098:	20000100 	.word	0x20000100
+08002d34 <MemManage_Handler>:
+ 8002d34:	b480      	push	{r7}
+ 8002d36:	af00      	add	r7, sp, #0
+ 8002d38:	bf00      	nop
+ 8002d3a:	e7fd      	b.n	8002d38 <MemManage_Handler+0x4>
 
-0800309c <NMI_Handler>:
- 800309c:	b480      	push	{r7}
- 800309e:	af00      	add	r7, sp, #0
- 80030a0:	bf00      	nop
- 80030a2:	46bd      	mov	sp, r7
- 80030a4:	bc80      	pop	{r7}
- 80030a6:	4770      	bx	lr
+08002d3c <BusFault_Handler>:
+ 8002d3c:	b480      	push	{r7}
+ 8002d3e:	af00      	add	r7, sp, #0
+ 8002d40:	bf00      	nop
+ 8002d42:	e7fd      	b.n	8002d40 <BusFault_Handler+0x4>
 
-080030a8 <HardFault_Handler>:
- 80030a8:	b480      	push	{r7}
- 80030aa:	af00      	add	r7, sp, #0
- 80030ac:	bf00      	nop
- 80030ae:	e7fd      	b.n	80030ac <HardFault_Handler+0x4>
+08002d44 <UsageFault_Handler>:
+ 8002d44:	b480      	push	{r7}
+ 8002d46:	af00      	add	r7, sp, #0
+ 8002d48:	bf00      	nop
+ 8002d4a:	e7fd      	b.n	8002d48 <UsageFault_Handler+0x4>
 
-080030b0 <MemManage_Handler>:
- 80030b0:	b480      	push	{r7}
- 80030b2:	af00      	add	r7, sp, #0
- 80030b4:	bf00      	nop
- 80030b6:	e7fd      	b.n	80030b4 <MemManage_Handler+0x4>
+08002d4c <SVC_Handler>:
+ 8002d4c:	b480      	push	{r7}
+ 8002d4e:	af00      	add	r7, sp, #0
+ 8002d50:	bf00      	nop
+ 8002d52:	46bd      	mov	sp, r7
+ 8002d54:	bc80      	pop	{r7}
+ 8002d56:	4770      	bx	lr
 
-080030b8 <BusFault_Handler>:
- 80030b8:	b480      	push	{r7}
- 80030ba:	af00      	add	r7, sp, #0
- 80030bc:	bf00      	nop
- 80030be:	e7fd      	b.n	80030bc <BusFault_Handler+0x4>
+08002d58 <DebugMon_Handler>:
+ 8002d58:	b480      	push	{r7}
+ 8002d5a:	af00      	add	r7, sp, #0
+ 8002d5c:	bf00      	nop
+ 8002d5e:	46bd      	mov	sp, r7
+ 8002d60:	bc80      	pop	{r7}
+ 8002d62:	4770      	bx	lr
 
-080030c0 <UsageFault_Handler>:
- 80030c0:	b480      	push	{r7}
- 80030c2:	af00      	add	r7, sp, #0
- 80030c4:	bf00      	nop
- 80030c6:	e7fd      	b.n	80030c4 <UsageFault_Handler+0x4>
+08002d64 <PendSV_Handler>:
+ 8002d64:	b480      	push	{r7}
+ 8002d66:	af00      	add	r7, sp, #0
+ 8002d68:	bf00      	nop
+ 8002d6a:	46bd      	mov	sp, r7
+ 8002d6c:	bc80      	pop	{r7}
+ 8002d6e:	4770      	bx	lr
 
-080030c8 <SVC_Handler>:
- 80030c8:	b480      	push	{r7}
- 80030ca:	af00      	add	r7, sp, #0
- 80030cc:	bf00      	nop
- 80030ce:	46bd      	mov	sp, r7
- 80030d0:	bc80      	pop	{r7}
- 80030d2:	4770      	bx	lr
+08002d70 <SystemInit>:
+ 8002d70:	b480      	push	{r7}
+ 8002d72:	af00      	add	r7, sp, #0
+ 8002d74:	bf00      	nop
+ 8002d76:	46bd      	mov	sp, r7
+ 8002d78:	bc80      	pop	{r7}
+ 8002d7a:	4770      	bx	lr
 
-080030d4 <DebugMon_Handler>:
- 80030d4:	b480      	push	{r7}
- 80030d6:	af00      	add	r7, sp, #0
- 80030d8:	bf00      	nop
- 80030da:	46bd      	mov	sp, r7
- 80030dc:	bc80      	pop	{r7}
- 80030de:	4770      	bx	lr
+08002d7c <Reset_Handler>:
+ 8002d7c:	480c      	ldr	r0, [pc, #48]	; (8002db0 <LoopFillZerobss+0x12>)
+ 8002d7e:	490d      	ldr	r1, [pc, #52]	; (8002db4 <LoopFillZerobss+0x16>)
+ 8002d80:	4a0d      	ldr	r2, [pc, #52]	; (8002db8 <LoopFillZerobss+0x1a>)
+ 8002d82:	2300      	movs	r3, #0
+ 8002d84:	e002      	b.n	8002d8c <LoopCopyDataInit>
 
-080030e0 <PendSV_Handler>:
- 80030e0:	b480      	push	{r7}
- 80030e2:	af00      	add	r7, sp, #0
- 80030e4:	bf00      	nop
- 80030e6:	46bd      	mov	sp, r7
- 80030e8:	bc80      	pop	{r7}
- 80030ea:	4770      	bx	lr
+08002d86 <CopyDataInit>:
+ 8002d86:	58d4      	ldr	r4, [r2, r3]
+ 8002d88:	50c4      	str	r4, [r0, r3]
+ 8002d8a:	3304      	adds	r3, #4
 
-080030ec <SystemInit>:
- 80030ec:	b480      	push	{r7}
- 80030ee:	af00      	add	r7, sp, #0
- 80030f0:	bf00      	nop
- 80030f2:	46bd      	mov	sp, r7
- 80030f4:	bc80      	pop	{r7}
- 80030f6:	4770      	bx	lr
+08002d8c <LoopCopyDataInit>:
+ 8002d8c:	18c4      	adds	r4, r0, r3
+ 8002d8e:	428c      	cmp	r4, r1
+ 8002d90:	d3f9      	bcc.n	8002d86 <CopyDataInit>
+ 8002d92:	4a0a      	ldr	r2, [pc, #40]	; (8002dbc <LoopFillZerobss+0x1e>)
+ 8002d94:	4c0a      	ldr	r4, [pc, #40]	; (8002dc0 <LoopFillZerobss+0x22>)
+ 8002d96:	2300      	movs	r3, #0
+ 8002d98:	e001      	b.n	8002d9e <LoopFillZerobss>
 
-080030f8 <Reset_Handler>:
- 80030f8:	480c      	ldr	r0, [pc, #48]	; (800312c <LoopFillZerobss+0x12>)
- 80030fa:	490d      	ldr	r1, [pc, #52]	; (8003130 <LoopFillZerobss+0x16>)
- 80030fc:	4a0d      	ldr	r2, [pc, #52]	; (8003134 <LoopFillZerobss+0x1a>)
- 80030fe:	2300      	movs	r3, #0
- 8003100:	e002      	b.n	8003108 <LoopCopyDataInit>
+08002d9a <FillZerobss>:
+ 8002d9a:	6013      	str	r3, [r2, #0]
+ 8002d9c:	3204      	adds	r2, #4
 
-08003102 <CopyDataInit>:
- 8003102:	58d4      	ldr	r4, [r2, r3]
- 8003104:	50c4      	str	r4, [r0, r3]
- 8003106:	3304      	adds	r3, #4
+08002d9e <LoopFillZerobss>:
+ 8002d9e:	42a2      	cmp	r2, r4
+ 8002da0:	d3fb      	bcc.n	8002d9a <FillZerobss>
+ 8002da2:	f7ff ffe5 	bl	8002d70 <SystemInit>
+ 8002da6:	f000 f80f 	bl	8002dc8 <__libc_init_array>
+ 8002daa:	f7ff f98f 	bl	80020cc <main>
+ 8002dae:	4770      	bx	lr
+ 8002db0:	20000000 	.word	0x20000000
+ 8002db4:	200000cc 	.word	0x200000cc
+ 8002db8:	08002e30 	.word	0x08002e30
+ 8002dbc:	200000cc 	.word	0x200000cc
+ 8002dc0:	200001dc 	.word	0x200001dc
 
-08003108 <LoopCopyDataInit>:
- 8003108:	18c4      	adds	r4, r0, r3
- 800310a:	428c      	cmp	r4, r1
- 800310c:	d3f9      	bcc.n	8003102 <CopyDataInit>
- 800310e:	4a0a      	ldr	r2, [pc, #40]	; (8003138 <LoopFillZerobss+0x1e>)
- 8003110:	4c0a      	ldr	r4, [pc, #40]	; (800313c <LoopFillZerobss+0x22>)
- 8003112:	2300      	movs	r3, #0
- 8003114:	e001      	b.n	800311a <LoopFillZerobss>
-
-08003116 <FillZerobss>:
- 8003116:	6013      	str	r3, [r2, #0]
- 8003118:	3204      	adds	r2, #4
-
-0800311a <LoopFillZerobss>:
- 800311a:	42a2      	cmp	r2, r4
- 800311c:	d3fb      	bcc.n	8003116 <FillZerobss>
- 800311e:	f7ff ffe5 	bl	80030ec <SystemInit>
- 8003122:	f000 f80f 	bl	8003144 <__libc_init_array>
- 8003126:	f7fe ffd1 	bl	80020cc <main>
- 800312a:	4770      	bx	lr
- 800312c:	20000000 	.word	0x20000000
- 8003130:	200000cc 	.word	0x200000cc
- 8003134:	080031ac 	.word	0x080031ac
- 8003138:	200000cc 	.word	0x200000cc
- 800313c:	200001dc 	.word	0x200001dc
-
-08003140 <ADC1_2_IRQHandler>:
- 8003140:	e7fe      	b.n	8003140 <ADC1_2_IRQHandler>
+08002dc4 <ADC1_2_IRQHandler>:
+ 8002dc4:	e7fe      	b.n	8002dc4 <ADC1_2_IRQHandler>
 	...
 
-08003144 <__libc_init_array>:
- 8003144:	b570      	push	{r4, r5, r6, lr}
- 8003146:	2500      	movs	r5, #0
- 8003148:	4e0c      	ldr	r6, [pc, #48]	; (800317c <__libc_init_array+0x38>)
- 800314a:	4c0d      	ldr	r4, [pc, #52]	; (8003180 <__libc_init_array+0x3c>)
- 800314c:	1ba4      	subs	r4, r4, r6
- 800314e:	10a4      	asrs	r4, r4, #2
- 8003150:	42a5      	cmp	r5, r4
- 8003152:	d109      	bne.n	8003168 <__libc_init_array+0x24>
- 8003154:	f000 f81a 	bl	800318c <_init>
- 8003158:	2500      	movs	r5, #0
- 800315a:	4e0a      	ldr	r6, [pc, #40]	; (8003184 <__libc_init_array+0x40>)
- 800315c:	4c0a      	ldr	r4, [pc, #40]	; (8003188 <__libc_init_array+0x44>)
- 800315e:	1ba4      	subs	r4, r4, r6
- 8003160:	10a4      	asrs	r4, r4, #2
- 8003162:	42a5      	cmp	r5, r4
- 8003164:	d105      	bne.n	8003172 <__libc_init_array+0x2e>
- 8003166:	bd70      	pop	{r4, r5, r6, pc}
- 8003168:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 800316c:	4798      	blx	r3
- 800316e:	3501      	adds	r5, #1
- 8003170:	e7ee      	b.n	8003150 <__libc_init_array+0xc>
- 8003172:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
- 8003176:	4798      	blx	r3
- 8003178:	3501      	adds	r5, #1
- 800317a:	e7f2      	b.n	8003162 <__libc_init_array+0x1e>
- 800317c:	080031a4 	.word	0x080031a4
- 8003180:	080031a4 	.word	0x080031a4
- 8003184:	080031a4 	.word	0x080031a4
- 8003188:	080031a8 	.word	0x080031a8
+08002dc8 <__libc_init_array>:
+ 8002dc8:	b570      	push	{r4, r5, r6, lr}
+ 8002dca:	2500      	movs	r5, #0
+ 8002dcc:	4e0c      	ldr	r6, [pc, #48]	; (8002e00 <__libc_init_array+0x38>)
+ 8002dce:	4c0d      	ldr	r4, [pc, #52]	; (8002e04 <__libc_init_array+0x3c>)
+ 8002dd0:	1ba4      	subs	r4, r4, r6
+ 8002dd2:	10a4      	asrs	r4, r4, #2
+ 8002dd4:	42a5      	cmp	r5, r4
+ 8002dd6:	d109      	bne.n	8002dec <__libc_init_array+0x24>
+ 8002dd8:	f000 f81a 	bl	8002e10 <_init>
+ 8002ddc:	2500      	movs	r5, #0
+ 8002dde:	4e0a      	ldr	r6, [pc, #40]	; (8002e08 <__libc_init_array+0x40>)
+ 8002de0:	4c0a      	ldr	r4, [pc, #40]	; (8002e0c <__libc_init_array+0x44>)
+ 8002de2:	1ba4      	subs	r4, r4, r6
+ 8002de4:	10a4      	asrs	r4, r4, #2
+ 8002de6:	42a5      	cmp	r5, r4
+ 8002de8:	d105      	bne.n	8002df6 <__libc_init_array+0x2e>
+ 8002dea:	bd70      	pop	{r4, r5, r6, pc}
+ 8002dec:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 8002df0:	4798      	blx	r3
+ 8002df2:	3501      	adds	r5, #1
+ 8002df4:	e7ee      	b.n	8002dd4 <__libc_init_array+0xc>
+ 8002df6:	f856 3025 	ldr.w	r3, [r6, r5, lsl #2]
+ 8002dfa:	4798      	blx	r3
+ 8002dfc:	3501      	adds	r5, #1
+ 8002dfe:	e7f2      	b.n	8002de6 <__libc_init_array+0x1e>
+ 8002e00:	08002e28 	.word	0x08002e28
+ 8002e04:	08002e28 	.word	0x08002e28
+ 8002e08:	08002e28 	.word	0x08002e28
+ 8002e0c:	08002e2c 	.word	0x08002e2c
 
-0800318c <_init>:
- 800318c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800318e:	bf00      	nop
- 8003190:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8003192:	bc08      	pop	{r3}
- 8003194:	469e      	mov	lr, r3
- 8003196:	4770      	bx	lr
+08002e10 <_init>:
+ 8002e10:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8002e12:	bf00      	nop
+ 8002e14:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8002e16:	bc08      	pop	{r3}
+ 8002e18:	469e      	mov	lr, r3
+ 8002e1a:	4770      	bx	lr
 
-08003198 <_fini>:
- 8003198:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 800319a:	bf00      	nop
- 800319c:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 800319e:	bc08      	pop	{r3}
- 80031a0:	469e      	mov	lr, r3
- 80031a2:	4770      	bx	lr
+08002e1c <_fini>:
+ 8002e1c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8002e1e:	bf00      	nop
+ 8002e20:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8002e22:	bc08      	pop	{r3}
+ 8002e24:	469e      	mov	lr, r3
+ 8002e26:	4770      	bx	lr
