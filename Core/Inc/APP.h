@@ -8,8 +8,8 @@
 #ifndef INC_APP_H_
 #define INC_APP_H_
 
-#define outomatic_ON       1
-#define outomatic_OFF      0
+#define Automatic_ON       1
+#define Automatic_OFF      0
 
 
 #define V2V_ENABLE         1
