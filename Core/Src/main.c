@@ -677,8 +677,6 @@ void APP_GET_UART_Command()
 
 }
 
-////ahmed hassan and ayman saad
-
 
 
 
