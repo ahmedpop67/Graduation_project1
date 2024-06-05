@@ -139,7 +139,4 @@
 #define MUSART_CR3_EIE_BIT		0
 
 
-/*maximum size of data recived from UART*/
-#define MAX_SIZE_DATA_BUFFER  200
-
 #endif /* UART_PRIVATE_H_ */

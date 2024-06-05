@@ -173,5 +173,11 @@ void MUART2_voidSetCallBack( Buffer_state (*ptr) (void) ) ;
 void MUART_u8ReceiveByteASynch (  USART_t *A_xUART_Type );
 
 
+Buffer_state MUART_Buffer_Write();
+
+Buffer_state MUART_ReadData(u8* A_u8PtrData);
+
+void APP_Sort_Buffer();
+
 
 #endif /* UART_INTERFACE_H_ */

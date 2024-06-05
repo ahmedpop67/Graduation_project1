@@ -13,8 +13,14 @@
 #include "UART_config.h"
 #include "UART_interface.h"
 
-u8 G_u8DataFromUART = 0;
+
 /*global array to store recived data from UART*/
+u8 G_Au8UART_Buffer[MAX_SIZE_DATA_BUFFER] = {0};
+u8 G_u8BufferHeadIndex    = 0;
+u8 G_u8BufferTailIndex    = 0;
+u8 G_u8Counter     = 0;
+u8 G_u8DataFromUART = 0;
+
 u8 global_u8String[MAX_SIZE_DATA_BUFFER];
 
 u8 local_u8_RX_Busyflag=0;
@@ -173,6 +179,107 @@ void MUART_RxIntSetStatus(USART_t *USARTx, u8 A_u8Status)
 	case DISABLE:  CLR_BIT(USARTx->CR1 , MUSART_CR1_RXNEIE_BIT); break;
 	}
 }
+
+Buffer_state MUART_Buffer_Write()
+{
+	Buffer_state Local_BufferState = 0;
+	if (G_u8Counter == MAX_SIZE_DATA_BUFFER)
+	{
+		Local_BufferState = Buffer_is_full;
+	}else{
+		Local_BufferState = Buffer_is_success;
+		//TODO Different UART
+		G_Au8UART_Buffer[G_u8BufferTailIndex] = MUART_u8ReadDataRegister(UART1);
+		G_u8BufferTailIndex = (G_u8BufferTailIndex+1) % MAX_SIZE_DATA_BUFFER;
+		G_u8Counter++;
+		APP_Sort_Buffer();
+	}
+	return Local_BufferState;
+}
+
+Buffer_state MUART_ReadData(u8* A_u8PtrData)
+{
+	Buffer_state L_BufferState=0;
+	if (G_u8Counter == 0)
+	{
+		L_BufferState = Buffer_is_empty;
+	}
+	else{
+		*A_u8PtrData = G_Au8UART_Buffer[G_u8BufferHeadIndex];
+		G_Au8UART_Buffer[G_u8BufferHeadIndex] = 0;
+		G_u8BufferHeadIndex = (G_u8BufferHeadIndex+1) % MAX_SIZE_DATA_BUFFER;
+		G_u8Counter--;
+		L_BufferState = Buffer_is_success;
+	}
+	return L_BufferState;
+}
+
+
+void APP_Sort_Buffer()
+{
+	u8 L_u8Temp =0;
+	u8 i = 0;
+	u8 L_u8Sorted = 0;
+	if(G_u8BufferHeadIndex < G_u8BufferTailIndex ){
+		for (i = G_u8BufferTailIndex; i > G_u8BufferHeadIndex ; i-- )
+		{
+			if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+			{
+				L_u8Temp = G_Au8UART_Buffer[i];
+				G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
+				G_Au8UART_Buffer[i-1] = L_u8Temp;
+			}else{
+				//Buffer is sorted
+				L_u8Sorted = 1;
+				break;
+			}
+		}
+	}else{
+		for (i = G_u8BufferTailIndex; i > 0; i-- )
+		{
+			if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+			{
+				L_u8Temp = G_Au8UART_Buffer[i];
+				G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
+				G_Au8UART_Buffer[i-1] = L_u8Temp;
+			}
+			else{
+				//Buffer is sorted
+				L_u8Sorted = 1;
+				break;
+			}
+		}
+		if(!L_u8Sorted){
+			if(G_Au8UART_Buffer[0] < G_Au8UART_Buffer[MAX_SIZE_DATA_BUFFER - 1]){
+				i= MAX_SIZE_DATA_BUFFER - 1; //last element in buffer
+				L_u8Temp = G_Au8UART_Buffer[0];
+				G_Au8UART_Buffer[0] = G_Au8UART_Buffer[i];
+				G_Au8UART_Buffer[i] = L_u8Temp;
+
+				for(;i> G_u8BufferHeadIndex ; i-- ){
+					if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+					{
+						L_u8Temp = G_Au8UART_Buffer[i];
+						G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
+						G_Au8UART_Buffer[i-1] = L_u8Temp;
+					}else{
+						//Buffer is sorted
+						L_u8Sorted = 1;
+						break;
+					}
+				}
+			}
+			else{
+				//Buffer is sorted
+			}
+		}
+		else{
+			//Buffer is sorted
+		}
+	}
+
+}
+
 
 void MUART_voidClearFlags(USART_t *USARTx)
 {

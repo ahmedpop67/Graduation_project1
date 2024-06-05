@@ -13,4 +13,7 @@
 
 #define THRESHOLD_VALUE 500000
 
+/*maximum size of data recived from UART*/
+#define MAX_SIZE_DATA_BUFFER  200
+
 #endif /* UART_CONFIGURATION_H_ */

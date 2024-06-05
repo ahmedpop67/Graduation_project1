@@ -65,7 +65,7 @@ typedef struct
 My_Data       G_xMy_Data       = {0,0,0};
 Near_Distance G_xNear_Distance = {0,0,0,0};
 
-u8 APP_G_u8DataFromUART;
+u8 APP_G_u8DataFromUART = 0;
 
 
 
@@ -89,7 +89,7 @@ void init_conf()
 	HUltrasonic_voidInit(ULTR_2);
 	HUltrasonic_voidInit(ULTR_3);
 	HUltrasonic_voidInit(ULTR_4);
-	MUART1_voidSetCallBack(&APP_Buffer_Write);
+	MUART1_voidSetCallBack(&MUART_Buffer_Write);
 	MUART_voidEnable(UART1);
 	MUART_u8ReceiveByteASynch(UART1);
 }
@@ -478,7 +478,7 @@ void APP_V2V_Connection()
 
 
 }
-
+/* TODO implement in UART
 Buffer_state APP_Buffer_Write()
 {
 	if (G_u8Counter == BUFFER_SIZE)
@@ -523,7 +523,7 @@ void APP_Sort_Buffer()
 		}
 	}
 }
-
+*/
 
 void ProcessingFun (void)
 {
