@@ -12,8 +12,6 @@
 #include "APP.h"
 #include "APP_config.h"
 
-
-
 u8 G_u8_LimetedSpeed = 4;
 
 /*declaration 4motors*/
@@ -470,7 +468,6 @@ void APP_voidForward_LeftTasks ()
 void APP_voidLane_Change()
 {
 
-
 }
 
 void APP_V2V_Connection()
@@ -527,7 +524,9 @@ void APP_Sort_Buffer()
 
 void ProcessingFun (void)
 {
+	u8 L_u8Data = APP_G_u8DataFromUART>>4;
 	/*Mapping data from UART*/
+
 	switch (APP_G_u8DataFromUART)
 	{
 	case 0x10: //forced stop
@@ -604,6 +603,55 @@ void ProcessingFun (void)
 		}else{
 			G_xMy_Data.Speed = Speed7;
 		}
+		break;
+	case 0xe8:
+		//TODO
+		//sent Request by stm is invalid
+		break;
+	case 0xf0:
+		//TODO
+		//error in ACK(ACK sent is invalid)
+		//retransmition (receive data)
+		break;
+	default:
+		switch(L_u8Data){
+		case 0x8:
+			//TODO
+			//There is a bump with distance
+			//distance = APP_G_u8DataFromUART & 0xF
+
+			break;
+		case 0x9:
+			//TODO
+			//detected a sign
+			//signCode = APP_G_u8DataFromUART & 0xF
+			break;
+		case 0xa:
+			if(APP_G_u8DataFromUART &1){
+				//Right lane
+				//RL_distance = APP_G_u8DataFromUART&0xe
+			}
+			else{
+				//left lane
+				//LL_distance = APP_G_u8DataFromUART&0xe
+			}
+			break;
+		case 0xb:
+			if(APP_G_u8DataFromUART & 0x8){
+				//extended distance
+				//receive data as extended distance
+			}
+			else{
+				//normal distance
+				//distance = APP_G_u8DataFromUART &0x7
+			}
+			break;
+		case 0xe:
+			//request code x is valid
+			//x = APP_G_u8DataFromUART & 0x7
+			break;
+		}
+
 		break;
 	}
 
