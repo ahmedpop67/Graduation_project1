@@ -13,6 +13,7 @@
 #include "APP_config.h"
 
 
+
 u8 G_u8_LimetedSpeed = 4;
 
 /*declaration 4motors*/
@@ -88,7 +89,7 @@ void init_conf()
 	HUltrasonic_voidInit(ULTR_2);
 	HUltrasonic_voidInit(ULTR_3);
 	HUltrasonic_voidInit(ULTR_4);
-	MUART1_voidSetCallBack(&APP_GET_UART_Command);
+	MUART1_voidSetCallBack(&APP_Buffer_Write);
 	MUART_voidEnable(UART1);
 	MUART_u8ReceiveByteASynch(UART1);
 }
@@ -171,22 +172,14 @@ int main()
 }
 
 
-void APP_voidCalcForword_Distance()
+void APP_Update_Distance()
 {
 	G_xNear_Distance.Distance_Forword = HUltrasonic_f32CalcDistance(ULTR_1);
-}
-void APP_voidCalcBackword_Distance()
-{
-	G_xNear_Distance.Distance_Back = HUltrasonic_f32CalcDistance(ULTR_2);
-}
-void APP_voidCalcRight_Distance()
-{
-	G_xNear_Distance.Distance_Right = HUltrasonic_f32CalcDistance(ULTR_3);
-}
-void APP_voidCalcLeft_Distance()
-{
+	G_xNear_Distance.Distance_Back = HUltrasonic_f32CalcDistance(ULTR_1);
+	G_xNear_Distance.Distance_Right = HUltrasonic_f32CalcDistance(ULTR_1);
 	G_xNear_Distance.Distance_Left = HUltrasonic_f32CalcDistance(ULTR_1);
 }
+
 
 
 void APP_VoidStop()
@@ -468,10 +461,51 @@ void APP_V2V_Connection()
 
 }
 
-void APP_GET_UART_Command()
+Buffer_state APP_Buffer_Write()
 {
-	APP_G_u8DataFromUART = MUART_u8ReadDataRegister(UART1);
+	if (G_u8Counter == BUFFER_SIZE)
+	{
+		return Buffer_is_full;
+	}
+	G_Au8UART_Buffer[G_u8Head_Ptr] = MUART_u8ReadDataRegister(UART1);
+	G_u8Head_Ptr = (G_u8Head_Ptr+1) % BUFFER_SIZE;
+	G_u8Counter++;
+	APP_Sort_Buffer();
+	return Buffer_is_success;
 }
+
+Buffer_state APP_Buffer_Read()
+{
+	if (G_u8Counter == 0)
+	{
+		return Buffer_is_empty;
+	}
+	APP_G_u8DataFromUART = G_Au8UART_Buffer[G_u8Current_ptr];
+	G_u8Current_ptr = (G_u8Current_ptr+1) % BUFFER_SIZE;
+	G_u8Counter--;
+	return Buffer_is_success;
+}
+
+
+void APP_Sort_Buffer()
+{
+	u8 L_u8Start_index  =  G_u8Current_ptr;
+	u8 L_u8Element_NUM  =  G_u8Counter;
+
+	for (u8 i = L_u8Start_index ; i < ( L_u8Start_index + L_u8Element_NUM ) ; i++ )
+	{
+		for(u8 j = L_u8Start_index ; j < ( L_u8Start_index + L_u8Element_NUM - i - 1 ) ; j++)
+		{
+			if(G_Au8UART_Buffer[j] > G_Au8UART_Buffer[j+1])
+			{
+				u8 L_u8Temp = G_Au8UART_Buffer[j];
+				G_Au8UART_Buffer[j] = G_Au8UART_Buffer[j+1];
+				G_Au8UART_Buffer[j+1] = L_u8Temp;
+			}
+		}
+	}
+}
+
 
 void ProcessingFun (void)
 {

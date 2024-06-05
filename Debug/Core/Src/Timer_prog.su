@@ -1,2 +1,2 @@
-../Core/Src/Timer_prog.c:18:6:MTimer_voidInit	16	static
-../Core/Src/Timer_prog.c:263:6:MTimer_voidPWM	208	static
+Timer_prog.c:18:6:MTimer_voidInit	16	static
+Timer_prog.c:263:6:MTimer_voidPWM	208	static

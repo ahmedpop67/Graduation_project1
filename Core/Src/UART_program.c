@@ -10,7 +10,7 @@
 #include "RCC_interface.h"
 #include "NVIC_interface.h"
 #include "UART_private.h"
-#include "UART_configuration.h"
+#include "UART_config.h"
 #include "UART_interface.h"
 
 u8 G_u8DataFromUART = 0;
@@ -20,13 +20,11 @@ u8 global_u8String[MAX_SIZE_DATA_BUFFER];
 u8 local_u8_RX_Busyflag=0;
 
 /*pointer to function for UART1 for call back*/
-void (*MUSART1_CallBack)(void);
+Buffer_state (*MUSART1_CallBack)(void);
 
 /*pointer to function for UART2 for call back*/
-void (*MUSART2_CallBack)(void);
+Buffer_state (*MUSART2_CallBack)(void);
 
-/*pointer to function for UART6 for call back*/
-void (*MUSART3_CallBack)(void);
 
 
 void MUART_voidInit(USART_InitType *A_InitStruct,USART_ClockInitTypeDef *A_xUART_ClockInitStruct,USART_t *A_xUART_Type)
@@ -186,20 +184,15 @@ u8 MUART_u8ReadDataRegister(USART_t *USARTx)
 	return USARTx -> DR;
 }
 
-void MUART1_voidSetCallBack( void (*ptr) (void) )
+void MUART1_voidSetCallBack( Buffer_state (*ptr) (void) )
 {
 
 	MUSART1_CallBack =ptr;
 }
 
-void MUART2_voidSetCallBack( void (*ptr) (void) )
+void MUART2_voidSetCallBack( Buffer_state (*ptr) (void) )
 {
 	MUSART2_CallBack = ptr;
-}
-
-void MUART6_voidSetCallBack( void (*ptr) (void) )
-{
-	MUSART3_CallBack = ptr;
 }
 
 /*IRQ of UART1*/

@@ -4,11 +4,11 @@
  /*****************************************************************************/
 
 
+#include <UART_config.h>
 #include "STD_TYPES.h"
 #include "BIT_MATH.h"
 
 #include "UART_private.h"
-#include "UART_configuration.h"
 #include "UART_interface.h"
 
 /* Configuration of MUART_Init */

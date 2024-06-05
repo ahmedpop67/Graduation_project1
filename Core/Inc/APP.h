@@ -6,6 +6,17 @@
 #ifndef INC_APP_H_
 #define INC_APP_H_
 
+
+#define BUFFER_SIZE    50
+
+
+u8 G_Au8UART_Buffer[BUFFER_SIZE];
+u8 G_u8Head_Ptr    = 0;
+u8 G_u8Current_ptr = 0;
+u8 G_u8Counter     = 0;
+
+
+
 #define Automatic_ON       1
 #define Automatic_OFF      0
 
@@ -36,10 +47,7 @@
 
 void ProcessingFun (void);
 
-void APP_voidCalcForword_Distance();
-void APP_voidCalcBackword_Distance();
-void APP_voidCalcRight_Distance();
-void APP_voidCalcLeft_Distance();
+void APP_Update_Distance();
 
 void APP_VoidStop();
 void APP_voidGoTasks () ;
@@ -51,6 +59,8 @@ void APP_voidForward_RightTasks () ;
 void APP_voidForward_LeftTasks () ;
 void APP_voidLane_Change();
 void APP_V2V_Connection();
-void APP_GET_UART_Command();
+Buffer_state APP_Buffer_Write();
+Buffer_state APP_Buffer_Read();
+void APP_Sort_Buffer();
 
 #endif /* INC_APP_H_ */

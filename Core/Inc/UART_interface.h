@@ -9,6 +9,13 @@
 #define UART_INTERFACE_H_
 
 
+typedef enum
+{
+	Buffer_is_empty,
+	Buffer_is_full,
+	Buffer_is_success
+}Buffer_state;
+
 /**********************************************/
 /* 			USART Register Structure 		  */
 /**********************************************/
@@ -152,7 +159,7 @@ u8 MUART_u8ReadDataRegister(USART_t *USARTx) ;
 	Function Arguments   : void (*ptr) (void)
 	Function Description : set call back function for UART1
 */
-void MUART1_voidSetCallBack( void (*ptr) (void) ) ;
+void MUART1_voidSetCallBack( Buffer_state (*ptr) (void) ) ;
 
 /**
 	Function Name        : MUART2_voidSetCallBack
@@ -160,7 +167,7 @@ void MUART1_voidSetCallBack( void (*ptr) (void) ) ;
 	Function Arguments   : void (*ptr) (void)
 	Function Description : set call back function for UART2
 */
-void MUART2_voidSetCallBack( void (*ptr) (void) ) ;
+void MUART2_voidSetCallBack( Buffer_state (*ptr) (void) ) ;
 
 
 void MUART_u8ReceiveByteASynch (  USART_t *A_xUART_Type );
