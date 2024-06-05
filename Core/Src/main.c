@@ -175,9 +175,9 @@ int main()
 void APP_Update_Distance()
 {
 	G_xNear_Distance.Distance_Forword = HUltrasonic_f32CalcDistance(ULTR_1);
-	G_xNear_Distance.Distance_Back = HUltrasonic_f32CalcDistance(ULTR_1);
-	G_xNear_Distance.Distance_Right = HUltrasonic_f32CalcDistance(ULTR_1);
-	G_xNear_Distance.Distance_Left = HUltrasonic_f32CalcDistance(ULTR_1);
+	G_xNear_Distance.Distance_Back    = HUltrasonic_f32CalcDistance(ULTR_1);
+	G_xNear_Distance.Distance_Right   = HUltrasonic_f32CalcDistance(ULTR_1);
+	G_xNear_Distance.Distance_Left    = HUltrasonic_f32CalcDistance(ULTR_1);
 }
 
 
@@ -194,170 +194,182 @@ void APP_VoidStop()
 
 void APP_voidGoTasks ()
 {
-	if (G_xNear_Distance.Distance_Forword  <= SO_SHORT_DISTANCE) // stop car
+	if(G_u16DataAfterProccing.Direction = Go)
+	{
+		if (G_xNear_Distance.Distance_Forword  <= SO_SHORT_DISTANCE) // stop car
+			{
+				//direction = stop
+				G_u16DataAfterProccing.Direction = Stop;
+				/*flag = 3*/
+				G_u16DataAfterProccing.Flag = 3;
+				/*stop car + alarm*/
+	//			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+			}
+		else if (G_xNear_Distance.Distance_Forword <= UN_SAFE_DISTANCE) //Un Safed Distance
+			{
+				if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+				{
+					/*flag = 1*/
+					G_u16DataAfterProccing.Flag = 1;
+					/*send direction and speed without any change*/
+					G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+					G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
+				}
+				else
+				{
+					/*flag = 2*/
+					G_u16DataAfterProccing.Flag = 2;
+					/*send direction and speed without any change*/
+					G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+					G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
+				}
+			}
+		else //safe case
+			{
+				/*flag = 0*/
+				G_u16DataAfterProccing.Flag = 0;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+				if (speed_control_Automatic == Automatic_ON)
+					G_u16DataAfterProccing.Speed = max_speed;
+				else
+					G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
+			}
+	}
+}
+void APP_voidBackTasks ()
+{
+	if(G_u16DataAfterProccing.Direction = Back)
+	{
+		if (G_xNear_Distance.Distance_Back  <= SO_SHORT_DISTANCE) // stop car
 		{
 			//direction = stop
 			G_u16DataAfterProccing.Direction = Stop;
 			/*flag = 3*/
 			G_u16DataAfterProccing.Flag = 3;
 			/*stop car + alarm*/
-//			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+	//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
 		}
-	else if (G_xNear_Distance.Distance_Forword <= UN_SAFE_DISTANCE) //Un Safed Distance
+		else if (G_xNear_Distance.Distance_Back <= UN_SAFE_DISTANCE) //Un Safed Distance
 		{
 			if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
 			{
 				/*flag = 1*/
-				G_u16DataAfterProccing.Flag = 1;
+				G_u16DataAfterProccing.Flag = 1; ;
 				/*send direction and speed without any change*/
-				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
-				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 			}
 			else
 			{
 				/*flag = 2*/
 				G_u16DataAfterProccing.Flag = 2;
 				/*send direction and speed without any change*/
-				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
-				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
 			}
 		}
-	else //safe case
+		else //sefed case
 		{
 			/*flag = 0*/
 			G_u16DataAfterProccing.Flag = 0;
 			/*send direction and speed without any change*/
-			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
 			if (speed_control_Automatic == Automatic_ON)
 				G_u16DataAfterProccing.Speed = max_speed;
 			else
-				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
-}
-void APP_voidBackTasks ()
-{
-	if (G_xNear_Distance.Distance_Back  <= SO_SHORT_DISTANCE) // stop car
-	{
-		//direction = stop
-		G_u16DataAfterProccing.Direction = Stop;
-		/*flag = 3*/
-		G_u16DataAfterProccing.Flag = 3;
-		/*stop car + alarm*/
-//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-	}
-	else if (G_xNear_Distance.Distance_Back <= UN_SAFE_DISTANCE) //Un Safed Distance
-	{
-		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
-		{
-			/*flag = 1*/
-			G_u16DataAfterProccing.Flag = 1; ;
-			/*send direction and speed without any change*/
-			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
-		}
-		else
-		{
-			/*flag = 2*/
-			G_u16DataAfterProccing.Flag = 2;
-			/*send direction and speed without any change*/
-			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
-		}
-	}
-	else //sefed case
-	{
-		/*flag = 0*/
-		G_u16DataAfterProccing.Flag = 0;
-		/*send direction and speed without any change*/
-		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-		if (speed_control_Automatic == Automatic_ON)
-			G_u16DataAfterProccing.Speed = max_speed;
-		else
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 	}
 }
 void APP_voidBackward_RightTasks ()
 {
-	if (G_xNear_Distance.Distance_Left  <= SO_SHORT_DISTANCE) // stop car
+	if(G_u16DataAfterProccing.Direction = Backward_Right)
 	{
-		//direction = stop
-		G_u16DataAfterProccing.Direction = Stop;
-		/*flag = 3*/
-		G_u16DataAfterProccing.Flag = 3;
-		/*stop car + alarm*/
-//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-	}
-	else if (G_xNear_Distance.Distance_Left <= UN_SAFE_DISTANCE) //Un Safed Distance
-	{
-		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+		if (G_xNear_Distance.Distance_Left  <= SO_SHORT_DISTANCE) // stop car
 		{
-			/*flag = 1*/
-			G_u16DataAfterProccing.Flag = 1; ;
+			//direction = stop
+			G_u16DataAfterProccing.Direction = Stop;
+			/*flag = 3*/
+			G_u16DataAfterProccing.Flag = 3;
+			/*stop car + alarm*/
+	//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+		}
+		else if (G_xNear_Distance.Distance_Left <= UN_SAFE_DISTANCE) //Un Safed Distance
+		{
+			if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+			{
+				/*flag = 1*/
+				G_u16DataAfterProccing.Flag = 1; ;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+			}
+			else
+			{
+				/*flag = 2*/
+				G_u16DataAfterProccing.Flag = 2;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
+			}
+		}
+		else //sefed case
+		{
+			/*flag = 0*/
+			G_u16DataAfterProccing.Flag = 0;
 			/*send direction and speed without any change*/
 			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+			if (speed_control_Automatic == Automatic_ON)
+				G_u16DataAfterProccing.Speed = max_speed;
+			else
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
-		else
-		{
-			/*flag = 2*/
-			G_u16DataAfterProccing.Flag = 2;
-			/*send direction and speed without any change*/
-			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
-		}
-	}
-	else //sefed case
-	{
-		/*flag = 0*/
-		G_u16DataAfterProccing.Flag = 0;
-		/*send direction and speed without any change*/
-		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-		if (speed_control_Automatic == Automatic_ON)
-			G_u16DataAfterProccing.Speed = max_speed;
-		else
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 	}
 }
 void APP_voidBackward_LEFTTasks ()
 {
-	if (G_xNear_Distance.Distance_Right  <= SO_SHORT_DISTANCE) // stop car
+	if(G_u16DataAfterProccing.Direction = Backward_Left)
 	{
-		//direction = stop
-		G_u16DataAfterProccing.Direction = Stop;
-		/*flag = 3*/
-		G_u16DataAfterProccing.Flag = 3;
-		/*stop car + alarm*/
-//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-	}
-	else if (G_xNear_Distance.Distance_Right <= UN_SAFE_DISTANCE) //Un Safed Distance
-	{
-		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+		if (G_xNear_Distance.Distance_Right  <= SO_SHORT_DISTANCE) // stop car
 		{
-			/*flag = 1*/
-			G_u16DataAfterProccing.Flag = 1;
+			//direction = stop
+			G_u16DataAfterProccing.Direction = Stop;
+			/*flag = 3*/
+			G_u16DataAfterProccing.Flag = 3;
+			/*stop car + alarm*/
+	//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+		}
+		else if (G_xNear_Distance.Distance_Right <= UN_SAFE_DISTANCE) //Un Safed Distance
+		{
+			if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+			{
+				/*flag = 1*/
+				G_u16DataAfterProccing.Flag = 1;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+			}
+			else
+			{
+				/*flag = 2*/
+				G_u16DataAfterProccing.Flag = 2;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
+			}
+		}
+		else //sefed case
+		{
+			/*flag = 0*/
+			G_u16DataAfterProccing.Flag = 0;
 			/*send direction and speed without any change*/
 			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+			if (speed_control_Automatic == Automatic_ON)
+				G_u16DataAfterProccing.Speed = max_speed;
+			else
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
-		else
-		{
-			/*flag = 2*/
-			G_u16DataAfterProccing.Flag = 2;
-			/*send direction and speed without any change*/
-			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
-		}
-	}
-	else //sefed case
-	{
-		/*flag = 0*/
-		G_u16DataAfterProccing.Flag = 0;
-		/*send direction and speed without any change*/
-		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-		if (speed_control_Automatic == Automatic_ON)
-			G_u16DataAfterProccing.Speed = max_speed;
-		else
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 	}
 }
 void APP_voidRight_LeftTasks ()
@@ -366,86 +378,92 @@ void APP_voidRight_LeftTasks ()
 }
 void APP_voidForward_RightTasks ()
 {
-	if (G_xNear_Distance.Distance_Right  <= SO_SHORT_DISTANCE) // stop car
+	if(G_u16DataAfterProccing.Direction = Forward_Right)
 	{
-		//direction = stop
-		G_u16DataAfterProccing.Direction = Stop;
-		/*flag = 3*/
-		G_u16DataAfterProccing.Flag = 3;
-		/*stop car + alarm*/
-//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-	}
-	else if (G_xNear_Distance.Distance_Right <= UN_SAFE_DISTANCE) //Un Safed Distance
-	{
-		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+		if (G_xNear_Distance.Distance_Right  <= SO_SHORT_DISTANCE) // stop car
 		{
-			/*flag = 1*/
-			G_u16DataAfterProccing.Flag = 1;
+			//direction = stop
+			G_u16DataAfterProccing.Direction = Stop;
+			/*flag = 3*/
+			G_u16DataAfterProccing.Flag = 3;
+			/*stop car + alarm*/
+	//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+		}
+		else if (G_xNear_Distance.Distance_Right <= UN_SAFE_DISTANCE) //Un Safed Distance
+		{
+			if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+			{
+				/*flag = 1*/
+				G_u16DataAfterProccing.Flag = 1;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+			}
+			else
+			{
+				/*flag = 2*/
+				G_u16DataAfterProccing.Flag = 2;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
+			}
+		}
+		else //sefed case
+		{
+			/*flag = 0*/
+			G_u16DataAfterProccing.Flag = 0;
 			/*send direction and speed without any change*/
 			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+			if (speed_control_Automatic == Automatic_ON)
+				G_u16DataAfterProccing.Speed = max_speed;
+			else
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
-		else
-		{
-			/*flag = 2*/
-			G_u16DataAfterProccing.Flag = 2;
-			/*send direction and speed without any change*/
-			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed ;
-		}
-	}
-	else //sefed case
-	{
-		/*flag = 0*/
-		G_u16DataAfterProccing.Flag = 0;
-		/*send direction and speed without any change*/
-		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-		if (speed_control_Automatic == Automatic_ON)
-			G_u16DataAfterProccing.Speed = max_speed;
-		else
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 	}
 }
 void APP_voidForward_LeftTasks ()
 {
-	if (G_xNear_Distance.Distance_Left  <= SO_SHORT_DISTANCE) // stop car
+	if(G_u16DataAfterProccing.Direction = Forward_Left)
 	{
-		//direction = stop
-		G_u16DataAfterProccing.Direction = Stop;
-		/*flag = 3*/
-		G_u16DataAfterProccing.Flag = 3;
-		/*stop car + alarm*/
-//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
-	}
-	else if (G_xNear_Distance.Distance_Left <= UN_SAFE_DISTANCE) //Un Safed Distance
-	{
-		if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+		if (G_xNear_Distance.Distance_Left  <= SO_SHORT_DISTANCE) // stop car
 		{
-			/*flag = 1*/
-			G_u16DataAfterProccing.Flag = 1;
+			//direction = stop
+			G_u16DataAfterProccing.Direction = Stop;
+			/*flag = 3*/
+			G_u16DataAfterProccing.Flag = 3;
+			/*stop car + alarm*/
+	//		G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
+		}
+		else if (G_xNear_Distance.Distance_Left <= UN_SAFE_DISTANCE) //Un Safed Distance
+		{
+			if (G_xMy_Data.Speed <= G_u8_LimetedSpeed)
+			{
+				/*flag = 1*/
+				G_u16DataAfterProccing.Flag = 1;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+			}
+			else
+			{
+				/*flag = 2*/
+				G_u16DataAfterProccing.Flag = 2;
+				/*send direction and speed without any change*/
+				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
+				G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed;
+			}
+		}
+		else //sefed case
+		{
+			/*flag = 0*/
+			G_u16DataAfterProccing.Flag = 0;
 			/*send direction and speed without any change*/
 			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+			if (speed_control_Automatic == Automatic_ON)
+				G_u16DataAfterProccing.Speed = max_speed;
+			else
+				G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 		}
-		else
-		{
-			/*flag = 2*/
-			G_u16DataAfterProccing.Flag = 2;
-			/*send direction and speed without any change*/
-			G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-			G_u16DataAfterProccing.Speed = G_u8_LimetedSpeed;
-		}
-	}
-	else //sefed case
-	{
-		/*flag = 0*/
-		G_u16DataAfterProccing.Flag = 0;
-		/*send direction and speed without any change*/
-		G_u16DataAfterProccing.Direction = G_xMy_Data.Direction ;
-		if (speed_control_Automatic == Automatic_ON)
-			G_u16DataAfterProccing.Speed = max_speed;
-		else
-			G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
 	}
 }
 
@@ -622,7 +640,4 @@ void ProcessingFun (void)
 		break;
 	}
 	return;
-
 }
-
-
