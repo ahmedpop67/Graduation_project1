@@ -1,0 +1,8 @@
+0 stop_sign
+1 no_right_turn
+2 no_left_turn
+3 no_parking
+4 park
+5 traffic-light-red
+6 traffic-light-yellow
+7 traffic-light-green
