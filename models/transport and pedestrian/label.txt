@@ -1,0 +1,6 @@
+0 car
+1 motorcycle
+2 person
+3 truck
+4 tuktuk
+5 van
