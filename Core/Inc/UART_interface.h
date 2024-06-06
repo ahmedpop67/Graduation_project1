@@ -55,6 +55,12 @@ typedef struct
 	u8 LastBitClockPulse;
 }USART_ClockInitTypeDef;
 
+typedef enum
+{
+  SUCCESS = 0U,
+  ERROR = !SUCCESS
+} ErrorStatus;
+
 #define OVER_SAMPLING_16	0
 #define OVER_SAMPLING_8 	1
 
@@ -178,6 +184,10 @@ Buffer_state MUART_Buffer_Write();
 Buffer_state MUART_ReadData(u8* A_u8PtrData);
 
 void APP_Sort_Buffer();
+
+Buffer_state MUART_WriteData(u8* A_u8PtrData);
+
+ErrorStatus MUART_ErrorStatusTransmitData(USART_t *A_xUART_Type);
 
 
 #endif /* UART_INTERFACE_H_ */

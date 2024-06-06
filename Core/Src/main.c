@@ -65,6 +65,9 @@ Near_Distance G_xNear_Distance = {0,0,0,0};
 
 u8 APP_G_u8DataFromUART = 0;
 
+u8 APP_G_u8V2VTxData = 0;
+u8 APP_G_u8V2VRxData = 0;
+
 
 
 My_Data G_u16DataAfterProccing = {0,0,0};
@@ -472,61 +475,78 @@ void APP_voidLane_Change()
 
 void APP_V2V_Connection()
 {
-
-
-}
-/* TODO implement in UART
-Buffer_state APP_Buffer_Write()
-{
-	if (G_u8Counter == BUFFER_SIZE)
-	{
-		return Buffer_is_full;
+	// V2V connection is done using Bluetooth
+	//This is a limitation that it has to be done with more flexible connection device
+	// V2V connection has to be established at a certain trigger
+	//the trigger of the V2V is mostly the raspberry pi massages
+	//when V2V is triggered initiate blutooth connection
+	if(!APP_G_u8V2VTxData){
+		//TODO send UART massage to contact bluetooth device
+		u8 L_u8Data = 0xC0;
+		MUART_WriteData(&L_u8Data);
+		//Send command that should be done with the connected device
+		//TODO check massages between cars
+		//note bluetooth massages are different from UART massages so there cane be duplicates.
+		//massages need to include car ID
+		//MSG 1 is ask front car to change Lane (used by emergency cars)
+		//MSG 2 is probability of crash -> take measures
+		//MSG 3 is parking
+		//MSG 4 is changing to your lane
+		//MSG 5 is overtake
+		MUART_WriteData(&APP_G_u8V2VTxData);
 	}
-	G_Au8UART_Buffer[G_u8Head_Ptr] = MUART_u8ReadDataRegister(UART1);
-	G_u8Head_Ptr = (G_u8Head_Ptr+1) % BUFFER_SIZE;
-	G_u8Counter++;
-	APP_Sort_Buffer();
-	return Buffer_is_success;
-}
 
-Buffer_state APP_Buffer_Read()
-{
-	if (G_u8Counter == 0)
-	{
-		return Buffer_is_empty;
-	}
-	APP_G_u8DataFromUART = G_Au8UART_Buffer[G_u8Current_ptr];
-	G_u8Current_ptr = (G_u8Current_ptr+1) % BUFFER_SIZE;
-	G_u8Counter--;
-	return Buffer_is_success;
-}
-
-
-void APP_Sort_Buffer()
-{
-	u8 L_u8Start_index  =  G_u8Current_ptr;
-	u8 L_u8Element_NUM  =  G_u8Counter;
-
-	for (u8 i = L_u8Start_index ; i < ( L_u8Start_index + L_u8Element_NUM ) ; i++ )
-	{
-		for(u8 j = L_u8Start_index ; j < ( L_u8Start_index + L_u8Element_NUM - i - 1 ) ; j++)
-		{
-			if(G_Au8UART_Buffer[j] > G_Au8UART_Buffer[j+1])
-			{
-				u8 L_u8Temp = G_Au8UART_Buffer[j];
-				G_Au8UART_Buffer[j] = G_Au8UART_Buffer[j+1];
-				G_Au8UART_Buffer[j+1] = L_u8Temp;
-			}
+	if(!APP_G_u8V2VRxData){
+		switch(APP_G_u8V2VRxData){
+		case 1:
+			//Try change lane
+			break;
+		case 2:
+			//Check for dangers
+			//take counter measures
+			break;
+		case 3:
+			//ACK
+			break;
+		case 4:
+			//See the car changing lane
+			//take counter measures
+			break;
+		case 5:
+			//see the care aver taking
+			//get ack for successful lane change
+			//decrease speed slightly for x seconds
+			//send ACK for car to overtake
+			//get ACK of successful overtaking
+			break;
+		default:
+			//message not recognized
+			break;
 		}
 	}
+
 }
-*/
+
+void UART_Task(){
+
+
+	while(1){
+		//process received massages
+		//TODO send ACKs
+		ProcessingFun();
+
+		//send massages to Rasp
+		MUART_ErrorStatusTransmitData(UART1);
+
+		//delay_os
+	}
+}
 
 void ProcessingFun (void)
 {
 	u8 L_u8Data = APP_G_u8DataFromUART>>4;
 	/*Mapping data from UART*/
-
+	//TODO Massage number for traking
 	switch (APP_G_u8DataFromUART)
 	{
 	case 0x10: //forced stop

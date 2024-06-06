@@ -60,4 +60,6 @@ void APP_V2V_Connection();
 //Buffer_state APP_Buffer_Read();
 void APP_Sort_Buffer();
 
+void UART_Task();
+
 #endif /* INC_APP_H_ */

@@ -5,47 +5,47 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .isr_vector   0000010c  08000000  08000000  00001000  2**0
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  1 .text         000029a8  0800010c  0800010c  0000110c  2**2
+  1 .text         00002a10  0800010c  0800010c  0000110c  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .rodata       00000000  08002ab4  08002ab4  000040cc  2**0
+  2 .rodata       00000000  08002b1c  08002b1c  000040cc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .ARM.extab    00000000  08002ab4  08002ab4  000040cc  2**0
+  3 .ARM.extab    00000000  08002b1c  08002b1c  000040cc  2**0
                   CONTENTS
-  4 .ARM          00000000  08002ab4  08002ab4  000040cc  2**0
+  4 .ARM          00000000  08002b1c  08002b1c  000040cc  2**0
                   CONTENTS
-  5 .preinit_array 00000000  08002ab4  08002ab4  000040cc  2**0
+  5 .preinit_array 00000000  08002b1c  08002b1c  000040cc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .init_array   00000004  08002ab4  08002ab4  00003ab4  2**2
+  6 .init_array   00000004  08002b1c  08002b1c  00003b1c  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  7 .fini_array   00000004  08002ab8  08002ab8  00003ab8  2**2
+  7 .fini_array   00000004  08002b20  08002b20  00003b20  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         000000cc  20000000  08002abc  00004000  2**2
+  8 .data         000000cc  20000000  08002b24  00004000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .bss          00000110  200000cc  08002b88  000040cc  2**2
+  9 .bss          00000110  200000cc  08002bf0  000040cc  2**2
                   ALLOC
- 10 ._user_heap_stack 00000604  200001dc  08002b88  000041dc  2**0
+ 10 ._user_heap_stack 00000604  200001dc  08002bf0  000041dc  2**0
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  000040cc  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00002312  00000000  00000000  000040f5  2**0
+ 12 .debug_info   000024b3  00000000  00000000  000040f5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000ec7  00000000  00000000  00006407  2**0
+ 13 .debug_abbrev 00000f2d  00000000  00000000  000065a8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000003f8  00000000  00000000  000072d0  2**3
+ 14 .debug_aranges 00000410  00000000  00000000  000074d8  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 000002d2  00000000  00000000  000076c8  2**0
+ 15 .debug_rnglists 000002e5  00000000  00000000  000078e8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0000217e  00000000  00000000  0000799a  2**0
+ 16 .debug_macro  0000217e  00000000  00000000  00007bcd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00002fc1  00000000  00000000  00009b18  2**0
+ 17 .debug_line   000030b5  00000000  00000000  00009d4b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000837f0  00000000  00000000  0000cad9  2**0
+ 18 .debug_str    000838ca  00000000  00000000  0000ce00  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000902c9  2**0
+ 19 .comment      00000043  00000000  00000000  000906ca  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000cf8  00000000  00000000  0009030c  2**2
+ 20 .debug_frame  00000d74  00000000  00000000  00090710  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000051  00000000  00000000  00091004  2**0
+ 21 .debug_line_str 00000051  00000000  00000000  00091484  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -64,7 +64,7 @@ Disassembly of section .text:
  8000122:	bd10      	pop	{r4, pc}
  8000124:	200000cc 	.word	0x200000cc
  8000128:	00000000 	.word	0x00000000
- 800012c:	08002a9c 	.word	0x08002a9c
+ 800012c:	08002b04 	.word	0x08002b04
 
 08000130 <frame_dummy>:
  8000130:	b508      	push	{r3, lr}
@@ -76,7 +76,7 @@ Disassembly of section .text:
  800013e:	bd08      	pop	{r3, pc}
  8000140:	00000000 	.word	0x00000000
  8000144:	200000d0 	.word	0x200000d0
- 8000148:	08002a9c 	.word	0x08002a9c
+ 8000148:	08002b04 	.word	0x08002b04
 
 0800014c <EXTI0_IRQHandler>:
 	EXTI0_CallBack = ptr ;
@@ -3750,7 +3750,7 @@ Buffer_state MUART_Buffer_Write()
 	Buffer_state Local_BufferState = 0;
  8001a8a:	2300      	movs	r3, #0
  8001a8c:	71fb      	strb	r3, [r7, #7]
-	if (G_u8Counter == MAX_SIZE_DATA_BUFFER)
+	if (G_u8RxCounter == MAX_SIZE_DATA_BUFFER)
  8001a8e:	4b18      	ldr	r3, [pc, #96]	@ (8001af0 <MUART_Buffer_Write+0x6c>)
  8001a90:	781b      	ldrb	r3, [r3, #0]
  8001a92:	2bc8      	cmp	r3, #200	@ 0xc8
@@ -3765,7 +3765,7 @@ Buffer_state MUART_Buffer_Write()
  8001a9c:	2302      	movs	r3, #2
  8001a9e:	71fb      	strb	r3, [r7, #7]
 		//TODO Different UART
-		G_Au8UART_Buffer[G_u8BufferTailIndex] = MUART_u8ReadDataRegister(UART1);
+		G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = MUART_u8ReadDataRegister(UART1);
  8001aa0:	4b14      	ldr	r3, [pc, #80]	@ (8001af4 <MUART_Buffer_Write+0x70>)
  8001aa2:	781b      	ldrb	r3, [r3, #0]
  8001aa4:	461c      	mov	r4, r3
@@ -3775,7 +3775,7 @@ Buffer_state MUART_Buffer_Write()
  8001aae:	461a      	mov	r2, r3
  8001ab0:	4b12      	ldr	r3, [pc, #72]	@ (8001afc <MUART_Buffer_Write+0x78>)
  8001ab2:	551a      	strb	r2, [r3, r4]
-		G_u8BufferTailIndex = (G_u8BufferTailIndex+1) % MAX_SIZE_DATA_BUFFER;
+		G_u8RxBufferTailIndex = (G_u8RxBufferTailIndex+1) % MAX_SIZE_DATA_BUFFER;
  8001ab4:	4b0f      	ldr	r3, [pc, #60]	@ (8001af4 <MUART_Buffer_Write+0x70>)
  8001ab6:	781b      	ldrb	r3, [r3, #0]
  8001ab8:	3301      	adds	r3, #1
@@ -3790,7 +3790,7 @@ Buffer_state MUART_Buffer_Write()
  8001ace:	b2d2      	uxtb	r2, r2
  8001ad0:	4b08      	ldr	r3, [pc, #32]	@ (8001af4 <MUART_Buffer_Write+0x70>)
  8001ad2:	701a      	strb	r2, [r3, #0]
-		G_u8Counter++;
+		G_u8RxCounter++;
  8001ad4:	4b06      	ldr	r3, [pc, #24]	@ (8001af0 <MUART_Buffer_Write+0x6c>)
  8001ad6:	781b      	ldrb	r3, [r3, #0]
  8001ad8:	3301      	adds	r3, #1
@@ -3815,9 +3815,9 @@ Buffer_state MUART_Buffer_Write()
  8001b00:	51eb851f 	.word	0x51eb851f
 
 08001b04 <APP_Sort_Buffer>:
-	return L_BufferState;
+	}
+	return L_ErrorStatus;
 }
-
 
 void APP_Sort_Buffer()
 {
@@ -3833,20 +3833,20 @@ void APP_Sort_Buffer()
 	u8 L_u8Sorted = 0;
  8001b12:	2300      	movs	r3, #0
  8001b14:	71bb      	strb	r3, [r7, #6]
-	if(G_u8BufferHeadIndex < G_u8BufferTailIndex ){
+	if(G_u8RxBufferHeadIndex < G_u8RxBufferTailIndex ){
  8001b16:	4b4d      	ldr	r3, [pc, #308]	@ (8001c4c <APP_Sort_Buffer+0x148>)
  8001b18:	781a      	ldrb	r2, [r3, #0]
  8001b1a:	4b4d      	ldr	r3, [pc, #308]	@ (8001c50 <APP_Sort_Buffer+0x14c>)
  8001b1c:	781b      	ldrb	r3, [r3, #0]
  8001b1e:	429a      	cmp	r2, r3
  8001b20:	d229      	bcs.n	8001b76 <APP_Sort_Buffer+0x72>
-		for (i = G_u8BufferTailIndex; i > G_u8BufferHeadIndex ; i-- )
+		for (i = G_u8RxBufferTailIndex; i > G_u8RxBufferHeadIndex ; i-- )
  8001b22:	4b4b      	ldr	r3, [pc, #300]	@ (8001c50 <APP_Sort_Buffer+0x14c>)
  8001b24:	781b      	ldrb	r3, [r3, #0]
  8001b26:	71fb      	strb	r3, [r7, #7]
  8001b28:	e01f      	b.n	8001b6a <APP_Sort_Buffer+0x66>
 		{
-			if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+			if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
  8001b2a:	79fb      	ldrb	r3, [r7, #7]
  8001b2c:	4a49      	ldr	r2, [pc, #292]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001b2e:	5cd2      	ldrb	r2, [r2, r3]
@@ -3857,12 +3857,12 @@ void APP_Sort_Buffer()
  8001b38:	429a      	cmp	r2, r3
  8001b3a:	d210      	bcs.n	8001b5e <APP_Sort_Buffer+0x5a>
 			{
-				L_u8Temp = G_Au8UART_Buffer[i];
+				L_u8Temp = G_Au8UART_RxBuffer[i];
  8001b3c:	79fb      	ldrb	r3, [r7, #7]
  8001b3e:	4a45      	ldr	r2, [pc, #276]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001b40:	5cd3      	ldrb	r3, [r2, r3]
  8001b42:	717b      	strb	r3, [r7, #5]
-				G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
+				G_Au8UART_RxBuffer[i] = G_Au8UART_RxBuffer[i-1];
  8001b44:	79fb      	ldrb	r3, [r7, #7]
  8001b46:	1e5a      	subs	r2, r3, #1
  8001b48:	79fb      	ldrb	r3, [r7, #7]
@@ -3870,7 +3870,7 @@ void APP_Sort_Buffer()
  8001b4c:	5c89      	ldrb	r1, [r1, r2]
  8001b4e:	4a41      	ldr	r2, [pc, #260]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001b50:	54d1      	strb	r1, [r2, r3]
-				G_Au8UART_Buffer[i-1] = L_u8Temp;
+				G_Au8UART_RxBuffer[i-1] = L_u8Temp;
  8001b52:	79fb      	ldrb	r3, [r7, #7]
  8001b54:	3b01      	subs	r3, #1
  8001b56:	493f      	ldr	r1, [pc, #252]	@ (8001c54 <APP_Sort_Buffer+0x150>)
@@ -3884,7 +3884,7 @@ void APP_Sort_Buffer()
  8001b60:	71bb      	strb	r3, [r7, #6]
 				break;
  8001b62:	e06e      	b.n	8001c42 <APP_Sort_Buffer+0x13e>
-		for (i = G_u8BufferTailIndex; i > G_u8BufferHeadIndex ; i-- )
+		for (i = G_u8RxBufferTailIndex; i > G_u8RxBufferHeadIndex ; i-- )
  8001b64:	79fb      	ldrb	r3, [r7, #7]
  8001b66:	3b01      	subs	r3, #1
  8001b68:	71fb      	strb	r3, [r7, #7]
@@ -3900,12 +3900,12 @@ void APP_Sort_Buffer()
 
 }
  8001b74:	e065      	b.n	8001c42 <APP_Sort_Buffer+0x13e>
-		for (i = G_u8BufferTailIndex; i > 0; i-- )
+		for (i = G_u8RxBufferTailIndex; i > 0; i-- )
  8001b76:	4b36      	ldr	r3, [pc, #216]	@ (8001c50 <APP_Sort_Buffer+0x14c>)
  8001b78:	781b      	ldrb	r3, [r3, #0]
  8001b7a:	71fb      	strb	r3, [r7, #7]
  8001b7c:	e01f      	b.n	8001bbe <APP_Sort_Buffer+0xba>
-			if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+			if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
  8001b7e:	79fb      	ldrb	r3, [r7, #7]
  8001b80:	4a34      	ldr	r2, [pc, #208]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001b82:	5cd2      	ldrb	r2, [r2, r3]
@@ -3915,12 +3915,12 @@ void APP_Sort_Buffer()
  8001b8a:	5ccb      	ldrb	r3, [r1, r3]
  8001b8c:	429a      	cmp	r2, r3
  8001b8e:	d210      	bcs.n	8001bb2 <APP_Sort_Buffer+0xae>
-				L_u8Temp = G_Au8UART_Buffer[i];
+				L_u8Temp = G_Au8UART_RxBuffer[i];
  8001b90:	79fb      	ldrb	r3, [r7, #7]
  8001b92:	4a30      	ldr	r2, [pc, #192]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001b94:	5cd3      	ldrb	r3, [r2, r3]
  8001b96:	717b      	strb	r3, [r7, #5]
-				G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
+				G_Au8UART_RxBuffer[i] = G_Au8UART_RxBuffer[i-1];
  8001b98:	79fb      	ldrb	r3, [r7, #7]
  8001b9a:	1e5a      	subs	r2, r3, #1
  8001b9c:	79fb      	ldrb	r3, [r7, #7]
@@ -3928,7 +3928,7 @@ void APP_Sort_Buffer()
  8001ba0:	5c89      	ldrb	r1, [r1, r2]
  8001ba2:	4a2c      	ldr	r2, [pc, #176]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001ba4:	54d1      	strb	r1, [r2, r3]
-				G_Au8UART_Buffer[i-1] = L_u8Temp;
+				G_Au8UART_RxBuffer[i-1] = L_u8Temp;
  8001ba6:	79fb      	ldrb	r3, [r7, #7]
  8001ba8:	3b01      	subs	r3, #1
  8001baa:	492a      	ldr	r1, [pc, #168]	@ (8001c54 <APP_Sort_Buffer+0x150>)
@@ -3940,7 +3940,7 @@ void APP_Sort_Buffer()
  8001bb4:	71bb      	strb	r3, [r7, #6]
 				break;
  8001bb6:	e005      	b.n	8001bc4 <APP_Sort_Buffer+0xc0>
-		for (i = G_u8BufferTailIndex; i > 0; i-- )
+		for (i = G_u8RxBufferTailIndex; i > 0; i-- )
  8001bb8:	79fb      	ldrb	r3, [r7, #7]
  8001bba:	3b01      	subs	r3, #1
  8001bbc:	71fb      	strb	r3, [r7, #7]
@@ -3951,7 +3951,7 @@ void APP_Sort_Buffer()
  8001bc4:	79bb      	ldrb	r3, [r7, #6]
  8001bc6:	2b00      	cmp	r3, #0
  8001bc8:	d13b      	bne.n	8001c42 <APP_Sort_Buffer+0x13e>
-			if(G_Au8UART_Buffer[0] < G_Au8UART_Buffer[MAX_SIZE_DATA_BUFFER - 1]){
+			if(G_Au8UART_RxBuffer[0] < G_Au8UART_RxBuffer[MAX_SIZE_DATA_BUFFER - 1]){
  8001bca:	4b22      	ldr	r3, [pc, #136]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001bcc:	781a      	ldrb	r2, [r3, #0]
  8001bce:	4b21      	ldr	r3, [pc, #132]	@ (8001c54 <APP_Sort_Buffer+0x150>)
@@ -3961,24 +3961,24 @@ void APP_Sort_Buffer()
 				i= MAX_SIZE_DATA_BUFFER - 1; //last element in buffer
  8001bd8:	23c7      	movs	r3, #199	@ 0xc7
  8001bda:	71fb      	strb	r3, [r7, #7]
-				L_u8Temp = G_Au8UART_Buffer[0];
+				L_u8Temp = G_Au8UART_RxBuffer[0];
  8001bdc:	4b1d      	ldr	r3, [pc, #116]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001bde:	781b      	ldrb	r3, [r3, #0]
  8001be0:	717b      	strb	r3, [r7, #5]
-				G_Au8UART_Buffer[0] = G_Au8UART_Buffer[i];
+				G_Au8UART_RxBuffer[0] = G_Au8UART_RxBuffer[i];
  8001be2:	79fb      	ldrb	r3, [r7, #7]
  8001be4:	4a1b      	ldr	r2, [pc, #108]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001be6:	5cd2      	ldrb	r2, [r2, r3]
  8001be8:	4b1a      	ldr	r3, [pc, #104]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001bea:	701a      	strb	r2, [r3, #0]
-				G_Au8UART_Buffer[i] = L_u8Temp;
+				G_Au8UART_RxBuffer[i] = L_u8Temp;
  8001bec:	79fb      	ldrb	r3, [r7, #7]
  8001bee:	4919      	ldr	r1, [pc, #100]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001bf0:	797a      	ldrb	r2, [r7, #5]
  8001bf2:	54ca      	strb	r2, [r1, r3]
-				for(;i> G_u8BufferHeadIndex ; i-- ){
+				for(;i> G_u8RxBufferHeadIndex ; i-- ){
  8001bf4:	e01f      	b.n	8001c36 <APP_Sort_Buffer+0x132>
-					if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+					if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
  8001bf6:	79fb      	ldrb	r3, [r7, #7]
  8001bf8:	4a16      	ldr	r2, [pc, #88]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001bfa:	5cd2      	ldrb	r2, [r2, r3]
@@ -3988,12 +3988,12 @@ void APP_Sort_Buffer()
  8001c02:	5ccb      	ldrb	r3, [r1, r3]
  8001c04:	429a      	cmp	r2, r3
  8001c06:	d210      	bcs.n	8001c2a <APP_Sort_Buffer+0x126>
-						L_u8Temp = G_Au8UART_Buffer[i];
+						L_u8Temp = G_Au8UART_RxBuffer[i];
  8001c08:	79fb      	ldrb	r3, [r7, #7]
  8001c0a:	4a12      	ldr	r2, [pc, #72]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001c0c:	5cd3      	ldrb	r3, [r2, r3]
  8001c0e:	717b      	strb	r3, [r7, #5]
-						G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
+						G_Au8UART_RxBuffer[i] = G_Au8UART_RxBuffer[i-1];
  8001c10:	79fb      	ldrb	r3, [r7, #7]
  8001c12:	1e5a      	subs	r2, r3, #1
  8001c14:	79fb      	ldrb	r3, [r7, #7]
@@ -4001,7 +4001,7 @@ void APP_Sort_Buffer()
  8001c18:	5c89      	ldrb	r1, [r1, r2]
  8001c1a:	4a0e      	ldr	r2, [pc, #56]	@ (8001c54 <APP_Sort_Buffer+0x150>)
  8001c1c:	54d1      	strb	r1, [r2, r3]
-						G_Au8UART_Buffer[i-1] = L_u8Temp;
+						G_Au8UART_RxBuffer[i-1] = L_u8Temp;
  8001c1e:	79fb      	ldrb	r3, [r7, #7]
  8001c20:	3b01      	subs	r3, #1
  8001c22:	490c      	ldr	r1, [pc, #48]	@ (8001c54 <APP_Sort_Buffer+0x150>)
@@ -4013,7 +4013,7 @@ void APP_Sort_Buffer()
  8001c2c:	71bb      	strb	r3, [r7, #6]
 						break;
  8001c2e:	e008      	b.n	8001c42 <APP_Sort_Buffer+0x13e>
-				for(;i> G_u8BufferHeadIndex ; i-- ){
+				for(;i> G_u8RxBufferHeadIndex ; i-- ){
  8001c30:	79fb      	ldrb	r3, [r7, #7]
  8001c32:	3b01      	subs	r3, #1
  8001c34:	71fb      	strb	r3, [r7, #7]
@@ -5392,813 +5392,875 @@ void APP_voidForward_LeftTasks ()
  8002560:	200000ca 	.word	0x200000ca
 
 08002564 <ProcessingFun>:
+		//delay_os
 	}
 }
-*/
 
 void ProcessingFun (void)
 {
  8002564:	b580      	push	{r7, lr}
- 8002566:	af00      	add	r7, sp, #0
+ 8002566:	b082      	sub	sp, #8
+ 8002568:	af00      	add	r7, sp, #0
+	u8 L_u8Data = APP_G_u8DataFromUART>>4;
+ 800256a:	4bd3      	ldr	r3, [pc, #844]	@ (80028b8 <ProcessingFun+0x354>)
+ 800256c:	781b      	ldrb	r3, [r3, #0]
+ 800256e:	091b      	lsrs	r3, r3, #4
+ 8002570:	71fb      	strb	r3, [r7, #7]
 	/*Mapping data from UART*/
+	//TODO Massage number for traking
 	switch (APP_G_u8DataFromUART)
- 8002568:	4bd4      	ldr	r3, [pc, #848]	@ (80028bc <ProcessingFun+0x358>)
- 800256a:	781b      	ldrb	r3, [r3, #0]
- 800256c:	3b10      	subs	r3, #16
- 800256e:	2b6c      	cmp	r3, #108	@ 0x6c
- 8002570:	f200 81cb 	bhi.w	800290a <ProcessingFun+0x3a6>
- 8002574:	a201      	add	r2, pc, #4	@ (adr r2, 800257c <ProcessingFun+0x18>)
- 8002576:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 800257a:	bf00      	nop
- 800257c:	08002731 	.word	0x08002731
- 8002580:	0800290b 	.word	0x0800290b
- 8002584:	0800290b 	.word	0x0800290b
- 8002588:	0800290b 	.word	0x0800290b
- 800258c:	0800290b 	.word	0x0800290b
- 8002590:	0800290b 	.word	0x0800290b
- 8002594:	0800290b 	.word	0x0800290b
- 8002598:	0800290b 	.word	0x0800290b
- 800259c:	0800290b 	.word	0x0800290b
- 80025a0:	0800290b 	.word	0x0800290b
- 80025a4:	0800290b 	.word	0x0800290b
- 80025a8:	0800290b 	.word	0x0800290b
- 80025ac:	0800290b 	.word	0x0800290b
- 80025b0:	0800290b 	.word	0x0800290b
- 80025b4:	0800290b 	.word	0x0800290b
- 80025b8:	0800290b 	.word	0x0800290b
- 80025bc:	0800273f 	.word	0x0800273f
- 80025c0:	0800290b 	.word	0x0800290b
- 80025c4:	0800290b 	.word	0x0800290b
- 80025c8:	0800290b 	.word	0x0800290b
- 80025cc:	0800290b 	.word	0x0800290b
- 80025d0:	0800290b 	.word	0x0800290b
- 80025d4:	0800290b 	.word	0x0800290b
- 80025d8:	0800290b 	.word	0x0800290b
- 80025dc:	0800290b 	.word	0x0800290b
- 80025e0:	0800290b 	.word	0x0800290b
- 80025e4:	0800290b 	.word	0x0800290b
- 80025e8:	0800290b 	.word	0x0800290b
- 80025ec:	0800290b 	.word	0x0800290b
- 80025f0:	0800290b 	.word	0x0800290b
- 80025f4:	0800290b 	.word	0x0800290b
- 80025f8:	0800290b 	.word	0x0800290b
- 80025fc:	0800290b 	.word	0x0800290b
- 8002600:	0800290b 	.word	0x0800290b
- 8002604:	0800290b 	.word	0x0800290b
- 8002608:	0800290b 	.word	0x0800290b
- 800260c:	0800290b 	.word	0x0800290b
- 8002610:	0800290b 	.word	0x0800290b
- 8002614:	0800290b 	.word	0x0800290b
- 8002618:	0800290b 	.word	0x0800290b
- 800261c:	0800290b 	.word	0x0800290b
- 8002620:	0800290b 	.word	0x0800290b
- 8002624:	0800290b 	.word	0x0800290b
- 8002628:	0800290b 	.word	0x0800290b
- 800262c:	0800290b 	.word	0x0800290b
- 8002630:	0800290b 	.word	0x0800290b
- 8002634:	0800290b 	.word	0x0800290b
- 8002638:	0800290b 	.word	0x0800290b
- 800263c:	0800274d 	.word	0x0800274d
- 8002640:	0800290b 	.word	0x0800290b
- 8002644:	0800290b 	.word	0x0800290b
- 8002648:	0800290b 	.word	0x0800290b
- 800264c:	0800290b 	.word	0x0800290b
- 8002650:	0800290b 	.word	0x0800290b
- 8002654:	0800290b 	.word	0x0800290b
- 8002658:	0800290b 	.word	0x0800290b
- 800265c:	0800275b 	.word	0x0800275b
- 8002660:	0800290b 	.word	0x0800290b
- 8002664:	0800290b 	.word	0x0800290b
- 8002668:	0800290b 	.word	0x0800290b
- 800266c:	08002769 	.word	0x08002769
- 8002670:	0800290b 	.word	0x0800290b
- 8002674:	0800290b 	.word	0x0800290b
- 8002678:	0800290b 	.word	0x0800290b
- 800267c:	08002777 	.word	0x08002777
- 8002680:	0800290b 	.word	0x0800290b
- 8002684:	0800290b 	.word	0x0800290b
- 8002688:	0800290b 	.word	0x0800290b
- 800268c:	0800290b 	.word	0x0800290b
- 8002690:	0800290b 	.word	0x0800290b
- 8002694:	0800290b 	.word	0x0800290b
- 8002698:	0800290b 	.word	0x0800290b
- 800269c:	08002785 	.word	0x08002785
- 80026a0:	0800290b 	.word	0x0800290b
- 80026a4:	0800290b 	.word	0x0800290b
- 80026a8:	0800290b 	.word	0x0800290b
- 80026ac:	08002793 	.word	0x08002793
- 80026b0:	0800290b 	.word	0x0800290b
- 80026b4:	0800290b 	.word	0x0800290b
- 80026b8:	0800290b 	.word	0x0800290b
- 80026bc:	080027a1 	.word	0x080027a1
- 80026c0:	0800290b 	.word	0x0800290b
- 80026c4:	0800290b 	.word	0x0800290b
- 80026c8:	0800290b 	.word	0x0800290b
- 80026cc:	0800290b 	.word	0x0800290b
- 80026d0:	0800290b 	.word	0x0800290b
- 80026d4:	0800290b 	.word	0x0800290b
- 80026d8:	0800290b 	.word	0x0800290b
- 80026dc:	080027dd 	.word	0x080027dd
- 80026e0:	0800290b 	.word	0x0800290b
- 80026e4:	0800290b 	.word	0x0800290b
- 80026e8:	0800290b 	.word	0x0800290b
- 80026ec:	08002819 	.word	0x08002819
- 80026f0:	0800290b 	.word	0x0800290b
- 80026f4:	0800290b 	.word	0x0800290b
- 80026f8:	0800290b 	.word	0x0800290b
- 80026fc:	08002855 	.word	0x08002855
- 8002700:	0800290b 	.word	0x0800290b
- 8002704:	0800290b 	.word	0x0800290b
- 8002708:	0800290b 	.word	0x0800290b
- 800270c:	0800290b 	.word	0x0800290b
- 8002710:	0800290b 	.word	0x0800290b
- 8002714:	0800290b 	.word	0x0800290b
- 8002718:	0800290b 	.word	0x0800290b
- 800271c:	0800288f 	.word	0x0800288f
- 8002720:	0800290b 	.word	0x0800290b
- 8002724:	0800290b 	.word	0x0800290b
- 8002728:	0800290b 	.word	0x0800290b
- 800272c:	080028d1 	.word	0x080028d1
+ 8002572:	4bd1      	ldr	r3, [pc, #836]	@ (80028b8 <ProcessingFun+0x354>)
+ 8002574:	781b      	ldrb	r3, [r3, #0]
+ 8002576:	2bf0      	cmp	r3, #240	@ 0xf0
+ 8002578:	f000 81f4 	beq.w	8002964 <ProcessingFun+0x400>
+ 800257c:	2bf0      	cmp	r3, #240	@ 0xf0
+ 800257e:	f300 81d9 	bgt.w	8002934 <ProcessingFun+0x3d0>
+ 8002582:	2b7c      	cmp	r3, #124	@ 0x7c
+ 8002584:	f300 80e4 	bgt.w	8002750 <ProcessingFun+0x1ec>
+ 8002588:	2b10      	cmp	r3, #16
+ 800258a:	f2c0 81d3 	blt.w	8002934 <ProcessingFun+0x3d0>
+ 800258e:	3b10      	subs	r3, #16
+ 8002590:	2b6c      	cmp	r3, #108	@ 0x6c
+ 8002592:	f200 81cf 	bhi.w	8002934 <ProcessingFun+0x3d0>
+ 8002596:	a201      	add	r2, pc, #4	@ (adr r2, 800259c <ProcessingFun+0x38>)
+ 8002598:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 800259c:	08002759 	.word	0x08002759
+ 80025a0:	08002935 	.word	0x08002935
+ 80025a4:	08002935 	.word	0x08002935
+ 80025a8:	08002935 	.word	0x08002935
+ 80025ac:	08002935 	.word	0x08002935
+ 80025b0:	08002935 	.word	0x08002935
+ 80025b4:	08002935 	.word	0x08002935
+ 80025b8:	08002935 	.word	0x08002935
+ 80025bc:	08002935 	.word	0x08002935
+ 80025c0:	08002935 	.word	0x08002935
+ 80025c4:	08002935 	.word	0x08002935
+ 80025c8:	08002935 	.word	0x08002935
+ 80025cc:	08002935 	.word	0x08002935
+ 80025d0:	08002935 	.word	0x08002935
+ 80025d4:	08002935 	.word	0x08002935
+ 80025d8:	08002935 	.word	0x08002935
+ 80025dc:	08002767 	.word	0x08002767
+ 80025e0:	08002935 	.word	0x08002935
+ 80025e4:	08002935 	.word	0x08002935
+ 80025e8:	08002935 	.word	0x08002935
+ 80025ec:	08002935 	.word	0x08002935
+ 80025f0:	08002935 	.word	0x08002935
+ 80025f4:	08002935 	.word	0x08002935
+ 80025f8:	08002935 	.word	0x08002935
+ 80025fc:	08002935 	.word	0x08002935
+ 8002600:	08002935 	.word	0x08002935
+ 8002604:	08002935 	.word	0x08002935
+ 8002608:	08002935 	.word	0x08002935
+ 800260c:	08002935 	.word	0x08002935
+ 8002610:	08002935 	.word	0x08002935
+ 8002614:	08002935 	.word	0x08002935
+ 8002618:	08002935 	.word	0x08002935
+ 800261c:	08002935 	.word	0x08002935
+ 8002620:	08002935 	.word	0x08002935
+ 8002624:	08002935 	.word	0x08002935
+ 8002628:	08002935 	.word	0x08002935
+ 800262c:	08002935 	.word	0x08002935
+ 8002630:	08002935 	.word	0x08002935
+ 8002634:	08002935 	.word	0x08002935
+ 8002638:	08002935 	.word	0x08002935
+ 800263c:	08002935 	.word	0x08002935
+ 8002640:	08002935 	.word	0x08002935
+ 8002644:	08002935 	.word	0x08002935
+ 8002648:	08002935 	.word	0x08002935
+ 800264c:	08002935 	.word	0x08002935
+ 8002650:	08002935 	.word	0x08002935
+ 8002654:	08002935 	.word	0x08002935
+ 8002658:	08002935 	.word	0x08002935
+ 800265c:	08002775 	.word	0x08002775
+ 8002660:	08002935 	.word	0x08002935
+ 8002664:	08002935 	.word	0x08002935
+ 8002668:	08002935 	.word	0x08002935
+ 800266c:	08002935 	.word	0x08002935
+ 8002670:	08002935 	.word	0x08002935
+ 8002674:	08002935 	.word	0x08002935
+ 8002678:	08002935 	.word	0x08002935
+ 800267c:	08002783 	.word	0x08002783
+ 8002680:	08002935 	.word	0x08002935
+ 8002684:	08002935 	.word	0x08002935
+ 8002688:	08002935 	.word	0x08002935
+ 800268c:	08002791 	.word	0x08002791
+ 8002690:	08002935 	.word	0x08002935
+ 8002694:	08002935 	.word	0x08002935
+ 8002698:	08002935 	.word	0x08002935
+ 800269c:	0800279f 	.word	0x0800279f
+ 80026a0:	08002935 	.word	0x08002935
+ 80026a4:	08002935 	.word	0x08002935
+ 80026a8:	08002935 	.word	0x08002935
+ 80026ac:	08002935 	.word	0x08002935
+ 80026b0:	08002935 	.word	0x08002935
+ 80026b4:	08002935 	.word	0x08002935
+ 80026b8:	08002935 	.word	0x08002935
+ 80026bc:	080027ad 	.word	0x080027ad
+ 80026c0:	08002935 	.word	0x08002935
+ 80026c4:	08002935 	.word	0x08002935
+ 80026c8:	08002935 	.word	0x08002935
+ 80026cc:	080027bb 	.word	0x080027bb
+ 80026d0:	08002935 	.word	0x08002935
+ 80026d4:	08002935 	.word	0x08002935
+ 80026d8:	08002935 	.word	0x08002935
+ 80026dc:	080027c9 	.word	0x080027c9
+ 80026e0:	08002935 	.word	0x08002935
+ 80026e4:	08002935 	.word	0x08002935
+ 80026e8:	08002935 	.word	0x08002935
+ 80026ec:	08002935 	.word	0x08002935
+ 80026f0:	08002935 	.word	0x08002935
+ 80026f4:	08002935 	.word	0x08002935
+ 80026f8:	08002935 	.word	0x08002935
+ 80026fc:	08002805 	.word	0x08002805
+ 8002700:	08002935 	.word	0x08002935
+ 8002704:	08002935 	.word	0x08002935
+ 8002708:	08002935 	.word	0x08002935
+ 800270c:	08002841 	.word	0x08002841
+ 8002710:	08002935 	.word	0x08002935
+ 8002714:	08002935 	.word	0x08002935
+ 8002718:	08002935 	.word	0x08002935
+ 800271c:	0800287d 	.word	0x0800287d
+ 8002720:	08002935 	.word	0x08002935
+ 8002724:	08002935 	.word	0x08002935
+ 8002728:	08002935 	.word	0x08002935
+ 800272c:	08002935 	.word	0x08002935
+ 8002730:	08002935 	.word	0x08002935
+ 8002734:	08002935 	.word	0x08002935
+ 8002738:	08002935 	.word	0x08002935
+ 800273c:	080028c1 	.word	0x080028c1
+ 8002740:	08002935 	.word	0x08002935
+ 8002744:	08002935 	.word	0x08002935
+ 8002748:	08002935 	.word	0x08002935
+ 800274c:	080028fb 	.word	0x080028fb
+ 8002750:	2be8      	cmp	r3, #232	@ 0xe8
+ 8002752:	f000 8109 	beq.w	8002968 <ProcessingFun+0x404>
+ 8002756:	e0ed      	b.n	8002934 <ProcessingFun+0x3d0>
 	{
 	case 0x10: //forced stop
 		G_xMy_Data.Direction = Stop ;
- 8002730:	4a63      	ldr	r2, [pc, #396]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002732:	7813      	ldrb	r3, [r2, #0]
- 8002734:	2108      	movs	r1, #8
- 8002736:	f361 0303 	bfi	r3, r1, #0, #4
- 800273a:	7013      	strb	r3, [r2, #0]
+ 8002758:	4a58      	ldr	r2, [pc, #352]	@ (80028bc <ProcessingFun+0x358>)
+ 800275a:	7813      	ldrb	r3, [r2, #0]
+ 800275c:	2108      	movs	r1, #8
+ 800275e:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002762:	7013      	strb	r3, [r2, #0]
 		//TODO make it forced
 		break;
- 800273c:	e0e5      	b.n	800290a <ProcessingFun+0x3a6>
+ 8002764:	e103      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x20: //normal stop
 		G_xMy_Data.Direction = Stop ;
- 800273e:	4a60      	ldr	r2, [pc, #384]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002740:	7813      	ldrb	r3, [r2, #0]
- 8002742:	2108      	movs	r1, #8
- 8002744:	f361 0303 	bfi	r3, r1, #0, #4
- 8002748:	7013      	strb	r3, [r2, #0]
+ 8002766:	4a55      	ldr	r2, [pc, #340]	@ (80028bc <ProcessingFun+0x358>)
+ 8002768:	7813      	ldrb	r3, [r2, #0]
+ 800276a:	2108      	movs	r1, #8
+ 800276c:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002770:	7013      	strb	r3, [r2, #0]
 		break;
- 800274a:	e0de      	b.n	800290a <ProcessingFun+0x3a6>
+ 8002772:	e0fc      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x40: //turn left extremely
 		G_xMy_Data.Direction = Left;
- 800274c:	4a5c      	ldr	r2, [pc, #368]	@ (80028c0 <ProcessingFun+0x35c>)
- 800274e:	7813      	ldrb	r3, [r2, #0]
- 8002750:	2103      	movs	r1, #3
- 8002752:	f361 0303 	bfi	r3, r1, #0, #4
- 8002756:	7013      	strb	r3, [r2, #0]
+ 8002774:	4a51      	ldr	r2, [pc, #324]	@ (80028bc <ProcessingFun+0x358>)
+ 8002776:	7813      	ldrb	r3, [r2, #0]
+ 8002778:	2103      	movs	r1, #3
+ 800277a:	f361 0303 	bfi	r3, r1, #0, #4
+ 800277e:	7013      	strb	r3, [r2, #0]
 		break;
- 8002758:	e0d7      	b.n	800290a <ProcessingFun+0x3a6>
+ 8002780:	e0f5      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x48: //turn left normal (forward left)
 		G_xMy_Data.Direction = Forward_Left;
- 800275a:	4a59      	ldr	r2, [pc, #356]	@ (80028c0 <ProcessingFun+0x35c>)
- 800275c:	7813      	ldrb	r3, [r2, #0]
- 800275e:	2105      	movs	r1, #5
- 8002760:	f361 0303 	bfi	r3, r1, #0, #4
- 8002764:	7013      	strb	r3, [r2, #0]
+ 8002782:	4a4e      	ldr	r2, [pc, #312]	@ (80028bc <ProcessingFun+0x358>)
+ 8002784:	7813      	ldrb	r3, [r2, #0]
+ 8002786:	2105      	movs	r1, #5
+ 8002788:	f361 0303 	bfi	r3, r1, #0, #4
+ 800278c:	7013      	strb	r3, [r2, #0]
 		break;
- 8002766:	e0d0      	b.n	800290a <ProcessingFun+0x3a6>
+ 800278e:	e0ee      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x4c: //turn left slightly
 		G_xMy_Data.Direction = Forward_Left;
- 8002768:	4a55      	ldr	r2, [pc, #340]	@ (80028c0 <ProcessingFun+0x35c>)
- 800276a:	7813      	ldrb	r3, [r2, #0]
- 800276c:	2105      	movs	r1, #5
- 800276e:	f361 0303 	bfi	r3, r1, #0, #4
- 8002772:	7013      	strb	r3, [r2, #0]
+ 8002790:	4a4a      	ldr	r2, [pc, #296]	@ (80028bc <ProcessingFun+0x358>)
+ 8002792:	7813      	ldrb	r3, [r2, #0]
+ 8002794:	2105      	movs	r1, #5
+ 8002796:	f361 0303 	bfi	r3, r1, #0, #4
+ 800279a:	7013      	strb	r3, [r2, #0]
 		//TODO make it slight
 		break;
- 8002774:	e0c9      	b.n	800290a <ProcessingFun+0x3a6>
+ 800279c:	e0e7      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x50: //turn Right extremely
 		G_xMy_Data.Direction = Right;
- 8002776:	4a52      	ldr	r2, [pc, #328]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002778:	7813      	ldrb	r3, [r2, #0]
- 800277a:	2102      	movs	r1, #2
- 800277c:	f361 0303 	bfi	r3, r1, #0, #4
- 8002780:	7013      	strb	r3, [r2, #0]
+ 800279e:	4a47      	ldr	r2, [pc, #284]	@ (80028bc <ProcessingFun+0x358>)
+ 80027a0:	7813      	ldrb	r3, [r2, #0]
+ 80027a2:	2102      	movs	r1, #2
+ 80027a4:	f361 0303 	bfi	r3, r1, #0, #4
+ 80027a8:	7013      	strb	r3, [r2, #0]
 		break;
- 8002782:	e0c2      	b.n	800290a <ProcessingFun+0x3a6>
+ 80027aa:	e0e0      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x58: //turn Right normal (forward Right)
 		G_xMy_Data.Direction = Forward_Right;
- 8002784:	4a4e      	ldr	r2, [pc, #312]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002786:	7813      	ldrb	r3, [r2, #0]
- 8002788:	2104      	movs	r1, #4
- 800278a:	f361 0303 	bfi	r3, r1, #0, #4
- 800278e:	7013      	strb	r3, [r2, #0]
+ 80027ac:	4a43      	ldr	r2, [pc, #268]	@ (80028bc <ProcessingFun+0x358>)
+ 80027ae:	7813      	ldrb	r3, [r2, #0]
+ 80027b0:	2104      	movs	r1, #4
+ 80027b2:	f361 0303 	bfi	r3, r1, #0, #4
+ 80027b6:	7013      	strb	r3, [r2, #0]
 		break;
- 8002790:	e0bb      	b.n	800290a <ProcessingFun+0x3a6>
+ 80027b8:	e0d9      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x5c: //turn Right slightly
 		G_xMy_Data.Direction = Forward_Right;
- 8002792:	4a4b      	ldr	r2, [pc, #300]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002794:	7813      	ldrb	r3, [r2, #0]
- 8002796:	2104      	movs	r1, #4
- 8002798:	f361 0303 	bfi	r3, r1, #0, #4
- 800279c:	7013      	strb	r3, [r2, #0]
+ 80027ba:	4a40      	ldr	r2, [pc, #256]	@ (80028bc <ProcessingFun+0x358>)
+ 80027bc:	7813      	ldrb	r3, [r2, #0]
+ 80027be:	2104      	movs	r1, #4
+ 80027c0:	f361 0303 	bfi	r3, r1, #0, #4
+ 80027c4:	7013      	strb	r3, [r2, #0]
 		//TODO make it slight
 		break;
- 800279e:	e0b4      	b.n	800290a <ProcessingFun+0x3a6>
+ 80027c6:	e0d2      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x60: //Decrease speed greatly
 		//TODO
 		if(G_xMy_Data.Speed > 4){
- 80027a0:	4b47      	ldr	r3, [pc, #284]	@ (80028c0 <ProcessingFun+0x35c>)
- 80027a2:	781b      	ldrb	r3, [r3, #0]
- 80027a4:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80027a8:	b2db      	uxtb	r3, r3
- 80027aa:	2b04      	cmp	r3, #4
- 80027ac:	d90f      	bls.n	80027ce <ProcessingFun+0x26a>
+ 80027c8:	4b3c      	ldr	r3, [pc, #240]	@ (80028bc <ProcessingFun+0x358>)
+ 80027ca:	781b      	ldrb	r3, [r3, #0]
+ 80027cc:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80027d0:	b2db      	uxtb	r3, r3
+ 80027d2:	2b04      	cmp	r3, #4
+ 80027d4:	d90f      	bls.n	80027f6 <ProcessingFun+0x292>
 			G_xMy_Data.Speed -= 4;
- 80027ae:	4b44      	ldr	r3, [pc, #272]	@ (80028c0 <ProcessingFun+0x35c>)
- 80027b0:	781b      	ldrb	r3, [r3, #0]
- 80027b2:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80027b6:	b2db      	uxtb	r3, r3
- 80027b8:	3b04      	subs	r3, #4
- 80027ba:	b2db      	uxtb	r3, r3
- 80027bc:	f003 0307 	and.w	r3, r3, #7
- 80027c0:	b2d9      	uxtb	r1, r3
- 80027c2:	4a3f      	ldr	r2, [pc, #252]	@ (80028c0 <ProcessingFun+0x35c>)
- 80027c4:	7813      	ldrb	r3, [r2, #0]
- 80027c6:	f361 1306 	bfi	r3, r1, #4, #3
- 80027ca:	7013      	strb	r3, [r2, #0]
+ 80027d6:	4b39      	ldr	r3, [pc, #228]	@ (80028bc <ProcessingFun+0x358>)
+ 80027d8:	781b      	ldrb	r3, [r3, #0]
+ 80027da:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80027de:	b2db      	uxtb	r3, r3
+ 80027e0:	3b04      	subs	r3, #4
+ 80027e2:	b2db      	uxtb	r3, r3
+ 80027e4:	f003 0307 	and.w	r3, r3, #7
+ 80027e8:	b2d9      	uxtb	r1, r3
+ 80027ea:	4a34      	ldr	r2, [pc, #208]	@ (80028bc <ProcessingFun+0x358>)
+ 80027ec:	7813      	ldrb	r3, [r2, #0]
+ 80027ee:	f361 1306 	bfi	r3, r1, #4, #3
+ 80027f2:	7013      	strb	r3, [r2, #0]
 		}else{
 			G_xMy_Data.Speed = Speed1;
 		}
 		break;
- 80027cc:	e09d      	b.n	800290a <ProcessingFun+0x3a6>
+ 80027f4:	e0bb      	b.n	800296e <ProcessingFun+0x40a>
 			G_xMy_Data.Speed = Speed1;
- 80027ce:	4a3c      	ldr	r2, [pc, #240]	@ (80028c0 <ProcessingFun+0x35c>)
- 80027d0:	7813      	ldrb	r3, [r2, #0]
- 80027d2:	2101      	movs	r1, #1
- 80027d4:	f361 1306 	bfi	r3, r1, #4, #3
- 80027d8:	7013      	strb	r3, [r2, #0]
+ 80027f6:	4a31      	ldr	r2, [pc, #196]	@ (80028bc <ProcessingFun+0x358>)
+ 80027f8:	7813      	ldrb	r3, [r2, #0]
+ 80027fa:	2101      	movs	r1, #1
+ 80027fc:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002800:	7013      	strb	r3, [r2, #0]
 		break;
- 80027da:	e096      	b.n	800290a <ProcessingFun+0x3a6>
+ 8002802:	e0b4      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x68: //Decrease speed
 		//TODO
 		if(G_xMy_Data.Speed > 2){
- 80027dc:	4b38      	ldr	r3, [pc, #224]	@ (80028c0 <ProcessingFun+0x35c>)
- 80027de:	781b      	ldrb	r3, [r3, #0]
- 80027e0:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80027e4:	b2db      	uxtb	r3, r3
- 80027e6:	2b02      	cmp	r3, #2
- 80027e8:	d90f      	bls.n	800280a <ProcessingFun+0x2a6>
+ 8002804:	4b2d      	ldr	r3, [pc, #180]	@ (80028bc <ProcessingFun+0x358>)
+ 8002806:	781b      	ldrb	r3, [r3, #0]
+ 8002808:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 800280c:	b2db      	uxtb	r3, r3
+ 800280e:	2b02      	cmp	r3, #2
+ 8002810:	d90f      	bls.n	8002832 <ProcessingFun+0x2ce>
 			G_xMy_Data.Speed -= 2;
- 80027ea:	4b35      	ldr	r3, [pc, #212]	@ (80028c0 <ProcessingFun+0x35c>)
- 80027ec:	781b      	ldrb	r3, [r3, #0]
- 80027ee:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80027f2:	b2db      	uxtb	r3, r3
- 80027f4:	3b02      	subs	r3, #2
- 80027f6:	b2db      	uxtb	r3, r3
- 80027f8:	f003 0307 	and.w	r3, r3, #7
- 80027fc:	b2d9      	uxtb	r1, r3
- 80027fe:	4a30      	ldr	r2, [pc, #192]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002800:	7813      	ldrb	r3, [r2, #0]
- 8002802:	f361 1306 	bfi	r3, r1, #4, #3
- 8002806:	7013      	strb	r3, [r2, #0]
+ 8002812:	4b2a      	ldr	r3, [pc, #168]	@ (80028bc <ProcessingFun+0x358>)
+ 8002814:	781b      	ldrb	r3, [r3, #0]
+ 8002816:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 800281a:	b2db      	uxtb	r3, r3
+ 800281c:	3b02      	subs	r3, #2
+ 800281e:	b2db      	uxtb	r3, r3
+ 8002820:	f003 0307 	and.w	r3, r3, #7
+ 8002824:	b2d9      	uxtb	r1, r3
+ 8002826:	4a25      	ldr	r2, [pc, #148]	@ (80028bc <ProcessingFun+0x358>)
+ 8002828:	7813      	ldrb	r3, [r2, #0]
+ 800282a:	f361 1306 	bfi	r3, r1, #4, #3
+ 800282e:	7013      	strb	r3, [r2, #0]
 		}else{
 			G_xMy_Data.Speed = Speed1;
 		}
 		break;
- 8002808:	e07f      	b.n	800290a <ProcessingFun+0x3a6>
+ 8002830:	e09d      	b.n	800296e <ProcessingFun+0x40a>
 			G_xMy_Data.Speed = Speed1;
- 800280a:	4a2d      	ldr	r2, [pc, #180]	@ (80028c0 <ProcessingFun+0x35c>)
- 800280c:	7813      	ldrb	r3, [r2, #0]
- 800280e:	2101      	movs	r1, #1
- 8002810:	f361 1306 	bfi	r3, r1, #4, #3
- 8002814:	7013      	strb	r3, [r2, #0]
+ 8002832:	4a22      	ldr	r2, [pc, #136]	@ (80028bc <ProcessingFun+0x358>)
+ 8002834:	7813      	ldrb	r3, [r2, #0]
+ 8002836:	2101      	movs	r1, #1
+ 8002838:	f361 1306 	bfi	r3, r1, #4, #3
+ 800283c:	7013      	strb	r3, [r2, #0]
 		break;
- 8002816:	e078      	b.n	800290a <ProcessingFun+0x3a6>
+ 800283e:	e096      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x6c: //Decrease speed lightly
 		//TODO
 		if(G_xMy_Data.Speed > 1){
- 8002818:	4b29      	ldr	r3, [pc, #164]	@ (80028c0 <ProcessingFun+0x35c>)
- 800281a:	781b      	ldrb	r3, [r3, #0]
- 800281c:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002820:	b2db      	uxtb	r3, r3
- 8002822:	2b01      	cmp	r3, #1
- 8002824:	d90f      	bls.n	8002846 <ProcessingFun+0x2e2>
+ 8002840:	4b1e      	ldr	r3, [pc, #120]	@ (80028bc <ProcessingFun+0x358>)
+ 8002842:	781b      	ldrb	r3, [r3, #0]
+ 8002844:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002848:	b2db      	uxtb	r3, r3
+ 800284a:	2b01      	cmp	r3, #1
+ 800284c:	d90f      	bls.n	800286e <ProcessingFun+0x30a>
 			G_xMy_Data.Speed -= 1;
- 8002826:	4b26      	ldr	r3, [pc, #152]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002828:	781b      	ldrb	r3, [r3, #0]
- 800282a:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 800282e:	b2db      	uxtb	r3, r3
- 8002830:	3b01      	subs	r3, #1
- 8002832:	b2db      	uxtb	r3, r3
- 8002834:	f003 0307 	and.w	r3, r3, #7
- 8002838:	b2d9      	uxtb	r1, r3
- 800283a:	4a21      	ldr	r2, [pc, #132]	@ (80028c0 <ProcessingFun+0x35c>)
- 800283c:	7813      	ldrb	r3, [r2, #0]
- 800283e:	f361 1306 	bfi	r3, r1, #4, #3
- 8002842:	7013      	strb	r3, [r2, #0]
+ 800284e:	4b1b      	ldr	r3, [pc, #108]	@ (80028bc <ProcessingFun+0x358>)
+ 8002850:	781b      	ldrb	r3, [r3, #0]
+ 8002852:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002856:	b2db      	uxtb	r3, r3
+ 8002858:	3b01      	subs	r3, #1
+ 800285a:	b2db      	uxtb	r3, r3
+ 800285c:	f003 0307 	and.w	r3, r3, #7
+ 8002860:	b2d9      	uxtb	r1, r3
+ 8002862:	4a16      	ldr	r2, [pc, #88]	@ (80028bc <ProcessingFun+0x358>)
+ 8002864:	7813      	ldrb	r3, [r2, #0]
+ 8002866:	f361 1306 	bfi	r3, r1, #4, #3
+ 800286a:	7013      	strb	r3, [r2, #0]
 		}else{
 			G_xMy_Data.Direction = Stop;
 		}
 		break;
- 8002844:	e061      	b.n	800290a <ProcessingFun+0x3a6>
+ 800286c:	e07f      	b.n	800296e <ProcessingFun+0x40a>
 			G_xMy_Data.Direction = Stop;
- 8002846:	4a1e      	ldr	r2, [pc, #120]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002848:	7813      	ldrb	r3, [r2, #0]
- 800284a:	2108      	movs	r1, #8
- 800284c:	f361 0303 	bfi	r3, r1, #0, #4
- 8002850:	7013      	strb	r3, [r2, #0]
+ 800286e:	4a13      	ldr	r2, [pc, #76]	@ (80028bc <ProcessingFun+0x358>)
+ 8002870:	7813      	ldrb	r3, [r2, #0]
+ 8002872:	2108      	movs	r1, #8
+ 8002874:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002878:	7013      	strb	r3, [r2, #0]
 		break;
- 8002852:	e05a      	b.n	800290a <ProcessingFun+0x3a6>
+ 800287a:	e078      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x70: //Increase speed greatly
 		//TODO
 		if(G_xMy_Data.Speed+4 < 8){
- 8002854:	4b1a      	ldr	r3, [pc, #104]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002856:	781b      	ldrb	r3, [r3, #0]
- 8002858:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 800285c:	b2db      	uxtb	r3, r3
- 800285e:	2b03      	cmp	r3, #3
- 8002860:	d80f      	bhi.n	8002882 <ProcessingFun+0x31e>
+ 800287c:	4b0f      	ldr	r3, [pc, #60]	@ (80028bc <ProcessingFun+0x358>)
+ 800287e:	781b      	ldrb	r3, [r3, #0]
+ 8002880:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002884:	b2db      	uxtb	r3, r3
+ 8002886:	2b03      	cmp	r3, #3
+ 8002888:	d80f      	bhi.n	80028aa <ProcessingFun+0x346>
 			G_xMy_Data.Speed += 4;
- 8002862:	4b17      	ldr	r3, [pc, #92]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002864:	781b      	ldrb	r3, [r3, #0]
- 8002866:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 800286a:	b2db      	uxtb	r3, r3
- 800286c:	3304      	adds	r3, #4
- 800286e:	b2db      	uxtb	r3, r3
- 8002870:	f003 0307 	and.w	r3, r3, #7
- 8002874:	b2d9      	uxtb	r1, r3
- 8002876:	4a12      	ldr	r2, [pc, #72]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002878:	7813      	ldrb	r3, [r2, #0]
- 800287a:	f361 1306 	bfi	r3, r1, #4, #3
- 800287e:	7013      	strb	r3, [r2, #0]
+ 800288a:	4b0c      	ldr	r3, [pc, #48]	@ (80028bc <ProcessingFun+0x358>)
+ 800288c:	781b      	ldrb	r3, [r3, #0]
+ 800288e:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002892:	b2db      	uxtb	r3, r3
+ 8002894:	3304      	adds	r3, #4
+ 8002896:	b2db      	uxtb	r3, r3
+ 8002898:	f003 0307 	and.w	r3, r3, #7
+ 800289c:	b2d9      	uxtb	r1, r3
+ 800289e:	4a07      	ldr	r2, [pc, #28]	@ (80028bc <ProcessingFun+0x358>)
+ 80028a0:	7813      	ldrb	r3, [r2, #0]
+ 80028a2:	f361 1306 	bfi	r3, r1, #4, #3
+ 80028a6:	7013      	strb	r3, [r2, #0]
 		}else{
 			G_xMy_Data.Speed = Speed7;
 		}
 		break;
- 8002880:	e043      	b.n	800290a <ProcessingFun+0x3a6>
+ 80028a8:	e061      	b.n	800296e <ProcessingFun+0x40a>
 			G_xMy_Data.Speed = Speed7;
- 8002882:	4a0f      	ldr	r2, [pc, #60]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002884:	7813      	ldrb	r3, [r2, #0]
- 8002886:	f043 0370 	orr.w	r3, r3, #112	@ 0x70
- 800288a:	7013      	strb	r3, [r2, #0]
+ 80028aa:	4a04      	ldr	r2, [pc, #16]	@ (80028bc <ProcessingFun+0x358>)
+ 80028ac:	7813      	ldrb	r3, [r2, #0]
+ 80028ae:	f043 0370 	orr.w	r3, r3, #112	@ 0x70
+ 80028b2:	7013      	strb	r3, [r2, #0]
 		break;
- 800288c:	e03d      	b.n	800290a <ProcessingFun+0x3a6>
+ 80028b4:	e05b      	b.n	800296e <ProcessingFun+0x40a>
+ 80028b6:	bf00      	nop
+ 80028b8:	200001d4 	.word	0x200001d4
+ 80028bc:	200001cc 	.word	0x200001cc
 	case 0x78: //Increase speed
 		//TODO
 		if(G_xMy_Data.Speed+2 < 8){
- 800288e:	4b0c      	ldr	r3, [pc, #48]	@ (80028c0 <ProcessingFun+0x35c>)
- 8002890:	781b      	ldrb	r3, [r3, #0]
- 8002892:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002896:	b2db      	uxtb	r3, r3
- 8002898:	2b05      	cmp	r3, #5
- 800289a:	d813      	bhi.n	80028c4 <ProcessingFun+0x360>
+ 80028c0:	4b52      	ldr	r3, [pc, #328]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 80028c2:	781b      	ldrb	r3, [r3, #0]
+ 80028c4:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80028c8:	b2db      	uxtb	r3, r3
+ 80028ca:	2b05      	cmp	r3, #5
+ 80028cc:	d80f      	bhi.n	80028ee <ProcessingFun+0x38a>
 			G_xMy_Data.Speed += 2;
- 800289c:	4b08      	ldr	r3, [pc, #32]	@ (80028c0 <ProcessingFun+0x35c>)
- 800289e:	781b      	ldrb	r3, [r3, #0]
- 80028a0:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80028a4:	b2db      	uxtb	r3, r3
- 80028a6:	3302      	adds	r3, #2
- 80028a8:	b2db      	uxtb	r3, r3
- 80028aa:	f003 0307 	and.w	r3, r3, #7
- 80028ae:	b2d9      	uxtb	r1, r3
- 80028b0:	4a03      	ldr	r2, [pc, #12]	@ (80028c0 <ProcessingFun+0x35c>)
- 80028b2:	7813      	ldrb	r3, [r2, #0]
- 80028b4:	f361 1306 	bfi	r3, r1, #4, #3
- 80028b8:	7013      	strb	r3, [r2, #0]
+ 80028ce:	4b4f      	ldr	r3, [pc, #316]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 80028d0:	781b      	ldrb	r3, [r3, #0]
+ 80028d2:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 80028d6:	b2db      	uxtb	r3, r3
+ 80028d8:	3302      	adds	r3, #2
+ 80028da:	b2db      	uxtb	r3, r3
+ 80028dc:	f003 0307 	and.w	r3, r3, #7
+ 80028e0:	b2d9      	uxtb	r1, r3
+ 80028e2:	4a4a      	ldr	r2, [pc, #296]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 80028e4:	7813      	ldrb	r3, [r2, #0]
+ 80028e6:	f361 1306 	bfi	r3, r1, #4, #3
+ 80028ea:	7013      	strb	r3, [r2, #0]
 		}else{
 			G_xMy_Data.Speed = Speed7;
 		}
 		break;
- 80028ba:	e026      	b.n	800290a <ProcessingFun+0x3a6>
- 80028bc:	200001d4 	.word	0x200001d4
- 80028c0:	200001cc 	.word	0x200001cc
+ 80028ec:	e03f      	b.n	800296e <ProcessingFun+0x40a>
 			G_xMy_Data.Speed = Speed7;
- 80028c4:	4a37      	ldr	r2, [pc, #220]	@ (80029a4 <ProcessingFun+0x440>)
- 80028c6:	7813      	ldrb	r3, [r2, #0]
- 80028c8:	f043 0370 	orr.w	r3, r3, #112	@ 0x70
- 80028cc:	7013      	strb	r3, [r2, #0]
+ 80028ee:	4a47      	ldr	r2, [pc, #284]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 80028f0:	7813      	ldrb	r3, [r2, #0]
+ 80028f2:	f043 0370 	orr.w	r3, r3, #112	@ 0x70
+ 80028f6:	7013      	strb	r3, [r2, #0]
 		break;
- 80028ce:	e01c      	b.n	800290a <ProcessingFun+0x3a6>
+ 80028f8:	e039      	b.n	800296e <ProcessingFun+0x40a>
 	case 0x7c: //Increase speed lightly
 		//TODO
 		if(G_xMy_Data.Speed != Speed7){
- 80028d0:	4b34      	ldr	r3, [pc, #208]	@ (80029a4 <ProcessingFun+0x440>)
- 80028d2:	781b      	ldrb	r3, [r3, #0]
- 80028d4:	f003 0370 	and.w	r3, r3, #112	@ 0x70
- 80028d8:	b2db      	uxtb	r3, r3
- 80028da:	2b70      	cmp	r3, #112	@ 0x70
- 80028dc:	d00f      	beq.n	80028fe <ProcessingFun+0x39a>
+ 80028fa:	4b44      	ldr	r3, [pc, #272]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 80028fc:	781b      	ldrb	r3, [r3, #0]
+ 80028fe:	f003 0370 	and.w	r3, r3, #112	@ 0x70
+ 8002902:	b2db      	uxtb	r3, r3
+ 8002904:	2b70      	cmp	r3, #112	@ 0x70
+ 8002906:	d00f      	beq.n	8002928 <ProcessingFun+0x3c4>
 			G_xMy_Data.Speed += 1;
- 80028de:	4b31      	ldr	r3, [pc, #196]	@ (80029a4 <ProcessingFun+0x440>)
- 80028e0:	781b      	ldrb	r3, [r3, #0]
- 80028e2:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 80028e6:	b2db      	uxtb	r3, r3
- 80028e8:	3301      	adds	r3, #1
- 80028ea:	b2db      	uxtb	r3, r3
- 80028ec:	f003 0307 	and.w	r3, r3, #7
- 80028f0:	b2d9      	uxtb	r1, r3
- 80028f2:	4a2c      	ldr	r2, [pc, #176]	@ (80029a4 <ProcessingFun+0x440>)
- 80028f4:	7813      	ldrb	r3, [r2, #0]
- 80028f6:	f361 1306 	bfi	r3, r1, #4, #3
- 80028fa:	7013      	strb	r3, [r2, #0]
+ 8002908:	4b40      	ldr	r3, [pc, #256]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 800290a:	781b      	ldrb	r3, [r3, #0]
+ 800290c:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 8002910:	b2db      	uxtb	r3, r3
+ 8002912:	3301      	adds	r3, #1
+ 8002914:	b2db      	uxtb	r3, r3
+ 8002916:	f003 0307 	and.w	r3, r3, #7
+ 800291a:	b2d9      	uxtb	r1, r3
+ 800291c:	4a3b      	ldr	r2, [pc, #236]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 800291e:	7813      	ldrb	r3, [r2, #0]
+ 8002920:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002924:	7013      	strb	r3, [r2, #0]
 		}else{
 			G_xMy_Data.Speed = Speed7;
 		}
 		break;
- 80028fc:	e004      	b.n	8002908 <ProcessingFun+0x3a4>
+ 8002926:	e022      	b.n	800296e <ProcessingFun+0x40a>
 			G_xMy_Data.Speed = Speed7;
- 80028fe:	4a29      	ldr	r2, [pc, #164]	@ (80029a4 <ProcessingFun+0x440>)
- 8002900:	7813      	ldrb	r3, [r2, #0]
- 8002902:	f043 0370 	orr.w	r3, r3, #112	@ 0x70
- 8002906:	7013      	strb	r3, [r2, #0]
+ 8002928:	4a38      	ldr	r2, [pc, #224]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 800292a:	7813      	ldrb	r3, [r2, #0]
+ 800292c:	f043 0370 	orr.w	r3, r3, #112	@ 0x70
+ 8002930:	7013      	strb	r3, [r2, #0]
 		break;
- 8002908:	bf00      	nop
+ 8002932:	e01c      	b.n	800296e <ProcessingFun+0x40a>
+		//TODO
+		//error in ACK(ACK sent is invalid)
+		//retransmition (receive data)
+		break;
+	default:
+		switch(L_u8Data){
+ 8002934:	79fb      	ldrb	r3, [r7, #7]
+ 8002936:	3b08      	subs	r3, #8
+ 8002938:	2b06      	cmp	r3, #6
+ 800293a:	d817      	bhi.n	800296c <ProcessingFun+0x408>
+ 800293c:	a201      	add	r2, pc, #4	@ (adr r2, 8002944 <ProcessingFun+0x3e0>)
+ 800293e:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 8002942:	bf00      	nop
+ 8002944:	08002961 	.word	0x08002961
+ 8002948:	08002961 	.word	0x08002961
+ 800294c:	08002961 	.word	0x08002961
+ 8002950:	08002961 	.word	0x08002961
+ 8002954:	0800296d 	.word	0x0800296d
+ 8002958:	0800296d 	.word	0x0800296d
+ 800295c:	08002961 	.word	0x08002961
+		case 0x8:
+			//TODO
+			//There is a bump with distance
+			//distance = APP_G_u8DataFromUART & 0xF
+
+			break;
+ 8002960:	bf00      	nop
+			//request code x is valid
+			//x = APP_G_u8DataFromUART & 0x7
+			break;
+		}
+
+		break;
+ 8002962:	e003      	b.n	800296c <ProcessingFun+0x408>
+		break;
+ 8002964:	bf00      	nop
+ 8002966:	e002      	b.n	800296e <ProcessingFun+0x40a>
+		break;
+ 8002968:	bf00      	nop
+ 800296a:	e000      	b.n	800296e <ProcessingFun+0x40a>
+		break;
+ 800296c:	bf00      	nop
 	}
 
 	G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
- 800290a:	4b26      	ldr	r3, [pc, #152]	@ (80029a4 <ProcessingFun+0x440>)
- 800290c:	781b      	ldrb	r3, [r3, #0]
- 800290e:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 8002912:	b2d9      	uxtb	r1, r3
- 8002914:	4a24      	ldr	r2, [pc, #144]	@ (80029a8 <ProcessingFun+0x444>)
- 8002916:	7813      	ldrb	r3, [r2, #0]
- 8002918:	f361 0303 	bfi	r3, r1, #0, #4
- 800291c:	7013      	strb	r3, [r2, #0]
+ 800296e:	4b27      	ldr	r3, [pc, #156]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 8002970:	781b      	ldrb	r3, [r3, #0]
+ 8002972:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 8002976:	b2d9      	uxtb	r1, r3
+ 8002978:	4a25      	ldr	r2, [pc, #148]	@ (8002a10 <ProcessingFun+0x4ac>)
+ 800297a:	7813      	ldrb	r3, [r2, #0]
+ 800297c:	f361 0303 	bfi	r3, r1, #0, #4
+ 8002980:	7013      	strb	r3, [r2, #0]
 	G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
- 800291e:	4b21      	ldr	r3, [pc, #132]	@ (80029a4 <ProcessingFun+0x440>)
- 8002920:	781b      	ldrb	r3, [r3, #0]
- 8002922:	f3c3 1302 	ubfx	r3, r3, #4, #3
- 8002926:	b2d9      	uxtb	r1, r3
- 8002928:	4a1f      	ldr	r2, [pc, #124]	@ (80029a8 <ProcessingFun+0x444>)
- 800292a:	7813      	ldrb	r3, [r2, #0]
- 800292c:	f361 1306 	bfi	r3, r1, #4, #3
- 8002930:	7013      	strb	r3, [r2, #0]
+ 8002982:	4b22      	ldr	r3, [pc, #136]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 8002984:	781b      	ldrb	r3, [r3, #0]
+ 8002986:	f3c3 1302 	ubfx	r3, r3, #4, #3
+ 800298a:	b2d9      	uxtb	r1, r3
+ 800298c:	4a20      	ldr	r2, [pc, #128]	@ (8002a10 <ProcessingFun+0x4ac>)
+ 800298e:	7813      	ldrb	r3, [r2, #0]
+ 8002990:	f361 1306 	bfi	r3, r1, #4, #3
+ 8002994:	7013      	strb	r3, [r2, #0]
 	switch(G_xMy_Data.Direction){
- 8002932:	4b1c      	ldr	r3, [pc, #112]	@ (80029a4 <ProcessingFun+0x440>)
- 8002934:	781b      	ldrb	r3, [r3, #0]
- 8002936:	f3c3 0303 	ubfx	r3, r3, #0, #4
- 800293a:	b2db      	uxtb	r3, r3
- 800293c:	2b08      	cmp	r3, #8
- 800293e:	d82d      	bhi.n	800299c <ProcessingFun+0x438>
- 8002940:	a201      	add	r2, pc, #4	@ (adr r2, 8002948 <ProcessingFun+0x3e4>)
- 8002942:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
- 8002946:	bf00      	nop
- 8002948:	0800296d 	.word	0x0800296d
- 800294c:	08002979 	.word	0x08002979
- 8002950:	08002997 	.word	0x08002997
- 8002954:	08002997 	.word	0x08002997
- 8002958:	0800298b 	.word	0x0800298b
- 800295c:	08002991 	.word	0x08002991
- 8002960:	0800297f 	.word	0x0800297f
- 8002964:	08002985 	.word	0x08002985
- 8002968:	08002973 	.word	0x08002973
+ 8002996:	4b1d      	ldr	r3, [pc, #116]	@ (8002a0c <ProcessingFun+0x4a8>)
+ 8002998:	781b      	ldrb	r3, [r3, #0]
+ 800299a:	f3c3 0303 	ubfx	r3, r3, #0, #4
+ 800299e:	b2db      	uxtb	r3, r3
+ 80029a0:	2b08      	cmp	r3, #8
+ 80029a2:	d82d      	bhi.n	8002a00 <ProcessingFun+0x49c>
+ 80029a4:	a201      	add	r2, pc, #4	@ (adr r2, 80029ac <ProcessingFun+0x448>)
+ 80029a6:	f852 f023 	ldr.w	pc, [r2, r3, lsl #2]
+ 80029aa:	bf00      	nop
+ 80029ac:	080029d1 	.word	0x080029d1
+ 80029b0:	080029dd 	.word	0x080029dd
+ 80029b4:	080029fb 	.word	0x080029fb
+ 80029b8:	080029fb 	.word	0x080029fb
+ 80029bc:	080029ef 	.word	0x080029ef
+ 80029c0:	080029f5 	.word	0x080029f5
+ 80029c4:	080029e3 	.word	0x080029e3
+ 80029c8:	080029e9 	.word	0x080029e9
+ 80029cc:	080029d7 	.word	0x080029d7
 	case Go:
 		APP_voidGoTasks();
- 800296c:	f7ff fb06 	bl	8001f7c <APP_voidGoTasks>
+ 80029d0:	f7ff fad4 	bl	8001f7c <APP_voidGoTasks>
 		break;
- 8002970:	e015      	b.n	800299e <ProcessingFun+0x43a>
+ 80029d4:	e015      	b.n	8002a02 <ProcessingFun+0x49e>
 	case Stop:
 		APP_VoidStop();
- 8002972:	f7ff faef 	bl	8001f54 <APP_VoidStop>
+ 80029d6:	f7ff fabd 	bl	8001f54 <APP_VoidStop>
 		break;
- 8002976:	e012      	b.n	800299e <ProcessingFun+0x43a>
+ 80029da:	e012      	b.n	8002a02 <ProcessingFun+0x49e>
 	case Back:
 		APP_voidBackTasks();
- 8002978:	f7ff fb82 	bl	8002080 <APP_voidBackTasks>
+ 80029dc:	f7ff fb50 	bl	8002080 <APP_voidBackTasks>
 		break;
- 800297c:	e00f      	b.n	800299e <ProcessingFun+0x43a>
+ 80029e0:	e00f      	b.n	8002a02 <ProcessingFun+0x49e>
 	case Backward_Right:
 		APP_voidBackward_RightTasks();
- 800297e:	f7ff fbfb 	bl	8002178 <APP_voidBackward_RightTasks>
+ 80029e2:	f7ff fbc9 	bl	8002178 <APP_voidBackward_RightTasks>
 		break;
- 8002982:	e00c      	b.n	800299e <ProcessingFun+0x43a>
+ 80029e6:	e00c      	b.n	8002a02 <ProcessingFun+0x49e>
 	case Backward_Left:
 		APP_voidBackward_LEFTTasks();
- 8002984:	f7ff fc74 	bl	8002270 <APP_voidBackward_LEFTTasks>
+ 80029e8:	f7ff fc42 	bl	8002270 <APP_voidBackward_LEFTTasks>
 		break;
- 8002988:	e009      	b.n	800299e <ProcessingFun+0x43a>
+ 80029ec:	e009      	b.n	8002a02 <ProcessingFun+0x49e>
 	case Forward_Right:
 		APP_voidForward_RightTasks();
- 800298a:	f7ff fcf3 	bl	8002374 <APP_voidForward_RightTasks>
+ 80029ee:	f7ff fcc1 	bl	8002374 <APP_voidForward_RightTasks>
 		break;
- 800298e:	e006      	b.n	800299e <ProcessingFun+0x43a>
+ 80029f2:	e006      	b.n	8002a02 <ProcessingFun+0x49e>
 	case Forward_Left:
 		APP_voidForward_LeftTasks();
- 8002990:	f7ff fd6c 	bl	800246c <APP_voidForward_LeftTasks>
+ 80029f4:	f7ff fd3a 	bl	800246c <APP_voidForward_LeftTasks>
 		break;
- 8002994:	e003      	b.n	800299e <ProcessingFun+0x43a>
+ 80029f8:	e003      	b.n	8002a02 <ProcessingFun+0x49e>
 	case Right:
 	case Left:
 		APP_voidRight_LeftTasks();
- 8002996:	f7ff fce7 	bl	8002368 <APP_voidRight_LeftTasks>
+ 80029fa:	f7ff fcb5 	bl	8002368 <APP_voidRight_LeftTasks>
 		break;
- 800299a:	e000      	b.n	800299e <ProcessingFun+0x43a>
+ 80029fe:	e000      	b.n	8002a02 <ProcessingFun+0x49e>
 	default:
 		//do nothing
 		break;
- 800299c:	bf00      	nop
+ 8002a00:	bf00      	nop
 	}
 	return;
- 800299e:	bf00      	nop
+ 8002a02:	bf00      	nop
 }
- 80029a0:	bd80      	pop	{r7, pc}
- 80029a2:	bf00      	nop
- 80029a4:	200001cc 	.word	0x200001cc
- 80029a8:	200001d8 	.word	0x200001d8
+ 8002a04:	3708      	adds	r7, #8
+ 8002a06:	46bd      	mov	sp, r7
+ 8002a08:	bd80      	pop	{r7, pc}
+ 8002a0a:	bf00      	nop
+ 8002a0c:	200001cc 	.word	0x200001cc
+ 8002a10:	200001d8 	.word	0x200001d8
 
-080029ac <NMI_Handler>:
+08002a14 <NMI_Handler>:
 /******************************************************************************/
 /**
   * @brief This function handles Non maskable interrupt.
   */
 void NMI_Handler(void)
 {
- 80029ac:	b480      	push	{r7}
- 80029ae:	af00      	add	r7, sp, #0
+ 8002a14:	b480      	push	{r7}
+ 8002a16:	af00      	add	r7, sp, #0
 
   /* USER CODE END NonMaskableInt_IRQn 0 */
   /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
 
   /* USER CODE END NonMaskableInt_IRQn 1 */
 }
- 80029b0:	bf00      	nop
- 80029b2:	46bd      	mov	sp, r7
- 80029b4:	bc80      	pop	{r7}
- 80029b6:	4770      	bx	lr
+ 8002a18:	bf00      	nop
+ 8002a1a:	46bd      	mov	sp, r7
+ 8002a1c:	bc80      	pop	{r7}
+ 8002a1e:	4770      	bx	lr
 
-080029b8 <HardFault_Handler>:
+08002a20 <HardFault_Handler>:
 
 /**
   * @brief This function handles Hard fault interrupt.
   */
 void HardFault_Handler(void)
 {
- 80029b8:	b480      	push	{r7}
- 80029ba:	af00      	add	r7, sp, #0
+ 8002a20:	b480      	push	{r7}
+ 8002a22:	af00      	add	r7, sp, #0
   /* USER CODE BEGIN HardFault_IRQn 0 */
 
   /* USER CODE END HardFault_IRQn 0 */
   while (1)
- 80029bc:	bf00      	nop
- 80029be:	e7fd      	b.n	80029bc <HardFault_Handler+0x4>
+ 8002a24:	bf00      	nop
+ 8002a26:	e7fd      	b.n	8002a24 <HardFault_Handler+0x4>
 
-080029c0 <MemManage_Handler>:
+08002a28 <MemManage_Handler>:
 
 /**
   * @brief This function handles Memory management fault.
   */
 void MemManage_Handler(void)
 {
- 80029c0:	b480      	push	{r7}
- 80029c2:	af00      	add	r7, sp, #0
+ 8002a28:	b480      	push	{r7}
+ 8002a2a:	af00      	add	r7, sp, #0
   /* USER CODE BEGIN MemoryManagement_IRQn 0 */
 
   /* USER CODE END MemoryManagement_IRQn 0 */
   while (1)
- 80029c4:	bf00      	nop
- 80029c6:	e7fd      	b.n	80029c4 <MemManage_Handler+0x4>
+ 8002a2c:	bf00      	nop
+ 8002a2e:	e7fd      	b.n	8002a2c <MemManage_Handler+0x4>
 
-080029c8 <BusFault_Handler>:
+08002a30 <BusFault_Handler>:
 
 /**
   * @brief This function handles Prefetch fault, memory access fault.
   */
 void BusFault_Handler(void)
 {
- 80029c8:	b480      	push	{r7}
- 80029ca:	af00      	add	r7, sp, #0
+ 8002a30:	b480      	push	{r7}
+ 8002a32:	af00      	add	r7, sp, #0
   /* USER CODE BEGIN BusFault_IRQn 0 */
 
   /* USER CODE END BusFault_IRQn 0 */
   while (1)
- 80029cc:	bf00      	nop
- 80029ce:	e7fd      	b.n	80029cc <BusFault_Handler+0x4>
+ 8002a34:	bf00      	nop
+ 8002a36:	e7fd      	b.n	8002a34 <BusFault_Handler+0x4>
 
-080029d0 <UsageFault_Handler>:
+08002a38 <UsageFault_Handler>:
 
 /**
   * @brief This function handles Undefined instruction or illegal state.
   */
 void UsageFault_Handler(void)
 {
- 80029d0:	b480      	push	{r7}
- 80029d2:	af00      	add	r7, sp, #0
+ 8002a38:	b480      	push	{r7}
+ 8002a3a:	af00      	add	r7, sp, #0
   /* USER CODE BEGIN UsageFault_IRQn 0 */
 
   /* USER CODE END UsageFault_IRQn 0 */
   while (1)
- 80029d4:	bf00      	nop
- 80029d6:	e7fd      	b.n	80029d4 <UsageFault_Handler+0x4>
+ 8002a3c:	bf00      	nop
+ 8002a3e:	e7fd      	b.n	8002a3c <UsageFault_Handler+0x4>
 
-080029d8 <SVC_Handler>:
+08002a40 <SVC_Handler>:
 
 /**
   * @brief This function handles System service call via SWI instruction.
   */
 void SVC_Handler(void)
 {
- 80029d8:	b480      	push	{r7}
- 80029da:	af00      	add	r7, sp, #0
+ 8002a40:	b480      	push	{r7}
+ 8002a42:	af00      	add	r7, sp, #0
 
   /* USER CODE END SVCall_IRQn 0 */
   /* USER CODE BEGIN SVCall_IRQn 1 */
 
   /* USER CODE END SVCall_IRQn 1 */
 }
- 80029dc:	bf00      	nop
- 80029de:	46bd      	mov	sp, r7
- 80029e0:	bc80      	pop	{r7}
- 80029e2:	4770      	bx	lr
+ 8002a44:	bf00      	nop
+ 8002a46:	46bd      	mov	sp, r7
+ 8002a48:	bc80      	pop	{r7}
+ 8002a4a:	4770      	bx	lr
 
-080029e4 <DebugMon_Handler>:
+08002a4c <DebugMon_Handler>:
 
 /**
   * @brief This function handles Debug monitor.
   */
 void DebugMon_Handler(void)
 {
- 80029e4:	b480      	push	{r7}
- 80029e6:	af00      	add	r7, sp, #0
+ 8002a4c:	b480      	push	{r7}
+ 8002a4e:	af00      	add	r7, sp, #0
 
   /* USER CODE END DebugMonitor_IRQn 0 */
   /* USER CODE BEGIN DebugMonitor_IRQn 1 */
 
   /* USER CODE END DebugMonitor_IRQn 1 */
 }
- 80029e8:	bf00      	nop
- 80029ea:	46bd      	mov	sp, r7
- 80029ec:	bc80      	pop	{r7}
- 80029ee:	4770      	bx	lr
+ 8002a50:	bf00      	nop
+ 8002a52:	46bd      	mov	sp, r7
+ 8002a54:	bc80      	pop	{r7}
+ 8002a56:	4770      	bx	lr
 
-080029f0 <PendSV_Handler>:
+08002a58 <PendSV_Handler>:
 
 /**
   * @brief This function handles Pendable request for system service.
   */
 void PendSV_Handler(void)
 {
- 80029f0:	b480      	push	{r7}
- 80029f2:	af00      	add	r7, sp, #0
+ 8002a58:	b480      	push	{r7}
+ 8002a5a:	af00      	add	r7, sp, #0
 
   /* USER CODE END PendSV_IRQn 0 */
   /* USER CODE BEGIN PendSV_IRQn 1 */
 
   /* USER CODE END PendSV_IRQn 1 */
 }
- 80029f4:	bf00      	nop
- 80029f6:	46bd      	mov	sp, r7
- 80029f8:	bc80      	pop	{r7}
- 80029fa:	4770      	bx	lr
+ 8002a5c:	bf00      	nop
+ 8002a5e:	46bd      	mov	sp, r7
+ 8002a60:	bc80      	pop	{r7}
+ 8002a62:	4770      	bx	lr
 
-080029fc <SystemInit>:
+08002a64 <SystemInit>:
   * @note   This function should be used only after reset.
   * @param  None
   * @retval None
   */
 void SystemInit (void)
 {
- 80029fc:	b480      	push	{r7}
- 80029fe:	af00      	add	r7, sp, #0
+ 8002a64:	b480      	push	{r7}
+ 8002a66:	af00      	add	r7, sp, #0
 
   /* Configure the Vector Table location -------------------------------------*/
 #if defined(USER_VECT_TAB_ADDRESS)
   SCB->VTOR = VECT_TAB_BASE_ADDRESS | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. */
 #endif /* USER_VECT_TAB_ADDRESS */
 }
- 8002a00:	bf00      	nop
- 8002a02:	46bd      	mov	sp, r7
- 8002a04:	bc80      	pop	{r7}
- 8002a06:	4770      	bx	lr
+ 8002a68:	bf00      	nop
+ 8002a6a:	46bd      	mov	sp, r7
+ 8002a6c:	bc80      	pop	{r7}
+ 8002a6e:	4770      	bx	lr
 
-08002a08 <Reset_Handler>:
+08002a70 <Reset_Handler>:
   .weak Reset_Handler
   .type Reset_Handler, %function
 Reset_Handler:
 
 /* Copy the data segment initializers from flash to SRAM */
   ldr r0, =_sdata
- 8002a08:	480c      	ldr	r0, [pc, #48]	@ (8002a3c <LoopFillZerobss+0x12>)
+ 8002a70:	480c      	ldr	r0, [pc, #48]	@ (8002aa4 <LoopFillZerobss+0x12>)
   ldr r1, =_edata
- 8002a0a:	490d      	ldr	r1, [pc, #52]	@ (8002a40 <LoopFillZerobss+0x16>)
+ 8002a72:	490d      	ldr	r1, [pc, #52]	@ (8002aa8 <LoopFillZerobss+0x16>)
   ldr r2, =_sidata
- 8002a0c:	4a0d      	ldr	r2, [pc, #52]	@ (8002a44 <LoopFillZerobss+0x1a>)
+ 8002a74:	4a0d      	ldr	r2, [pc, #52]	@ (8002aac <LoopFillZerobss+0x1a>)
   movs r3, #0
- 8002a0e:	2300      	movs	r3, #0
+ 8002a76:	2300      	movs	r3, #0
   b LoopCopyDataInit
- 8002a10:	e002      	b.n	8002a18 <LoopCopyDataInit>
+ 8002a78:	e002      	b.n	8002a80 <LoopCopyDataInit>
 
-08002a12 <CopyDataInit>:
+08002a7a <CopyDataInit>:
 
 CopyDataInit:
   ldr r4, [r2, r3]
- 8002a12:	58d4      	ldr	r4, [r2, r3]
+ 8002a7a:	58d4      	ldr	r4, [r2, r3]
   str r4, [r0, r3]
- 8002a14:	50c4      	str	r4, [r0, r3]
+ 8002a7c:	50c4      	str	r4, [r0, r3]
   adds r3, r3, #4
- 8002a16:	3304      	adds	r3, #4
+ 8002a7e:	3304      	adds	r3, #4
 
-08002a18 <LoopCopyDataInit>:
+08002a80 <LoopCopyDataInit>:
 
 LoopCopyDataInit:
   adds r4, r0, r3
- 8002a18:	18c4      	adds	r4, r0, r3
+ 8002a80:	18c4      	adds	r4, r0, r3
   cmp r4, r1
- 8002a1a:	428c      	cmp	r4, r1
+ 8002a82:	428c      	cmp	r4, r1
   bcc CopyDataInit
- 8002a1c:	d3f9      	bcc.n	8002a12 <CopyDataInit>
+ 8002a84:	d3f9      	bcc.n	8002a7a <CopyDataInit>
   
 /* Zero fill the bss segment. */
   ldr r2, =_sbss
- 8002a1e:	4a0a      	ldr	r2, [pc, #40]	@ (8002a48 <LoopFillZerobss+0x1e>)
+ 8002a86:	4a0a      	ldr	r2, [pc, #40]	@ (8002ab0 <LoopFillZerobss+0x1e>)
   ldr r4, =_ebss
- 8002a20:	4c0a      	ldr	r4, [pc, #40]	@ (8002a4c <LoopFillZerobss+0x22>)
+ 8002a88:	4c0a      	ldr	r4, [pc, #40]	@ (8002ab4 <LoopFillZerobss+0x22>)
   movs r3, #0
- 8002a22:	2300      	movs	r3, #0
+ 8002a8a:	2300      	movs	r3, #0
   b LoopFillZerobss
- 8002a24:	e001      	b.n	8002a2a <LoopFillZerobss>
+ 8002a8c:	e001      	b.n	8002a92 <LoopFillZerobss>
 
-08002a26 <FillZerobss>:
+08002a8e <FillZerobss>:
 
 FillZerobss:
   str  r3, [r2]
- 8002a26:	6013      	str	r3, [r2, #0]
+ 8002a8e:	6013      	str	r3, [r2, #0]
   adds r2, r2, #4
- 8002a28:	3204      	adds	r2, #4
+ 8002a90:	3204      	adds	r2, #4
 
-08002a2a <LoopFillZerobss>:
+08002a92 <LoopFillZerobss>:
 
 LoopFillZerobss:
   cmp r2, r4
- 8002a2a:	42a2      	cmp	r2, r4
+ 8002a92:	42a2      	cmp	r2, r4
   bcc FillZerobss
- 8002a2c:	d3fb      	bcc.n	8002a26 <FillZerobss>
+ 8002a94:	d3fb      	bcc.n	8002a8e <FillZerobss>
 
 /* Call the clock system intitialization function.*/
     bl  SystemInit
- 8002a2e:	f7ff ffe5 	bl	80029fc <SystemInit>
+ 8002a96:	f7ff ffe5 	bl	8002a64 <SystemInit>
 /* Call static constructors */
     bl __libc_init_array
- 8002a32:	f000 f80f 	bl	8002a54 <__libc_init_array>
+ 8002a9a:	f000 f80f 	bl	8002abc <__libc_init_array>
 /* Call the application's entry point.*/
   bl main
- 8002a36:	f7ff f9ef 	bl	8001e18 <main>
+ 8002a9e:	f7ff f9bb 	bl	8001e18 <main>
   bx lr
- 8002a3a:	4770      	bx	lr
+ 8002aa2:	4770      	bx	lr
   ldr r0, =_sdata
- 8002a3c:	20000000 	.word	0x20000000
+ 8002aa4:	20000000 	.word	0x20000000
   ldr r1, =_edata
- 8002a40:	200000cc 	.word	0x200000cc
+ 8002aa8:	200000cc 	.word	0x200000cc
   ldr r2, =_sidata
- 8002a44:	08002abc 	.word	0x08002abc
+ 8002aac:	08002b24 	.word	0x08002b24
   ldr r2, =_sbss
- 8002a48:	200000cc 	.word	0x200000cc
+ 8002ab0:	200000cc 	.word	0x200000cc
   ldr r4, =_ebss
- 8002a4c:	200001dc 	.word	0x200001dc
+ 8002ab4:	200001dc 	.word	0x200001dc
 
-08002a50 <ADC1_2_IRQHandler>:
+08002ab8 <ADC1_2_IRQHandler>:
  * @retval : None
 */
     .section .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
   b Infinite_Loop
- 8002a50:	e7fe      	b.n	8002a50 <ADC1_2_IRQHandler>
+ 8002ab8:	e7fe      	b.n	8002ab8 <ADC1_2_IRQHandler>
 	...
 
-08002a54 <__libc_init_array>:
- 8002a54:	b570      	push	{r4, r5, r6, lr}
- 8002a56:	2600      	movs	r6, #0
- 8002a58:	4d0c      	ldr	r5, [pc, #48]	@ (8002a8c <__libc_init_array+0x38>)
- 8002a5a:	4c0d      	ldr	r4, [pc, #52]	@ (8002a90 <__libc_init_array+0x3c>)
- 8002a5c:	1b64      	subs	r4, r4, r5
- 8002a5e:	10a4      	asrs	r4, r4, #2
- 8002a60:	42a6      	cmp	r6, r4
- 8002a62:	d109      	bne.n	8002a78 <__libc_init_array+0x24>
- 8002a64:	f000 f81a 	bl	8002a9c <_init>
- 8002a68:	2600      	movs	r6, #0
- 8002a6a:	4d0a      	ldr	r5, [pc, #40]	@ (8002a94 <__libc_init_array+0x40>)
- 8002a6c:	4c0a      	ldr	r4, [pc, #40]	@ (8002a98 <__libc_init_array+0x44>)
- 8002a6e:	1b64      	subs	r4, r4, r5
- 8002a70:	10a4      	asrs	r4, r4, #2
- 8002a72:	42a6      	cmp	r6, r4
- 8002a74:	d105      	bne.n	8002a82 <__libc_init_array+0x2e>
- 8002a76:	bd70      	pop	{r4, r5, r6, pc}
- 8002a78:	f855 3b04 	ldr.w	r3, [r5], #4
- 8002a7c:	4798      	blx	r3
- 8002a7e:	3601      	adds	r6, #1
- 8002a80:	e7ee      	b.n	8002a60 <__libc_init_array+0xc>
- 8002a82:	f855 3b04 	ldr.w	r3, [r5], #4
- 8002a86:	4798      	blx	r3
- 8002a88:	3601      	adds	r6, #1
- 8002a8a:	e7f2      	b.n	8002a72 <__libc_init_array+0x1e>
- 8002a8c:	08002ab4 	.word	0x08002ab4
- 8002a90:	08002ab4 	.word	0x08002ab4
- 8002a94:	08002ab4 	.word	0x08002ab4
- 8002a98:	08002ab8 	.word	0x08002ab8
+08002abc <__libc_init_array>:
+ 8002abc:	b570      	push	{r4, r5, r6, lr}
+ 8002abe:	2600      	movs	r6, #0
+ 8002ac0:	4d0c      	ldr	r5, [pc, #48]	@ (8002af4 <__libc_init_array+0x38>)
+ 8002ac2:	4c0d      	ldr	r4, [pc, #52]	@ (8002af8 <__libc_init_array+0x3c>)
+ 8002ac4:	1b64      	subs	r4, r4, r5
+ 8002ac6:	10a4      	asrs	r4, r4, #2
+ 8002ac8:	42a6      	cmp	r6, r4
+ 8002aca:	d109      	bne.n	8002ae0 <__libc_init_array+0x24>
+ 8002acc:	f000 f81a 	bl	8002b04 <_init>
+ 8002ad0:	2600      	movs	r6, #0
+ 8002ad2:	4d0a      	ldr	r5, [pc, #40]	@ (8002afc <__libc_init_array+0x40>)
+ 8002ad4:	4c0a      	ldr	r4, [pc, #40]	@ (8002b00 <__libc_init_array+0x44>)
+ 8002ad6:	1b64      	subs	r4, r4, r5
+ 8002ad8:	10a4      	asrs	r4, r4, #2
+ 8002ada:	42a6      	cmp	r6, r4
+ 8002adc:	d105      	bne.n	8002aea <__libc_init_array+0x2e>
+ 8002ade:	bd70      	pop	{r4, r5, r6, pc}
+ 8002ae0:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8002ae4:	4798      	blx	r3
+ 8002ae6:	3601      	adds	r6, #1
+ 8002ae8:	e7ee      	b.n	8002ac8 <__libc_init_array+0xc>
+ 8002aea:	f855 3b04 	ldr.w	r3, [r5], #4
+ 8002aee:	4798      	blx	r3
+ 8002af0:	3601      	adds	r6, #1
+ 8002af2:	e7f2      	b.n	8002ada <__libc_init_array+0x1e>
+ 8002af4:	08002b1c 	.word	0x08002b1c
+ 8002af8:	08002b1c 	.word	0x08002b1c
+ 8002afc:	08002b1c 	.word	0x08002b1c
+ 8002b00:	08002b20 	.word	0x08002b20
 
-08002a9c <_init>:
- 8002a9c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8002a9e:	bf00      	nop
- 8002aa0:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8002aa2:	bc08      	pop	{r3}
- 8002aa4:	469e      	mov	lr, r3
- 8002aa6:	4770      	bx	lr
+08002b04 <_init>:
+ 8002b04:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8002b06:	bf00      	nop
+ 8002b08:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8002b0a:	bc08      	pop	{r3}
+ 8002b0c:	469e      	mov	lr, r3
+ 8002b0e:	4770      	bx	lr
 
-08002aa8 <_fini>:
- 8002aa8:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
- 8002aaa:	bf00      	nop
- 8002aac:	bcf8      	pop	{r3, r4, r5, r6, r7}
- 8002aae:	bc08      	pop	{r3}
- 8002ab0:	469e      	mov	lr, r3
- 8002ab2:	4770      	bx	lr
+08002b10 <_fini>:
+ 8002b10:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+ 8002b12:	bf00      	nop
+ 8002b14:	bcf8      	pop	{r3, r4, r5, r6, r7}
+ 8002b16:	bc08      	pop	{r3}
+ 8002b18:	469e      	mov	lr, r3
+ 8002b1a:	4770      	bx	lr

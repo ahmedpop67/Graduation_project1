@@ -16,4 +16,7 @@
 /*maximum size of data recived from UART*/
 #define MAX_SIZE_DATA_BUFFER  200
 
+/*maximum size of data Transmitted from UART*/
+#define MAX_SIZE_TX_DATA_BUFFER  20
+
 #endif /* UART_CONFIGURATION_H_ */

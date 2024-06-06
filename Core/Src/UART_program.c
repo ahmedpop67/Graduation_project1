@@ -15,11 +15,18 @@
 
 
 /*global array to store recived data from UART*/
-u8 G_Au8UART_Buffer[MAX_SIZE_DATA_BUFFER] = {0};
-u8 G_u8BufferHeadIndex    = 0;
-u8 G_u8BufferTailIndex    = 0;
-u8 G_u8Counter     = 0;
+u8 G_Au8UART_RxBuffer[MAX_SIZE_DATA_BUFFER] = {0};
+u8 G_u8RxBufferHeadIndex    = 0;
+u8 G_u8RxBufferTailIndex    = 0;
+u8 G_u8RxCounter     = 0;
 u8 G_u8DataFromUART = 0;
+
+/*global array to store transmitting data from UART*/
+u8 G_Au8UART_TxBuffer[MAX_SIZE_TX_DATA_BUFFER] = {0};
+u8 G_u8TxBufferHeadIndex    = 0;
+u8 G_u8TxBufferTailIndex    = 0;
+u8 G_u8TxCounter     = 0;
+
 
 u8 global_u8String[MAX_SIZE_DATA_BUFFER];
 
@@ -183,15 +190,15 @@ void MUART_RxIntSetStatus(USART_t *USARTx, u8 A_u8Status)
 Buffer_state MUART_Buffer_Write()
 {
 	Buffer_state Local_BufferState = 0;
-	if (G_u8Counter == MAX_SIZE_DATA_BUFFER)
+	if (G_u8RxCounter == MAX_SIZE_DATA_BUFFER)
 	{
 		Local_BufferState = Buffer_is_full;
 	}else{
 		Local_BufferState = Buffer_is_success;
 		//TODO Different UART
-		G_Au8UART_Buffer[G_u8BufferTailIndex] = MUART_u8ReadDataRegister(UART1);
-		G_u8BufferTailIndex = (G_u8BufferTailIndex+1) % MAX_SIZE_DATA_BUFFER;
-		G_u8Counter++;
+		G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = MUART_u8ReadDataRegister(UART1);
+		G_u8RxBufferTailIndex = (G_u8RxBufferTailIndex+1) % MAX_SIZE_DATA_BUFFER;
+		G_u8RxCounter++;
 		APP_Sort_Buffer();
 	}
 	return Local_BufferState;
@@ -200,34 +207,78 @@ Buffer_state MUART_Buffer_Write()
 Buffer_state MUART_ReadData(u8* A_u8PtrData)
 {
 	Buffer_state L_BufferState=0;
-	if (G_u8Counter == 0)
+	if (G_u8RxCounter == 0)
 	{
 		L_BufferState = Buffer_is_empty;
 	}
 	else{
-		*A_u8PtrData = G_Au8UART_Buffer[G_u8BufferHeadIndex];
-		G_Au8UART_Buffer[G_u8BufferHeadIndex] = 0;
-		G_u8BufferHeadIndex = (G_u8BufferHeadIndex+1) % MAX_SIZE_DATA_BUFFER;
-		G_u8Counter--;
+		*A_u8PtrData = G_Au8UART_RxBuffer[G_u8RxBufferHeadIndex];
+		G_Au8UART_RxBuffer[G_u8RxBufferHeadIndex] = 0;
+		G_u8RxBufferHeadIndex = (G_u8RxBufferHeadIndex+1) % MAX_SIZE_DATA_BUFFER;
+		G_u8RxCounter--;
 		L_BufferState = Buffer_is_success;
 	}
 	return L_BufferState;
 }
 
+Buffer_state MUART_WriteData(u8* A_u8PtrData)
+{
+	Buffer_state L_BufferState=0;
+	if (G_u8TxCounter == MAX_SIZE_TX_DATA_BUFFER)
+	{
+		L_BufferState = Buffer_is_full;
+	}
+	else{
+		G_Au8UART_TxBuffer[G_u8TxBufferTailIndex] = *A_u8PtrData;
+		G_u8TxBufferTailIndex = (G_u8TxBufferTailIndex+1) % MAX_SIZE_TX_DATA_BUFFER;
+		G_u8TxCounter++;
+		L_BufferState = Buffer_is_success;
+	}
+	return L_BufferState;
+}
+
+ErrorStatus MUART_ErrorStatusTransmitData(USART_t *A_xUART_Type)
+{
+	ErrorStatus L_ErrorStatus;
+	while(G_u8TxCounter--){
+		/*wait to TX be empty*/
+		//TODO make delay OS for not halting
+		while (READ_BIT(A_xUART_Type->SR,MUSART_SR_TXE_BIT)==0);
+
+		/*write data transfered into data register*/
+		A_xUART_Type->DR= G_Au8UART_TxBuffer[G_u8TxBufferHeadIndex];
+		G_u8TxBufferHeadIndex++;
+		/*wait to complete transmission*/
+		//TODO make delay OS for not halting
+		while (READ_BIT(A_xUART_Type->SR,MUSART_SR_TC_BIT)==0);
+
+		/*clear complete transmission flag to be ready to new transmition*/
+		CLR_BIT(A_xUART_Type->SR,MUSART_SR_TC_BIT);
+	}
+	if(G_u8TxCounter == 0){
+		G_u8TxBufferHeadIndex = 0;
+		G_u8TxBufferTailIndex = 0;
+		L_ErrorStatus = SUCCESS;
+	}
+	else{
+		L_ErrorStatus = ERROR;
+	}
+	return L_ErrorStatus;
+}
 
 void APP_Sort_Buffer()
 {
 	u8 L_u8Temp =0;
 	u8 i = 0;
 	u8 L_u8Sorted = 0;
-	if(G_u8BufferHeadIndex < G_u8BufferTailIndex ){
-		for (i = G_u8BufferTailIndex; i > G_u8BufferHeadIndex ; i-- )
+	if(G_u8RxBufferHeadIndex < G_u8RxBufferTailIndex ){
+		for (i = G_u8RxBufferTailIndex; i > G_u8RxBufferHeadIndex ; i-- )
 		{
-			if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+			if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
 			{
-				L_u8Temp = G_Au8UART_Buffer[i];
-				G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
-				G_Au8UART_Buffer[i-1] = L_u8Temp;
+				L_u8Temp = G_Au8UART_RxBuffer[i];
+				G_Au8UART_RxBuffer[i] = G_Au8UART_RxBuffer[i-1];
+				G_Au8UART_RxBuffer[i-1] = L_u8Temp;
 			}else{
 				//Buffer is sorted
 				L_u8Sorted = 1;
@@ -235,13 +286,13 @@ void APP_Sort_Buffer()
 			}
 		}
 	}else{
-		for (i = G_u8BufferTailIndex; i > 0; i-- )
+		for (i = G_u8RxBufferTailIndex; i > 0; i-- )
 		{
-			if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+			if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
 			{
-				L_u8Temp = G_Au8UART_Buffer[i];
-				G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
-				G_Au8UART_Buffer[i-1] = L_u8Temp;
+				L_u8Temp = G_Au8UART_RxBuffer[i];
+				G_Au8UART_RxBuffer[i] = G_Au8UART_RxBuffer[i-1];
+				G_Au8UART_RxBuffer[i-1] = L_u8Temp;
 			}
 			else{
 				//Buffer is sorted
@@ -250,18 +301,18 @@ void APP_Sort_Buffer()
 			}
 		}
 		if(!L_u8Sorted){
-			if(G_Au8UART_Buffer[0] < G_Au8UART_Buffer[MAX_SIZE_DATA_BUFFER - 1]){
+			if(G_Au8UART_RxBuffer[0] < G_Au8UART_RxBuffer[MAX_SIZE_DATA_BUFFER - 1]){
 				i= MAX_SIZE_DATA_BUFFER - 1; //last element in buffer
-				L_u8Temp = G_Au8UART_Buffer[0];
-				G_Au8UART_Buffer[0] = G_Au8UART_Buffer[i];
-				G_Au8UART_Buffer[i] = L_u8Temp;
+				L_u8Temp = G_Au8UART_RxBuffer[0];
+				G_Au8UART_RxBuffer[0] = G_Au8UART_RxBuffer[i];
+				G_Au8UART_RxBuffer[i] = L_u8Temp;
 
-				for(;i> G_u8BufferHeadIndex ; i-- ){
-					if(G_Au8UART_Buffer[i] < G_Au8UART_Buffer[i-1])
+				for(;i> G_u8RxBufferHeadIndex ; i-- ){
+					if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
 					{
-						L_u8Temp = G_Au8UART_Buffer[i];
-						G_Au8UART_Buffer[i] = G_Au8UART_Buffer[i-1];
-						G_Au8UART_Buffer[i-1] = L_u8Temp;
+						L_u8Temp = G_Au8UART_RxBuffer[i];
+						G_Au8UART_RxBuffer[i] = G_Au8UART_RxBuffer[i-1];
+						G_Au8UART_RxBuffer[i-1] = L_u8Temp;
 					}else{
 						//Buffer is sorted
 						L_u8Sorted = 1;
