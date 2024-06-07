@@ -74,8 +74,7 @@ void MUART_voidInit(USART_InitType *A_InitStruct,USART_ClockInitTypeDef *A_xUART
 
 		 A_xUART_Type->BRR = UART_BRR_SAMPLING16(__PCLK__,A_InitStruct->BaudRate);
 
-		 A_xUART_Type->CR1 = (A_InitStruct->Oversampling        << MUSART_CR1_OVER8_BIT ) |
-    		            (A_InitStruct->HardwareFlowControl << MUSART_CR1_UE_BIT    ) |
+		 A_xUART_Type->CR1 =(A_InitStruct->HardwareFlowControl << MUSART_CR1_UE_BIT    ) |
     			        (A_InitStruct->DataWidth           << MUSART_CR1_M_BIT     ) |
     			        (A_InitStruct->Parity_Enable       << MUSART_CR1_PCE_BIT   ) |
     			        (A_InitStruct->Parity_Selection    << MUSART_CR1_PS_BIT    ) ;
@@ -99,7 +98,8 @@ void MUART_voidInit(USART_InitType *A_InitStruct,USART_ClockInitTypeDef *A_xUART
     				      (A_xUART_ClockInitStruct->ClockPolarity     << MUSART_CR2_CPOL_BIT  )  |
     				      (A_xUART_ClockInitStruct->LastBitClockPulse << MUSART_CR2_LBCL_BIT  )  ;
 
-    A_xUART_Type->SR = 0;				    	          							             ;
+    A_xUART_Type->SR = 0;
+    local_u8_RX_Busyflag=0;
 }
 
 void MUART_voidEnable( USART_t *A_xUART_Type)
@@ -158,12 +158,8 @@ u8 MUART_u8ReceiveByteSynchNonBlocking (  USART_t *A_xUART_Type )
 
 void MUART_u8ReceiveByteASynch (USART_t *A_xUART_Type )
 {
-	NVIC_voidEnableInterrupt(37); //enable uart in nvic
-	if(local_u8_RX_Busyflag == 0)
-	{
 		local_u8_RX_Busyflag=1;
 		SET_BIT(A_xUART_Type->CR1 , MUSART_CR1_RXNEIE_BIT);
-	}
 }
 
 u8 * MUART_ptrReceiveStringSynchNonBlocking (  USART_t *A_xUART_Type )
@@ -365,7 +361,6 @@ void USART1_IRQHandler(void)
 {
     UART1->SR = 0;
     //G_u8DataFromUART = MUART_u8ReadDataRegister(UART1);
-    local_u8_RX_Busyflag=0;
 	if(MUSART1_CallBack!=NULL)
 	{
 		MUSART1_CallBack();

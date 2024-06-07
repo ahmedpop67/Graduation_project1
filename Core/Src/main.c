@@ -1,6 +1,5 @@
 #include "STD_TYPES.h"
 #include "BIT_MATH.h"
-
 #include "RCC_interface.h"
 #include "GPIO_interface.h"
 #include "STK_interface.h"
@@ -14,10 +13,14 @@
 
 u8 G_u8_LimetedSpeed = 4;
 
+u8 APP_G_u8V2VRxData = 0;
+u8 APP_G_u8V2VTxData = 0;
 /*declaration 4motors*/
 //extern DCmotor_Type MOTOR_1 ;
 //extern DCmotor_Type MOTOR_2 ;
 
+extern MUART_Init;
+extern MUART_clock;
 
 typedef struct
 {
@@ -65,9 +68,6 @@ Near_Distance G_xNear_Distance = {0,0,0,0};
 
 u8 APP_G_u8DataFromUART = 0;
 
-u8 APP_G_u8V2VTxData = 0;
-u8 APP_G_u8V2VRxData = 0;
-
 
 
 My_Data G_u16DataAfterProccing = {0,0,0};
@@ -81,15 +81,16 @@ void init_conf()
 	RCC_voidEnablePeripheral(RCC_APB2,GPIOA);
 	RCC_voidEnablePeripheral(RCC_APB2,GPIOB);
 	RCC_voidEnablePeripheral(RCC_APB2,GPIOC);
-	RCC_voidEnablePeripheral(RCC_APB2,TIM1);
+//	RCC_voidEnablePeripheral(RCC_APB2,TIM1);
 	RCC_voidEnablePeripheral(RCC_APB2,USART1);
 	MSTK_voidInit();
-	MOTOR_init(MOTOR_1);
-	MOTOR_init(MOTOR_2);
-	HUltrasonic_voidInit(ULTR_1);
-	HUltrasonic_voidInit(ULTR_2);
-	HUltrasonic_voidInit(ULTR_3);
-	HUltrasonic_voidInit(ULTR_4);
+//	MOTOR_init(MOTOR_1);
+//	MOTOR_init(MOTOR_2);
+//	HUltrasonic_voidInit(ULTR_1);
+//	HUltrasonic_voidInit(ULTR_2);
+//	HUltrasonic_voidInit(ULTR_3);
+//HUltrasonic_voidInit(ULTR_4);
+	MUART_voidInit(&MUART_Init,&MUART_clock,UART1);
 	MUART1_voidSetCallBack(&MUART_Buffer_Write);
 	MUART_voidEnable(UART1);
 	MUART_u8ReceiveByteASynch(UART1);
@@ -106,7 +107,12 @@ int main()
 
 	while(1)
 	{
+		//x=MUART_u8ReceiveByteSynchNonBlocking(UART1);
+		//MUART_ReadData(&APP_G_u8DataFromUART);
+		MUART_ReadData(&APP_G_u8DataFromUART);
+
 		ProcessingFun();
+		//MUART_voidTransmitByte(UART1,5);
 
 		/*Encoding received data and take Direction (second 3bits)*/
 		L_u8Direction = G_u16DataAfterProccing.Direction;
@@ -542,11 +548,12 @@ void UART_Task(){
 	}
 }
 
+
 void ProcessingFun (void)
 {
 	u8 L_u8Data = APP_G_u8DataFromUART>>4;
 	/*Mapping data from UART*/
-	//TODO Massage number for traking
+
 	switch (APP_G_u8DataFromUART)
 	{
 	case 0x10: //forced stop

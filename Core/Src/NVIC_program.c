@@ -19,12 +19,12 @@ void NVIC_voidEnableInterrupt(u8 copy_u8IntNumber)
 	}
 	else if(copy_u8IntNumber<63)
 	{
-		copy_u8IntNumber-=31;
+		copy_u8IntNumber-=32;
 		NVIC_ISER1=1<<copy_u8IntNumber;
 	}
 	else if(copy_u8IntNumber<95)
 	{
-		copy_u8IntNumber-=63;
+		copy_u8IntNumber-=64;
 		NVIC_ISER2=1<<copy_u8IntNumber;
 	}
 }

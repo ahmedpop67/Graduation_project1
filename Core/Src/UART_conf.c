@@ -17,10 +17,10 @@ USART_InitType MUART_Init =
 		.BaudRate            = __BAUDRATE__     ,
 		.DataWidth           = MODE_8BIT        ,
 		.StopBits            = STOP_BIT_1       ,
-		.Parity_Enable       = DISABLE          ,
+		.Parity_Enable       = ENABLE          ,
 		.Parity_Selection    = EVEN_PARITY      ,
 		.TransferDirection   = TX_RX            ,
-		.HardwareFlowControl = DISABLE
+		.HardwareFlowControl = ENABLE
 } ;
 
 /* Configuration of MUART_clock */
