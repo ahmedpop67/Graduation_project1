@@ -102,7 +102,7 @@ void MUART_voidInit(USART_InitType *A_InitStruct,USART_ClockInitTypeDef *A_xUART
     A_xUART_Type->SR = 0;				    	          							             ;
 }
 
-void x( USART_t *A_xUART_Type)
+void MUART_voidEnable( USART_t *A_xUART_Type)
 {
 	SET_BIT(A_xUART_Type->CR1,MUSART_CR1_UE_BIT);
 }
@@ -273,7 +273,7 @@ void APP_Sort_Buffer()
 	u8 i = 0;
 	u8 L_u8Sorted = 0;
 	if(G_u8RxBufferHeadIndex < G_u8RxBufferTailIndex ){
-		for (i = G_u8RxBufferTailIndex; i > G_u8RxBufferHeadIndex ; i-- )
+		for (i = G_u8RxBufferTailIndex - 1; i > G_u8RxBufferHeadIndex ; i-- )
 		{
 			if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
 			{
@@ -287,7 +287,9 @@ void APP_Sort_Buffer()
 			}
 		}
 	}else{
-		for (i = G_u8RxBufferTailIndex; i > 0; i-- )
+		if(G_u8RxBufferTailIndex  != 0){
+
+		for (i = G_u8RxBufferTailIndex - 1; i > 0; i-- )
 		{
 			if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
 			{
@@ -307,6 +309,10 @@ void APP_Sort_Buffer()
 				L_u8Temp = G_Au8UART_RxBuffer[0];
 				G_Au8UART_RxBuffer[0] = G_Au8UART_RxBuffer[i];
 				G_Au8UART_RxBuffer[i] = L_u8Temp;
+		}
+		else{
+			i = MAX_SIZE_DATA_BUFFER - 1;
+			}
 
 				for(;i> G_u8RxBufferHeadIndex ; i-- ){
 					if(G_Au8UART_RxBuffer[i] < G_Au8UART_RxBuffer[i-1])
