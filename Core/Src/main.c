@@ -63,6 +63,8 @@ typedef struct
 	u8 Vehical_distance;
 }VEHICLE;
 
+VEHICLE G_Front_vehicle        ={0,0};
+
 My_Data       G_xMy_Data       = {0,0,0};
 Near_Distance G_xNear_Distance = {0,0,0,0};
 
@@ -99,9 +101,6 @@ void init_conf()
 
 int main()
 {
-	u16  L_u16Speed = 0;
-	u8  L_u8Direction = 0 ;
-	u8  L_u8Flag = 0;
 
 	init_conf();
 
@@ -109,71 +108,11 @@ int main()
 	{
 		//x=MUART_u8ReceiveByteSynchNonBlocking(UART1);
 		//MUART_ReadData(&APP_G_u8DataFromUART);
-		MUART_ReadData(&APP_G_u8DataFromUART);
 
-		ProcessingFun();
 		//MUART_voidTransmitByte(UART1,5);
-
+		UART_Task();
 		/*Encoding received data and take Direction (second 3bits)*/
-		L_u8Direction = G_u16DataAfterProccing.Direction;
-		/*Encoding received data and take Speed (first 4bits)*/
-		L_u16Speed = G_u16DataAfterProccing.Speed;
-		/*Encoding received data and take Flag (last bit)*/
-		L_u8Flag = G_u16DataAfterProccing.Flag;
-
-		if (L_u8Direction == Stop){
-			MOTOR_Stop(MOTOR_1) ;
-			MOTOR_Stop(MOTOR_2) ;
-		}else
-		{
-			/*
-			 * first speed  = 1 +  =
-			 * second speed = 2 +  =
-			 * third speed  = 3 +  =
-			 */
-			L_u16Speed = (0Xff<<G_xMy_Data.Speed) + 0xf0;
-
-			if (L_u8Direction == Go)  //Forward direction
-			{
-				MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
-				MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
-			}
-			else if (L_u8Direction == Back)  //Backward direction
-			{
-				MOTOR_CounterClockWise(MOTOR_1 , L_u16Speed) ;
-				MOTOR_CounterClockWise(MOTOR_2 , L_u16Speed) ;
-			}
-			else if (L_u8Direction == Right)  //Right direction
-			{
-				MOTOR_Stop(MOTOR_1) ;
-				MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
-			}
-			else if (L_u8Direction == Left)  //Left direction
-			{
-				MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
-				MOTOR_Stop(MOTOR_2) ;
-			}
-			else if (L_u8Direction == Forward_Right)  //forward right
-			{
-				MOTOR_ClockWise(MOTOR_1 , 0xa) ;
-				MOTOR_ClockWise(MOTOR_2 , 0xc) ;
-			}
-			else if (L_u8Direction == Forward_Left)  //forward left
-			{
-				MOTOR_ClockWise(MOTOR_1 , 0xa) ;
-				MOTOR_ClockWise(MOTOR_2 , 0xc) ;
-			}
-			else if (L_u8Direction == Backward_Right)  //backward right
-			{
-				MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
-				MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
-			}
-			else if (L_u8Direction == Backward_Left)  //backward left
-			{
-				MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
-				MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
-			}
-		}
+		APP_Direction_Control();
 	}
     return 0;
 }
@@ -209,6 +148,18 @@ void APP_voidGoTasks ()
 				G_u16DataAfterProccing.Direction = Stop;
 				/*flag = 3*/
 				G_u16DataAfterProccing.Flag = 3;
+				if (V2V_OPTION == ENABLE && G_Front_vehicle.Vehical_detected )
+				{
+					if (EMERGANCY_CAR == ENABLE)
+					{
+						APP_G_u8V2VTxData = 0xe1;
+						APP_V2V_Connection();
+					}
+				}
+				else if(G_Front_vehicle.Vehical_detected == 0 && OPSTICAL_AVOID == ENABLE)
+				{
+					APP_voidObstical_avoid();
+				}
 				/*stop car + alarm*/
 	//			G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
 			}
@@ -381,6 +332,7 @@ void APP_voidBackward_LEFTTasks ()
 }
 void APP_voidRight_LeftTasks ()
 {
+	APP_Update_Distance();
 
 }
 void APP_voidForward_RightTasks ()
@@ -474,23 +426,39 @@ void APP_voidForward_LeftTasks ()
 	}
 }
 
-void APP_voidLane_Change()
+void APP_voidObstical_avoid()
 {
+	if (G_xNear_Distance.Distance_Right  > UN_SAFE_DISTANCE)
+	{
+			//go right
+
+			//go forword
+
+			//go left
+
+			//go forword
+	}
+	else if(G_xNear_Distance.Distance_Left  > UN_SAFE_DISTANCE)
+	{
+		//go right
+
+		//go forword
+
+		//go left
+
+		//go forword
+	}
+	else
+	{
+		//stop;
+		//TODO backword
+	}
 
 }
 
 void APP_V2V_Connection()
 {
-	// V2V connection is done using Bluetooth
-	//This is a limitation that it has to be done with more flexible connection device
-	// V2V connection has to be established at a certain trigger
-	//the trigger of the V2V is mostly the raspberry pi massages
-	//when V2V is triggered initiate blutooth connection
 	if(!APP_G_u8V2VTxData){
-		//TODO send UART massage to contact bluetooth device
-		u8 L_u8Data = 0xC0;
-		MUART_WriteData(&L_u8Data);
-		//Send command that should be done with the connected device
 		//TODO check massages between cars
 		//note bluetooth massages are different from UART massages so there cane be duplicates.
 		//massages need to include car ID
@@ -500,52 +468,22 @@ void APP_V2V_Connection()
 		//MSG 4 is changing to your lane
 		//MSG 5 is overtake
 		MUART_WriteData(&APP_G_u8V2VTxData);
-	}
-
-	if(!APP_G_u8V2VRxData){
-		switch(APP_G_u8V2VRxData){
-		case 1:
-			//Try change lane
-			break;
-		case 2:
-			//Check for dangers
-			//take counter measures
-			break;
-		case 3:
-			//ACK
-			break;
-		case 4:
-			//See the car changing lane
-			//take counter measures
-			break;
-		case 5:
-			//see the care aver taking
-			//get ack for successful lane change
-			//decrease speed slightly for x seconds
-			//send ACK for car to overtake
-			//get ACK of successful overtaking
-			break;
-		default:
-			//message not recognized
-			break;
-		}
+		APP_G_u8V2VTxData = 0;
 	}
 
 }
 
 void UART_Task(){
 
-
-	while(1){
 		//process received massages
 		//TODO send ACKs
-		ProcessingFun();
+
+	MUART_ReadData(&APP_G_u8DataFromUART);
+	ProcessingFun();
 
 		//send massages to Rasp
-		MUART_ErrorStatusTransmitData(UART1);
+	MUART_ErrorStatusTransmitData(UART1);
 
-		//delay_os
-	}
 }
 
 
@@ -715,4 +653,72 @@ void ProcessingFun (void)
 		break;
 	}
 	return;
+}
+
+void APP_Direction_Control()
+{
+	u16  L_u16Speed = 0;
+	u8  L_u8Direction = 0 ;
+	u8  L_u8Flag = 0;
+
+	L_u8Direction = G_u16DataAfterProccing.Direction;
+	/*Encoding received data and take Speed (first 4bits)*/
+	L_u16Speed = G_u16DataAfterProccing.Speed;
+	/*Encoding received data and take Flag (last bit)*/
+	L_u8Flag = G_u16DataAfterProccing.Flag;
+
+	if (L_u8Direction == Stop){
+		MOTOR_Stop(MOTOR_1) ;
+		MOTOR_Stop(MOTOR_2) ;
+	}
+	else
+	{
+		/*
+		 * first speed  = 1 +  =
+		 * second speed = 2 +  =
+		 * third speed  = 3 +  =
+		 */
+		L_u16Speed = (0Xff<<G_xMy_Data.Speed) + 0xf0;
+
+		if (L_u8Direction == Go)  //Forward direction
+		{
+			MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
+			MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
+		}
+		else if (L_u8Direction == Back)  //Backward direction
+		{
+			MOTOR_CounterClockWise(MOTOR_1 , L_u16Speed) ;
+			MOTOR_CounterClockWise(MOTOR_2 , L_u16Speed) ;
+		}
+		else if (L_u8Direction == Right)  //Right direction
+		{
+			MOTOR_Stop(MOTOR_1) ;
+			MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
+		}
+		else if (L_u8Direction == Left)  //Left direction
+		{
+			MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
+			MOTOR_Stop(MOTOR_2) ;
+		}
+		else if (L_u8Direction == Forward_Right)  //forward right
+		{
+			MOTOR_ClockWise(MOTOR_1 , 0xa) ;
+			MOTOR_ClockWise(MOTOR_2 , 0xc) ;
+		}
+		else if (L_u8Direction == Forward_Left)  //forward left
+		{
+			MOTOR_ClockWise(MOTOR_1 , 0xa) ;
+			MOTOR_ClockWise(MOTOR_2 , 0xc) ;
+		}
+		else if (L_u8Direction == Backward_Right)  //backward right
+		{
+			MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
+			MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
+		}
+		else if (L_u8Direction == Backward_Left)  //backward left
+		{
+			MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
+			MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
+		}
+	}
 }

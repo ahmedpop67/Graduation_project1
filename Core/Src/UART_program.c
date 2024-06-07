@@ -20,6 +20,7 @@ u8 G_u8RxBufferHeadIndex    = 0;
 u8 G_u8RxBufferTailIndex    = 0;
 u8 G_u8RxCounter     = 0;
 u8 G_u8DataFromUART = 0;
+u32 G_RX_Time_over =0;
 
 /*global array to store transmitting data from UART*/
 u8 G_Au8UART_TxBuffer[MAX_SIZE_TX_DATA_BUFFER] = {0};
@@ -237,28 +238,40 @@ Buffer_state MUART_WriteData(u8* A_u8PtrData)
 ErrorStatus MUART_ErrorStatusTransmitData(USART_t *A_xUART_Type)
 {
 	ErrorStatus L_ErrorStatus;
-	while(G_u8TxCounter--){
+	while(G_u8TxCounter){
 		/*wait to TX be empty*/
 		//TODO make delay OS for not halting
-		while (READ_BIT(A_xUART_Type->SR,MUSART_SR_TXE_BIT)==0);
-
-		/*write data transfered into data register*/
-		A_xUART_Type->DR= G_Au8UART_TxBuffer[G_u8TxBufferHeadIndex];
-		G_u8TxBufferHeadIndex++;
-		/*wait to complete transmission*/
-		//TODO make delay OS for not halting
-		while (READ_BIT(A_xUART_Type->SR,MUSART_SR_TC_BIT)==0);
-
-		/*clear complete transmission flag to be ready to new transmition*/
-		CLR_BIT(A_xUART_Type->SR,MUSART_SR_TC_BIT);
-	}
-	if(G_u8TxCounter == 0){
-		G_u8TxBufferHeadIndex = 0;
-		G_u8TxBufferTailIndex = 0;
-		L_ErrorStatus = SUCCESS;
-	}
-	else{
-		L_ErrorStatus = ERROR;
+		while ((READ_BIT(A_xUART_Type->SR,MUSART_SR_TXE_BIT)==0) && G_RX_Time_over < TIME_LIMIT)
+		{
+			G_RX_Time_over++;
+		}
+		if(G_RX_Time_over != TIME_LIMIT)
+		{
+			/*write data transfered into data register*/
+			G_RX_Time_over = 0;
+			A_xUART_Type->DR= G_Au8UART_TxBuffer[G_u8TxBufferHeadIndex];
+			/*wait to complete transmission*/
+			//TODO make delay OS for not halting
+			while ((READ_BIT(A_xUART_Type->SR,MUSART_SR_TC_BIT)==0)&& G_RX_Time_over < TIME_LIMIT)
+			{
+				G_RX_Time_over++;
+			}
+			if(G_RX_Time_over != TIME_LIMIT)
+			{
+				CLR_BIT(A_xUART_Type->SR,MUSART_SR_TC_BIT);
+				G_u8TxCounter--;
+				G_u8TxBufferHeadIndex++;
+			}
+			/*clear complete transmission flag to be ready to new transmition*/
+		}
+		if(G_u8TxCounter == 0){
+			G_u8TxBufferHeadIndex = 0;
+			G_u8TxBufferTailIndex = 0;
+			L_ErrorStatus = SUCCESS;
+		}
+		else{
+			L_ErrorStatus = ERROR;
+		}
 	}
 	return L_ErrorStatus;
 }

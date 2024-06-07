@@ -18,9 +18,6 @@ u8 G_u8Counter     = 0;
 #define Automatic_OFF      0
 
 
-#define V2V_ENABLE         1
-#define V2V_DISABLE        0
-
 #define max_speed          7
 
 
@@ -59,6 +56,15 @@ void APP_V2V_Connection();
 //Buffer_state APP_Buffer_Write();
 //Buffer_state APP_Buffer_Read();
 void APP_Sort_Buffer();
+
+void APP_Direction_Control();
+
+void APP_MOTOR_Forword();
+void APP_MOTOR_Backword();
+void APP_MOTOR_Right();
+void APP_MOTOR_Left();
+void APP_MOTOR_Forword_Right();
+void APP_MOTOR_Forword_LEFT();
 
 void UART_Task();
 

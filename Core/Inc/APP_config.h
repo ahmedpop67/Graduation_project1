@@ -15,7 +15,9 @@
  * Automatic_OFF
  */
 #define speed_control_Automatic         Automatic_ON
-#define V2V_OPTION                      V2V_ENABLE
+#define V2V_OPTION                      ENABLE
+#define OPSTICAL_AVOID                  DISAPLE
+#define EMERGANCY_CAR                   ENABLE
 
 #define SO_SHORT_DISTANCE  10.0
 #define UN_SAFE_DISTANCE   20.0

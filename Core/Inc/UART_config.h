@@ -19,4 +19,6 @@
 /*maximum size of data Transmitted from UART*/
 #define MAX_SIZE_TX_DATA_BUFFER  20
 
+#define TIME_LIMIT      1000000
+
 #endif /* UART_CONFIGURATION_H_ */
