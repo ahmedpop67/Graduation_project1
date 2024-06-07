@@ -102,7 +102,7 @@ void MUART_voidInit(USART_InitType *A_InitStruct,USART_ClockInitTypeDef *A_xUART
     A_xUART_Type->SR = 0;				    	          							             ;
 }
 
-void MUART_voidEnable( USART_t *A_xUART_Type)
+void x( USART_t *A_xUART_Type)
 {
 	SET_BIT(A_xUART_Type->CR1,MUSART_CR1_UE_BIT);
 }
@@ -156,8 +156,9 @@ u8 MUART_u8ReceiveByteSynchNonBlocking (  USART_t *A_xUART_Type )
 	return L_u8Data;
 }
 
-void MUART_u8ReceiveByteASynch (  USART_t *A_xUART_Type )
+void MUART_u8ReceiveByteASynch (USART_t *A_xUART_Type )
 {
+	NVIC_voidEnableInterrupt(37); //enable uart in nvic
 	if(local_u8_RX_Busyflag == 0)
 	{
 		local_u8_RX_Busyflag=1;
