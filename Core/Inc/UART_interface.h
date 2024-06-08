@@ -1,8 +1,8 @@
 /*
  * UART_interface.h
  *
- *  Created on: Oct 15, 2022
- *      Author: Mohammed Ramadan
+ *  Created on: Feb 15, 2024
+ *      Author: Ahmed Hassan
  */
 
 #ifndef UART_INTERFACE_H_
@@ -189,5 +189,7 @@ Buffer_state MUART_WriteData(u8* A_u8PtrData);
 
 ErrorStatus MUART_ErrorStatusTransmitData(USART_t *A_xUART_Type);
 
+
+void MUART_voidCleanRxBuffer(u8 A_u8NewData);
 
 #endif /* UART_INTERFACE_H_ */

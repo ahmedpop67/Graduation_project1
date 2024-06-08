@@ -494,32 +494,43 @@ void ProcessingFun (void)
 
 	switch (APP_G_u8DataFromUART)
 	{
+	case 0x0:
+		G_xMy_Data.Direction = Go;
+		break;
 	case 0x10: //forced stop
-		G_xMy_Data.Direction = Stop ;
+		G_xMy_Data.Direction = Stop;
 		//TODO make it forced
+		MOTOR_CounterClockWise(MOTOR_1, 0xff);
+		MSTK_voidSetBusyWait(1000);
 		break;
 	case 0x20: //normal stop
 		G_xMy_Data.Direction = Stop ;
 		break;
 	case 0x40: //turn left extremely
 		G_xMy_Data.Direction = Left;
+		G_xMy_Data.Speed = Speed7;
 		break;
 	case 0x48: //turn left normal (forward left)
-		G_xMy_Data.Direction = Forward_Left;
+		G_xMy_Data.Direction = Left;
+		G_xMy_Data.Speed = Speed4;
 		break;
 	case 0x4c: //turn left slightly
-		G_xMy_Data.Direction = Forward_Left;
+		G_xMy_Data.Direction = Left;
 		//TODO make it slight
+		G_xMy_Data.Speed = Speed1;
 		break;
 	case 0x50: //turn Right extremely
 		G_xMy_Data.Direction = Right;
+		G_xMy_Data.Speed = Speed7;
 		break;
 	case 0x58: //turn Right normal (forward Right)
-		G_xMy_Data.Direction = Forward_Right;
+		G_xMy_Data.Direction = Right;
+		G_xMy_Data.Speed = Speed4;
 		break;
 	case 0x5c: //turn Right slightly
 		G_xMy_Data.Direction = Forward_Right;
 		//TODO make it slight
+		G_xMy_Data.Speed = Speed1;
 		break;
 	case 0x60: //Decrease speed greatly
 		//TODO
@@ -547,7 +558,7 @@ void ProcessingFun (void)
 		break;
 	case 0x70: //Increase speed greatly
 		//TODO
-		if(G_xMy_Data.Speed+4 < 8){
+		if(G_xMy_Data.Speed < 4){
 			G_xMy_Data.Speed += 4;
 		}else{
 			G_xMy_Data.Speed = Speed7;
@@ -555,7 +566,7 @@ void ProcessingFun (void)
 		break;
 	case 0x78: //Increase speed
 		//TODO
-		if(G_xMy_Data.Speed+2 < 8){
+		if(G_xMy_Data.Speed < 6){
 			G_xMy_Data.Speed += 2;
 		}else{
 			G_xMy_Data.Speed = Speed7;
@@ -621,7 +632,7 @@ void ProcessingFun (void)
 	}
 
 	G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
-	G_u16DataAfterProccing.Speed = G_xMy_Data.Speed ;
+	G_u16DataAfterProccing.Speed = G_xMy_Data.Speed;
 	switch(G_xMy_Data.Direction){
 	case Go:
 		APP_voidGoTasks();

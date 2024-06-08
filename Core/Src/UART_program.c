@@ -188,16 +188,18 @@ void MUART_RxIntSetStatus(USART_t *USARTx, u8 A_u8Status)
 Buffer_state MUART_Buffer_Write()
 {
 	Buffer_state Local_BufferState = 0;
+	u8 L_u8temp;
 	if (G_u8RxCounter == MAX_SIZE_DATA_BUFFER)
 	{
 		Local_BufferState = Buffer_is_full;
 	}else{
 		Local_BufferState = Buffer_is_success;
 		//TODO Different UART
-		G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = MUART_u8ReadDataRegister(UART1);
+		L_u8temp =  MUART_u8ReadDataRegister(UART1);
+		G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = L_u8temp;
 		G_u8RxBufferTailIndex = (G_u8RxBufferTailIndex+1) % MAX_SIZE_DATA_BUFFER;
 		G_u8RxCounter++;
-		APP_Sort_Buffer();
+		MUART_voidCleanRxBuffer(L_u8temp);
 	}
 	return Local_BufferState;
 }
@@ -215,6 +217,10 @@ Buffer_state MUART_ReadData(u8* A_u8PtrData)
 		G_u8RxBufferHeadIndex = (G_u8RxBufferHeadIndex+1) % MAX_SIZE_DATA_BUFFER;
 		G_u8RxCounter--;
 		L_BufferState = Buffer_is_success;
+		if(!G_u8RxCounter){
+			G_u8RxBufferHeadIndex = 0;
+			G_u8RxBufferTailIndex = 0;
+		}
 	}
 	return L_BufferState;
 }
@@ -347,6 +353,315 @@ void APP_Sort_Buffer()
 
 }
 
+void MUART_voidCleanRxBuffer(u8 A_u8NewData)
+{
+	u8 i=0;
+	u8 counter = G_u8RxCounter-1;
+	if(!counter){
+		i = G_u8RxBufferHeadIndex;
+		if(A_u8NewData < 0x21){//stop command
+			if(G_u8RxBufferHeadIndex>G_u8RxBufferTailIndex){
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0x80){
+						//moving command
+						//delete
+						G_Au8UART_RxBuffer[i] = 0;
+						G_u8RxBufferHeadIndex++;
+						G_u8RxCounter--;
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+					i = ((i<MAX_SIZE_DATA_BUFFER)?(i+1):(0));
+				}
+			}
+			else{
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0x80){
+						//moving command
+						//delete
+						G_Au8UART_RxBuffer[i] = 0;
+						G_u8RxBufferHeadIndex++;
+						G_u8RxCounter--;
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+					i++;
+				}
+			}
+
+		}
+		else if(A_u8NewData <0x60){//turn command
+			if(G_u8RxBufferHeadIndex>G_u8RxBufferTailIndex){
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0x21){
+						//Stop command
+						//delete new command
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						G_u8RxCounter--;
+						break;
+					}
+					else if(G_Au8UART_RxBuffer[i]<0x60){
+						//turn command
+						//replace old command
+						G_Au8UART_RxBuffer[i] = A_u8NewData;
+						G_u8RxCounter--;
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						break;
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+					i = ((i<MAX_SIZE_DATA_BUFFER)?(i+1):(0));
+				}
+			}
+			else{
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0x21){
+						//Stop command
+						//delete new command
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						G_u8RxCounter--;
+						break;
+					}
+					else if(G_Au8UART_RxBuffer[i]<0x60){
+						//turn command
+						//replace old command
+						G_Au8UART_RxBuffer[i] = A_u8NewData;
+						G_u8RxCounter--;
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						break;
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+					i++;
+				}
+			}
+
+		}
+		else if(A_u8NewData <0x80){//speed command
+			if(G_u8RxBufferHeadIndex>G_u8RxBufferTailIndex){
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0x21){
+						//Stop command
+						//delete new command
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						G_u8RxCounter--;
+						break;
+					}
+					else if(G_Au8UART_RxBuffer[i]<0x60){
+						//turn command
+						//ignore
+					}
+					else if(G_Au8UART_RxBuffer[i]<0x80){
+						//speed command
+						//replace old command
+						G_Au8UART_RxBuffer[i] = A_u8NewData;
+						G_u8RxCounter--;
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						break;
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+
+					i = ((i<MAX_SIZE_DATA_BUFFER)?(i+1):(0));
+				}
+			}
+			else{
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0x21){
+						//Stop command
+						//delete new command
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						G_u8RxCounter--;
+						break;
+					}
+					else if(G_Au8UART_RxBuffer[i]<0x60){
+						//turn command
+						//ignore
+					}
+					else if(G_Au8UART_RxBuffer[i]<0x80){
+						//speed command
+						//replace old command
+						G_Au8UART_RxBuffer[i] = A_u8NewData;
+						G_u8RxCounter--;
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						break;
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+
+					i++;
+				}
+			}
+		}
+		else if(A_u8NewData <0x90){//bump data
+			if(G_u8RxBufferHeadIndex>G_u8RxBufferTailIndex){
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0x80){
+						//movement command
+						//ignore
+					}
+					else if(G_Au8UART_RxBuffer[i]<0x90){
+						//Bump data
+						//replace old data
+						G_Au8UART_RxBuffer[i] = A_u8NewData;
+						G_u8RxCounter--;
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						break;
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+
+					i = ((i<MAX_SIZE_DATA_BUFFER)?(i+1):(0));
+				}
+			}
+			else{
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0x80){
+						//movement command
+						//ignore
+					}
+					else if(G_Au8UART_RxBuffer[i]<0x90){
+						//Bump data
+						//replace old data
+						G_Au8UART_RxBuffer[i] = A_u8NewData;
+						G_u8RxCounter--;
+						G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+						G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+						break;
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+
+					i++;
+				}
+			}
+		}
+		else if(A_u8NewData <0xa0){//sign data
+			//there can be multiple sign
+			//duplicates are permitted
+			APP_Sort_Buffer();
+		}
+		else if(A_u8NewData <0xb0){//Lane data
+			if(G_u8RxBufferHeadIndex>G_u8RxBufferTailIndex){
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0xa0){
+						//movement or bump or sign
+						//ignore
+					}
+					else if(G_Au8UART_RxBuffer[i]<0xb0){
+						//Lane data
+						//check same direction or not
+						if((G_Au8UART_RxBuffer[i]+A_u8NewData)&1){
+							//different
+							//ignore
+						}
+						else{
+							//same direction
+							//replace old data
+							G_Au8UART_RxBuffer[i] = A_u8NewData;
+							G_u8RxCounter--;
+							G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+							G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+							break;
+						}
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+
+					i = ((i<MAX_SIZE_DATA_BUFFER)?(i+1):(0));
+				}
+			}
+			else{
+				while(counter--){
+					if(G_Au8UART_RxBuffer[i]<0xa0){
+						//movement or bump or sign
+						//ignore
+					}
+					else if(G_Au8UART_RxBuffer[i]<0xb0){
+						//Lane data
+						//check same direction or not
+						if((G_Au8UART_RxBuffer[i]+A_u8NewData)&1){
+							//different
+							//ignore
+						}
+						else{
+							//same direction
+							//replace old data
+							G_Au8UART_RxBuffer[i] = A_u8NewData;
+							G_u8RxCounter--;
+							G_u8RxBufferTailIndex= ((G_u8RxBufferTailIndex)?(G_u8RxBufferTailIndex-1):(MAX_SIZE_DATA_BUFFER));
+							G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = 0;
+							break;
+						}
+					}
+					else{
+						//data commands
+						APP_Sort_Buffer();
+						break;
+					}
+
+					i++;
+				}
+			}
+		}
+		else if(A_u8NewData <0xc0){//Distance
+			//permits duplicates
+			APP_Sort_Buffer();
+		}
+		else if(A_u8NewData <0xd0){//V2V Connection
+			//permits duplicates
+			APP_Sort_Buffer();
+		}
+		else if(A_u8NewData <0xe0){//V2V message
+			//permits duplicates
+			APP_Sort_Buffer();
+		}
+		else if(A_u8NewData <0xf0){//Requests ACKs
+			//permits duplicates
+			APP_Sort_Buffer();
+		}
+		else{//Error in ACK
+			//permits duplicates
+			APP_Sort_Buffer();
+		}
+	}
+}
 
 void MUART_voidClearFlags(USART_t *USARTx)
 {
