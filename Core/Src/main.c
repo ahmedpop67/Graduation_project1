@@ -6,6 +6,7 @@
 #include "EXTI_interface.h"
 #include "SPI_interface.h"
 #include "UART_interface.h"
+#include "Timer_init.h"
 #include "Ultrasonic_init.h"
 #include "PWM_DCmotor_init.h"
 #include "APP.h"
@@ -84,37 +85,48 @@ void init_conf()
 	RCC_voidEnablePeripheral(RCC_APB2,GPIOB);
 	RCC_voidEnablePeripheral(RCC_APB2,GPIOC);
 //	RCC_voidEnablePeripheral(RCC_APB2,TIM1);
-	RCC_voidEnablePeripheral(RCC_APB2,USART1);
+	RCC_voidEnablePeripheral(RCC_APB1,TIM2);
+	RCC_voidEnablePeripheral(RCC_APB1,TIM3);
+//	RCC_voidEnablePeripheral(RCC_APB2,USART1);
 	MSTK_voidInit();
 	MOTOR_init(MOTOR_1);
 	MOTOR_init(MOTOR_2);
-//	HUltrasonic_voidInit(ULTR_1);
+
+	HUltrasonic_voidInit(ULTR_1);
 //	HUltrasonic_voidInit(ULTR_2);
 //	HUltrasonic_voidInit(ULTR_3);
 //HUltrasonic_voidInit(ULTR_4);
-	MUART_voidInit(&MUART_Init,&MUART_clock,UART1);
-	MUART1_voidSetCallBack(&MUART_Buffer_Write);
-	MUART_voidEnable(UART1);
-	MUART_u8ReceiveByteASynch(UART1);
+//	MUART_voidInit(&MUART_Init,&MUART_clock,UART1);
+//	MUART1_voidSetCallBack(&MUART_Buffer_Write);
+//	MUART_voidEnable(UART1);
+//	MUART_u8ReceiveByteASynch(UART1);
+
 }
 
 
 int main()
 {
-	RCC_voidInitSysClock();
-	RCC_voidEnablePeripheral(RCC_APB2,GPIOA);
-	MSTK_voidInit();
-	GPIO_voidSetPinMode(GPIO_PORTA,7,GPIO_OUTPUT_2M_PP);
-	//init_conf();
+	//RCC_voidInitSysClock();
+	//RCC_voidEnablePeripheral(RCC_APB2,GPIOA);
+	//MSTK_voidInit();
+	//GPIO_voidSetPinMode(GPIO_PORTA,7,GPIO_OUTPUT_2M_PP);
+	init_conf();
 
 	while(1)
 	{
 		//x=MUART_u8ReceiveByteSynchNonBlocking(UART1);
 		//MUART_ReadData(&APP_G_u8DataFromUART);
-		GPIO_voidSetPinValue(GPIO_PORTA,7,GPIO_HIGH);
-		MSTK_voidSetBusyWait(1000000);
-		GPIO_voidSetPinValue(GPIO_PORTA,7,GPIO_LOW);
-		MSTK_voidSetBusyWait(1000000);
+		if(HUltrasonic_f32CalcDistance(1) > 10)
+		{
+			MOTOR_ClockWise(MOTOR_1, 0xff00);
+			MOTOR_ClockWise(MOTOR_2, 0xff00);
+		}
+		else
+		{
+			MOTOR_Stop(1);
+			MOTOR_Stop(2);
+		}
+
 		//MUART_voidTransmitByte(UART1,5);
 		//UART_Task();
 		/*Encoding received data and take Direction (second 3bits)*/

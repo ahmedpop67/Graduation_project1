@@ -29,8 +29,8 @@
 
 #define MOTOR1_PORT            GPIO_PORTA
 
-#define MOTOR1_PINR            GPIO_PIN3
-#define MOTOR1_PINL            GPIO_PIN4
+#define MOTOR1_PINR            GPIO_PIN0
+#define MOTOR1_PINL            GPIO_PIN5
 
 
 //second motor
@@ -47,14 +47,14 @@
          1-MOTOR2_CHANNAL4
  */
 
-#define MOTOR2_FirstTimerType                  MOTOR2_TIMER3
-#define MOTOR2_FirstChannelNumber              MOTOR2_CHANNAL2
+#define MOTOR2_FirstTimerType                  MOTOR2_TIMER2
+#define MOTOR2_FirstChannelNumber              MOTOR2_CHANNAL4
 //#define MOTOR2_SecondTimerType               MOTOR2_TIMER3
 //#define MOTOR2_SecondChannelNumber           MOTOR2_CHANNAL2
 
 #define MOTOR2_PORT            GPIO_PORTA
 
-#define MOTOR2_PINR            GPIO_PIN5
-#define MOTOR2_PINL            GPIO_PIN6
+#define MOTOR2_PINR            GPIO_PIN6
+#define MOTOR2_PINL            GPIO_PIN7
 
 #endif /* HAL_PWM_DCMOTOR_PWM_DCMOTOR_CONF_H_ */

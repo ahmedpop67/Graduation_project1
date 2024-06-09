@@ -35,8 +35,9 @@
 #define  ULtrasonic_PIN10            10
 #define  ULtrasonic_PIN11            11
 #define  ULtrasonic_PIN12            12
-#define  ULtrasonic_PIN14            13
-#define  ULtrasonic_PIN15            14
+#define  ULtrasonic_PIN13            13
+#define  ULtrasonic_PIN14            14
+#define  ULtrasonic_PIN15            15
 
 
 #endif /* HAL_ULTRASONIC_ULTRASONIC_PRIVATE_H_ */

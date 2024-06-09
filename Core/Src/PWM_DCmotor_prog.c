@@ -63,13 +63,13 @@ void MOTOR_ClockWise  (u8 A_u8MotorNum , u16 A_u16CaptureValue)
 		switch(A_u8MotorNum)
 		{
 		case 1:
-			MTimer_voidPWM(MOTOR1_FirstTimerType,MOTOR1_FirstChannelNumber,0);
+			MTimer_voidPWM(MOTOR1_FirstTimerType,MOTOR1_FirstChannelNumber,A_u16CaptureValue);
 			GPIO_voidSetPinValue(MOTOR1_PORT, MOTOR1_PINR, GPIO_LOW);
 			GPIO_voidSetPinValue(MOTOR1_PORT, MOTOR1_PINL, GPIO_HIGH);
 //			MTimer_voidPWM(MOTOR1_FirstTimerType,MOTOR1_SecondChannelNumber,A_u16CaptureValue);
 			break;
 		case 2:
-			MTimer_voidPWM(MOTOR1_FirstTimerType,MOTOR2_FirstChannelNumber,0);
+			MTimer_voidPWM(MOTOR1_FirstTimerType,MOTOR2_FirstChannelNumber,A_u16CaptureValue);
 			GPIO_voidSetPinValue(MOTOR1_PORT, MOTOR2_PINR, GPIO_LOW);
 			GPIO_voidSetPinValue(MOTOR1_PORT, MOTOR2_PINL, GPIO_HIGH);
 //			MTimer_voidPWM(MOTOR1_FirstTimerType,MOTOR2_SecondChannelNumber,A_u16CaptureValue);

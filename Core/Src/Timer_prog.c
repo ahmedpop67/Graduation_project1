@@ -14,6 +14,17 @@
 
 u8 channel1_set=0;
 u8 channel2_set=0;
+u8 channel3_set=0;
+u8 channel4_set=0;
+
+u8 channel21_set = 0;
+u8 channel22_set = 0;
+u8 channel23_set = 0;
+u8 channel24_set = 0;
+
+u8 channel31_set = 0;
+u8 channel32_set = 0;
+
 
 void MTimer_voidInit (u8 A_u8TimerSelected)
 {
@@ -410,6 +421,13 @@ void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareVal
 		}
 		else if (A_u8Channel == TIM_CHANNEL_3)
 		{
+
+			if (channel3_set==0)
+				{
+					GPIO_voidSetPinMode(GPIO_PORTA,GPIO_PIN10,GPIO_OUTPUT_10M_AF_PP);
+					channel3_set=1;
+				}
+
 			u32 L_u32TempCCMRX = 0 ;
 			u32 L_u32TempCCER  = 0 ;
 			u32 L_u32TempCR2   = 0 ;
@@ -478,6 +496,12 @@ void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareVal
 		}
 		else if (A_u8Channel == TIM_CHANNEL_4)
 		{
+
+			if (channel4_set==0)
+				{
+					GPIO_voidSetPinMode(GPIO_PORTA,GPIO_PIN11,GPIO_OUTPUT_10M_AF_PP);
+					channel4_set=1;
+				}
 			u32 L_u32TempCCMRX = 0 ;
 			u32 L_u32TempCCER  = 0 ;
 			u32 L_u32TempCR2   = 0 ;
@@ -540,6 +564,12 @@ void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareVal
 	{
 		if (A_u8Channel == TIM_CHANNEL_1)
 		{
+			if (channel21_set==0)
+				{
+					GPIO_voidSetPinMode(GPIO_PORTA,GPIO_PIN15,GPIO_OUTPUT_10M_AF_PP);
+					channel21_set=1;
+				}
+
 			u32 L_u32TempCCMRX = 0 ;
 			u32 L_u32TempCCER  = 0 ;
 			u32 L_u32TempCR2   = 0 ;
@@ -593,6 +623,13 @@ void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareVal
 		}
 		else if (A_u8Channel == TIM_CHANNEL_2)
 		{
+
+			if (channel22_set==0)
+				{
+					GPIO_voidSetPinMode(GPIO_PORTA,GPIO_PIN1,GPIO_OUTPUT_10M_AF_PP);
+					channel22_set=1;
+				}
+
 			u32 L_u32TempCCMRX = 0 ;
 			u32 L_u32TempCCER  = 0 ;
 		    u32 L_u32TempCR2   = 0 ;
@@ -649,6 +686,12 @@ void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareVal
 		}
 		else if (A_u8Channel == TIM_CHANNEL_3)
 		{
+			if (channel23_set==0)
+				{
+					GPIO_voidSetPinMode(GPIO_PORTA,GPIO_PIN2,GPIO_OUTPUT_10M_AF_PP);
+					channel23_set=1;
+				}
+
 			u32 L_u32TempCCMRX = 0 ;
 			u32 L_u32TempCCER  = 0 ;
 			u32 L_u32TempCR2   = 0 ;
@@ -705,6 +748,13 @@ void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareVal
 		}
 		else if (A_u8Channel == TIM_CHANNEL_4)
 		{
+
+			if (channel24_set==0)
+				{
+					GPIO_voidSetPinMode(GPIO_PORTA,GPIO_PIN3,GPIO_OUTPUT_10M_AF_PP);
+					channel24_set=1;
+				}
+
 			u32 L_u32TempCCMRX = 0 ;
 			u32 L_u32TempCCER  = 0 ;
 			u32 L_u32TempCR2   = 0 ;
@@ -761,6 +811,11 @@ void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareVal
 	{
 		if (A_u8Channel == TIM_CHANNEL_1)
 		{
+			if (channel31_set==0)
+				{
+					GPIO_voidSetPinMode(GPIO_PORTA,GPIO_PIN6,GPIO_OUTPUT_10M_AF_PP);
+					channel31_set=1;
+				}
 			u32 L_u32TempCCMRX = 0 ;
 			u32 L_u32TempCCER  = 0 ;
 			u32 L_u32TempCR2   = 0 ;
@@ -814,6 +869,12 @@ void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareVal
 		}
 		else if (A_u8Channel == TIM_CHANNEL_2)
 		{
+			if (channel32_set==0)
+				{
+					GPIO_voidSetPinMode(GPIO_PORTA,GPIO_PIN7,GPIO_OUTPUT_10M_AF_PP);
+					channel32_set=1;
+				}
+
 			u32 L_u32TempCCMRX = 0 ;
 			u32 L_u32TempCCER  = 0 ;
 		    u32 L_u32TempCR2   = 0 ;
