@@ -29,10 +29,10 @@
  *         1-ULtrasonic_PIN15
  */
 
-#define  Ultrasonic1_TrigPort         Ultrasonic_PORTA
-#define  Ultrasonic1_TrigPin          ULtrasonic_PIN9
-#define  Ultrasonic1_EchoPort         Ultrasonic_PORTA
-#define  Ultrasonic1_EchoPin          ULtrasonic_PIN10
+#define  Ultrasonic1_TrigPort         Ultrasonic_PORTB
+#define  Ultrasonic1_TrigPin          ULtrasonic_PIN10
+#define  Ultrasonic1_EchoPort         Ultrasonic_PORTB
+#define  Ultrasonic1_EchoPin          ULtrasonic_PIN11
 
 
 /*option
@@ -58,10 +58,10 @@
  *         1-ULtrasonic_PIN15
  */
 
-#define  Ultrasonic2_TrigPort         Ultrasonic_PORTA
-#define  Ultrasonic2_TrigPin          ULtrasonic_PIN2
-#define  Ultrasonic2_EchoPort         Ultrasonic_PORTA
-#define  Ultrasonic2_EchoPin          ULtrasonic_PIN3
+#define  Ultrasonic2_TrigPort         Ultrasonic_PORTB
+#define  Ultrasonic2_TrigPin          ULtrasonic_PIN12
+#define  Ultrasonic2_EchoPort         Ultrasonic_PORTB
+#define  Ultrasonic2_EchoPin          ULtrasonic_PIN13
 
 
 /*option
@@ -87,10 +87,10 @@
  *         1-ULtrasonic_PIN15
  */
 
-#define  Ultrasonic3_TrigPort         Ultrasonic_PORTA
-#define  Ultrasonic3_TrigPin          ULtrasonic_PIN4
-#define  Ultrasonic3_EchoPort         Ultrasonic_PORTA
-#define  Ultrasonic3_EchoPin          ULtrasonic_PIN5
+#define  Ultrasonic3_TrigPort         Ultrasonic_PORTB
+#define  Ultrasonic3_TrigPin          ULtrasonic_PIN14
+#define  Ultrasonic3_EchoPort         Ultrasonic_PORTB
+#define  Ultrasonic3_EchoPin          ULtrasonic_PIN15
 
 /*option
  *         1-Ultrasonic_PORTA

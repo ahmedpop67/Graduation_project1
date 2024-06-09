@@ -21,13 +21,13 @@
          1-MOTOR1_CHANNAL4
  */
 
-#define MOTOR1_FirstTimerType                  MOTOR1_TIMER1
-#define MOTOR1_FirstChannelNumber              MOTOR1_CHANNAL1
+#define MOTOR1_FirstTimerType                  MOTOR1_TIMER2
+#define MOTOR1_FirstChannelNumber              MOTOR1_CHANNAL3
 //#define MOTOR1_SecondTimerType               MOTOR1_TIMER1
 //#define MOTOR1_SecondChannelNumber           MOTOR1_CHANNAL2
 
 
-#define MOTOR1_PORT            GPIO_PORTB
+#define MOTOR1_PORT            GPIO_PORTA
 
 #define MOTOR1_PINR            GPIO_PIN3
 #define MOTOR1_PINL            GPIO_PIN4
@@ -47,12 +47,12 @@
          1-MOTOR2_CHANNAL4
  */
 
-#define MOTOR2_FirstTimerType                  MOTOR2_TIMER1
+#define MOTOR2_FirstTimerType                  MOTOR2_TIMER3
 #define MOTOR2_FirstChannelNumber              MOTOR2_CHANNAL2
 //#define MOTOR2_SecondTimerType               MOTOR2_TIMER3
 //#define MOTOR2_SecondChannelNumber           MOTOR2_CHANNAL2
 
-#define MOTOR2_PORT            GPIO_PORTB
+#define MOTOR2_PORT            GPIO_PORTA
 
 #define MOTOR2_PINR            GPIO_PIN5
 #define MOTOR2_PINL            GPIO_PIN6

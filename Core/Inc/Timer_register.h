@@ -47,9 +47,9 @@ typedef struct
 /*base address of TIM2 Peripheral*/
 #define TIM2_BASE_ADDRES  0x40000000
 /*base address of TIM3 Peripheral*/
-#define TIM3_BASE_ADDRES  0x40004000
+#define TIM3_BASE_ADDRES  0x40000400
 /*base address of TIM4 Peripheral*/
-#define TIM4_BASE_ADDRES  0x40008000
+#define TIM4_BASE_ADDRES  0x40000800
 
 
 /*define the TIM2 with its base address*/

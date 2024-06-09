@@ -1,7 +1,7 @@
-../Core/Src/GPIO_program.c:14:7:GPIO_VoidInit	4	static
-../Core/Src/GPIO_program.c:98:4:GPIO_voidSetPinMode	24	static
-../Core/Src/GPIO_program.c:190:4:GPIO_voidSetPinValue	24	static
-../Core/Src/GPIO_program.c:239:4:GPIO_voidSetPortValue	24	static
-../Core/Src/GPIO_program.c:260:4:GPIO_GetPinValue	24	static
-../Core/Src/GPIO_program.c:281:4:GPIO_GetPortValue	24	static
-../Core/Src/GPIO_program.c:302:4:GPIO_TogglePin	24	static
+GPIO_program.c:14:7:GPIO_VoidInit	4	static
+GPIO_program.c:98:4:GPIO_voidSetPinMode	24	static
+GPIO_program.c:190:4:GPIO_voidSetPinValue	24	static
+GPIO_program.c:239:4:GPIO_voidSetPortValue	24	static
+GPIO_program.c:260:4:GPIO_GetPinValue	24	static
+GPIO_program.c:281:4:GPIO_GetPortValue	24	static
+GPIO_program.c:302:4:GPIO_TogglePin	24	static

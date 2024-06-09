@@ -86,8 +86,8 @@ void init_conf()
 //	RCC_voidEnablePeripheral(RCC_APB2,TIM1);
 	RCC_voidEnablePeripheral(RCC_APB2,USART1);
 	MSTK_voidInit();
-//	MOTOR_init(MOTOR_1);
-//	MOTOR_init(MOTOR_2);
+	MOTOR_init(MOTOR_1);
+	MOTOR_init(MOTOR_2);
 //	HUltrasonic_voidInit(ULTR_1);
 //	HUltrasonic_voidInit(ULTR_2);
 //	HUltrasonic_voidInit(ULTR_3);
@@ -101,18 +101,24 @@ void init_conf()
 
 int main()
 {
-
-	init_conf();
+	RCC_voidInitSysClock();
+	RCC_voidEnablePeripheral(RCC_APB2,GPIOA);
+	MSTK_voidInit();
+	GPIO_voidSetPinMode(GPIO_PORTA,7,GPIO_OUTPUT_2M_PP);
+	//init_conf();
 
 	while(1)
 	{
 		//x=MUART_u8ReceiveByteSynchNonBlocking(UART1);
 		//MUART_ReadData(&APP_G_u8DataFromUART);
-
+		GPIO_voidSetPinValue(GPIO_PORTA,7,GPIO_HIGH);
+		MSTK_voidSetBusyWait(1000000);
+		GPIO_voidSetPinValue(GPIO_PORTA,7,GPIO_LOW);
+		MSTK_voidSetBusyWait(1000000);
 		//MUART_voidTransmitByte(UART1,5);
-		UART_Task();
+		//UART_Task();
 		/*Encoding received data and take Direction (second 3bits)*/
-		APP_Direction_Control();
+		//APP_Direction_Control();
 	}
     return 0;
 }
