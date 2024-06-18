@@ -119,6 +119,7 @@ Buffer_state MUART_WriteData(u8* A_u8PtrData);
 
 ErrorStatus MUART_ErrorStatusTransmitData(USART_t *A_xUART_Type);
 
+void MUART_voidSendAck(u8 A_u8Data);
 
 void MUART_voidCleanRxBuffer(u8 A_u8NewData);
 

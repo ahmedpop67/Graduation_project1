@@ -199,9 +199,25 @@ Buffer_state MUART_Buffer_Write()
 		G_Au8UART_RxBuffer[G_u8RxBufferTailIndex] = L_u8temp;
 		G_u8RxBufferTailIndex = (G_u8RxBufferTailIndex+1) % MAX_SIZE_DATA_BUFFER;
 		G_u8RxCounter++;
+
+		MUART_voidSendAck(L_u8temp);
 		MUART_voidCleanRxBuffer(L_u8temp);
 	}
 	return Local_BufferState;
+}
+
+void MUART_voidSendAck(u8 A_u8Data){
+
+	u8 ACK = 0;
+	ACK = A_u8Data >> 2;
+	if(A_u8Data< 0x80){
+		MUART_voidTransmitByte(UART1, ACK);
+	}else if(A_u8Data <0xe0){
+		ACK |= 0x40;
+		MUART_voidTransmitByte(UART1, ACK);
+	}else{
+		//ACK data
+	}
 }
 
 Buffer_state MUART_ReadData(u8* A_u8PtrData)

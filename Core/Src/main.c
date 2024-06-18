@@ -557,53 +557,30 @@ void ProcessingFun (void)
 		//TODO make it slight
 		G_xMy_Data.Speed = Speed1;
 		break;
-	case 0x60: //Decrease speed greatly
-		//TODO
-		if(G_xMy_Data.Speed > 4){
-			G_xMy_Data.Speed -= 4;
-		}else{
-			G_xMy_Data.Speed = Speed1;
-		}
+	//speed change 0x60 + speed (speed is 0(stop) to 7(max speed))
+	case 0x60:
+		G_xMy_Data.Direction = Stop;
 		break;
-	case 0x68: //Decrease speed
-		//TODO
-		if(G_xMy_Data.Speed > 2){
-			G_xMy_Data.Speed -= 2;
-		}else{
-			G_xMy_Data.Speed = Speed1;
-		}
+	case 0x61:
+		G_xMy_Data.Speed = 1;
 		break;
-	case 0x6c: //Decrease speed lightly
-		//TODO
-		if(G_xMy_Data.Speed > 1){
-			G_xMy_Data.Speed -= 1;
-		}else{
-			G_xMy_Data.Direction = Stop;
-		}
+	case 0x62:
+		G_xMy_Data.Speed = 2;
 		break;
-	case 0x70: //Increase speed greatly
-		//TODO
-		if(G_xMy_Data.Speed < 4){
-			G_xMy_Data.Speed += 4;
-		}else{
-			G_xMy_Data.Speed = Speed7;
-		}
+	case 0x63:
+		G_xMy_Data.Speed = 3;
 		break;
-	case 0x78: //Increase speed
-		//TODO
-		if(G_xMy_Data.Speed < 6){
-			G_xMy_Data.Speed += 2;
-		}else{
-			G_xMy_Data.Speed = Speed7;
-		}
+	case 0x64:
+		G_xMy_Data.Speed = 4;
 		break;
-	case 0x7c: //Increase speed lightly
-		//TODO
-		if(G_xMy_Data.Speed != Speed7){
-			G_xMy_Data.Speed += 1;
-		}else{
-			G_xMy_Data.Speed = Speed7;
-		}
+	case 0x65:
+		G_xMy_Data.Speed = 5;
+		break;
+	case 0x66:
+		G_xMy_Data.Speed = 6;
+		break;
+	case 0x67:
+		G_xMy_Data.Speed = 7;
 		break;
 	case 0xe8:
 		//TODO
