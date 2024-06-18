@@ -7,11 +7,11 @@ from multiprocessing import Process, Manager
 from tflite_runtime.interpreter import load_delegate
 from tflite_runtime.interpreter import Interpreter
 import uart
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Focal length of the camera in pixels
-FOCAL_LENGTH = 2571 #focal lenght(3600)/pixel size(1.4)
-
-SPECIFIC_DISTANE = 100
+FOCAL_LENGTH = 2571  # focal length(3600)/pixel size(1.4)
+SPECIFIC_DISTANCE = 10
 
 # Known widths of the objects in the real world (in some units, e.g., cm)
 KNOWN_WIDTHS = {
@@ -22,26 +22,40 @@ KNOWN_WIDTHS = {
     "tuktuk": 150,
     "van": 250,
     "bump": 600,  # example width in cm
-    "stop_sign": 80,
-    "no_right_turn":60,
-    "no_left_turn":60,
-    "no_parking":60,
-    "park":60,
-    "traffic-light-red":30,
-    "traffic-light-yellow":30,
-     "traffic-light-green":30
+    "stop_sign": 4.6,
+    "no_right_turn": 60,
+    "no_left_turn": 60,
+    "no_parking": 60,
+    "park": 60,
+    "traffic-light-red": 30,
+    "traffic-light-yellow": 30,
+    "traffic-light-green": 30
 }
-
+# 
 # Labels for each model
 labels = [
-    ["stop_sign", "no_right_turn", "no_left_turn", "no_parking", "park", "traffic-light-red", "traffic-light-yellow", "traffic-light-green"],
-
-    ["stop_sign", "no_right_turn", "no_left_turn", "no_parking", "park", "traffic-light-red", "traffic-light-yellow", "traffic-light-green"]
+    #["bump"],
+    ["stop_sign", "limit","traffic-light-red", "traffic-light-yellow", "traffic-light-green","bump"],
+    ["car", "motorcycle", "person", "truck", "tuktuk", "van"]
 ]
 
-UART_TxCommands = {
+class Car:
+    DIRECTIONS = {
+        "go": "G",
+        "stop": "S",
+        "right": "R",
+        "left": "L",
+        "back": "B",
+        "front_left": "FL",
+        "front_right": "FR",
+        "back_left": "BL",
+        "back_right": "BR"
+    }
+    
+    UART_TxCommands = {
     "fstop":        0x10,
     "stop":         0x20,
+    "GO"  :         0x30,
     "leftH":        0x40,
     "leftM":        0x48,
     "leftL":        0x4c,
@@ -63,9 +77,9 @@ UART_TxCommands = {
     "requestack":   0x0e, #4 MSBs, add '0', add 3 LSB for request number 
     "request_invld":0xe8, #sent request is not a valid request
     "ackerr":       0xf0  #sent ack is error (either ack or transmitted command is affected by noise, or no ack received) -> retransmit
-}
+    }
 
-UART_RxCommands = {
+    UART_RxCommands = {
     #ack is 6 LSBs represent values in UART_TxCommands 
     "ackcmnd_min":  0x04,    #minimum ack
     "ackcmnd_max":  0x1b,   #maximum ack
@@ -75,18 +89,6 @@ UART_RxCommands = {
     "ackerr":       0x80,   #error in request valid response (requestack) followed by retransmission
     "nack":         0xa0,   #no ack sent -> retransmit
     "lanedata":     0xc0    #request lane data        
-}
-class Car:
-    DIRECTIONS = {
-        "go": "G",
-        "stop": "S",
-        "right": "R",
-        "left": "L",
-        "back": "B",
-        "front_left": "FL",
-        "front_right": "FR",
-        "back_left": "BL",
-        "back_right": "BR"
     }
 
     SPEEDS = {
@@ -102,66 +104,57 @@ class Car:
     def __init__(self, uart_handler):
         self.uart_handler = uart_handler
 
-    def update_state(self, direction, speed):
-        if direction in self.DIRECTIONS and speed in self.SPEEDS:
-            self.send_command(direction)
-            self.send_command(speed)
+    def update_state(self, direction):
+        if direction in self.UART_TxCommands: # and speed in self.SPEEDS:
+            self.send_command(self.UART_TxCommands[direction])
+            #self.send_command(self.SPEEDS[speed])
         else:
             print("Invalid direction or speed")
 
     def send_command(self, command):
         if self.uart_handler:
-            self.uart_handler.send_command(command)
+            self.uart_handler.transmit(command)
             print(f"Sent command to UART buffer: {command}")
 
-uart_handler = UARTHandler(port='/dev/ttyUSB0', baudrate=9600)
+uart_handler = uart.UARTTransmitter(port='/dev/ttyS0', baud_rate=9600)
 car = Car(uart_handler=uart_handler)
 
 def action_stop_sign():
-    #print("Action: Stop Sign detected")
-    car.update_state("stop",1)
+    car.update_state("stop")
 
 def action_no_right_turn():
-    #print("Action: No Right Turn detected")
     pass
 
 def action_no_left_turn():
-    #print("Action: No Left Turn detected")
     pass
+
 def action_no_parking():
-    #print("Action: No Parking detected")
     pass
+
 def action_park():
-    car.update_state("stop",1)
-    #print("Action: Park detected")
+    car.update_state("stop", 1)
 
 def action_traffic_light_red():
-    #print("Action: Red Traffic Light detected")
     pass
 
 def action_traffic_light_yellow():
-    #print("Action: Yellow Traffic Light detected")
     pass
 
 def action_traffic_light_green():
-    #print("Action: Green Traffic Light detected")
     pass
 
 def action_bump():
-    #print("Action: bump detected")
     pass
 
-def action_vehical():
-    #print("Action: vehicle detected")
+def action_vehicle():
+    pass
 
 def action_person():
-    #print("Action: person detected")
     pass
-    
-def not_detect():
-    car.update_state("go",5)
-    
-    
+
+def GO_func():
+    car.update_state("GO")
+
 label_to_action = {
     "stop_sign": action_stop_sign,
     "no_right_turn": action_no_right_turn,
@@ -172,7 +165,6 @@ label_to_action = {
     "traffic-light-yellow": action_traffic_light_yellow,
     "traffic-light-green": action_traffic_light_green
 }
-
 
 def draw_boxes(image, results):
     draw = ImageDraw.Draw(image)
@@ -185,15 +177,14 @@ def draw_boxes(image, results):
         draw.rectangle([x_min, y_min, x_max, y_max], outline="white", width=5)
         label = labels[model_index][class_id]
         perceived_width = x_max - x_min
-        distance = (KNOWN_WIDTHS[label] * FOCAL_LENGTH) / perceived_width
+        distance = -3+(KNOWN_WIDTHS[label] * 3.6*640) / (perceived_width*3.68)
         draw.text((x_min, y_min), f'{label}: {score:.2f} Distance: {distance:.2f}', fill="white", font=font)
         if label in detected_objects:
             detected_objects[label].append(distance)
         else:
             detected_objects[label] = [distance]
-            
+
     return detected_objects
-        
 
 def apply_nms(boxes, scores, threshold=0.5):
     picked_indices = []
@@ -275,36 +266,55 @@ def postprocess_output(output_data, input_size, original_size, confidence_thresh
 
     return results
 
-def process_frame(interpreters, frame, input_size, confidence_threshold, return_dict, model_index):
+def model_inference(interpreter, frame, input_size, confidence_threshold, model_index):
     original_size = frame.shape[1], frame.shape[0]  # (width, height)
     resized_frame = cv2.resize(frame, input_size)  # Resize to model input size
     image = Image.fromarray(cv2.cvtColor(resized_frame, cv2.COLOR_BGR2RGB))
     input_data = preprocess_image(image, input_size)
-    output_data = run_inference(interpreters[model_index], input_data)
+    output_data = run_inference(interpreter, input_data)
     results = postprocess_output(output_data, input_size, original_size, confidence_threshold)
-    return_dict[model_index] = [(result[0], result[1], result[2], model_index) for result in results]
+    return [(result[0], result[1], result[2], model_index) for result in results]
 
-def detect_objects(model_paths, camera_index=0, input_size=(320, 320), confidence_threshold=0.5):
+def process_frame(interpreters, frame, input_size, confidence_threshold):
+    results = []
+    with ThreadPoolExecutor(max_workers=len(interpreters)) as executor:
+        futures = [
+            executor.submit(model_inference, interpreter, frame, input_size, confidence_threshold, model_index)
+            for model_index, interpreter in enumerate(interpreters)
+        ]
+        for future in as_completed(futures):
+            results.extend(future.result())
+    return results
+
+def detect_objects(model_paths, camera_index=0, input_size=(320, 320), confidence_threshold=0.5, output_video_path='camera.mp4'):
     interpreters = [load_model(model_path) for model_path in model_paths]
     cap = cv2.VideoCapture(camera_index)
-    manager = Manager()
-    return_dict = manager.dict()
-
+    
     if not cap.isOpened():
         print(f"Error: Unable to access camera at index {camera_index}")
         return
+    
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    fps = 5
+    out = cv2.VideoWriter(output_video_path, fourcc, fps, (width, height))
+    
+    action_triggered = []
+    detected_objects = {}
+    i=0
 
     while True:
         ret, frame = cap.read()
         if not ret:
             print("Failed to grab frame")
             break
-
-        process_frame(interpreters, frame, input_size, confidence_threshold, return_dict, 0)
-
-        results = []
-        for model_results in return_dict.values():
-            results.extend(model_results)
+        
+        start_time = time.time()
+        results = process_frame(interpreters, frame, input_size, confidence_threshold)
+        end_time = time.time()
+        print(f"Total time taken for inference: {end_time - start_time} seconds")
 
         if results:
             boxes = np.array([result[0] for result in results])
@@ -315,12 +325,13 @@ def detect_objects(model_paths, camera_index=0, input_size=(320, 320), confidenc
             image = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
             detected_objects = draw_boxes(image, filtered_results)
             frame_with_boxes = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+            out.write(frame_with_boxes)
             cv2.imshow('Detection', frame_with_boxes)
-            
+
             nearest_distance = float('inf')
             nearest_label = None
-            for label, distances_and_boxes in detected_objects.items():
-                for distance, _ in distances_and_boxes:
+            for label, distances in detected_objects.items():
+                for distance in distances:
                     if distance < nearest_distance:
                         nearest_distance = distance
                         nearest_label = label
@@ -328,29 +339,40 @@ def detect_objects(model_paths, camera_index=0, input_size=(320, 320), confidenc
             if nearest_label:
                 if nearest_label not in action_triggered: 
                     print(f"Nearest {nearest_label}: {nearest_distance} cm")
-                    if nearest_label in label_to_action and closest_distance <= SPECIFIC_DISTANE:
+                    if nearest_label in label_to_action and nearest_distance <= SPECIFIC_DISTANCE:
                         label_to_action[nearest_label]() 
-                        action_triggered[nearest_label] = True  
+                        action_triggered.append(nearest_label)
+                        i = 1
+                    else:
+                        if(i == 1):
+                            GO_func()
+                            i=0
         else:
-            cv2.imshow('Detection', frame)  # Display the original frame if no results
-            not_detect
+            print("No object detected")
+            action_triggered.clear()
+            if(i == 1):
+                GO_func()
+                i=0
+            out.write(frame)
+            cv2.imshow('Detection', frame)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
+    out.release()
     cv2.destroyAllWindows()
-    car.update_state("stop",1)
+    car.update_state("stop")
     uart_handler.close()
 
-if _name_ == "_main_":
-    
+if __name__ == "__main__":
     start_time = time.time()
     
     model_paths = ['/home/raspberrypi/Desktop/esraa_comp_best_integer_quant_edgetpu.tflite']
     input_size = (320, 320)
     confidence_threshold = 0.5
-
-    detect_objects(model_paths, camera_index=0, input_size=input_size, confidence_threshold=confidence_threshold)
+    output_video_path = 'camera.mp4'
+    car.update_state("GO")
+    detect_objects(model_paths, camera_index=0, input_size=input_size, confidence_threshold=confidence_threshold, output_video_path=output_video_path)
     end_time = time.time()
     print(f"Total time taken for inference: {end_time - start_time} seconds")

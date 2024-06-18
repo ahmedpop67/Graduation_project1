@@ -16,6 +16,11 @@ u8 G_u8_LimetedSpeed = 4;
 
 u8 APP_G_u8V2VRxData = 0;
 u8 APP_G_u8V2VTxData = 0;
+
+u8  L_Previous_speed = 0;
+u8  L_Previous_Direction = 0;
+
+
 /*declaration 4motors*/
 //extern DCmotor_Type MOTOR_1 ;
 //extern DCmotor_Type MOTOR_2 ;
@@ -84,53 +89,49 @@ void init_conf()
 	RCC_voidEnablePeripheral(RCC_APB2,GPIOA);
 	RCC_voidEnablePeripheral(RCC_APB2,GPIOB);
 	RCC_voidEnablePeripheral(RCC_APB2,GPIOC);
-//	RCC_voidEnablePeripheral(RCC_APB2,TIM1);
+	RCC_voidEnablePeripheral(RCC_APB2,TIM1);
 	RCC_voidEnablePeripheral(RCC_APB1,TIM2);
-	RCC_voidEnablePeripheral(RCC_APB1,TIM3);
-//	RCC_voidEnablePeripheral(RCC_APB2,USART1);
+	RCC_voidEnablePeripheral(RCC_APB2,USART1);
 	MSTK_voidInit();
 	MOTOR_init(MOTOR_1);
 	MOTOR_init(MOTOR_2);
-
+	GPIO_voidSetPinMode(2,5,GPIO_OUTPUT_10M_PP);
 	HUltrasonic_voidInit(ULTR_1);
-//	HUltrasonic_voidInit(ULTR_2);
-//	HUltrasonic_voidInit(ULTR_3);
-//HUltrasonic_voidInit(ULTR_4);
-//	MUART_voidInit(&MUART_Init,&MUART_clock,UART1);
-//	MUART1_voidSetCallBack(&MUART_Buffer_Write);
-//	MUART_voidEnable(UART1);
-//	MUART_u8ReceiveByteASynch(UART1);
+	HUltrasonic_voidInit(ULTR_2);
+	HUltrasonic_voidInit(ULTR_3);
+    //HUltrasonic_voidInit(ULTR_4);
+	MUART_voidInit(&MUART_Init,&MUART_clock,UART1);
+	MUART1_voidSetCallBack(&MUART_Buffer_Write);
+	MUART_voidEnable(UART1);
+	MUART_u8ReceiveByteASynch(UART1);
 
 }
 
 
 int main()
 {
-	//RCC_voidInitSysClock();
-	//RCC_voidEnablePeripheral(RCC_APB2,GPIOA);
-	//MSTK_voidInit();
-	//GPIO_voidSetPinMode(GPIO_PORTA,7,GPIO_OUTPUT_2M_PP);
+	//init_conf();
+	//while(1)
+	//{
+		//MOTOR_CounterClockWise(MOTOR_1 , 0xff) ;
+		//MOTOR_CounterClockWise(MOTOR_2 , 0xff) ;
+		//MSTK_voidSetBusyWait(1000000);
+		//MSTK_voidSetBusyWait(1000000);
+		//MOTOR_Stop(MOTOR_1) ;
+		//MOTOR_Stop(MOTOR_2) ;
+		//MSTK_voidSetBusyWait(1000000);
+		//MSTK_voidSetBusyWait(1000000);
+	//}
 	init_conf();
+	MSTK_voidSetBusyWait(1000000);
+	GPIO_voidSetPinValue(2,5,1);
 
 	while(1)
 	{
-		//x=MUART_u8ReceiveByteSynchNonBlocking(UART1);
-		//MUART_ReadData(&APP_G_u8DataFromUART);
-		if(HUltrasonic_f32CalcDistance(1) > 10)
-		{
-			MOTOR_ClockWise(MOTOR_1, 0xff00);
-			MOTOR_ClockWise(MOTOR_2, 0xff00);
-		}
-		else
-		{
-			MOTOR_Stop(1);
-			MOTOR_Stop(2);
-		}
+		UART_Task();
 
-		//MUART_voidTransmitByte(UART1,5);
-		//UART_Task();
 		/*Encoding received data and take Direction (second 3bits)*/
-		//APP_Direction_Control();
+		APP_Direction_Control();
 	}
     return 0;
 }
@@ -139,9 +140,8 @@ int main()
 void APP_Update_Distance()
 {
 	G_xNear_Distance.Distance_Forword = HUltrasonic_f32CalcDistance(ULTR_1);
-	G_xNear_Distance.Distance_Back    = HUltrasonic_f32CalcDistance(ULTR_1);
-	G_xNear_Distance.Distance_Right   = HUltrasonic_f32CalcDistance(ULTR_1);
-	G_xNear_Distance.Distance_Left    = HUltrasonic_f32CalcDistance(ULTR_1);
+	G_xNear_Distance.Distance_Right   = HUltrasonic_f32CalcDistance(ULTR_2);
+	G_xNear_Distance.Distance_Left    = HUltrasonic_f32CalcDistance(ULTR_3);
 }
 
 
@@ -152,6 +152,7 @@ void APP_VoidStop()
 	G_u16DataAfterProccing.Direction = Stop;
 	/*flag = 3*/
 	G_u16DataAfterProccing.Flag = 3;
+	GPIO_voidSetPinValue(2,5,0);
 	/*stop car + alarm*/
 //	G_u16DataAfterProccing = G_u16DataAfterProccing & 0xFF8F ;
 }
@@ -206,6 +207,7 @@ void APP_voidGoTasks ()
 				G_u16DataAfterProccing.Flag = 0;
 				/*send direction and speed without any change*/
 				G_u16DataAfterProccing.Direction = G_xMy_Data.Direction;
+				GPIO_voidSetPinValue(2,5,1);
 				if (speed_control_Automatic == Automatic_ON)
 					G_u16DataAfterProccing.Speed = max_speed;
 				else
@@ -497,10 +499,10 @@ void UART_Task(){
 		//TODO send ACKs
 
 	MUART_ReadData(&APP_G_u8DataFromUART);
+	APP_Update_Distance();
 	ProcessingFun();
-
 		//send massages to Rasp
-	MUART_ErrorStatusTransmitData(UART1);
+	//MUART_ErrorStatusTransmitData(UART1);
 
 }
 
@@ -523,6 +525,11 @@ void ProcessingFun (void)
 		break;
 	case 0x20: //normal stop
 		G_xMy_Data.Direction = Stop ;
+		break;
+	case 0x30:
+		//GPIO_voidSetPinValue(2,5,1);
+		G_xMy_Data.Direction = Go;
+		G_xMy_Data.Speed = Speed7;
 		break;
 	case 0x40: //turn left extremely
 		G_xMy_Data.Direction = Left;
@@ -686,68 +693,86 @@ void ProcessingFun (void)
 
 void APP_Direction_Control()
 {
-	u16  L_u16Speed = 0;
+	u8  L_u16Speed = 0;
 	u8  L_u8Direction = 0 ;
 	u8  L_u8Flag = 0;
 
 	L_u8Direction = G_u16DataAfterProccing.Direction;
-	/*Encoding received data and take Speed (first 4bits)*/
+			/*Encoding received data and take Speed (first 4bits)*/
 	L_u16Speed = G_u16DataAfterProccing.Speed;
-	/*Encoding received data and take Flag (last bit)*/
+			/*Encoding received data and take Flag (last bit)*/
 	L_u8Flag = G_u16DataAfterProccing.Flag;
 
-	if (L_u8Direction == Stop){
-		MOTOR_Stop(MOTOR_1) ;
-		MOTOR_Stop(MOTOR_2) ;
-	}
-	else
+	if(L_Previous_speed != L_u16Speed || L_Previous_Direction != L_u8Direction)
 	{
-		/*
-		 * first speed  = 1 +  =
-		 * second speed = 2 +  =
-		 * third speed  = 3 +  =
-		 */
-		L_u16Speed = (0Xff<<G_xMy_Data.Speed) + 0xf0;
+		L_Previous_speed = L_u16Speed;
+		L_Previous_Direction = L_u8Direction;
 
-		if (L_u8Direction == Go)  //Forward direction
-		{
-			MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
-			MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
-		}
-		else if (L_u8Direction == Back)  //Backward direction
-		{
-			MOTOR_CounterClockWise(MOTOR_1 , L_u16Speed) ;
-			MOTOR_CounterClockWise(MOTOR_2 , L_u16Speed) ;
-		}
-		else if (L_u8Direction == Right)  //Right direction
-		{
+
+		if (L_u8Direction == Stop){
+			GPIO_voidSetPinValue(2,5,0);
 			MOTOR_Stop(MOTOR_1) ;
-			MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
-		}
-		else if (L_u8Direction == Left)  //Left direction
-		{
-			MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
 			MOTOR_Stop(MOTOR_2) ;
+			MSTK_voidSetBusyWait(1000000);
+
 		}
-		else if (L_u8Direction == Forward_Right)  //forward right
+		else
 		{
-			MOTOR_ClockWise(MOTOR_1 , 0xa) ;
-			MOTOR_ClockWise(MOTOR_2 , 0xc) ;
-		}
-		else if (L_u8Direction == Forward_Left)  //forward left
-		{
-			MOTOR_ClockWise(MOTOR_1 , 0xa) ;
-			MOTOR_ClockWise(MOTOR_2 , 0xc) ;
-		}
-		else if (L_u8Direction == Backward_Right)  //backward right
-		{
-			MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
-			MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
-		}
-		else if (L_u8Direction == Backward_Left)  //backward left
-		{
-			MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
-			MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
+			/*
+			 * first speed  = 1 +  =
+			 * second speed = 2 +  =
+			 * third speed  = 3 +  =
+			 */
+			L_u16Speed = (0Xff<<G_xMy_Data.Speed) + 0xf0;
+
+			if (L_u8Direction == Go)  //Forward direction
+			{
+				MOTOR_CounterClockWise(MOTOR_1 , L_u16Speed) ;
+				MOTOR_CounterClockWise(MOTOR_2 , L_u16Speed) ;
+				MSTK_voidSetBusyWait(1000000);
+			}
+			else if (L_u8Direction == Back)  //Backward direction
+			{
+				MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
+				MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
+				MSTK_voidSetBusyWait(1000000);
+			}
+			else if (L_u8Direction == Right)  //Right direction
+			{
+				MOTOR_Stop(MOTOR_1) ;
+				MOTOR_ClockWise(MOTOR_2 , L_u16Speed) ;
+				MSTK_voidSetBusyWait(1000000);
+			}
+			else if (L_u8Direction == Left)  //Left direction
+			{
+				MOTOR_ClockWise(MOTOR_1 , L_u16Speed) ;
+				MOTOR_Stop(MOTOR_2) ;
+			}
+			else if (L_u8Direction == Forward_Right)  //forward right
+			{
+				MOTOR_ClockWise(MOTOR_1 , 0xa) ;
+				MOTOR_ClockWise(MOTOR_2 , 0xc) ;
+				MSTK_voidSetBusyWait(1000000);
+			}
+			else if (L_u8Direction == Forward_Left)  //forward left
+			{
+				MOTOR_ClockWise(MOTOR_1 , 0xa) ;
+				MOTOR_ClockWise(MOTOR_2 , 0xc) ;
+				MSTK_voidSetBusyWait(1000000);
+			}
+			else if (L_u8Direction == Backward_Right)  //backward right
+			{
+				MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
+				MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
+				MSTK_voidSetBusyWait(1000000);
+			}
+			else if (L_u8Direction == Backward_Left)  //backward left
+			{
+				MOTOR_CounterClockWise(MOTOR_1 , 0xa) ;
+				MOTOR_CounterClockWise(MOTOR_2 , 0xc) ;
+				MSTK_voidSetBusyWait(1000000);
+			}
 		}
 	}
+
 }

@@ -16,6 +16,7 @@ u8 HUltrasonic_f32CalcDistance (u8 Ultra_Num)
 {
 	u32 L_u32TicksNumber = 0   ;
 	u8 L_f32Distance    = 0.0 ;
+	u16 u16_Time_out = 0;
 	switch(Ultra_Num)
 	{
 	case 1:
@@ -35,7 +36,14 @@ u8 HUltrasonic_f32CalcDistance (u8 Ultra_Num)
 		MSTK_voidSetBusyWait(TIME_FOR_EIGHT_PULSES) ;
 
 		/*wait until generating rising edge for echo pin*/
-      		while (GPIO_GetPinValue( Ultrasonic1_EchoPort, Ultrasonic1_EchoPin) == GPIO_LOW) ;
+      	while ((GPIO_GetPinValue( Ultrasonic1_EchoPort, Ultrasonic1_EchoPin) == GPIO_LOW) && u16_Time_out < 1000000)
+      	{
+      		u16_Time_out ++;
+      	}
+      	if(u16_Time_out >= 1000000)
+      	{
+      		return 255;
+      	}
 
 		while (GPIO_GetPinValue( Ultrasonic1_EchoPort, Ultrasonic1_EchoPin) == GPIO_HIGH)
 		{
@@ -48,6 +56,7 @@ u8 HUltrasonic_f32CalcDistance (u8 Ultra_Num)
 
 		/*initialize L_u32TicksNumber for next read*/
 		L_u32TicksNumber = 0 ;
+		u16_Time_out = 0;
 		return L_f32Distance ;
 		break;
 	case 2:
@@ -67,7 +76,14 @@ u8 HUltrasonic_f32CalcDistance (u8 Ultra_Num)
 		MSTK_voidSetBusyWait(TIME_FOR_EIGHT_PULSES) ;
 
 		/*wait until generating rising edge for echo pin*/
-		while (GPIO_GetPinValue( Ultrasonic2_EchoPort, Ultrasonic2_EchoPin) == GPIO_LOW) ;
+		while ((GPIO_GetPinValue( Ultrasonic2_EchoPort, Ultrasonic2_EchoPin) == GPIO_LOW) && u16_Time_out < 1000000)
+	      	{
+	      		u16_Time_out ++;
+	      	}
+	      	if(u16_Time_out >= 1000000)
+	      	{
+	      		return 255;
+	      	}
 
 		while (GPIO_GetPinValue( Ultrasonic2_EchoPort, Ultrasonic2_EchoPin) == GPIO_HIGH)
 		{
@@ -98,7 +114,14 @@ u8 HUltrasonic_f32CalcDistance (u8 Ultra_Num)
 		MSTK_voidSetBusyWait(TIME_FOR_EIGHT_PULSES) ;
 
 		/*wait until generating rising edge for echo pin*/
-		while (GPIO_GetPinValue( Ultrasonic3_EchoPort, Ultrasonic3_EchoPin) == GPIO_LOW) ;
+		while ((GPIO_GetPinValue( Ultrasonic3_EchoPort, Ultrasonic3_EchoPin) == GPIO_LOW) && u16_Time_out < 1000000)
+	      	{
+	      		u16_Time_out ++;
+	      	}
+	      	if(u16_Time_out >= 1000000)
+	      	{
+	      		return 255;
+	      	} ;
 
 		while (GPIO_GetPinValue( Ultrasonic3_EchoPort, Ultrasonic3_EchoPin) == GPIO_HIGH)
 		{

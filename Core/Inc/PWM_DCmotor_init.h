@@ -15,10 +15,7 @@
 
 
 void MOTOR_init (u8 A_u8MotorNum) ;
-
 void MOTOR_CounterClockWise  (u8 A_u8MotorNum , u16 A_u8CaptureValue) ;
-
 void MOTOR_ClockWise  (u8 A_u8MotorNum , u16 A_u8CaptureValue) ;
-
 void MOTOR_Stop  (u8 A_u8MotorNum) ;
 #endif /* HAL_PWM_DCMOTOR_PWM_DCMOTOR_INIT_H_ */

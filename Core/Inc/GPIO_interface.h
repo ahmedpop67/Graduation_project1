@@ -74,14 +74,14 @@
 void  GPIO_VoidInit();
 void  GPIO_VoidDeInit();
 
-u8 GPIO_voidSetPinMode       (u8 copy_u8portID,u8 copy_u8PinID,u8 copy_u8Mode);
-u8 GPIO_voidSetPinValue      (u8 copy_u8portID,u8 copy_u8PinID,u8 copy_u8Value);
-u8 GPIO_voidSetPortValue     (u8 copy_u8portID,u16 copy_u16PortValue);
+u8 GPIO_voidSetPinMode  (u8 copy_u8portID,u8 copy_u8PinID,u8 copy_u8Mode);
+u8 GPIO_voidSetPinValue (u8 copy_u8portID,u8 copy_u8PinID,u8 copy_u8Value);
+u8 GPIO_voidSetPortValue(u8 copy_u8portID,u16 copy_u16PortValue);
 
-u8 GPIO_GetPinValue          (u8 copy_u8portID,u8 copy_u8PinID);
-u8 GPIO_GetPortValue         (u8 copy_u8portID,u16 * copy_u16ReturnPinValue);
+u8 GPIO_GetPinValue     (u8 copy_u8portID,u8 copy_u8PinID);
+u8 GPIO_GetPortValue    (u8 copy_u8portID,u16 * copy_u16ReturnPinValue);
 
-u8 GPIO_TogglePin            (u8 copy_u8portID,u8 copy_u8PinID);
+u8 GPIO_TogglePin       (u8 copy_u8portID,u8 copy_u8PinID);
 
 //u8 GPIO_Lockpin              (u8 copy_u8portID,u8 copy_u8PinID);
 

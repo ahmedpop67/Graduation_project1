@@ -82,102 +82,32 @@ typedef enum
 #define ENABLE				1
 #define DISABLE				0
 
-/**
-	Function Name        : MUART_voidInit
-	Function Returns     : void
-	Function Arguments   : USART_InitType         *A_InitStruct      ,
-	                       USART_ClockInitTypeDef *A_ClockInitStruct ,
-	                       USART_t                *USARTx
-	Function Description : initialize regusters of UART
-*/
 void MUART_voidInit(USART_InitType         *A_InitStruct      ,
 		            USART_ClockInitTypeDef *A_ClockInitStruct ,
 		            USART_t                *USARTx
 					);
 
-/**
-	Function Name        : MUART_voidEnable
-	Function Returns     : void
-	Function Arguments   : USART_t *USARTx
-	Function Description : Enable UART
-*/
 void MUART_voidEnable(USART_t *USARTx);
 
-/**
-	Function Name        : MUART_voidTransmitByte
-	Function Returns     : void
-	Function Arguments   : USART_t *USARTx,u8 A_u8Byte
-	Function Description : Transmit one byte Synchronous
-*/
 void MUART_voidTransmitByte (USART_t *USARTx,u8 A_u8Byte);
 
-/**
-	Function Name        : MUART_voidTransmitString
-	Function Returns     : void
-	Function Arguments   : USART_t *USARTx, u8 * A_ptru8String
-	Function Description : Transmit string Synchronous
-*/
 void MUART_voidTransmitString (USART_t *USARTx, u8 * A_ptru8String );
 
-/**
-	Function Name        : MUART_u8ReceiveByteSynchNonBlocking
-	Function Returns     : u8
-	Function Arguments   : USART_t *USARTx
-	Function Description : recive one byte Synchronous non blocking
-*/
 u8 MUART_u8ReceiveByteSynchNonBlocking ( USART_t *USARTx );
 
-/**
-	Function Name        : MUART_ptrReceiveStringSynchNonBlocking
-	Function Returns     : pointer to u8
-	Function Arguments   : USART_t *USARTx
-	Function Description : recive string Synchronous non blocking
-*/
 u8 * MUART_ptrReceiveStringSynchNonBlocking ( USART_t *USARTx );
 
-/**
-	Function Name        : MUART_RxIntSetStatus
-	Function Returns     : void
-	Function Arguments   : USART_t *USARTx, u8 A_u8Status
-	Function Description : choose to enable RX interrupt or disable
-*/
 void MUART_RxIntSetStatus(USART_t *USARTx, u8 A_u8Status) ;
 
-/**
-	Function Name        : MUART_voidClearFlags
-	Function Returns     : void
-	Function Arguments   : USART_t *USARTx
-	Function Description : clear all flags after RX interrupted
-*/
 void MUART_voidClearFlags(USART_t *USARTx) ;
 
-/**
-	Function Name        : MUART_u8ReadDataRegister
-	Function Returns     : u8
-	Function Arguments   : USART_t *USARTx
-	Function Description : recive one byte Asynchronous
-*/
 u8 MUART_u8ReadDataRegister(USART_t *USARTx) ;
 
-/**
-	Function Name        : MUART1_voidSetCallBack
-	Function Returns     : void
-	Function Arguments   : void (*ptr) (void)
-	Function Description : set call back function for UART1
-*/
 void MUART1_voidSetCallBack( Buffer_state (*ptr) (void) ) ;
 
-/**
-	Function Name        : MUART2_voidSetCallBack
-	Function Returns     : void
-	Function Arguments   : void (*ptr) (void)
-	Function Description : set call back function for UART2
-*/
 void MUART2_voidSetCallBack( Buffer_state (*ptr) (void) ) ;
 
-
 void MUART_u8ReceiveByteASynch (  USART_t *A_xUART_Type );
-
 
 Buffer_state MUART_Buffer_Write();
 

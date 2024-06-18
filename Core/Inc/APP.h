@@ -20,8 +20,7 @@ u8 G_u8Counter     = 0;
 
 #define max_speed          7
 
-
-#define Go              0
+#define Stop            0
 #define Back            1
 #define Right           2
 #define Left            3
@@ -29,7 +28,7 @@ u8 G_u8Counter     = 0;
 #define Forward_Left    5
 #define Backward_Right  6
 #define Backward_Left   7
-#define Stop            8
+#define Go              8
 
 #define Speed1          1
 #define Speed2          2
@@ -58,6 +57,7 @@ void APP_V2V_Connection();
 void APP_Sort_Buffer();
 
 void APP_Direction_Control();
+void APP_voidObstical_avoid();
 
 void APP_MOTOR_Forword();
 void APP_MOTOR_Backword();

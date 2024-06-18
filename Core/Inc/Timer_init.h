@@ -26,7 +26,6 @@
 
 
 void MTimer_voidInit (u8 A_u8TimerSelected) ;
-
 void MTimer_voidPWM (u8 A_u8TimerSelected , u8 A_u8Channel , u16 A_u16CompareValue) ;
 #endif /* MCAL_TIMER_TIMER_INIT_H_ */
 
